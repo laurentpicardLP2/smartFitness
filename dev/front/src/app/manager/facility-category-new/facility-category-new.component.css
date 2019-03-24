@@ -1,29 +1,26 @@
-
-.facility-new-container {
+.facility-category-new-container {
     display: flex;
     flex-direction: column;
   }
   
-  .facility-new-container > * {
+  .facility-category-new-container > * {
     width: 100%;
   }
 
-  .facility-form {
+  .facility-category-form {
     min-width: 150px;
     max-width: 600px;
     width: 100%;
   }
 
-  .upload-zone {
-    width: 600px;
-  }
+
   
-  .facility-full-width {
+  .facility-category-full-width {
     min-width:400px;
     max-width: 800px;
   }
 
-  .facility-border {
+  .facility-category-border {
     border-style: solid;
   }
 

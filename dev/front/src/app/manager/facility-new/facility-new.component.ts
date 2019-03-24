@@ -5,8 +5,10 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { FileInformation } from '../file-information';
 import { ManagerService } from 'src/app/services/manager.service';
 import { FacilityCategory } from 'src/app/models/facility-category.model';
+import { Facility } from 'src/app/models/facility.model';
 import { Room } from 'src/app/models/room.model';
 import { BehaviorSubject } from 'rxjs';
+import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
 
 @Component({
   selector: 'app-facility-new',
@@ -21,12 +23,16 @@ export class FacilityNewComponent implements OnInit {
   listFacilityCategories: BehaviorSubject<FacilityCategory[]>;
   listRooms: BehaviorSubject<Room[]>;
   facilityCategories: FacilityCategory[];
+  listFacilities: BehaviorSubject<Facility[]>;
+  facilities: Facility[];
   rooms: Room[];
   nameFacility : string;
   descriptionFacility: string;
   imageFacility: string;;
   idFacilityCategory: number;
   idRoom: number;
+  errors = errorMessages;
+  confirmValidParentMatcher = new ConfirmValidParentMatcher();
 
   @ViewChild('fileInput')
   fileInput: ElementRef;
@@ -40,12 +46,18 @@ export class FacilityNewComponent implements OnInit {
 
   ngOnInit(): void {
     //this.loginService.setIsUserLoggedSubject(true);
-    // TO DO reinit setUsername
+    // TO DO reinit setUsername après upload image file
 
     this.managerService.getFacilityCategories().subscribe(res => {
       this.facilityCategories = res;
       this.managerService.publishFacilityCategories();
       this.listFacilityCategories = this.managerService.listFacilityCategories$;
+    });
+
+    this.managerService.getFacilities().subscribe(res => {
+      this.facilities = res;
+      this.managerService.publishFacilities();
+      this.listFacilities = this.managerService.listFacilities$;
     });
 
     this.managerService.getRooms().subscribe(res => {
@@ -59,9 +71,12 @@ export class FacilityNewComponent implements OnInit {
 
   createForm(){
     this.facilityForm = this.formBuilder.group({
-      nameFacility: ['', [
-        Validators.required
-    ]],
+      nameFacilityGroup: this.formBuilder.group({
+        nameFacility: ['', [
+          Validators.required,
+          Validators.minLength(1),
+        ]]
+      }, {validator: this.checkNameFacility.bind(this)}),
       descriptionFacility: '',
       imageFacility: '',
       userFile: null,
@@ -72,6 +87,14 @@ export class FacilityNewComponent implements OnInit {
     });
 
     
+  }
+
+  checkNameFacility(group: FormGroup){
+    let nameFacility : string;
+    
+    nameFacility = group.get("nameFacility").value;
+    const isValid = !(this.managerService.listFacilities.find(facility => facility.nameFacility === nameFacility ));
+    return isValid ? null : { checkNameFacility: true };
   }
 
   onSelectFile(event) {
@@ -97,7 +120,6 @@ export class FacilityNewComponent implements OnInit {
       } else {
         this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility);
       }
-      
    
   }
 

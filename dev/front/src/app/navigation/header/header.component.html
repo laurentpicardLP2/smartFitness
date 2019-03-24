@@ -30,20 +30,38 @@
 <!--&& authority.authority=='ROLE_CUSTOMER'-->
 
       <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="choix">Mes choix</button>
-      <mat-menu  #choix="matMenu">
+      <mat-menu *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'"  #choix="matMenu">
         <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/seance-booking')">Ajouter une séance</button>
         <button mat-menu-item [matMenuTriggerFor]="suivis" _ngcontent-cl="" tabindex="1" aria-disabled="false">Mes suivis</button>
       </mat-menu>
 
-      <mat-menu #suivis="matMenu">
+      <mat-menu *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" #suivis="matMenu">
           <button mat-menu-item _ngcontent-cl="" tabindex="2" aria-disabled="false" (click)="onAction('/command-listing')">Mes commandes</button>
           <button mat-menu-item _ngcontent-cl="" tabindex="3" aria-disabled="false" (click)="onAction('/seance-listing')">Mes séances</button>
       </mat-menu>
       
-      <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')" mat-button [matMenuTriggerFor]="parc">Gestion parc</button>
-      <mat-menu #parc="matMenu">
-          <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/facility-new')">Ajouter un équipement</button>
+      <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="centre">Gestion centre</button>
+      <mat-menu  #centre="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="room">Gestion des salles</button>
+          <button mat-menu-item [matMenuTriggerFor]="parc">Gestion du parc</button>
       </mat-menu>
+
+      <mat-menu  #room="matMenu">
+         <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/room-new')">Ajouter une salle</button>
+      </mat-menu>
+
+      <mat-menu  #parc="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="category">Categorie équipement</button>
+          <button mat-menu-item [matMenuTriggerFor]="facility">Equipement</button>
+      </mat-menu>
+
+      <mat-menu #category="matMenu">
+          <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/facility-category-new')">Ajouter une catégorie d'equipement</button>
+       </mat-menu>
+
+       <mat-menu #facility="matMenu">
+          <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/facility-new')">Ajouter une référence d'équipement</button>
+       </mat-menu>     
 
       <a *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onToggleCart()">
         <mat-icon matBadge="{{ nbItems }}" matBadgeColor="warn">shopping_cart</mat-icon>

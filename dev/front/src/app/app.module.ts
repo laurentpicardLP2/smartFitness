@@ -26,6 +26,8 @@ import { HomeComponent } from './user/home/home.component';
 import { AuthGuardCustomerService } from './services/auth-guard-customer.service';
 import { AuthGuardManagerService } from './services/auth-guard-manager.service';
 import { AuthGuardAdminService } from './services/auth-guard-admin.service';
+import { RoomNewComponent } from './manager/room-new/room-new.component';
+import { FacilityCategoryNewComponent } from './manager/facility-category-new/facility-category-new.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { AuthGuardAdminService } from './services/auth-guard-admin.service';
     SeanceDetailComponent,
     FacilityNewComponent,
     HomeComponent,
+    RoomNewComponent,
+    FacilityCategoryNewComponent,
   ],
   imports: [
     BrowserModule,

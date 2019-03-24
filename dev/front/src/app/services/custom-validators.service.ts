@@ -21,6 +21,7 @@ export class CustomValidators {
         const isValid = otherControlNames.every(controlName => formGroup.get(controlName).value === formGroup.get(firstControlName).value);
         return isValid ? null : { childrenNotEqual: true };
     }
+
 }
 
 /**
@@ -45,12 +46,16 @@ export const regExps: { [key: string]: RegExp } = {
  * Collection of reusable error messages
  */
 export const errorMessages: { [key: string]: string } = {
-    fullName: 'Full name must be between 1 and 128 characters',
-    username: 'username must be unique',
-    email: 'Email must be a valid email address (username@domain)',
-    confirmEmail: 'Email addresses must match',
-    password: 'Password must be between 7 and 15 characters, and contain at least one number and special character',
-    confirmPassword: 'Passwords must match',
-    domesticCp: '5 characters for Postal Code',
-    deliveryCp: '5 characters for Postal Code'
+    fullName: 'Votre nom complet doit comporter entre 1 et 128 caractères.',
+    username: 'Ce username existe déjà, veuillez en choisir un autre.',
+    email: 'Email doit être un email valide (username@domain).',
+    confirmEmail: 'Les adresses emails doivent correspondre.',
+    password: 'Le mot de passe doit comporter entre 1 et 128 caractères, et contenor au moins un chiffre et un caractère spécial.',
+    confirmPassword: 'Les mots de passe doivent correspondre.',
+    domesticCp: '5 caractères pour le code postal.',
+    deliveryCp: '5 caractères pour le code postal.',
+    nameRoom: 'Ce nom de salle existe déjà, veuillez en choisir un autre.',
+    capacityRoom: 'La capacité de la salle doit être comprise entre 4 et 100.',
+    nameFacilityCategory: 'Ce nom de catégorie d\'équipement existe déjà.',
+    nameFacility: 'Ce nom d\'équipement existe déjà.'
 };

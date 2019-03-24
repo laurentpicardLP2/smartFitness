@@ -11,6 +11,8 @@ import { SeanceDetailComponent } from './synthese/seance-detail/seance-detail.co
 import { FacilityNewComponent } from './manager/facility-new/facility-new.component';
 import { TimestampFacilityComponent } from './booking/timestamp-facility/timestamp-facility.component';
 import { HomeComponent } from './user/home/home.component';
+import { RoomNewComponent } from './manager/room-new/room-new.component';
+import { FacilityCategoryNewComponent } from './manager/facility-category-new/facility-category-new.component';
 import { AuthGuardCustomerService } from './services/auth-guard-customer.service';
 import { AuthGuardManagerService } from './services/auth-guard-manager.service';
 import { AuthGuardAdminService } from './services/auth-guard-admin.service';
@@ -22,7 +24,9 @@ const routes: Routes = [
   { path: 'seance-listing', canActivate: [AuthGuardCustomerService], component: SeanceListingComponent },
   { path: 'seance-detail/:idItem', canActivate: [AuthGuardCustomerService], component: SeanceDetailComponent},
   { path: 'facility-new', canActivate: [AuthGuardManagerService], component: FacilityNewComponent},
-  { path: 'chart', canActivate: [AuthGuardManagerService], component: TimestampFacilityComponent },
+  { path: 'facility-category-new', canActivate: [AuthGuardManagerService], component: FacilityCategoryNewComponent},
+  { path: 'room-new', canActivate: [AuthGuardManagerService], component: RoomNewComponent},
+  { path: 'chart',  component: TimestampFacilityComponent },
   { path: '', component: HomeComponent },
   //{ path: 'seance-booking', component: SeanceBookingComponent},
   //{ path: 'facility-category-booking', component: FacilityCategoryBookingComponent},
