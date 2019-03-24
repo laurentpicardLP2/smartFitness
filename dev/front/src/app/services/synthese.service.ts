@@ -44,6 +44,10 @@ export class SyntheseService {
   });
   }
 
+  /**
+   * Retourne la liste des timestamp pour une seance idItem
+   * @param idItem 
+   */
   public getTimestampForASeance(idItem: number): Observable<TimestampFacilityAdaptater[]> {
     return this.httpClient.get<TimestampFacilityAdaptater[]>('http://localhost:8080/synthesectrl/gettimestampforaseance/' + idItem, 
     {
