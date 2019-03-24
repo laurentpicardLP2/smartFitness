@@ -1,0 +1,34 @@
+<mat-sidenav-container class="container">
+  
+  <mat-sidenav-content>
+    <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+    <div class="pad">
+      <router-outlet></router-outlet>  
+    </div>
+    <mat-sidenav #sidenav role="naigation">
+      <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
+    </mat-sidenav>
+
+    <div class="pad">
+        <div class="body">
+            <div class = "container-list">
+            <div class="matlist">
+              <mat-list role="list" *ngFor="let timestamp of timstampFacilitiesList | async; let i=index ">
+                <mat-list-item *ngIf="i==0" role="listitem"> Feuille de route de la séance du &nbsp; 
+                 <span class="seanceTitle"> {{timestamp.dayName}} {{timestamp.dayOfMonth}} {{timestamp.monthName}} {{timestamp.year}} </span>
+                </mat-list-item>
+                <mat-list-item role="listitem">Heure début : {{showTwoDigitsHour(timestamp.hourStart)}}:{{showTwoDigitsMinute(timestamp.minuteStart)}}</mat-list-item>
+                <mat-list-item role="listitem">Heure fin :{{ showTwoDigitsHour(timestamp.hourEnd)}}:{{showTwoDigitsMinute(timestamp.minuteEnd)}}</mat-list-item>
+                <mat-list-item role="listitem">Activité: {{ timestamp.nameFacilityCategory }}</mat-list-item>
+                <mat-list-item role="listitem">Equipement: {{ timestamp.nameFacility }}</mat-list-item>
+              </mat-list>
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+          <mat-card-content></mat-card-content>
+          </div>
+          <!-- <mat-card-actions><button mat-button class="boutton" (click)="onOrder(googleBook.bookId)">Commander</button></mat-card-actions> -->
+    </div>
+  </mat-sidenav-content> 
+</mat-sidenav-container>

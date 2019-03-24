@@ -1,0 +1,53 @@
+
+ .cart {
+	 background-color:brown; 
+	 display:block;
+	 position:absolute;
+
+	cursor: pointer;
+  }
+  
+  /* The actual cart (appears on top) */
+  .cart .cartText {
+	visibility: hidden;
+	width: 160px;
+	background-color: rgb(116, 23, 23);
+	color: #FFFFFF;
+	text-align: center;
+	border-radius: 6px;
+	padding: 8px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 100%;
+	left: 10%;
+	margin-left: -140px;
+	top: 30px;
+	height: 100px;
+  }
+  
+  
+  /* Toggle this class when clicking on the popup container (hide and show the popup) */
+  .cart .show {
+	visibility: visible;
+	-webkit-animation: fadeIn 1s;
+	animation: fadeIn 1s
+  }
+  
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+	from {opacity: 0;} 
+	to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+	from {opacity: 0;}
+	to {opacity:1 ;}
+	}
+	
+	.flex-spacer {
+		flex: 1 1 auto;
+	}
+	
+	
+	
+  

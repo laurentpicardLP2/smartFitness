@@ -1,0 +1,16 @@
+.seance-title {
+    text-decoration: none;
+    position:absolute; top:-35px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: oblique;
+}
+
+.example-form-field {
+    width: 220px;
+  }
+
+.root-div {
+    background-color: beige;
+    border-radius: 5%;
+    padding-bottom: 10px;
+}

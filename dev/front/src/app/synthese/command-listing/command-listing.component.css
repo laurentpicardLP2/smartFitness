@@ -1,0 +1,65 @@
+.mat-elevation-z5 {
+    background-color: rgb(72, 85, 122);
+}
+
+.container {
+    background-color: grey;
+}
+
+
+
+.menu {
+   
+    text-align: center;
+    background-color: rgb(72, 85, 122);
+    
+    
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    
+}
+
+a {
+    border-bottom: 1px, white solid;
+}
+
+.menu a {
+    list-style-type: none;
+    color: black;
+    border-bottom: 1px, white solid;
+    display: block;
+    /* Make the links appear below each other */
+    padding: 12px;
+    /* Add some padding */
+    text-decoration: none;
+    /* Remove underline from links */
+    
+}
+
+.menu a:hover {
+    background-color: #ccc;
+    /* Dark grey background on mouse-over */
+}
+
+
+.app-fill-remaining-space {
+    flew: 1 1 auto;
+}
+
+
+mat-row:hover {
+    background-color: rgb(44, 99, 116);
+}
+
+.pad {
+    margin: 5px;
+    padding: 5px;
+  }
+
+.flex-spacer {
+    flex: 1 1 auto;
+}
+

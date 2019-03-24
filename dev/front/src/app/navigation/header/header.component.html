@@ -1,0 +1,77 @@
+<mat-toolbar color="primary" class="mat-elevation-z5" role="heading">
+  <!-- <li *ngIf="typeRole === 'ROLE_ADMIN' || typeRole === 'ROLE_USER' || typeRole === 'ROLE_MANAGER' || typeRole === 'ROLE_DEVELOPPER'"><a routerLink="/gendles">Genres</a></li> -->
+  <div class="flex-spacer" _ngcontent-cl=""></div>
+
+  <div fxHide.gt-xs>
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+      <a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onHome('')">
+        <mat-icon>home</mat-icon>
+        <div class="mat-button-ripple mat-ripple" matripple=""></div>
+        <div class="mat-button-focus-overlay"></div>
+      </a>
+
+      <a *ngIf="authority.authority=='ROLE_ANONYMOUS'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" routerLink="/login">
+        <mat-icon>person</mat-icon>
+        <span class="mat-button-wrapper">SignIn</span>
+        <div class="mat-button-ripple mat-ripple" matripple=""></div>
+        <div class="mat-button-focus-overlay"></div>
+      </a>
+      <a *ngIf="authority.authority=='ROLE_ANONYMOUS'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" routerLink="/customer-new">
+          <mat-icon>person_add</mat-icon>
+          <span class="mat-button-wrapper">SignUp</span>
+        <div class="mat-button-ripple mat-ripple" matripple=""></div>
+        <div class="mat-button-focus-overlay"></div>
+      </a> 
+<!--&& authority.authority=='ROLE_CUSTOMER'-->
+
+      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="choix">Mes choix</button>
+      <mat-menu  #choix="matMenu">
+        <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/seance-booking')">Ajouter une séance</button>
+        <button mat-menu-item [matMenuTriggerFor]="suivis" _ngcontent-cl="" tabindex="1" aria-disabled="false">Mes suivis</button>
+      </mat-menu>
+
+      <mat-menu #suivis="matMenu">
+          <button mat-menu-item _ngcontent-cl="" tabindex="2" aria-disabled="false" (click)="onAction('/command-listing')">Mes commandes</button>
+          <button mat-menu-item _ngcontent-cl="" tabindex="3" aria-disabled="false" (click)="onAction('/seance-listing')">Mes séances</button>
+      </mat-menu>
+      
+      <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')" mat-button [matMenuTriggerFor]="parc">Gestion parc</button>
+      <mat-menu #parc="matMenu">
+          <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/facility-new')">Ajouter un équipement</button>
+      </mat-menu>
+
+      <a *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onToggleCart()">
+        <mat-icon matBadge="{{ nbItems }}" matBadgeColor="warn">shopping_cart</mat-icon>
+      <div class="mat-button-ripple mat-ripple" matripple=""></div>
+      <div class="mat-button-focus-overlay"></div>
+    </a> 
+    <div *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" id="cart" class="cart">        
+        <div class="cartText" id="cartText">
+          <a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onResetCart()">
+                  <span class="mat-button-wrapper">Vider le panier</span>
+                <div class="mat-button-ripple mat-ripple" matripple=""></div>
+                <div class="mat-button-focus-overlay"></div>
+              </a>
+              <br> 
+              <a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onValidateCart()">
+                  <span class="mat-button-wrapper">Valider le panier</span>
+                <div class="mat-button-ripple mat-ripple" matripple=""></div>
+                <div class="mat-button-focus-overlay"></div>
+              </a>
+              <br>
+              <a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onContinue()" >
+                  <span class="mat-button-wrapper">Poursuivre les achats</span>
+                <div class="mat-button-ripple mat-ripple" matripple=""></div>
+                <div class="mat-button-focus-overlay"></div>
+              </a>                
+        </div>
+          
+    </div>   
+  </div>       
+    
+</mat-toolbar>

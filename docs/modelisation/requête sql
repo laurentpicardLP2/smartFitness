@@ -1,0 +1,67 @@
+SELECT * FROM db_fitness.seance INNER JOIN db_fitness.timestamp_facility ON id_item = seance_id_seance ORDER BY id_item DESC;
+
+SELECT * FROM db_fitness.seance ORDER BY id_item DESC;
+
+SELECT timestamp_facility.* FROM db_fitness.timestamp_facility INNER JOIN db_fitness.seance ON id_item = seance_id_seance
+WHERE customer_users_username like 'db_sebastien' ORDER BY seance_id_seance DESC ;
+
+SELECT seance.* FROM db_fitness.seance ORDER BY id_item DESC ;
+
+SELECT timestamp_facility.* FROM db_fitness.timestamp_facility INNER JOIN db_fitness.seance ON id_item = seance_id_seance
+WHERE customer_users_username like 'db_sebastien' and seance_id_seance = 23 ORDER BY date_of_timestamp ASC ;
+
+SELECT timestamp_facility.date_of_timestamp FROM db_fitness.timestamp_facility INNER JOIN db_fitness.seance ON id_item = seance_id_seance
+WHERE customer_users_username like 'db_sebastien' and seance_id_seance = 23 ORDER BY date_of_timestamp ASC limit 1  ;
+
+SELECT count(*) FROM timestamp_facility INNER JOIN seance ON seance_id_seance = id_item
+WHERE id_item = 11
+
+
+SELECT seance_id_seance, count(date_of_timestamp) FROM db_fitness.timestamp_facility GROUP BY seance_id_seance;
+
+SELECT facility_id_facility, COUNT(facility_id_facility) / 96 FROM db_fitness.timestamp_facility group by facility_id_facility;
+
+
+USE db_fitness;
+SELECT timestamp_facility.facility_id_facility, COUNT(timestamp_facility.facility_id_facility)
+FROM db_fitness.timestamp_facility INNER JOIN facility 
+ON timestamp_facility.facility_id_facility = db_fitness.facility.id_facility GROUP BY  timestamp_facility.facility_id_facility;
+
+
+USE db_fitness;
+SELECT facility.id_facility , COUNT(facility.id_facility)
+FROM facility INNER JOIN timestamp_facility
+ON facility.id_facility=  timestamp_facility.facility_id_facility GROUP BY facility.id_facility;
+
+USE db_fitness;
+SELECT facility.id_facility , COUNT(facility.id_facility)
+FROM facility LEFT JOIN timestamp_facility
+ON facility.id_facility=  timestamp_facility.facility_id_facility GROUP BY facility.id_facility;
+
+USE db_fitness;
+SELECT facility.id_facility , COUNT(timestamp_facility.facility_id_facility)
+FROM facility LEFT JOIN timestamp_facility
+ON facility.id_facility=  timestamp_facility.facility_id_facility GROUP BY facility.id_facility;
+
+USE db_fitness;
+SELECT facility.id_facility , (COUNT(timestamp_facility.facility_id_facility) /96 ) * 100
+FROM facility INNER JOIN timestamp_facility
+ON facility.id_facility=  timestamp_facility.facility_id_facility
+WHERE day(date_of_timestamp) = 18 and month(date_of_timestamp)=3 and year(date_of_timestamp)=2019
+ GROUP BY facility.id_facility;
+
+USE db_fitness;
+SELECT facility.id_facility,  count(facility.id_facility) * 96 - COUNT(timestamp_facility.facility_id_facility) 
+FROM facility LEFT JOIN timestamp_facility
+ON facility.id_facility =  timestamp_facility.facility_id_facility
+WHERE (day(date_of_timestamp) = 18 and month(date_of_timestamp)=3 and year(date_of_timestamp)=2019) 
+ GROUP BY facility.id_facility;
+
+USE db_fitness;
+SELECT (COUNT(timestamp_facility.facility_id_facility) /96 ) * 100
+FROM timestamp_facility
+WHERE day(date_of_timestamp) = 18 and month(date_of_timestamp)=3 and year(date_of_timestamp)=2019
+AND timestamp_facility.facility_id_facility = 4
+ GROUP BY timestamp_facility.facility_id_facility; 
+
+

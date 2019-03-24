@@ -1,0 +1,16 @@
+<div fxFlex fxLayout fxLayoutAlign="center">
+  <div class="pad">
+      <form [formGroup]="userLoginForm" class="customer-form">
+
+          <mat-form-field class="customer-full-width">
+              <input matInput placeholder="Username" type="text" formControlName="username"  [(ngModel)]="username">
+          </mat-form-field>
+          
+          <mat-form-field class="customer-full-width">
+              <input matInput placeholder="Password" type="password" formControlName="password" [(ngModel)]="password">
+          </mat-form-field>
+
+          <button mat-raised-button [disabled]="userLoginForm.invalid" (click)="onSignIn()">SignIn</button>
+      </form>
+  </div>
+</div>

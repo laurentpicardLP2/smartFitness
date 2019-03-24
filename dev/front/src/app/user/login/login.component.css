@@ -1,0 +1,28 @@
+
+.customer-new-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .customer-new-container > * {
+    width: 100%;
+  }
+
+  .customer-form {
+    min-width: 150px;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .customer-full-width {
+    width: 100%;
+  }
+
+  .customer-border {
+    border-style: solid;
+  }
+
+  .pad {
+    margin: 5px;
+    padding: 5px;
+  }

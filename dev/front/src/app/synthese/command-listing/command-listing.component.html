@@ -1,0 +1,54 @@
+<mat-sidenav-container class="container">
+  
+  <mat-sidenav-content>
+
+      <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+    <div class="pad">
+      <router-outlet></router-outlet>  
+    </div>
+    <mat-sidenav #sidenav role="naigation">
+      <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
+    </mat-sidenav>
+
+    <div class="alert alert-info">
+        <strong>Liste des Commandes.</strong>
+    </div>
+    <div class="pad">>
+        <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        <div class="example-container mat-elevation-z8">
+          <mat-table #Table [dataSource]="MyDataSource" multiTemplateDataRows matSort>
+          <ng-container matColumnDef="Id" >
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+          <mat-cell *matCellDef="let post"> {{post.idCommand}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Date </mat-header-cell>
+          <mat-cell *matCellDef="let post"> {{post.dateOfCommand}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Prix">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Prix </mat-header-cell>
+          <mat-cell *matCellDef="let post"> {{post.totalPrice}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Statut">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Statut </mat-header-cell>
+          <!-- <mat-cell style="text-align: center;" *matCellDef="let post"> -->
+          <mat-cell *matCellDef="let post"> 
+            <span *ngIf="post.statusCommand==0">commande en attente de paiement</span> 
+            <span *ngIf="post.statusCommand==1">commande validée</span> 
+          </mat-cell>
+          <!-- </mat-cell> -->
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onShow(row.idCommand)"></mat-row>
+          </mat-table>
+          <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+          </mat-paginator>
+      </div>
+    </div>
+  </mat-sidenav-content> 
+</mat-sidenav-container>
+
+
+

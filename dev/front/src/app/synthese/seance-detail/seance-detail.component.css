@@ -1,0 +1,138 @@
+.seanceTitle {
+  font-weight: bold;
+}
+
+.container {
+    max-width: auto;
+    max-height: auto;
+    display: flex;
+    flex-direction: column;
+  
+    
+    /* align-content: center; */
+  }
+  
+  .image {
+      overflow: hidden;
+      border-radius: 50px;
+      width: 40px;
+      height: 40px;
+  }
+  
+  
+  
+  .body {
+    display: flex;
+    height: auto;
+    flex-direction: row;
+    display: block;
+    
+   
+  
+  }
+  
+  .couverture {
+   
+    width: 250px;
+    margin-top: 40px;
+    margin-right: 50px;
+      float: left;
+      
+  
+    
+    
+  }
+  .container-list{
+    justify-content: center;
+    align-content: center;
+  }
+  
+  .matlist {
+  width: 700px;
+  align-content: center;
+  }
+  
+  .footer {
+    align-content: center;
+    flex-grow: auto;
+    margin-top: 40px;
+   
+  
+    
+  }
+  
+  .header {
+    flex-grow: auto;
+   
+  }
+  
+  .boutton{
+    border: 1px white solid;
+    
+  }
+  
+  
+  
+  
+  .mat-elevation-z5 {
+    background-color: rgb(72, 85, 122);
+  }
+  
+  
+  
+  
+  .menu {
+   
+    text-align: center;
+    background-color: rgb(72, 85, 122);
+    
+    
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    
+  }
+  
+  a {
+    border-bottom: 1px, white solid;
+  }
+  
+  .menu a {
+    list-style-type: none;
+    color: black;
+    border-bottom: 1px, white solid;
+    display: block;
+    /* Make the links appear below each other */
+    padding: 12px;
+    /* Add some padding */
+    text-decoration: none;
+    /* Remove underline from links */
+    
+  }
+  
+  .menu a:hover {
+    background-color: #ccc;
+    /* Dark grey background on mouse-over */
+  }
+  
+  
+  .flex-spacer {
+    flex: 1 1 auto;
+  }
+  
+  
+  mat-row:hover {
+    background-color: rgb(44, 99, 116);
+  }
+  
+  .pad {
+    margin: 5px;
+    padding: 5px;
+  }
+  
+  .flex-spacer {
+    flex: 1 1 auto;
+  }
+  

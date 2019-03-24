@@ -1,0 +1,15 @@
+.pad {
+    margin: 50px;
+    padding: 50px;
+  }
+
+  .welcome {
+      font-size: 40px;
+      font-family: 'Times New Roman', Times, serif;
+      font-style: italic;
+      color: brown;
+      font-weight: 900;
+  }
+
+
+

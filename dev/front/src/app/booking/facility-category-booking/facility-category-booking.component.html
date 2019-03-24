@@ -1,0 +1,38 @@
+
+      
+<mat-accordion *ngIf="!isBookedTimestamp && isShowableFacilities">
+      <mat-expansion-panel *ngFor="let facilityCategory of listFacilityCategories | async">
+          
+          <mat-expansion-panel-header *ngIf="facilityCategory.quantityAvailable > 0">
+            <mat-panel-title>
+                {{ facilityCategory.nameFacilityCategory }} (dispo : {{ facilityCategory.quantityAvailable }} )
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+      
+
+          <table>
+            <tr *ngFor="let facility of facilityCategory.facilities">
+              <td>
+                  {{ facility.nameFacility }} : ({{ facilityCategory.priceFacilityCategory }} €) <br>
+                <span *ngIf="facility.descriptionFacility !='' && facility.imageFacility !=''" >
+                  {{ facility.descriptionFacility }} <img src="assets/images/facilities/{{ facility.imageFacility }}" /> <br></span>
+                <span *ngIf="facility.descriptionFacility !='' && facility.imageFacility ==''" >
+                    {{ facility.descriptionFacility }} <br></span>
+                <span *ngIf="facility.descriptionFacility =='' && facility.imageFacility !=''" >
+                    <img src="assets/images/facilities/{{ facility.imageFacility }}" /> <br></span>
+          <a mat-flat-button (click)="onBookingFacility(facility.nameFacility, facilityCategory.nameFacilityCategory, facilityCategory.priceFacilityCategory)">Sélectionner</a></td>
+            </tr>
+          </table>   
+        
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div *ngIf="isBookedTimestamp">
+    Votre équipement est réservé pour cette tranche horaire.
+  </div>
+  
+  <div *ngIf="isNotAvailableFacilities">
+    Tous les équipements sont réservés
+  </div>
+
+  

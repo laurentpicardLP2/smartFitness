@@ -1,0 +1,32 @@
+
+Cédric24/11/2018
+Pour les gens de mon équipe fil rouge (et les autres aussi :smiley: )  j'ai un serial pour balsamiq (le logiciel pour faire les maquettes). Je le trouve trés bien fait et plus pratique à utiliser...
+name : angel
+serial : eJzzzU/OLi0odstPdypNr6pJzEtPzakxMjKwNDA2MjAwqHE2BJIAAoYMCA==
+
+
+sites responsives vs adaptatifs
+RGPD :  Règlement Général sur la Protection des Données (tenir compte de la protection des données personnelles au stade de la conception d'un logiciel : cryptage des données, etc.).
+GIT - GITHUB - GITLAB
+Publier des pages web sur serveur : OVH
+ref naturel : META, respect des balises, vitesse de chargement des pages, site mobile = site desktop (google croler)
+WCAG( * niv accessibiliytés) Web Content Accessibility Guidelines (WCAG) 2.0 [https://www.w3.org/Translations/WCAG20-fr/]
+eco -c conception : eviter la contre performance énergétique (green code) : rechargement inutile de librairies, import io.*, les requêtes imbriquées
+
+attention aux effets de bord
+
+Programmer avec un framework de script client (C3) : React (Facebookk), View,  angular (un framework pr developper des SPA)
+CMS est l’acronyme de content management system, Il s’agit d’un programme informatique utilisant une base de données et permettant de gérer de A et Z l’apparence et le contenu d’un site web
+(https://www.cms.fr/definition-cms-content-management-system.php)
+Utiliser un gabarit de mise en page fourni dans la solution installée : thèmes (palettes + thèmes child)
+
+DOM : représentation objet de la page HTML
+Angular : HTML (template) structure page HTML / css => style / TS : logique du component
+JS : typage dynamique vs TS (typage statique des varialbles)
+
+SpringBoot tourne sur Apache tomcat en localhost 8080, angular tourne sur node.js en localhost 4200 : Communication entre les deux serveurs : requêtes REST API
+
+DTO : DATA TRANSFERT OBJECT : pour transformer les objets lors des opérations de sérialisation / désérialisation du json 
+
+Utilisée par les navigateurs, la technologie REST (REpresentational State Transfer) peut être considérée comme la langue d'Internet.
+Aujourd'hui, l'utilisation croissante du Cloud entraîne l'apparition de différentes API visant à présenter les services Web. REST constitue un choix logique pour le développement d'API permettant à l'utilisateur final de se connecter à des services Cloud et d'interagir avec eux. De nombreux sites font appel à des API RESTful, notamment Google, Amazon, Twitter et LinkedIn.
