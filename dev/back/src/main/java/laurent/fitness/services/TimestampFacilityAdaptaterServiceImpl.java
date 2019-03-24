@@ -43,13 +43,13 @@ public class TimestampFacilityAdaptaterServiceImpl implements TimestampFacilityA
 		String nameFacility;
 		String nameFacilityCategory;
 		
-		daysName.put(0, "Dimanche");
-		daysName.put(1, "Lundi");
-		daysName.put(2, "Mardi");
-		daysName.put(3, "Mercredi");
-		daysName.put(4, "Jeudi");
-		daysName.put(5, "Vendredi");
-		daysName.put(6, "Samedi");
+		daysName.put(1, "Dimanche");
+		daysName.put(2, "Lundi");
+		daysName.put(3, "Mardi");
+		daysName.put(4, "Mercredi");
+		daysName.put(5, "Jeudi");
+		daysName.put(6, "Vendredi");
+		daysName.put(7, "Samedi");
 		
 		monthsName.put(0, "Janvier");
 		monthsName.put(1, "Février");

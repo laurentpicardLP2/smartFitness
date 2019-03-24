@@ -59,7 +59,7 @@ public class SyntheseController {
 	}	
 	
 	// Récupération des timestamp d'une séance (composition d'une séance)
-	@GetMapping("/gettimestampfromaseance/{idItem}")
+	@GetMapping("/gettimestampforaseance/{idItem}")
 	public List<TimestampFacilityAdaptater> GetTimestampFromASeance(@PathVariable int idItem){
 		try {
 			return this.timestampFacilityAdaptaterService.getTimestampFacilitiesForASeance(idItem);
