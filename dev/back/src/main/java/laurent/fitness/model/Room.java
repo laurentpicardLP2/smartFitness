@@ -22,7 +22,7 @@ public class Room implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idRoom;
 
-	private int capacity;
+	private int capacityRoom;
 
 	private String nameRoom;
 
@@ -39,9 +39,9 @@ public class Room implements Serializable {
 	public Room() {
 	}
 	
-	public Room(String nameRoom, int capacity) {
+	public Room(String nameRoom, int capacityRoom) {
 		this.nameRoom = nameRoom;
-		this.capacity = capacity;
+		this.capacityRoom = capacityRoom;
 	}
 
 	public int getIdRoom() {
@@ -52,12 +52,12 @@ public class Room implements Serializable {
 		this.idRoom = idRoom;
 	}
 
-	public int getCapacity() {
-		return this.capacity;
+	public int getCapacityRoom() {
+		return this.capacityRoom;
 	}
 
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
+	public void setCapacityRoom(int capacityRoom) {
+		this.capacityRoom = capacityRoom;
 	}
 
 	public String getNameRoom() {

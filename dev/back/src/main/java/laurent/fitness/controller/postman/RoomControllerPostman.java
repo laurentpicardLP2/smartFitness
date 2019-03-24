@@ -22,9 +22,9 @@ public class RoomControllerPostman {
 	
 	//Add a new room
 	@PostMapping("/addroom")
-	public ResponseEntity<?> addRoom(@Valid String nameRoom, @Valid String capacity) {
+	public ResponseEntity<?> addRoom(@Valid String nameRoom, @Valid String capacityRoom) {
 		try {
-			this.roomService.saveRoom(new Room(nameRoom, Integer.parseInt(capacity)));
+			this.roomService.saveRoom(new Room(nameRoom, Integer.parseInt(capacityRoom)));
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 		
 		} catch(Exception e) {
@@ -36,10 +36,10 @@ public class RoomControllerPostman {
 	
 	// Update a room by Postman
 	@PutMapping("/updateroom")
-	public ResponseEntity<?> updateRoom(@Valid String nameRoom, @Valid String capacity){
+	public ResponseEntity<?> updateRoom(@Valid String nameRoom, @Valid String capacityRoom){
 		try {
 			Room roomToUpdate = this.roomService.findByRoomName(nameRoom);
-			roomToUpdate.setCapacity(Integer.parseInt(capacity));
+			roomToUpdate.setCapacityRoom(Integer.parseInt(capacityRoom));
 			this.roomService.saveRoom(roomToUpdate);
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 		} catch(Exception e) {

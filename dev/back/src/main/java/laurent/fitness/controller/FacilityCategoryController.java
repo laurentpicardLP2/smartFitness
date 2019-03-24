@@ -43,6 +43,7 @@ public class FacilityCategoryController {
 		this.convertTimeToStringService = convertTimeToStringService;
 	}
 	
+	
 	//Retourne la liste des équipements disponibles pour la tranche horaire timestamp
 	@GetMapping("/getfacilitycategoriesavailable/{timestamp}")
 	public ResponseEntity<?> getFacilityCategoriesAvailable(@PathVariable Date timestamp) {

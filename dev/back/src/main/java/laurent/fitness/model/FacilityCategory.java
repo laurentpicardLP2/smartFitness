@@ -49,6 +49,11 @@ public class FacilityCategory implements Serializable {
 		this.quantityFacilityCategory = quantityFacilityCategory;
 	}
 	
+	public FacilityCategory(String nameFacilityCategory, float priceFacilityCategory) {
+		this.nameFacilityCategory = nameFacilityCategory;
+		this.priceFacilityCategory = priceFacilityCategory;
+	}
+	
 	public FacilityCategory(String nameFacilityCategory, int quantityFacilityCategory, float priceFacilityCategory) {
 		this.nameFacilityCategory = nameFacilityCategory;
 		this.quantityFacilityCategory = quantityFacilityCategory;

@@ -6,17 +6,38 @@ package laurent.fitness;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import laurent.fitness.model.Authority;
+import laurent.fitness.model.Staff;
+import laurent.fitness.model.User;
+import laurent.fitness.repository.AuthorityRepository;
+import laurent.fitness.repository.StaffRepository;
+import laurent.fitness.repository.UserRepository;
+
+
 
 @SpringBootApplication
 public class Fitness implements CommandLineRunner {
     public boolean someLibraryMethod() {
         return true;
     }
+    @Autowired
+	private AuthorityRepository authorityRepository;
     
+    @Autowired
+	private StaffRepository staffRepository;
+    
+    @Autowired
+	private UserRepository userRepository;
+
 
 	public static void main(String[] args) throws Exception, MalformedURLException, IOException, ClassNotFoundException, SQLException {
 		SpringApplication.run(Fitness.class, args);
@@ -25,6 +46,23 @@ public class Fitness implements CommandLineRunner {
 	@Override
 	public void run(String... args)
 			throws Exception,  MalformedURLException, IOException, ClassNotFoundException, SQLException {
+		
+		
+		int idUser = 0;
+		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+		
+		if( (this.staffRepository.findByUsername("db_admin") == null)) {
+			try {
+				idUser = this.userRepository.findByUsernameIdMax().getIdUser() + 1;
+			} catch (Exception e) {
+				idUser = 1;
+			}
+			finally {
+				this.authorityRepository.save(new Authority("db_admin", "ROLE_ADMIN"));
+				this.staffRepository.save(new Staff(idUser, "db_admin", "sysadmin", "{bcrypt}" + bcrypt.encode("Azerty12!"),"", "", new Date(), (byte)(1), "", ""));				
+			}
+		}
+		
 	}
     
 }
