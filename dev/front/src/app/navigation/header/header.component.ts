@@ -54,7 +54,6 @@ export class HeaderComponent implements OnInit {
 
     this.loginService.authoritySubject.subscribe(res => {
       this.authority = res;
-      console.log("this.authority : ", this.authority);
     });
   }
 
