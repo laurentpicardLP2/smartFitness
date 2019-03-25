@@ -1,0 +1,30 @@
+.facility-category-new-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .facility-category-new-container > * {
+    width: 100%;
+  }
+
+  .facility-category-form {
+    min-width: 150px;
+    max-width: 600px;
+    width: 100%;
+  }
+
+
+  
+  .facility-category-full-width {
+    min-width:400px;
+    max-width: 800px;
+  }
+
+  .facility-category-border {
+    border-style: solid;
+  }
+
+  .pad {
+    margin: 5px;
+    padding: 5px;
+  }

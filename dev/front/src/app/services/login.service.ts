@@ -73,6 +73,7 @@ export class LoginService {
         this.publishAuthority(user);
         this.setIsUserLoggedSubject(true); 
         this.setUsernameSubject(user.username);
+        this.router.navigate(['']);
       },
       (error) => { console.log("login user pb : ", error); 
         this.setIsUserLoggedSubject(false);

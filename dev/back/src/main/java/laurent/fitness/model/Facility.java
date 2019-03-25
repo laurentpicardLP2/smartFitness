@@ -25,6 +25,8 @@ public class Facility implements Serializable {
 
 	private String nameFacility;
 	
+	private float priceSeance;
+	
 	@Lob
 	private String descriptionFacility;
 
@@ -62,23 +64,46 @@ public class Facility implements Serializable {
 		this.facilityCategory = facilityCategory;
 	}
 	
+	public Facility(String nameFacility, Room room, FacilityCategory facilityCategory, float priceSeance) {
+		this.nameFacility = nameFacility;
+		this.room = room;
+		this.facilityCategory = facilityCategory;
+		this.priceSeance = priceSeance;
+	}
+	
 	public Facility(String nameFacility, Room room, FacilityCategory facilityCategory, String descriptionFacility) {
 		this.nameFacility = nameFacility;
 		this.room = room;
 		this.facilityCategory = facilityCategory;
-		this.descriptionFacility = descriptionFacility;
-		
+		this.descriptionFacility = descriptionFacility;	
 	}
+
+	public Facility(String nameFacility, Room room, FacilityCategory facilityCategory, String descriptionFacility, float priceSeance) {
+		this.nameFacility = nameFacility;
+		this.room = room;
+		this.facilityCategory = facilityCategory;
+		this.descriptionFacility = descriptionFacility;
+		this.priceSeance = priceSeance;
+	}
+
 	
 	public Facility(String nameFacility, Room room, FacilityCategory facilityCategory, String descriptionFacility, String imageFacility) {
 		this.nameFacility = nameFacility;
 		this.room = room;
 		this.facilityCategory = facilityCategory;
 		this.descriptionFacility = descriptionFacility;
-		this.imageFacility = imageFacility;
-		
+		this.imageFacility = imageFacility;		
 	}
 
+	public Facility(String nameFacility, Room room, FacilityCategory facilityCategory, String descriptionFacility, String imageFacility, float priceSeance) {
+		this.nameFacility = nameFacility;
+		this.room = room;
+		this.facilityCategory = facilityCategory;
+		this.descriptionFacility = descriptionFacility;
+		this.imageFacility = imageFacility;
+		this.priceSeance = priceSeance;
+	}
+	
 	public int getIdFacility() {
 		return this.idFacility;
 	}
@@ -93,6 +118,14 @@ public class Facility implements Serializable {
 
 	public void setNameFacility(String nameFacility) {
 		this.nameFacility = nameFacility;
+	}
+	
+	public float getPriceSeance() {
+		return this.priceSeance;
+	}
+
+	public void setPriceSeance(float priceSeance) {
+		this.priceSeance = priceSeance;
 	}
 
 	public String getDescriptionFacility() {

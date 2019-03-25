@@ -3,31 +3,48 @@ import { Routes, RouterModule } from '@angular/router';
 import { CustomerNewComponent } from './user/customer-new/customer-new.component';
 import { SeanceBookingComponent } from './booking/seance-booking/seance-booking.component';
 import { FacilityCategoryBookingComponent } from './booking/facility-category-booking/facility-category-booking.component';
+import { FacilityCategoryListingComponent } from './manager/facility-category-listing/facility-category-listing.component';
+import { FacilityCategoryNewComponent } from './manager/facility-category-new/facility-category-new.component';
+import { FacilityCategoryDetailComponent } from './manager/facility-category-detail/facility-category-detail.component';
 import { FacilityBookingComponent } from './booking/facility-booking/facility-booking.component';
 import { LoginComponent } from './user/login/login.component';
 import { CommandListingComponent } from './synthese/command-listing/command-listing.component';
 import { SeanceListingComponent } from './synthese/seance-listing/seance-listing.component';
 import { SeanceDetailComponent } from './synthese/seance-detail/seance-detail.component';
 import { FacilityNewComponent } from './manager/facility-new/facility-new.component';
+import { FacilityListingComponent } from './manager/facility-listing/facility-listing.component';
+import { FacilityDetailComponent } from './manager/facility-detail/facility-detail.component';
 import { TimestampFacilityComponent } from './booking/timestamp-facility/timestamp-facility.component';
 import { HomeComponent } from './user/home/home.component';
 import { RoomNewComponent } from './manager/room-new/room-new.component';
-import { FacilityCategoryNewComponent } from './manager/facility-category-new/facility-category-new.component';
 import { AuthGuardCustomerService } from './services/auth-guard-customer.service';
 import { AuthGuardManagerService } from './services/auth-guard-manager.service';
 import { AuthGuardAdminService } from './services/auth-guard-admin.service';
+import { RoomListingComponent } from './manager/room-listing/room-listing.component';
+import { RoomDetailComponent } from './manager/room-detail/room-detail.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { PaypalComponent } from './booking/paypal/paypal.component';
 
 const routes: Routes = [
+  { path: 'error-page', component: ErrorPageComponent },
   { path: 'customer-new', component: CustomerNewComponent },
   { path: 'login', component: LoginComponent },
   { path: 'command-listing', canActivate: [AuthGuardCustomerService], component: CommandListingComponent },
   { path: 'seance-listing', canActivate: [AuthGuardCustomerService], component: SeanceListingComponent },
   { path: 'seance-detail/:idItem', canActivate: [AuthGuardCustomerService], component: SeanceDetailComponent},
   { path: 'facility-new', canActivate: [AuthGuardManagerService], component: FacilityNewComponent},
+  { path: 'facility-listing', canActivate: [AuthGuardManagerService], component: FacilityListingComponent},
+  { path: 'facility-detail/:idFacility', canActivate: [AuthGuardManagerService], component: FacilityDetailComponent},
   { path: 'facility-category-new', canActivate: [AuthGuardManagerService], component: FacilityCategoryNewComponent},
+  { path: 'facility-category-listing', canActivate: [AuthGuardManagerService], component: FacilityCategoryListingComponent},
+  { path: 'facility-category-detail/:idFacilityCategory', canActivate: [AuthGuardManagerService], component: FacilityCategoryDetailComponent},
   { path: 'room-new', canActivate: [AuthGuardManagerService], component: RoomNewComponent},
+  { path: 'room-listing', canActivate: [AuthGuardManagerService], component: RoomListingComponent},
+  { path: 'room-detail/:idRoom', canActivate: [AuthGuardManagerService], component: RoomDetailComponent},
   { path: 'chart',  component: TimestampFacilityComponent },
+  { path: 'paypal',  component: PaypalComponent },
   { path: '', component: HomeComponent },
+  
   //{ path: 'seance-booking', component: SeanceBookingComponent},
   //{ path: 'facility-category-booking', component: FacilityCategoryBookingComponent},
   //{ path: 'facility-booking', component: FacilityBookingComponent, outlet: 'booking-router-outlet' }

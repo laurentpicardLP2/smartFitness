@@ -1,0 +1,22 @@
+<div fxFlex fxLayout fxLayoutAlign="center">
+    <div class="pad">
+      <form [formGroup]="facilityCategoryForm" >
+          <div formGroupName="nameFacilityCategoryGroup">
+          <mat-form-field class="facility-category-full-width">
+              <input matInput placeholder="Nom de la catégorie d'équipement" type="text" formControlName="nameFacilityCategory" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameFacilityCategory">
+              <mat-error>
+                  {{errors.nameFacilityCategory}}
+              </mat-error>
+          </mat-form-field>
+  
+        </div>
+        <div>
+            <mat-form-field class="facility-category-full-width">
+                <input matInput placeholder="Prix d'achat de l'équipement" type="number" formControlName="priceFacilityCategory" [(ngModel)]="priceFacilityCategory">
+            </mat-form-field>
+          </div>
+  
+        <button mat-raised-button [disabled]="facilityCategoryForm.invalid" (click)="onUpdate()">Enregistrer les modifications</button>
+      </form>
+    </div> 
+  </div>

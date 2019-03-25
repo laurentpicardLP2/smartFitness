@@ -37,7 +37,6 @@ public class FacilityAvailableAdaptaterServiceImpl implements FacilityAvailableA
 		
 		int availableFacilities = 0;
 		String nameFacilityCategory = "";
-		float priceFacilityCategory = 0f;
 		ArrayList<FacilityAvailableAdaptater> facilitiesAvailableAdaptater = new ArrayList<FacilityAvailableAdaptater>() ;
 		List<Facility> facilities = null;
 		List<FacilityCategory> facilityCategories = this.facilityCategoryRepo.findAll();
@@ -45,10 +44,11 @@ public class FacilityAvailableAdaptaterServiceImpl implements FacilityAvailableA
 		
 		for (int i=0; i<facilityCategories.size(); i++) {
 			nameFacilityCategory = facilityCategories.get(i).getNameFacilityCategory();
-			priceFacilityCategory = facilityCategories.get(i).getPriceFacilityCategory();
 			availableFacilities = this.timestampFacilityRepo.findByFacilityCategoryCount(nameFacilityCategory, timestampToString);
+System.out.println("timestampToString : "  + timestampToString);
+System.out.println("availableFacilities : "  + availableFacilities);
 			facilities = this.facilityRepo.findByFacilityAvailable(nameFacilityCategory, timestampToString);
-			facilitiesAvailableAdaptater.add(new FacilityAvailableAdaptater(nameFacilityCategory, priceFacilityCategory, availableFacilities, facilities));
+			facilitiesAvailableAdaptater.add(new FacilityAvailableAdaptater(nameFacilityCategory, availableFacilities, facilities));
 		}
 		return facilitiesAvailableAdaptater;
 	}

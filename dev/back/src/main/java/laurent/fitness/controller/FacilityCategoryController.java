@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import laurent.fitness.model.FacilityCategory;
+import laurent.fitness.model.Room;
 import laurent.fitness.model.adaptater.FacilityAvailableAdaptater;
 import laurent.fitness.services.ConvertTimeToStringService;
 import laurent.fitness.services.FacilityAvailableAdaptaterService;
 import laurent.fitness.services.FacilityCategoryService;
+import laurent.fitness.services.RoomService;
 import laurent.fitness.services.TimestampFacilityService;
 
 @RestController
@@ -30,18 +32,22 @@ public class FacilityCategoryController {
 	private TimestampFacilityService timestampFacilityService;
 	private FacilityAvailableAdaptaterService facilityAvailableAdaptaterService;
 	private ConvertTimeToStringService convertTimeToStringService;
+	private RoomService roomService;
 	
 	public FacilityCategoryController(
 			FacilityCategoryService facilityCategoryService,
 			TimestampFacilityService timestampFacilityService,
 			FacilityAvailableAdaptaterService facilityAvailableAdaptaterService,
-			ConvertTimeToStringService convertTimeToStringService
+			ConvertTimeToStringService convertTimeToStringService,
+			RoomService roomService
 			) {
 		this.facilityCategoryService = facilityCategoryService;
 		this.timestampFacilityService = timestampFacilityService;
 		this.facilityAvailableAdaptaterService = facilityAvailableAdaptaterService;
 		this.convertTimeToStringService = convertTimeToStringService;
+		this.roomService = roomService;
 	}
+	
 	
 	
 	//Retourne la liste des équipements disponibles pour la tranche horaire timestamp
@@ -58,35 +64,41 @@ public class FacilityCategoryController {
 		return ResponseEntity.status(HttpStatus.OK).body(listeFacilitiesAvailable);
 	}
 	
-	@PostMapping("/addfacilitycategory")
-	public ResponseEntity<?> addFacilityCategory(@Valid String nameFacilityCategory, @Valid String quantityFacilityCategory,  @Valid String priceFacilityCategory) {
-		try {
-			FacilityCategory facilityCategory = new FacilityCategory(nameFacilityCategory, Integer.parseInt(quantityFacilityCategory), Float.parseFloat(priceFacilityCategory));
-			this.facilityCategoryService.saveFacilityCategory(facilityCategory);
-			
-		return ResponseEntity.status(HttpStatus.OK).body(null);
-		
-		} catch(Exception e) {
-			
-			System.out.println(e);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
-		}			
-	}
+	
+	
+	
+	
+	
+	
+//	@PostMapping("/addfacilitycategory")
+//	public ResponseEntity<?> addFacilityCategory(@Valid String nameFacilityCategory, @Valid String quantityFacilityCategory,  @Valid String priceFacilityCategory) {
+//		try {
+//			FacilityCategory facilityCategory = new FacilityCategory(nameFacilityCategory, Integer.parseInt(quantityFacilityCategory), Float.parseFloat(priceFacilityCategory));
+//			this.facilityCategoryService.saveFacilityCategory(facilityCategory);
+//			
+//		return ResponseEntity.status(HttpStatus.OK).body(null);
+//		
+//		} catch(Exception e) {
+//			
+//			System.out.println(e);
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+//		}			
+//	}
 	
 	// Update a category of facility
-		@PutMapping("/updatefacilitycategory")
-		public ResponseEntity<?> updateFacilityCategory(
-				@Valid String nameFacilityCategory, 
-				@Valid String quantityFacilityCategory,
-				@Valid String priceFacilityCategory){
-			try {
-				this.facilityCategoryService.updateFacilityCategory(nameFacilityCategory, quantityFacilityCategory,priceFacilityCategory);
-				return ResponseEntity.status(HttpStatus.OK).body(null);
-			}  catch(Exception e) {
-				System.out.println(e);
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
-			}
-		}
+//		@PutMapping("/updatefacilitycategory")
+//		public ResponseEntity<?> updateFacilityCategory(
+//				@Valid String nameFacilityCategory, 
+//				@Valid String quantityFacilityCategory,
+//				@Valid String priceFacilityCategory){
+//			try {
+//				this.facilityCategoryService.updateFacilityCategory(nameFacilityCategory, quantityFacilityCategory,priceFacilityCategory);
+//				return ResponseEntity.status(HttpStatus.OK).body(null);
+//			}  catch(Exception e) {
+//				System.out.println(e);
+//				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+//			}
+//		}
 	
 	// Delete a category of facility
 		@DeleteMapping("/delfacilitycategory")
@@ -94,6 +106,39 @@ public class FacilityCategoryController {
 			try {
 				this.facilityCategoryService.deleteFacilityCategory(this.facilityCategoryService.findByFacilityCategoryName(facilityCategoryName));
 				return ResponseEntity.status(HttpStatus.OK).body(null);
+			} catch(Exception e) {
+				System.out.println(e);
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+			}
+		}
+		
+		
+		//Return the list of rooms
+		@GetMapping("/getrooms")
+		public List<Room> getRooms() {
+			return this.roomService.getAllRooms();			
+		}
+
+		
+		//Add a new room
+		@PostMapping("/addroom/{nameRoom}/{capacityRoom}")
+		public ResponseEntity<?> addRoom(@PathVariable String nameRoom, @PathVariable Integer capacityRoom) {
+			try {
+				this.roomService.saveRoom(new Room(nameRoom, capacityRoom));
+			return ResponseEntity.status(HttpStatus.OK).body(null);
+			
+			} catch(Exception e) {
+				
+				System.out.println(e);
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+			}			
+		}
+		
+		// Update a room
+		@PutMapping("/updateroom/{idRoom}/{nameRoom}/{capacityRoom}")
+		public ResponseEntity<?> updateRoom(@PathVariable Integer idRoom, @PathVariable String nameRoom, @PathVariable Integer capacityRoom){
+			try {
+				return ResponseEntity.status(HttpStatus.OK).body(this.roomService.updateRoom(idRoom, nameRoom, capacityRoom));
 			} catch(Exception e) {
 				System.out.println(e);
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	

@@ -129,6 +129,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/seancectrl/**").hasAnyRole("ADMIN", "MANAGER", "CUSTOMER")
                 .antMatchers("/managerctrl/getrooms").hasAnyRole("ADMIN", "MANAGER")
                 .antMatchers("/managerctrl/getfacilitycategories").hasAnyRole("ADMIN", "MANAGER")
+                .antMatchers("/managerctrl/getfacilitycategoriesavailable/**").hasAnyRole("ADMIN", "MANAGER", "CUSTOMER")
                 .antMatchers("/managerctrl/addfacility/**").hasAnyRole("ADMIN", "MANAGER")
                 .antMatchers("/managerctrl/upload").permitAll()
                 .antMatchers("/adminctrl/newstaff/**").hasAnyRole("ADMIN")

@@ -3,11 +3,14 @@ package laurent.fitness.services;
 import java.util.List;
 
 import laurent.fitness.model.FacilityCategory;
+import laurent.fitness.model.Room;
 
 public interface FacilityCategoryService {
 	public List<FacilityCategory> getAllFacilityCategories();
 	
 	public FacilityCategory saveFacilityCategory(FacilityCategory facilityCategory);
+	
+	public FacilityCategory updateFacilityCategory(int idFacilityCategory, String nameFacilityCategory, float priceFacilityCategory);
 	
 	public void deleteFacilityCategory(FacilityCategory facilityCategory);
 	

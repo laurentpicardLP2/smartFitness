@@ -1,0 +1,26 @@
+
+<div fxFlex fxLayout fxLayoutAlign="center">
+    <div class="pad">
+      <form [formGroup]="roomForm" >
+          <div formGroupName="nameRoomGroup">
+          <mat-form-field class="room-full-width">
+              <input matInput placeholder="Nom de la salle" type="text" formControlName="nameRoom" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameRoom">
+              <mat-error>
+                  {{errors.nameRoom}}
+              </mat-error>
+          </mat-form-field>
+  
+        </div>
+        <div formGroupName="capacityRoomGroup">
+            <mat-form-field class="room-full-width">
+                <input matInput placeholder="Contenance de la salle" type="number" formControlName="capacityRoom" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="capacityRoom">
+                <mat-error>
+                    {{errors.capacityRoom}}
+                </mat-error>
+            </mat-form-field>
+          </div>
+  
+        <button mat-raised-button [disabled]="roomForm.invalid" (click)="onUpdate()">Enregistrer les modifications</button>
+      </form>
+    </div> 
+  </div>

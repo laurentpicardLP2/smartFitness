@@ -28,6 +28,14 @@ import { AuthGuardManagerService } from './services/auth-guard-manager.service';
 import { AuthGuardAdminService } from './services/auth-guard-admin.service';
 import { RoomNewComponent } from './manager/room-new/room-new.component';
 import { FacilityCategoryNewComponent } from './manager/facility-category-new/facility-category-new.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { RoomListingComponent } from './manager/room-listing/room-listing.component';
+import { RoomDetailComponent } from './manager/room-detail/room-detail.component';
+import { FacilityCategoryListingComponent } from './manager/facility-category-listing/facility-category-listing.component';
+import { FacilityCategoryDetailComponent } from './manager/facility-category-detail/facility-category-detail.component';
+import { FacilityListingComponent } from './manager/facility-listing/facility-listing.component';
+import { PaypalComponent } from './booking/paypal/paypal.component';
+import { FacilityDetailComponent } from './manager/facility-detail/facility-detail.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +55,14 @@ import { FacilityCategoryNewComponent } from './manager/facility-category-new/fa
     HomeComponent,
     RoomNewComponent,
     FacilityCategoryNewComponent,
+    ErrorPageComponent,
+    RoomListingComponent,
+    RoomDetailComponent,
+    FacilityCategoryListingComponent,
+    FacilityCategoryDetailComponent,
+    FacilityListingComponent,
+    PaypalComponent,
+    FacilityDetailComponent,
   ],
   imports: [
     BrowserModule,

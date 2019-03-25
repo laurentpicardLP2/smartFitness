@@ -13,7 +13,7 @@
         </div>
         <div formGroupName="capacityRoomGroup">
             <mat-form-field class="room-full-width">
-                <input matInput type="number" formControlName="capacityRoom" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="capacityRoom">
+                <input matInput placeholder="Contenance de la salle" type="number" formControlName="capacityRoom" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="capacityRoom">
                 <mat-error>
                     {{errors.capacityRoom}}
                 </mat-error>

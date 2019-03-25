@@ -81,8 +81,8 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
 
   }
 
-  onBookingFacility(nameFacility: string, nameFacilityCategory: string, priceFacilityCategory: number){
-    this.priceSeance.push(priceFacilityCategory);
+  onBookingFacility(nameFacility: string, nameFacilityCategory: string, priceSeance: number){
+    this.priceSeance.push(priceSeance);
     this.seanceService.setPriceSeanceSubject(this.priceSeance);
     this.seanceService.setSeanceSubject(this.seance);
  

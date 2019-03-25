@@ -13,14 +13,14 @@
           <table>
             <tr *ngFor="let facility of facilityCategory.facilities">
               <td>
-                  {{ facility.nameFacility }} : ({{ facilityCategory.priceFacilityCategory }} €) <br>
+                  {{ facility.nameFacility }} : ({{ facility.priceSeance }} €) <br>
                 <span *ngIf="facility.descriptionFacility !='' && facility.imageFacility !=''" >
                   {{ facility.descriptionFacility }} <img src="assets/images/facilities/{{ facility.imageFacility }}" /> <br></span>
                 <span *ngIf="facility.descriptionFacility !='' && facility.imageFacility ==''" >
                     {{ facility.descriptionFacility }} <br></span>
                 <span *ngIf="facility.descriptionFacility =='' && facility.imageFacility !=''" >
                     <img src="assets/images/facilities/{{ facility.imageFacility }}" /> <br></span>
-          <a mat-flat-button (click)="onBookingFacility(facility.nameFacility, facilityCategory.nameFacilityCategory, facilityCategory.priceFacilityCategory)">Sélectionner</a></td>
+          <a mat-flat-button (click)="onBookingFacility(facility.nameFacility, facilityCategory.nameFacilityCategory, facility.priceSeance)">Sélectionner</a></td>
             </tr>
           </table>   
         
@@ -31,7 +31,7 @@
     Votre équipement est réservé pour cette tranche horaire.
   </div>
   
-  <div *ngIf="isNotAvailableFacilities">
+  <div *ngIf="isNotAvailableFacilities && !isBookedTimestamp">
     Tous les équipements sont réservés
   </div>
 

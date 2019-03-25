@@ -21,10 +21,9 @@ public class FacilityAvailableAdaptater {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public FacilityAvailableAdaptater(String nameFacilityCategory, float priceFacilityCategory, int quantityAvailable, List<Facility> facilities) {
+	public FacilityAvailableAdaptater(String nameFacilityCategory, int quantityAvailable, List<Facility> facilities) {
 		super();
 		this.nameFacilityCategory = nameFacilityCategory;
-		this.priceFacilityCategory = priceFacilityCategory;
 		this.quantityAvailable = quantityAvailable;
 		this.facilities = facilities;
 	}	

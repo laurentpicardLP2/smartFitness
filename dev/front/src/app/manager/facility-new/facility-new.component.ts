@@ -26,7 +26,8 @@ export class FacilityNewComponent implements OnInit {
   listFacilities: BehaviorSubject<Facility[]>;
   facilities: Facility[];
   rooms: Room[];
-  nameFacility : string;
+  nameFacility: string;
+  priceFacility: number;
   descriptionFacility: string;
   imageFacility: string;;
   idFacilityCategory: number;
@@ -77,6 +78,9 @@ export class FacilityNewComponent implements OnInit {
           Validators.minLength(1),
         ]]
       }, {validator: this.checkNameFacility.bind(this)}),
+      priceFacility: ['', [
+        Validators.required
+      ]],
       descriptionFacility: '',
       imageFacility: '',
       userFile: null,
@@ -116,9 +120,9 @@ export class FacilityNewComponent implements OnInit {
       if (this.file !== undefined){
         this.imageFacility = this.nameFacility + "_" + this.file.name;
         data.append('data', this.file, this.nameFacility + "_" + this.file.name);
-        this.managerService.addImage(data, this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility);
+        this.managerService.addImage(data, this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceFacility);
       } else {
-        this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility);
+        this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceFacility);
       }
    
   }

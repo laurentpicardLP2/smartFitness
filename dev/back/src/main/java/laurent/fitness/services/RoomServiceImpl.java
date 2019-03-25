@@ -47,4 +47,13 @@ public class RoomServiceImpl implements RoomService {
 		return this.roomRepo.findByIdRoom(idRoom);
 	}
 
+	@Override
+	public Room updateRoom(int idRoom, String nameRoom, int capacityRoom) {
+		// TODO Auto-generated method stub
+		Room room = this.roomRepo.findByIdRoom(idRoom);
+		room.setNameRoom(nameRoom);
+		room.setCapacityRoom(capacityRoom);
+		return this.roomRepo.save(room);
+	}
+
 }

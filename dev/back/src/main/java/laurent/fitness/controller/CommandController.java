@@ -83,8 +83,8 @@ public class CommandController {
 	}
 	
 	// Validation du panier : maj en base des prix des différents items du panier
-	@PutMapping("/validatecommand")
-	public ResponseEntity<?> validateCommand(@RequestBody Command command){
+	@PutMapping("/validatecommand/{username}")
+	public ResponseEntity<?> validateCommand(@RequestBody Command command, @PathVariable String username){
 	
 		try {
 						
@@ -95,8 +95,12 @@ public class CommandController {
 			}
 			
 			this.commandService.saveCommand(command);
+			// ATTENTION il faudra remettre return ResponseEntity.status(HttpStatus.OK).body(command); 
+			// pour l'étape effective du paiement en ligne
 			
-			return ResponseEntity.status(HttpStatus.OK).body(command);
+			// Toutes les instructions suivantes doivent disparaître
+			Customer customer = this.customerService.findByUsername(username);
+			return ResponseEntity.status(HttpStatus.OK).body(this.commandService.saveCommand(new Command(customer, new Date())));
 		} catch(Exception e) {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	

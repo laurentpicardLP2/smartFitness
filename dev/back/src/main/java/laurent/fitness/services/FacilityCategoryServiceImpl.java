@@ -59,6 +59,16 @@ public class FacilityCategoryServiceImpl implements FacilityCategoryService {
 		return this.facilityCategoryRepo.findByIdFacilityCategory(idFacilityCategory);
 	}
 
+	@Override
+	public FacilityCategory updateFacilityCategory(int idFacilityCategory, String nameFacilityCategory,
+			float priceFacilityCategory) {
+		// TODO Auto-generated method stub
+		FacilityCategory facilityCategory = this.facilityCategoryRepo.findByIdFacilityCategory(idFacilityCategory);
+		facilityCategory.setNameFacilityCategory(nameFacilityCategory);
+		facilityCategory.setPriceFacilityCategory(priceFacilityCategory);
+		return this.facilityCategoryRepo.save(facilityCategory);
+	}
+
 
 
 
