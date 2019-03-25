@@ -8,6 +8,7 @@ import { Command } from 'src/app/models/command.model';
 import { Item } from 'src/app/models/item.model';
 import { BehaviorSubject } from 'rxjs';
 import { SeanceService } from 'src/app/services/seance.service';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Injectable({
   providedIn: 'root'
@@ -69,8 +70,8 @@ export class CommandService {
     );
   }
 
-  public validateCommand(command: Command){
-    this.httpClient.put<Command>('http://localhost:8080/commandctrl/validatecommand', command, 
+  public validateCommand(command: Command, username: string){
+    this.httpClient.put<Command>('http://localhost:8080/commandctrl/validatecommand/' + username, command, 
     {
       headers: {
           "Content-Type": "application/json",
@@ -80,8 +81,12 @@ export class CommandService {
     (validatedCommand) =>{ 
         console.log("validate command OK : ", validatedCommand);
         this.setCommandSubject(validatedCommand);
+        this.setNbItemsSubject("");
+        this.router.navigate(['paypal']);
       },
-      (error) => { console.log("validate command pb : ", error); }
+      (error) => { console.log("validate command pb : ", error); 
+                    this.router.navigate(['error-page']);
+                  }
     );
       
   }

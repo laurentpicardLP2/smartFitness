@@ -33,8 +33,12 @@ export class UtilsService {
       "Authorization": this.token.getToken()
       }
       }).subscribe(
-        () => {this.router.navigate([''])},
-        (error) => console.log("del command error", error)
+        () => {
+                this.commandService.setNbItemsSubject("");
+                this.router.navigate([''])
+              },
+        (error) => {console.log("del command error", error);
+                    this.router.navigate(['/error-page']);}
       );
     }
   }
@@ -54,7 +58,7 @@ export class UtilsService {
   }
 
   public getDateSeance(pDateOfTimestamp: Date): string{
-    let dd = (pDateOfTimestamp.getDay() < 10 ) ? "0" + pDateOfTimestamp.getDay() : "" + pDateOfTimestamp.getDay();
+    let dd = (pDateOfTimestamp.getDate() < 10 ) ? "0" + pDateOfTimestamp.getDate() : "" + pDateOfTimestamp.getDate();
     let mm = (pDateOfTimestamp.getMonth() + 1 < 10) ? "0" + (pDateOfTimestamp.getMonth() + 1) : "" + (pDateOfTimestamp.getMonth() + 1);
     return  dd + '/' + mm + '/' + pDateOfTimestamp.getFullYear().toString().substring(2, 4);
   }
@@ -69,7 +73,7 @@ export class UtilsService {
    * Met en forme la parie date (pDateOfTimestamp) présente dans chaque ligne du listing des séances pour un utilisateur
    * @param pDateOfTimestamp 
    *  ATTENTION : Il existe un décalage d'une heure (voir deux ? en GMT + 2) entre la date renvoyée par springboot
-   * et celle recçue par Angular
+   * et celle reçue par Angular
    */
   public convertIntoDateTimeSeanceListing(pDateOfTimestamp: string): string{
     

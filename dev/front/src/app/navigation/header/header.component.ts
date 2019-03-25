@@ -88,7 +88,7 @@ export class HeaderComponent implements OnInit {
       totalCart = totalCart + this.command.items[i].price;
     }
     this.command.totalPrice = totalCart;
-    this.commandService.validateCommand(this.command);
+    this.commandService.validateCommand(this.command,this.username);
   }
 
   public onContinue(){
