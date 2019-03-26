@@ -36,6 +36,7 @@ import { FacilityCategoryDetailComponent } from './manager/facility-category-det
 import { FacilityListingComponent } from './manager/facility-listing/facility-listing.component';
 import { PaypalComponent } from './booking/paypal/paypal.component';
 import { FacilityDetailComponent } from './manager/facility-detail/facility-detail.component';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { FacilityDetailComponent } from './manager/facility-detail/facility-deta
     FacilityListingComponent,
     PaypalComponent,
     FacilityDetailComponent,
+    UploadComponent,
   ],
   imports: [
     BrowserModule,

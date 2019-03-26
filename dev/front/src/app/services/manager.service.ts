@@ -151,11 +151,10 @@ export class ManagerService {
     }
 
 
-    public addImage(data, idFacilityCategory: number, idRoom: number, nameFacility: string, descriptionFacility:string, imageFacility: string, priceFacility: number){
+    public addImage(data){
       this.httpClient.post(
-        'http://localhost:8080/managerctrl/upload', data).subscribe(value => {
-          setTimeout(()=> this.addFacility(idFacilityCategory, idRoom, nameFacility, descriptionFacility, imageFacility, priceFacility), 3000);
-          
+        'http://localhost:8080/managerctrl/upload', data).subscribe(() => {
+          //this.addFacility(idFacilityCategory, idRoom, nameFacility, descriptionFacility, imageFacility, priceFacility);
         },
           (error) => {console.log("pb upload fichier ", error);}
         );
@@ -219,6 +218,9 @@ export class ManagerService {
     }
 
     public updateFacilityCategory(idFacilityCategory:number, nameFacilityCategory: string, priceFacilityCategory: number){
+      console.log(idFacilityCategory);
+      console.log(idFacilityCategory);
+      console.log(idFacilityCategory);
       this.httpClient.put<FacilityCategory>('http://localhost:8080/managerctrl/updatefacilitycategory/' + idFacilityCategory + '/' + nameFacilityCategory + '/' + priceFacilityCategory, null, 
           {
           headers: {

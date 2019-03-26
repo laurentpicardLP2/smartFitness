@@ -1,3 +1,4 @@
+
 package laurent.fitness.security;
 
 import com.google.gson.Gson;

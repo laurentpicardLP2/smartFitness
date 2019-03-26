@@ -74,9 +74,24 @@ public class ManagerController {
 		}			
 	}
 	
-	// Update a facilityCategory
+	// upload a file and put it in /home/laurent/smartFitness/dev/front/src/assets/images and memorize its name in DB
+	@PostMapping(value = "/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+	  public ResponseEntity<FileInformation> uploadFile(
+	      @RequestParam("data") MultipartFile multipartFile
+	  ) throws UploadFileException, IllegalStateException, IOException {
+		
+	    if (multipartFile == null || multipartFile.isEmpty()) {
+	      throw new UploadFileException();
+	    }
+	    
+	    multipartFile.transferTo(new File("/home/laurent/smartFitness/dev/front/src/assets/images/facilities/" + multipartFile.getOriginalFilename()));
+	    return new ResponseEntity<>(new FileInformation(multipartFile.getOriginalFilename(), multipartFile.getSize()), HttpStatus.CREATED);
+	  }
+
+	
+	// Update a facility
 	@PutMapping("/updatefacility/{idFacility}/{nameFacility}/{priceSeance}")
-	public ResponseEntity<?> updateFacilitycategory(@PathVariable Integer idFacility, @PathVariable String nameFacility, @PathVariable Float priceSeance){
+	public ResponseEntity<?> updateFacility(@PathVariable Integer idFacility, @PathVariable String nameFacility, @PathVariable Float priceSeance){
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.facilityService.updateFacility(idFacility, nameFacility, priceSeance));
 		} catch(Exception e) {
@@ -84,72 +99,83 @@ public class ManagerController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}
-			
-		/**
-		 * Crée un catégorie d'équipement
-		 * @param nameFacilityCategory
-		 * @param priceFacilityCategory
-		 * @return
-		 */
-		@PostMapping("/addfacilitycategory/{nameFacilityCategory}/{priceFacilityCategory}")
-		public ResponseEntity<?> addFacilityCategory(@PathVariable String nameFacilityCategory, @PathVariable Float priceFacilityCategory) {
+	
+	// Update a facilityCategory
+		@PutMapping("/updatefacilitycategory/{idFacilityCategory}/{nameFacilityCategory}/{priceFacilityCategory}") 
+		public ResponseEntity<?> updateFacilityCategory(@PathVariable Integer idFacilityCategory, @PathVariable String nameFacilityCategory, @PathVariable Float priceFacilityCategory){
 			try {
-				FacilityCategory facilityCategory = new FacilityCategory(nameFacilityCategory, priceFacilityCategory);
-				this.facilityCategoryService.saveFacilityCategory(facilityCategory);
-				
-			return ResponseEntity.status(HttpStatus.OK).body(null);
-			
-			} catch(Exception e) {
-				
-				System.out.println(e);
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
-			}			
-		}
-
-
-		// Delete a category of facility
-		@DeleteMapping("/delfacilitycategory")
-		public ResponseEntity<?> delFacilityCategory(@Valid String facilityCategoryName){
-			try {
-				this.facilityCategoryService.deleteFacilityCategory(this.facilityCategoryService.findByFacilityCategoryName(facilityCategoryName));
-				return ResponseEntity.status(HttpStatus.OK).body(null);
+				return ResponseEntity.status(HttpStatus.OK).body(this.facilityCategoryService.updateFacilityCategory(idFacilityCategory, nameFacilityCategory, priceFacilityCategory));
 			} catch(Exception e) {
 				System.out.println(e);
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 			}
 		}
-		
-		
-		//Return the list of rooms
-		@GetMapping("/getrooms")
-		public List<Room> getRooms() {
-			return this.roomService.getAllRooms();			
-		}
-
-		
-		//Add a new room
-		@PostMapping("/addroom/{nameRoom}/{capacityRoom}")
-		public ResponseEntity<?> addRoom(@PathVariable String nameRoom, @PathVariable Integer capacityRoom) {
-			try {
-				this.roomService.saveRoom(new Room(nameRoom, capacityRoom));
-			return ResponseEntity.status(HttpStatus.OK).body(null);
 			
-			} catch(Exception e) {
-				
-				System.out.println(e);
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
-			}			
-		}
+	/**
+	 * Crée un catégorie d'équipement
+	 * @param nameFacilityCategory
+	 * @param priceFacilityCategory
+	 * @return
+	 */
+	@PostMapping("/addfacilitycategory/{nameFacilityCategory}/{priceFacilityCategory}")
+	public ResponseEntity<?> addFacilityCategory(@PathVariable String nameFacilityCategory, @PathVariable Float priceFacilityCategory) {
+		try {
+			FacilityCategory facilityCategory = new FacilityCategory(nameFacilityCategory, priceFacilityCategory);
+			this.facilityCategoryService.saveFacilityCategory(facilityCategory);
+			
+		return ResponseEntity.status(HttpStatus.OK).body(null);
 		
-		// Update a room
-		@PutMapping("/updateroom/{idRoom}/{nameRoom}/{capacityRoom}")
-		public ResponseEntity<?> updateRoom(@PathVariable Integer idRoom, @PathVariable String nameRoom, @PathVariable Integer capacityRoom){
-			try {
-				return ResponseEntity.status(HttpStatus.OK).body(this.roomService.updateRoom(idRoom, nameRoom, capacityRoom));
-			} catch(Exception e) {
-				System.out.println(e);
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
-			}
-		}	
+		} catch(Exception e) {
+			
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}			
+	}
+
+
+	// Delete a category of facility
+	@DeleteMapping("/delfacilitycategory")
+	public ResponseEntity<?> delFacilityCategory(@Valid String facilityCategoryName){
+		try {
+			this.facilityCategoryService.deleteFacilityCategory(this.facilityCategoryService.findByFacilityCategoryName(facilityCategoryName));
+			return ResponseEntity.status(HttpStatus.OK).body(null);
+		} catch(Exception e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}
+	}
+	
+	
+	//Return the list of rooms
+	@GetMapping("/getrooms")
+	public List<Room> getRooms() {
+		return this.roomService.getAllRooms();			
+	}
+
+	
+	//Add a new room
+	@PostMapping("/addroom/{nameRoom}/{capacityRoom}")
+	public ResponseEntity<?> addRoom(@PathVariable String nameRoom, @PathVariable Integer capacityRoom) {
+		try {
+			this.roomService.saveRoom(new Room(nameRoom, capacityRoom));
+		return ResponseEntity.status(HttpStatus.OK).body(null);
+		
+		} catch(Exception e) {
+			
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}			
+	}
+	
+	// Update a room
+	@PutMapping("/updateroom/{idRoom}/{nameRoom}/{capacityRoom}")
+	public ResponseEntity<?> updateRoom(@PathVariable Integer idRoom, @PathVariable String nameRoom, @PathVariable Integer capacityRoom){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.roomService.updateRoom(idRoom, nameRoom, capacityRoom));
+		} catch(Exception e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}
+	}	
 
 }

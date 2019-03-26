@@ -20,7 +20,8 @@ public interface AuthorityRepository extends JpaRepository<Authority, String>{
 	@Query("DELETE FROM Authority a WHERE a.username LIKE %?1%")
     void deleteByUsername(String username);
 	
-	@Query(value = "SELECT * FROM authorities WHERE authority like 'ROLE_CUSTOMER' ) ", nativeQuery = true)
+	//WHERE authority like 'ROLE_CUSTOMER'
+	@Query(value = "SELECT * FROM authorities WHERE authority like '%' ) ", nativeQuery = true)
 	public List<Authority> findAllAuthoritiesCustomer ();
 }
 

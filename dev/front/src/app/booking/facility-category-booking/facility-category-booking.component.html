@@ -28,11 +28,21 @@
   </mat-accordion>
 
   <div *ngIf="isBookedTimestamp">
-    Votre équipement est réservé pour cette tranche horaire.
-  </div>
-  
-  <div *ngIf="isNotAvailableFacilities && !isBookedTimestamp">
-    Tous les équipements sont réservés
+    <div style="position: relative; text-align:center; height: 450px; vertical-align: bottom; background-image: url('assets/images/infoReservation.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.2;">
+      
+    </div>
+    <div style="position: absolute; width:100%; left: 130px; top: 350px; text-align:center;"><span class="info-reserve">Votre équipement est réservé <br>pour cette tranche horaire.</span></div>
   </div>
 
+  <div *ngIf="isNotAvailableFacilities && !isBookedTimestamp">
+      <div style="position: relative; text-align:center; height: 450px; vertical-align: bottom; background-image: url('assets/images/warningReservation.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.2;">
+        
+      </div>
+      <div style="position: absolute; width:100%; left: 130px; top: 400px; text-align:center;"><span class="warning-reserve">Tous les équipements sont réservés.</span></div>
+  </div>
+
+
+
+
+ 
   

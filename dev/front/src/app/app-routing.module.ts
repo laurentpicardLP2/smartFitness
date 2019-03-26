@@ -22,11 +22,13 @@ import { AuthGuardManagerService } from './services/auth-guard-manager.service';
 import { AuthGuardAdminService } from './services/auth-guard-admin.service';
 import { RoomListingComponent } from './manager/room-listing/room-listing.component';
 import { RoomDetailComponent } from './manager/room-detail/room-detail.component';
+import { UploadComponent } from './upload/upload.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { PaypalComponent } from './booking/paypal/paypal.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
+  { path: 'upload/:data', component: UploadComponent },
   { path: 'customer-new', component: CustomerNewComponent },
   { path: 'login', component: LoginComponent },
   { path: 'command-listing', canActivate: [AuthGuardCustomerService], component: CommandListingComponent },

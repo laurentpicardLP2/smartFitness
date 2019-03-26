@@ -197,7 +197,12 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
     //this.router.navigate(['/seance-booking', {outlets: {'booking-router-outlet' : ['facility-category-booking']}}]);
   }
 
-  public onChangeDateTime() {
+  public onChangeDateTime(fieldType: string) {
+    
+    if(fieldType === 'd' && this.priceSeance.length > 0){
+      alert("Veuillez supprimer les éléments de la séance afin de pouvoir changer de date.");
+      return;
+    }
     
     let selectedTimestamp = this.getDateTimeFields();
     

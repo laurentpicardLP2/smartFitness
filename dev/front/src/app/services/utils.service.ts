@@ -25,24 +25,32 @@ export class UtilsService {
       this.command = res;
     });
 
-    if(this.command != undefined){
-      this.httpClient.delete('http://localhost:8080/commandctrl/delcommand/' + this.command.idCommand, 
-      {
-      headers: {
-      "Content-Type": "application/json",
-      "Authorization": this.token.getToken()
-      }
-      }).subscribe(
-        () => {
-                this.commandService.setNbItemsSubject("");
-                this.router.navigate([''])
-              },
-        (error) => {console.log("del command error", error);
-                    this.router.navigate(['/error-page']);}
-      );
+    //console.log("this.coomand : ", this.command);
+    if(this.command == undefined || this.command ==null){
+      this.router.navigate(['']);
+      return;
     }
+
+    this.httpClient.delete('http://localhost:8080/commandctrl/delcommand/' + this.command.idCommand, 
+    {
+    headers: {
+    "Content-Type": "application/json",
+    "Authorization": this.token.getToken()
+    }
+    }).subscribe(
+      () => {
+              this.commandService.setNbItemsSubject("");
+              this.router.navigate(['']);
+            },
+      (error) => {console.log("del command error", error);
+                  this.router.navigate(['/error-page']);}
+    );
   }
 
+  /**
+   * Convertit en [\d](*).[\d][\d] € le total de la séance lorque l'utilisateur se constitue une séance
+   * @param price 
+   */
   convertIntoMonetaryFormat(price: number){
     let splittedPrice = price.toString().split(".");
     if(splittedPrice.length == 1) {
@@ -51,7 +59,7 @@ export class UtilsService {
       if(splittedPrice[1].length ==1) {
         return price.toString() + "0 €";
       } else {
-        return price.toString() + " €";
+        return Math.trunc(price).toString() + "." + splittedPrice[1].substring(0, 2) + " €";
       }
     }
     

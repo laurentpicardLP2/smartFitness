@@ -105,7 +105,7 @@ ENGINE = InnoDB;
 -- Table `db_fitness`.`SubscriptionCategory`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_fitness`.`SubscriptionCategory` (
-  `idSubscriptionCategory` INT NOT NULL,
+  `idSubscriptionCategory` INT NOT NULL AUTO_INCREMENT,
   `nameSubscription` VARCHAR(45) NOT NULL,
   `lastSubscription` VARCHAR(45) NOT NULL,
   `priceSubscription` FLOAT NOT NULL,
@@ -117,7 +117,7 @@ ENGINE = InnoDB;
 -- Table `db_fitness`.`Subscription`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_fitness`.`Subscription` (
-  `idSubscriptionType` INT NOT NULL,
+  `idSubscriptionType` INT NOT NULL AUTO_INCREMENT,
   `Customer_Users_username` VARCHAR(45) NOT NULL,
   `SubscriptionCategory_idSubscriptionCategory` INT NOT NULL,
   PRIMARY KEY (`idSubscriptionType`),
@@ -142,7 +142,7 @@ CREATE INDEX `fk_Subscription_SubscriptionCategory1_idx` ON `db_fitness`.`Subscr
 -- Table `db_fitness`.`ConnectedWatchCategory`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_fitness`.`ConnectedWatchCategory` (
-  `idConnectedWatchCategory` INT NOT NULL,
+  `idConnectedWatchCategory` INT NOT NULL AUTO_INCREMENT,
   `modelWatch` VARCHAR(45) NOT NULL,
   `priceConnectedWatch` FLOAT NOT NULL,
   PRIMARY KEY (`idConnectedWatchCategory`))
@@ -178,7 +178,7 @@ CREATE INDEX `fk_ConnectedWatch_ConnectedWatchCategory1_idx` ON `db_fitness`.`Co
 -- Table `db_fitness`.`Room`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_fitness`.`Room` (
-  `idRoom` INT NOT NULL,
+  `idRoom` INT NOT NULL AUTO_INCREMENT,
   `capacityRoom` INT NOT NULL,
   `nameRoom` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idRoom`))
@@ -189,7 +189,7 @@ ENGINE = InnoDB;
 -- Table `db_fitness`.`FacilityCategory`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_fitness`.`FacilityCategory` (
-  `idFacilityCategory` INT NOT NULL,
+  `idFacilityCategory` INT NOT NULL AUTO_INCREMENT,
   `nameFacilityategory` VARCHAR(45) NOT NULL,
   `quantityFacilityCategory` INT NOT NULL,
   `priceFacilityCategory` FLOAT NOT NULL,
@@ -201,7 +201,7 @@ ENGINE = InnoDB;
 -- Table `db_fitness`.`Facility`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_fitness`.`Facility` (
-  `idFacility` INT NOT NULL,
+  `idFacility` INT NOT NULL AUTO_INCREMENT,
   `nameFacility` VARCHAR(45) NOT NULL,
   `priceSeance` FLOAT NOT NULL DEFAULT 0,
   `Room_idRoom` INT NOT NULL,
@@ -232,7 +232,7 @@ CREATE INDEX `fk_Facility_FacilityCategory1_idx` ON `db_fitness`.`Facility` (`Fa
 -- Table `db_fitness`.`Seance`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_fitness`.`Seance` (
-  `idSeance` INT NOT NULL,
+  `idSeance` INT NOT NULL AUTO_INCREMENT,
   `Customer_Users_username` VARCHAR(45) NOT NULL,
   `statusSeance` INT NULL DEFAULT 0,
   `dateOfSeance` DATETIME NULL,
@@ -252,7 +252,7 @@ CREATE INDEX `fk_Seance_Customer1_idx` ON `db_fitness`.`Seance` (`Customer_Users
 -- Table `db_fitness`.`SessionTraining`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_fitness`.`SessionTraining` (
-  `idSessionTraining` INT NOT NULL,
+  `idSessionTraining` INT NOT NULL AUTO_INCREMENT,
   `dateTime` DATETIME NOT NULL,
   `capacityAttendant` INT NOT NULL,
   `Staff_Users_username` VARCHAR(45) NOT NULL,
@@ -280,7 +280,7 @@ CREATE INDEX `fk_SessionTraining_Room1_idx` ON `db_fitness`.`SessionTraining` (`
 -- Table `db_fitness`.`Item`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_fitness`.`Item` (
-  `idItem` INT NOT NULL,
+  `idItem` INT NOT NULL AUTO_INCREMENT,
   `typeItem` VARCHAR(45) NULL,
   `price` FLOAT NULL,
   `Subscription_idSubscriptionType` INT NULL,
@@ -324,7 +324,7 @@ CREATE INDEX `fk_Item_SessionTraining1_idx` ON `db_fitness`.`Item` (`SessionTrai
 -- Table `db_fitness`.`Command`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_fitness`.`Command` (
-  `idCommand` INT NOT NULL,
+  `idCommand` INT NOT NULL AUTO_INCREMENT,
   `dateOfCommand` DATETIME NOT NULL,
   `totalPrice` FLOAT NOT NULL,
   `statusCommand` INT NOT NULL DEFAULT 0,
@@ -402,7 +402,7 @@ CREATE INDEX `fk_TimestampFacility_FacilityCategory1_idx` ON `db_fitness`.`Times
 -- Table `db_fitness`.`MaintenanceOperation`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_fitness`.`MaintenanceOperation` (
-  `idMaintenanceOperation` INT NOT NULL,
+  `idMaintenanceOperation` INT NOT NULL AUTO_INCREMENT,
   `priceMaintenanceOperation` FLOAT NOT NULL,
   `dateOfIntervention` DATETIME NOT NULL,
   `Facility_idFacility` INT NOT NULL,

@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -5,6 +7,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { FileInformation } from '../file-information';
 import { ManagerService } from 'src/app/services/manager.service';
 import { FacilityCategory } from 'src/app/models/facility-category.model';
+import { Authority } from 'src/app/models/authority.model';
+import { User } from 'src/app/models/user.model';
 import { Facility } from 'src/app/models/facility.model';
 import { Room } from 'src/app/models/room.model';
 import { BehaviorSubject } from 'rxjs';
@@ -37,11 +41,15 @@ export class FacilityNewComponent implements OnInit {
 
   @ViewChild('fileInput')
   fileInput: ElementRef;
+  username: string;
+  password: string;
 
   constructor(private httpClient: HttpClient, 
               private formBuilder: FormBuilder,
               private managerService: ManagerService,
-              private loginService: LoginService) {
+              private loginService: LoginService,
+              private router: Router,
+              private token: TokenStorageService) {
  
   }
 
@@ -65,6 +73,14 @@ export class FacilityNewComponent implements OnInit {
       this.rooms = res;
       this.managerService.publishRooms();
       this.listRooms = this.managerService.listRooms$;
+    });
+
+    this.loginService.usernameSubject.subscribe(res => {
+      this.username = res;
+    });
+
+    this.loginService.passwordSubject.subscribe(res => {
+      this.password = res;
     });
     
     this.createForm();
@@ -115,16 +131,21 @@ export class FacilityNewComponent implements OnInit {
     this.fileInput.nativeElement.click();
   }
 
+
   public onValidate() {
       const data: FormData = new FormData();
+      this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceFacility);
       if (this.file !== undefined){
         this.imageFacility = this.nameFacility + "_" + this.file.name;
         data.append('data', this.file, this.nameFacility + "_" + this.file.name);
-        this.managerService.addImage(data, this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceFacility);
-      } else {
-        this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceFacility);
+        
+        
+        setTimeout(()=> this.managerService.addImage(data), 2000);
+        //this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceFacility);
+
       }
-   
+       
   }
+
 
 }

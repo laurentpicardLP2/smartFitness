@@ -43,6 +43,19 @@ export class LoginService {
     }
   }
 
+  /**
+   * L'existence de ce subject a pour but de rejouer une authentification automatique dans le cas d'un upload 
+   * d'un fichier image
+   */
+  public passwordSubject: BehaviorSubject<string> = new BehaviorSubject(null);
+  public setPasswordSubject(value: string){
+    if(value){
+      this.passwordSubject.next(value);
+    } else {
+      this.passwordSubject.next(null);
+    }
+  }
+
   // Subject informant du rôle (authority) de l'utlisateur
   public authoritySubject: BehaviorSubject<Authority> = new BehaviorSubject(null);
   public setAuthoritySubject(value: Authority){
@@ -73,6 +86,7 @@ export class LoginService {
         this.publishAuthority(user);
         this.setIsUserLoggedSubject(true); 
         this.setUsernameSubject(user.username);
+        this.setPasswordSubject(user.password);
         this.router.navigate(['']);
       },
       (error) => { console.log("login user pb : ", error); 
