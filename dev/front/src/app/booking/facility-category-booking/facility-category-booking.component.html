@@ -13,15 +13,19 @@
           <table>
             <tr *ngFor="let facility of facilityCategory.facilities">
               <td>
-                  {{ facility.nameFacility }} : ({{ facility.priceSeance }} €) <br>
-                <span *ngIf="facility.descriptionFacility !='' && facility.imageFacility !=''" >
-                  {{ facility.descriptionFacility }} <img src="assets/images/facilities/{{ facility.imageFacility }}" /> <br></span>
-                <span *ngIf="facility.descriptionFacility !='' && facility.imageFacility ==''" >
-                    {{ facility.descriptionFacility }} <br></span>
-                <span *ngIf="facility.descriptionFacility =='' && facility.imageFacility !=''" >
-                    <img src="assets/images/facilities/{{ facility.imageFacility }}" /> <br></span>
-          <a mat-flat-button (click)="onBookingFacility(facility.nameFacility, facilityCategory.nameFacilityCategory, facility.priceSeance)">Sélectionner</a></td>
-            </tr>
+                
+                    {{ facility.nameFacility }} : ({{ convertIntoMonetaryFormat(facility.priceSeance) }} les 10') <br>
+                  <span *ngIf="facility.descriptionFacility !='' && facility.imageFacility !=''" >
+                    {{ facility.descriptionFacility }} <img src="assets/images/facilities/{{ facility.imageFacility }}" /> <br></span>
+                  <span *ngIf="facility.descriptionFacility !='' && facility.imageFacility ==''" >
+                      {{ facility.descriptionFacility }} <br></span>
+                  <span *ngIf="facility.descriptionFacility =='' && facility.imageFacility !=''" >
+                      <img src="assets/images/facilities/{{ facility.imageFacility }}" /> <br></span>
+              
+            <a mat-flat-button (click)="onBookingFacility(facility.nameFacility, facilityCategory.nameFacilityCategory, facility.priceSeance)">Sélectionner</a>
+          </td>
+            
+          </tr>
           </table>   
         
     </mat-expansion-panel>
@@ -42,6 +46,25 @@
   </div>
 
 
+  <!--
+
+
+    <table>
+            <tr *ngFor="let facility of facilityCategory.facilities">
+              <td>
+                <div *ngIf="facility.imageFacility ==''">
+                      {{ facility.nameFacility }} : ({{ convertIntoMonetaryFormat(facility.priceSeance) }} les 10') <br>
+                    <span *ngIf="facility.descriptionFacility !=''" >
+                      {{ facility.descriptionFacility }}  <br></span>
+                </div>
+              </td>
+          <a mat-flat-button (click)="onBookingFacility(facility.nameFacility, facilityCategory.nameFacilityCategory, facility.priceSeance)">Sélectionner</a></td>
+            -->
+        <!--<span *ngIf="facility.descriptionFacility =='' && facility.imageFacility !=''" >
+                        <img src="assets/images/facilities/{{ facility.imageFacility }}" /> <br></span>-->
+                   <!--   </tr>
+                    </table>   
+  -->
 
 
  

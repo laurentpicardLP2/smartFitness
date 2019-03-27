@@ -5,7 +5,7 @@ import { CommandService } from './command.service';
 import { Seance } from 'src/app/models/seance.model';
 import { Command } from 'src/app/models/command.model';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { LoginService } from 'src/app/services/login.service';
+import { BookingService } from 'src/app/services/booking.service';
 import { TokenStorageService } from './token-storage.service';
 import { Router } from '@angular/router';
 
@@ -16,7 +16,7 @@ export class SeanceService {
 
   constructor(private commandService: CommandService,
               private httpClient: HttpClient,
-              private loginService: LoginService,
+              private bookingService: BookingService,
               private router: Router,
               private token: TokenStorageService) { }
 
@@ -112,7 +112,7 @@ export class SeanceService {
     );
   }
 
-  public addTimestampFacilityToSeance(seance: Seance, dateOfTimestamp: Date, nameFacility: string, nameFacilityCategory: string){
+  public addTimestampFacilityToSeance(seance: Seance, dateOfTimestamp: Date, nameFacility: string, nameFacilityCategory: string, priceSeance: number, priceSeanceArray: number[]){
     
     
     this.httpClient.post<TimestampFacility>('http://localhost:8080/timestampfacilityctrl/addtimestampfacility/' + seance.idItem + '/' +
@@ -130,14 +130,23 @@ export class SeanceService {
           this.listTimestampFacilities$.next(seance.timestampFacilities);
           //console.log("seance (seance) : ", seance.timestampFacilities[0].dateOfTimestamp);
            //this.commandService.setCommandSubject(command);
-          
-          this.setSeanceSubject(seance);  
+          this.setSeanceSubject(seance);    
+          this.setIsBookedTimestampSubject(true);
+          this.setSeanceSubject(seance);
+          priceSeanceArray.push(priceSeance);
+          this.setPriceSeanceSubject(priceSeanceArray);
+
+    this.router.navigate(['/seance-booking', {outlets: {'facility-router-outlet' : ['facility-booking']}}]);
         },
-        (error) => { console.log("init timestamp pb : ", error); }
+        (error) => { console.log("init timestamp pb : ", error); 
+                    alert('Oups! cet équipement vient d\'être réservé');
+                    this.bookingService.publishFacilityCategories(dateOfTimestamp);
+                    this.router.navigate(['/seance-booking', {outlets: {'facility-category-router-outlet' : ['facility-category-booking']}}]);
+                  }
     );
   }
 
-  
+      
  
 
   public addDateAndNbTimestamp(seance: Seance){

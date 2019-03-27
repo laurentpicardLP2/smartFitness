@@ -1,0 +1,74 @@
+
+DROP TRIGGER IF EXISTS triggerAugmentation;
+DELIMITER $$
+CREATE TRIGGER triggerAugmentation BEFORE INSERT ON compte
+    FOR EACH ROW
+    BEGIN
+    DECLARE a INT;
+	IF `func_count`(0) > 9 THEN
+		SET a=1;
+        signal sqlstate '45000';
+		-- call `proc_update` (7000);
+	END IF;
+    END$$
+DELIMITER ;
+
+
+
+use db_procstock;
+DROP FUNCTION IF EXISTS `func_count`;
+DELIMITER $$
+CREATE FUNCTION `func_count`(`var` INT) RETURNS int
+BEGIN
+    DECLARE nb INT;
+    select count(*) into nb from db_procstock.compte WHERE compte.SOLDE>var;
+    RETURN nb;
+END$$
+DELIMITER ;
+
+
+
+use db_procstock;
+drop procedure IF EXISTS `proc_get`;
+DELIMITER $$
+CREATE PROCEDURE `proc_get` (OUT nb INT)
+	COMMENT 'Commande pour accorder une prime patronale de 19€'
+BEGIN
+	DECLARE augmentation INT DEFAULT 0;
+    select count(*) into nb from db_procstock.compte;
+    IF nb > 0 THEN
+		SET augmentation=7000;
+		call `proc_update`(augmentation);
+    END IF;
+END$$
+DELIMITER ;
+
+
+
+
+USE db_procstock;
+
+set @augmentation = 70;
+call proc_cadeaux(@augmentation);
+
+
+
+insert into db_procstock.compte(NUMERO, CODETYPECOMPTE, CODETITULAIRE, SOLDE) VALUES (11003, 'L', 1005, 200);
+
+
+use db_procstock;
+drop procedure IF EXISTS `proc_update`;
+DELIMITER $$
+CREATE PROCEDURE `proc_update` (IN augmentation INT)
+	COMMENT 'Commande pour accorder une prime patronale de 19€'
+BEGIN
+    UPDATE db_procstock.compte  SET solde = solde + augmentation; 
+END$$
+DELIMITER ;
+
+
+
+
+
+
+

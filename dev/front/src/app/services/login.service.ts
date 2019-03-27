@@ -44,7 +44,7 @@ export class LoginService {
   }
 
   /**
-   * L'existence de ce subject a pour but de rejouer une authentification automatique dans le cas d'un upload 
+   * l'existence de ce subject a pour but de rejouer une authentification automatique d'un upload
    * d'un fichier image
    */
   public passwordSubject: BehaviorSubject<string> = new BehaviorSubject(null);
@@ -55,6 +55,8 @@ export class LoginService {
       this.passwordSubject.next(null);
     }
   }
+
+
 
   // Subject informant du rôle (authority) de l'utlisateur
   public authoritySubject: BehaviorSubject<Authority> = new BehaviorSubject(null);
@@ -76,7 +78,7 @@ export class LoginService {
    * Fonction appelée lorsqu'un utilisateur (client ou staff) se connecte sur le site
    * @param user 
    */
-  public signIn(user: User){
+  public signIn(user: User, bReload: boolean){
 
     this.attemptAuth(user.username, user.password).subscribe(
       data => {
@@ -87,7 +89,13 @@ export class LoginService {
         this.setIsUserLoggedSubject(true); 
         this.setUsernameSubject(user.username);
         this.setPasswordSubject(user.password);
-        this.router.navigate(['']);
+        
+        if(bReload){
+          setTimeout(() => this.router.navigate(['/facility-listing']), 300);
+        }
+        else {
+          this.router.navigate(['']);
+        }
       },
       (error) => { console.log("login user pb : ", error); 
         this.setIsUserLoggedSubject(false);

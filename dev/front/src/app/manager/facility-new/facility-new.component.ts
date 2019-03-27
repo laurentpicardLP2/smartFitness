@@ -134,16 +134,19 @@ export class FacilityNewComponent implements OnInit {
 
   public onValidate() {
       const data: FormData = new FormData();
-      this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceFacility);
+      
       if (this.file !== undefined){
         this.imageFacility = this.nameFacility + "_" + this.file.name;
+        this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceFacility);
         data.append('data', this.file, this.nameFacility + "_" + this.file.name);
-        
-        
-        setTimeout(()=> this.managerService.addImage(data), 2000);
-        //this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceFacility);
-
+        this.managerService.addImage(data, this.username, this.password);
       }
+      else {
+        this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceFacility);
+      }
+       
+  
+      
        
   }
 

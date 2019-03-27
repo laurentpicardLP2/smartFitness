@@ -40,11 +40,10 @@ public class TimestampFacilityController {
 		try {
 		return ResponseEntity.status(HttpStatus.OK).body(
 				this.timestampFacilityService.saveNewTimestampFacility(idItem, dateOfTimestamp, nameFacility, nameFacilityCategory));
-		
 		} catch(Exception e) {
 			
 			System.out.println(e);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new String("Timestamp already taken"));	
 		}			
 	}
 	

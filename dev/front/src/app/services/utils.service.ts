@@ -52,6 +52,7 @@ export class UtilsService {
    * @param price 
    */
   convertIntoMonetaryFormat(price: number){
+    price = Math.round(price*100)/100;
     let splittedPrice = price.toString().split(".");
     if(splittedPrice.length == 1) {
       return price.toString() + ".00 €";

@@ -140,8 +140,9 @@ export class ManagerService {
           }
         }).subscribe(
           (addedFacility) =>{ 
-            console.log("add Facility OK : ", addedFacility);
-            this.router.navigate(['facility-listing']);
+            if(imageFacility == undefined) {
+              this.router.navigate(['facility-listing']);
+            }
           },
           (error) => { 
             console.log("add Facility pb : ", error);
@@ -151,10 +152,11 @@ export class ManagerService {
     }
 
 
-    public addImage(data){
+    public addImage(data, username, password){
       this.httpClient.post(
         'http://localhost:8080/managerctrl/upload', data).subscribe(() => {
-          //this.addFacility(idFacilityCategory, idRoom, nameFacility, descriptionFacility, imageFacility, priceFacility);
+          window.localStorage.setItem("username", username);
+          window.localStorage.setItem("password", password);
         },
           (error) => {console.log("pb upload fichier ", error);}
         );

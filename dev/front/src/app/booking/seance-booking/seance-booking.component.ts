@@ -42,6 +42,7 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
   isAuth: boolean = false;
   isValidateSeance: boolean = false;
   priceSeance: number[]=[];
+  bOpenedSeance: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -87,6 +88,7 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
 
     this.seanceService.priceSeanceSubject.subscribe(res => {
       this.priceSeance = res;
+      this.bOpenedSeance = (this.priceSeance.length == 0);
     });
     
   }

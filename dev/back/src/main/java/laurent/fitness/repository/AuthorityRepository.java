@@ -12,12 +12,12 @@ import laurent.fitness.model.Facility;
 import laurent.fitness.model.User;
 
 public interface AuthorityRepository extends JpaRepository<Authority, String>{
-	@Query("SELECT a FROM Authority a WHERE a.username LIKE %?1%")
+	@Query("SELECT a FROM Authority a WHERE a.username LIKE ?1")
 	 public Authority findByUsername(String username);
 	
 	@Transactional
 	@Modifying
-	@Query("DELETE FROM Authority a WHERE a.username LIKE %?1%")
+	@Query("DELETE FROM Authority a WHERE a.username LIKE ?1")
     void deleteByUsername(String username);
 	
 	//WHERE authority like 'ROLE_CUSTOMER'

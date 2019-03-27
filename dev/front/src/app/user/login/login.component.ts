@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   userLoginForm: FormGroup;
   username: string;
   password: string; 
+  bReload: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,7 +31,8 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
-    
+    this.bReload = window.localStorage.getItem("username") == null ? false : true;
+    window.localStorage.clear();
   }
 
   createForm() {
@@ -46,7 +48,7 @@ export class LoginComponent implements OnInit {
 
   onSignIn(): void {
     this.token.signOut();
-    this.loginService.signIn(new User(this.username, this.password));
+    this.loginService.signIn(new User(this.username, this.password), false);
  }
 
 }

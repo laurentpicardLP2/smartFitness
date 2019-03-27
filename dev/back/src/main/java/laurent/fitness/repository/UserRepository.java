@@ -10,12 +10,12 @@ import laurent.fitness.model.Customer;
 import laurent.fitness.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer>{
-	@Query("SELECT u FROM User u WHERE u.username LIKE %?1%")
+	@Query("SELECT u FROM User u WHERE u.username LIKE ?1")
 	User findByUsername(String username);
 		
 	@Transactional
 	@Modifying
-	@Query("DELETE FROM User u WHERE u.username LIKE %?1%")
+	@Query("DELETE FROM User u WHERE u.username LIKE ?1")
     void deleteByUsername(String username);
 	
 	

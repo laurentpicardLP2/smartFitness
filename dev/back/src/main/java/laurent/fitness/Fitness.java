@@ -67,53 +67,53 @@ public class Fitness implements CommandLineRunner {
 	public void run(String... args)
 			throws Exception,  MalformedURLException, IOException, ClassNotFoundException, SQLException {
 		
-		int idUser = 0;
-		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
-		
-		if( (this.staffRepository.findByUsername("db_admin") == null)) {
-			try {
-				idUser = this.userRepository.findByUsernameIdMax().getIdUser() + 1;
-			} catch (Exception e) {
-				idUser = 1;
-			}
-			finally {
-				this.authorityRepository.save(new Authority("db_admin", "ROLE_ADMIN"));
-				this.staffRepository.save(new Staff(idUser, "db_admin", "sysadmin", "{bcrypt}" + bcrypt.encode("simplon"),"", "", new Date(), (byte)(1), "", ""));				
-			}
-		}
-		
-		if( (this.customerRepository.findByUsername("db_user") == null)) {
-			try {
-				idUser = this.userRepository.findByUsernameIdMax().getIdUser() + 1;
-			} catch (Exception e) {
-				idUser = 1;
-			}
-			finally {
-				this.authorityRepository.save(new Authority("db_user", "ROLE_CUSTOMER"));
-				this.customerRepository.save(new Customer(idUser, "db_user", "customer", "{bcrypt}" + bcrypt.encode("simplon"),"", "", new Date(), (byte)(1), new Date(),"","","","","","","",""));
-			}
-		}
-		
-		this.roomRepository.save(new Room("Salle A", 15));
-		this.roomRepository.save(new Room("Salle B", 20));
-		this.roomRepository.save(new Room("Salle C", 10));
-		
-		this.facilityCategoryRepository.save(new FacilityCategory("Elliptique", 3));
-		this.facilityCategoryRepository.save(new FacilityCategory("Tapis roulant", 2));
-		this.facilityCategoryRepository.save(new FacilityCategory("Vélo", 1));
-		
-		Room room = this.roomRepository.findByRoomName("Salle A");
-		FacilityCategory elliptique = this.facilityCategoryRepository.findByFacilityCategoryName("Elliptique");
-		this.facilityRepository.save(new Facility("Elliptique 1", room, elliptique, "", "", 0.75f));
-		this.facilityRepository.save(new Facility("Elliptique 2", room, elliptique, "", "", 0.80f));
-		this.facilityRepository.save(new Facility("Elliptique 3", room, elliptique, "", "", 0.45f));
-		
-		FacilityCategory tapisRoulant = this.facilityCategoryRepository.findByFacilityCategoryName("Tapis roulant");
-		this.facilityRepository.save(new Facility("Tapis roulant 1", room, tapisRoulant, "", "", 0.50f));
-		this.facilityRepository.save(new Facility("Tapis roulant 2", room, tapisRoulant, "", "", 0.55f));
-		
-		FacilityCategory velo = this.facilityCategoryRepository.findByFacilityCategoryName("Vélo");
-		this.facilityRepository.save(new Facility("Vélo 1", room, velo, "", "", 1.50f));
+//		int idUser = 0;
+//		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+//		
+//		if( (this.staffRepository.findByUsername("db_admin") == null)) {
+//			try {
+//				idUser = this.userRepository.findByUsernameIdMax().getIdUser() + 1;
+//			} catch (Exception e) {
+//				idUser = 1;
+//			}
+//			finally {
+//				this.authorityRepository.save(new Authority("db_admin", "ROLE_ADMIN"));
+//				this.staffRepository.save(new Staff(idUser, "db_admin", "sysadmin", "{bcrypt}" + bcrypt.encode("simplon"),"", "", new Date(), (byte)(1), "", ""));				
+//			}
+//		}
+//		
+//		if( (this.customerRepository.findByUsername("db_user") == null)) {
+//			try {
+//				idUser = this.userRepository.findByUsernameIdMax().getIdUser() + 1;
+//			} catch (Exception e) {
+//				idUser = 1;
+//			}
+//			finally {
+//				this.authorityRepository.save(new Authority("db_user", "ROLE_CUSTOMER"));
+//				this.customerRepository.save(new Customer(idUser, "db_user", "customer", "{bcrypt}" + bcrypt.encode("simplon"),"", "", new Date(), (byte)(1), new Date(),"","","","","","","",""));
+//			}
+//		}
+//		
+//		this.roomRepository.save(new Room("Salle A", 15));
+//		this.roomRepository.save(new Room("Salle B", 20));
+//		this.roomRepository.save(new Room("Salle C", 10));
+//		
+//		this.facilityCategoryRepository.save(new FacilityCategory("Elliptique", 3));
+//		this.facilityCategoryRepository.save(new FacilityCategory("Tapis roulant", 2));
+//		this.facilityCategoryRepository.save(new FacilityCategory("Vélo", 1));
+//		
+//		Room room = this.roomRepository.findByRoomName("Salle A");
+//		FacilityCategory elliptique = this.facilityCategoryRepository.findByFacilityCategoryName("Elliptique");
+//		this.facilityRepository.save(new Facility("Elliptique 1", room, elliptique, "", "", 0.75f));
+//		this.facilityRepository.save(new Facility("Elliptique 2", room, elliptique, "", "", 0.80f));
+//		this.facilityRepository.save(new Facility("Elliptique 3", room, elliptique, "", "", 0.45f));
+//		
+//		FacilityCategory tapisRoulant = this.facilityCategoryRepository.findByFacilityCategoryName("Tapis roulant");
+//		this.facilityRepository.save(new Facility("Tapis roulant 1", room, tapisRoulant, "", "", 0.50f));
+//		this.facilityRepository.save(new Facility("Tapis roulant 2", room, tapisRoulant, "", "", 0.55f));
+//		
+//		FacilityCategory velo = this.facilityCategoryRepository.findByFacilityCategoryName("Vélo");
+//		this.facilityRepository.save(new Facility("Vélo 1", room, velo, "", "", 1.50f));
 
 	}
 	

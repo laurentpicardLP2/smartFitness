@@ -1,3 +1,4 @@
+import { UtilsService } from 'src/app/services/utils.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators, FormBuilder, AbstractControl} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -35,7 +36,8 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
     private bookingService: BookingService,
     private httpClient: HttpClient,
     private commandService: CommandService,
-    private seanceService: SeanceService
+    private seanceService: SeanceService,
+    private ustilsService: UtilsService
     ) { 
       
       }
@@ -82,13 +84,12 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
   }
 
   onBookingFacility(nameFacility: string, nameFacilityCategory: string, priceSeance: number){
-    this.priceSeance.push(priceSeance);
-    this.seanceService.setPriceSeanceSubject(this.priceSeance);
-    this.seanceService.setSeanceSubject(this.seance);
- 
-    this.seanceService.addTimestampFacilityToSeance(this.seance, this.dateOfTimestamp, nameFacility, nameFacilityCategory);
-    this.seanceService.setIsBookedTimestampSubject(true);
-    this.router.navigate(['/seance-booking', {outlets: {'facility-router-outlet' : ['facility-booking']}}]);
+    this.seanceService.addTimestampFacilityToSeance(this.seance, this.dateOfTimestamp, nameFacility, nameFacilityCategory, priceSeance, this.priceSeance);
+   
+  }
+
+  public convertIntoMonetaryFormat(priceSeance: number){
+    return this.ustilsService.convertIntoMonetaryFormat(priceSeance);
   }
 
 
