@@ -56,10 +56,7 @@ import laurent.fitness.repository.UserRepository;
 @RequestMapping("/userctrl")
 @CrossOrigin("http://localhost:4200")
 public class UserController {
-	
-	@Autowired
-	UserRepository usersRepo;
-	
+		
 	@Autowired
 	AuthenticationManager authenticationManager;
 	
@@ -71,17 +68,14 @@ public class UserController {
 	
 	private AuthorityService authorityService;
 	private CustomerService customerService;
-	private StaffService staffService;
 	private UserService userService;
 	
 	public UserController(
 				AuthorityService authorityService, 
 				CustomerService customerService,
-				StaffService staffService,
 				UserService userService) {
 		this.authorityService = authorityService;
 		this.customerService = customerService;
-		this.staffService = staffService;
 		this.userService = userService;
 	}
 	
@@ -98,12 +92,11 @@ public class UserController {
 		
 		try {
 			this.authorityService.saveAuthority(new Authority(newCustomer.getUsername(), "ROLE_CUSTOMER"));
-			this.customerService.saveCustomer(new Customer(this.userService.findByUsernameIdMax(),
-				newCustomer.getUsername(), newCustomer.getFullname(), "{bcrypt}" + bcrypt.encode(newCustomer.getPassword()), 
-				newCustomer.getEmail(), newCustomer.getTel(), new Date(), (byte)1, newCustomer.getDateOfBirthday(),
-				newCustomer.getDomesticAddress(), newCustomer.getDomesticCp(), newCustomer.getDeliveryCity(), newCustomer.getDomesticCountry(),
-				newCustomer.getDeliveryAddress(), newCustomer.getDeliveryCp(), newCustomer.getDeliveryCity(), newCustomer.getDeliveryCountry()));
-		return ResponseEntity.status(HttpStatus.OK).body(null);
+			return ResponseEntity.status(HttpStatus.OK).body(this.customerService.saveCustomer(new Customer(this.userService.findByUsernameIdMax(),
+					newCustomer.getUsername(), newCustomer.getFullname(), "{bcrypt}" + bcrypt.encode(newCustomer.getPassword()), 
+					newCustomer.getEmail(), newCustomer.getTel(), new Date(), (byte)1, newCustomer.getDateOfBirthday(),
+					newCustomer.getDomesticAddress(), newCustomer.getDomesticCp(), newCustomer.getDeliveryCity(), newCustomer.getDomesticCountry(),
+					newCustomer.getDeliveryAddress(), newCustomer.getDeliveryCp(), newCustomer.getDeliveryCity(), newCustomer.getDeliveryCountry())));
 		
 	} catch(Exception e) {
 		
@@ -112,11 +105,6 @@ public class UserController {
 		}			
 	}
 		
-	
-	@PostMapping("/newstaff/{role}")
-	public ResponseEntity<?> addStaff(@PathVariable String role) {			
-		return ResponseEntity.status(HttpStatus.OK).body(null);		
-	}
 	
 	@DeleteMapping("/deluser")
 	public ResponseEntity<?> delCustomer(@Valid String username){

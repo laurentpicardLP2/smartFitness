@@ -62,7 +62,7 @@ export class CustomerService {
 
   public register(newCustomer: Customer){
     this.httpClient.post<Customer>('http://localhost:8080/userctrl/newcustomer', newCustomer).subscribe(
-        (newUsers) =>{ console.log("création user OK : ", newUsers); this.router.navigate(['']);},
+        (customer) =>{ console.log("création user OK : ",customer); this.router.navigate(['']);},
         (error) => console.log("création user pb : ", error) 
     );
   }

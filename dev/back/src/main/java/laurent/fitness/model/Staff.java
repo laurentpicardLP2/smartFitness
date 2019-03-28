@@ -23,10 +23,10 @@ public class Staff extends User implements Serializable {
 
 	private String hourWorking;
 
-	//bi-directional many-to-one association to SessionTraining
-	@OneToMany(mappedBy="staff")
-	@JsonManagedReference
-	private List<SessionTraining> sessionTrainings;
+//	//bi-directional many-to-one association to SessionTraining
+//	@OneToMany(mappedBy="staff")
+//	@JsonIgnore
+//	private List<SessionTraining> sessionTrainings;
 
 
 	public Staff() {
@@ -65,26 +65,26 @@ public class Staff extends User implements Serializable {
 		this.hourWorking = hourWorking;
 	}
 
-	public List<SessionTraining> getSessionTrainings() {
-		return this.sessionTrainings;
-	}
-
-	public void setSessionTrainings(List<SessionTraining> sessionTrainings) {
-		this.sessionTrainings = sessionTrainings;
-	}
-
-	public SessionTraining addSessionTraining(SessionTraining sessionTraining) {
-		getSessionTrainings().add(sessionTraining);
-		sessionTraining.setStaff(this);
-
-		return sessionTraining;
-	}
-
-	public SessionTraining removeSessionTraining(SessionTraining sessionTraining) {
-		getSessionTrainings().remove(sessionTraining);
-		sessionTraining.setStaff(null);
-
-		return sessionTraining;
-	}
+//	public List<SessionTraining> getSessionTrainings() {
+//		return this.sessionTrainings;
+//	}
+//
+//	public void setSessionTrainings(List<SessionTraining> sessionTrainings) {
+//		this.sessionTrainings = sessionTrainings;
+//	}
+//
+//	public SessionTraining addSessionTraining(SessionTraining sessionTraining) {
+//		getSessionTrainings().add(sessionTraining);
+//		sessionTraining.setStaff(this);
+//
+//		return sessionTraining;
+//	}
+//
+//	public SessionTraining removeSessionTraining(SessionTraining sessionTraining) {
+//		getSessionTrainings().remove(sessionTraining);
+//		sessionTraining.setStaff(null);
+//
+//		return sessionTraining;
+//	}
 
 }

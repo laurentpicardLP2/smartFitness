@@ -19,11 +19,12 @@ public class Room implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idRoom;
 
 	private int capacityRoom;
 
+	@Column(unique = true)
 	private String nameRoom;
 
 	//bi-directional many-to-one association to Facility
@@ -31,10 +32,10 @@ public class Room implements Serializable {
 	@JsonManagedReference
 	private List<Facility> facilities;
 
-	//bi-directional many-to-one association to SessionTraining
-	@OneToMany(mappedBy="room")
-	@JsonManagedReference
-	private List<SessionTraining> sessionTrainings;
+//	//bi-directional many-to-one association to SessionTraining
+//	@OneToMany(mappedBy="room")
+//	@JsonManagedReference
+//	private List<SessionTraining> sessionTrainings;
 
 	public Room() {
 	}
@@ -90,26 +91,26 @@ public class Room implements Serializable {
 		return facility;
 	}
 
-	public List<SessionTraining> getSessionTrainings() {
-		return this.sessionTrainings;
-	}
-
-	public void setSessionTrainings(List<SessionTraining> sessionTrainings) {
-		this.sessionTrainings = sessionTrainings;
-	}
-
-	public SessionTraining addSessionTraining(SessionTraining sessionTraining) {
-		getSessionTrainings().add(sessionTraining);
-		sessionTraining.setRoom(this);
-
-		return sessionTraining;
-	}
-
-	public SessionTraining removeSessionTraining(SessionTraining sessionTraining) {
-		getSessionTrainings().remove(sessionTraining);
-		sessionTraining.setRoom(null);
-
-		return sessionTraining;
-	}
+//	public List<SessionTraining> getSessionTrainings() {
+//		return this.sessionTrainings;
+//	}
+//
+//	public void setSessionTrainings(List<SessionTraining> sessionTrainings) {
+//		this.sessionTrainings = sessionTrainings;
+//	}
+//
+//	public SessionTraining addSessionTraining(SessionTraining sessionTraining) {
+//		getSessionTrainings().add(sessionTraining);
+//		sessionTraining.setRoom(this);
+//
+//		return sessionTraining;
+//	}
+//
+//	public SessionTraining removeSessionTraining(SessionTraining sessionTraining) {
+//		getSessionTrainings().remove(sessionTraining);
+//		sessionTraining.setRoom(null);
+//
+//		return sessionTraining;
+//	}
 
 }

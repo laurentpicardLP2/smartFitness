@@ -1,0 +1,27 @@
+.staff-new-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .staff-new-container > * {
+    width: 100%;
+  }
+
+  .staff-form {
+    min-width: 150px;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .staff-full-width {
+    width: 100%;
+  }
+
+  .staff-border {
+    border-style: solid;
+  }
+
+  .pad {
+    margin: 5px;
+    padding: 5px;
+  }

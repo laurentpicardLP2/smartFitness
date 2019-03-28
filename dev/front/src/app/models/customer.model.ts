@@ -8,7 +8,7 @@ export class Customer{
 
     constructor (
         public username: string,
-        public fullName: string,
+        public fullname: string,
         public password: string,
         public email: string,
         public tel: string,

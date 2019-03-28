@@ -20,7 +20,7 @@
       </div>
       <div formGroupName="nameFacilityGroup">
           <mat-form-field class="facility-full-width">
-              <input matInput placeholder="Nom de l'équipement" type="text" formControlName="nameFacility" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameFacility">
+              <input matInput required placeholder="Nom de l'équipement" type="text" formControlName="nameFacility" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameFacility">
               <mat-error>
                   {{errors.nameFacility}}
               </mat-error>
@@ -28,7 +28,7 @@
       </div>
       <div>
         <mat-form-field class="facility-full-width">
-            <input matInput placeholder="Tarif prestation (10')" type="number" formControlName="priceFacility" [(ngModel)]="priceFacility">
+            <input matInput required placeholder="Tarif prestation (10')" type="number" formControlName="priceFacility" [(ngModel)]="priceFacility">
         </mat-form-field>
       </div>
       <div>

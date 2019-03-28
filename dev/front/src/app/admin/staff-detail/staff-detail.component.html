@@ -1,0 +1,71 @@
+<div fxFlex fxLayout fxLayoutAlign="center">
+    <div class="pad">
+        <form [formGroup]="staffRegistrationForm" class="staff-form">
+        
+            <mat-form-field class="staff-full-width">
+                <input required matInput placeholder="Full name" type="text" formControlName="fullname" [(ngModel)]="fullname">
+                <mat-error>
+                    {{errors.fullname}}
+                </mat-error>
+            </mat-form-field>
+            <div formGroupName="usernameGroup">
+            <mat-form-field class="staff-full-width">
+                <input required matInput placeholder="Username" type="text" formControlName="username" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="username">
+                <mat-error>
+                    {{errors.username}}
+                </mat-error>
+            </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="staff-full-width">
+                    <mat-label>Rôle du collaborateur</mat-label>
+                    <mat-select [(value)]="role" required name="role" formControlName="role" [(ngModel)]="role">
+                      <mat-option value="ROLE_MANAGER">ROLE_MANAGER</mat-option>
+                      <mat-option value="ROLE_ADMIN">ROLE_ADMIN</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+           
+            </div>
+            <div formGroupName="emailGroup">
+                <mat-form-field class="staff-full-width">
+                    <input required matInput placeholder="Email address" type="email" formControlName="email" [(ngModel)]="email">
+                    <mat-error>
+                        {{errors.email}}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="staff-full-width">    
+                    <input required matInput placeholder="Confirm email address" type="email" formControlName="confirmEmail" [errorStateMatcher]="confirmValidParentMatcher">
+                    <mat-error>
+                        {{errors.confirmEmail}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div formGroupName="passwordGroup">
+                <mat-form-field class="staff-full-width">
+                    <input required matInput placeholder="Password" type="password" formControlName="password" [(ngModel)]="password">
+                    <mat-error>
+                        {{errors.password}}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="staff-full-width">
+                    <input matInput required placeholder="Confirm password" type="password" formControlName="confirmPassword" [errorStateMatcher]="confirmValidParentMatcher">
+                    <mat-error>
+                        {{errors.confirmPassword}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field class="staff-full-width">
+                    <span matPrefix>&nbsp;</span>
+                    <input type="tel" matInput required placeholder="Telephone" formControlName="tel" [(ngModel)]="tel">
+                    <mat-icon matSuffix>mode_edit</mat-icon>
+                </mat-form-field>
+            </div>
+            <button mat-raised-button [disabled]="staffRegistrationForm.invalid" (click)="onUpdate()">Enregistrer les modifications</button>
+        
+        </form>
+    </div>
+</div>

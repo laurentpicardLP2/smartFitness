@@ -1,7 +1,0 @@
-
---DROP SCHEMA IF EXISTS `db_fitness` ;
---
---
---CREATE SCHEMA IF NOT EXISTS `db_fitness` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
-
-

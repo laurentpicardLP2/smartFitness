@@ -20,7 +20,7 @@ export class CustomerNewComponent implements OnInit {
   userRegistrationForm: FormGroup;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
   errors = errorMessages;
-  fullName: string; 
+  fullname: string; 
   username: string;
   email: string;
   password: string;
@@ -53,7 +53,7 @@ export class CustomerNewComponent implements OnInit {
 
   createForm() {
       this.userRegistrationForm = this.formBuilder.group({
-          fullName: ['', [
+          fullname: ['', [
               Validators.required,
               Validators.minLength(1),
               Validators.maxLength(128)
@@ -135,7 +135,7 @@ export class CustomerNewComponent implements OnInit {
   onRegister(): void {
       this.newCustomer = new Customer(
                 this.username,
-                this.fullName,  
+                this.fullname,  
                 this.password,
                 this.email,
                 this.tel, 

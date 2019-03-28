@@ -65,13 +65,24 @@
           <button mat-menu-item _ngcontent-cl="" tabindex="8" aria-disabled="false" (click)="onAction('/facility-new')">Ajouter un équipement</button>
           <button mat-menu-item _ngcontent-cl="" tabindex="9" aria-disabled="false" (click)="onAction('/facility-listing')">Lister les équipements</button>
        </mat-menu>
+
+       <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="abonnement">Gestion abonnement</button>
+       <mat-menu  #abonnement="matMenu">
+           <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/subscription-category-new')">Ajout d'une catégorie d'abonnement</button>
+           <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/subscription-category-listing')">Listing des catégories d'abonnement</button>
+        </mat-menu>
+
+       <button *ngIf="isAuth && authority.authority=='ROLE_ADMIN'"  mat-button [matMenuTriggerFor]="staff">Gestion staff</button>
+       <mat-menu  #staff="matMenu">
+           <button mat-menu-item _ngcontent-cl="" tabindex="12" aria-disabled="false" (click)="onAction('/staff-new')">Ajout collaborateurs</button>
+           <button mat-menu-item _ngcontent-cl="" tabindex="13" aria-disabled="false" (click)="onAction('/staff-listing')">Listing des collaborateurs</button>
+        </mat-menu>
     
       <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="pilotage">Pilotage</button>
       <mat-menu  #pilotage="matMenu">
-          <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/chart')">Tableaux de bord</button>
+          <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false" (click)="onAction('/chart')">Tableaux de bord</button>
        </mat-menu>
- 
-
+  
       <a *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onToggleCart()">
         <mat-icon matBadge="{{ nbItems }}" matBadgeColor="warn">shopping_cart</mat-icon>
       <div class="mat-button-ripple mat-ripple" matripple=""></div>

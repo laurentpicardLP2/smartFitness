@@ -37,6 +37,11 @@ import { FacilityListingComponent } from './manager/facility-listing/facility-li
 import { PaypalComponent } from './booking/paypal/paypal.component';
 import { FacilityDetailComponent } from './manager/facility-detail/facility-detail.component';
 import { UploadComponent } from './upload/upload.component';
+import { StaffNewComponent } from './admin/staff-new/staff-new.component';
+import { StaffListingComponent } from './admin/staff-listing/staff-listing.component';
+import { StaffDetailComponent } from './admin/staff-detail/staff-detail.component';
+import { SubscriptionCategoryNewComponent } from './manager/subscription-category-new/subscription-category-new.component';
+import { SubscriptionCategoryListingComponent } from './manager/subscription-category-listing/subscription-category-listing.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +70,11 @@ import { UploadComponent } from './upload/upload.component';
     PaypalComponent,
     FacilityDetailComponent,
     UploadComponent,
+    StaffNewComponent,
+    StaffListingComponent,
+    StaffDetailComponent,
+    SubscriptionCategoryNewComponent,
+    SubscriptionCategoryListingComponent,
   ],
   imports: [
     BrowserModule,

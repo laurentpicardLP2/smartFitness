@@ -119,7 +119,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin() //Pour activer la base de donnees MySQL
                 .and()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/").permitAll()
                 .antMatchers("/postman/**").permitAll()
                 .antMatchers("/userctrl/newcustomer").permitAll()
                 .antMatchers("/userctrl/login").permitAll()
@@ -134,8 +134,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/managerctrl/updatefacility/**").hasAnyRole("ADMIN", "MANAGER") 
                 .antMatchers("/managerctrl/addfacility/**").hasAnyRole("ADMIN", "MANAGER")
                 .antMatchers("/managerctrl/upload").permitAll()
-                .antMatchers("/adminctrl/newstaff/**").hasAnyRole("ADMIN")
-                .antMatchers("/adminctrl/deluser/**").hasAnyRole("ADMIN")
+                .antMatchers("/adminctrl/**").hasAnyRole("ADMIN")
+               
               
                 .antMatchers(SIGN_UP_URLS).permitAll()
                 .anyRequest().authenticated();

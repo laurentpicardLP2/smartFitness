@@ -19,7 +19,7 @@ public class StaffServiceImpl implements StaffService {
 	@Override
 	public List<Staff> getAllStaff() {
 		// TODO Auto-generated method stub
-		return this.staffRepo.findAll();
+		return this.staffRepo.findAllStaff();
 	}
 
 	@Override

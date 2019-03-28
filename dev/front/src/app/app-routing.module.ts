@@ -25,11 +25,19 @@ import { RoomDetailComponent } from './manager/room-detail/room-detail.component
 import { UploadComponent } from './upload/upload.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { PaypalComponent } from './booking/paypal/paypal.component';
+import { StaffNewComponent } from './admin/staff-new/staff-new.component';
+import { StaffListingComponent } from './admin/staff-listing/staff-listing.component';
+import { StaffDetailComponent } from './admin/staff-detail/staff-detail.component';
+import { SubscriptionCategoryNewComponent } from './manager/subscription-category-new/subscription-category-new.component';
+import { SubscriptionCategoryListingComponent } from './manager/subscription-category-listing/subscription-category-listing.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
   { path: 'upload/:data', component: UploadComponent },
   { path: 'customer-new', component: CustomerNewComponent },
+  { path: 'staff-new', canActivate: [AuthGuardAdminService], component: StaffNewComponent },
+  { path: 'staff-listing', canActivate: [AuthGuardAdminService], component: StaffListingComponent },
+  { path: 'staff-detail/:username', canActivate: [AuthGuardAdminService], component: StaffDetailComponent },
   { path: 'login', component: LoginComponent },
   { path: 'command-listing', canActivate: [AuthGuardCustomerService], component: CommandListingComponent },
   { path: 'seance-listing', canActivate: [AuthGuardCustomerService], component: SeanceListingComponent },
@@ -43,6 +51,8 @@ const routes: Routes = [
   { path: 'room-new', canActivate: [AuthGuardManagerService], component: RoomNewComponent},
   { path: 'room-listing', canActivate: [AuthGuardManagerService], component: RoomListingComponent},
   { path: 'room-detail/:idRoom', canActivate: [AuthGuardManagerService], component: RoomDetailComponent},
+  { path: 'subscription-category-new', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryNewComponent},
+  { path: 'subscription-category-listing', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryListingComponent},
   { path: 'chart',  component: TimestampFacilityComponent },
   { path: 'paypal',  component: PaypalComponent },
   { path: '', component: HomeComponent },

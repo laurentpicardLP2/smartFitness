@@ -3,7 +3,7 @@
       <form [formGroup]="facilityCategoryForm" >
           <div formGroupName="nameFacilityCategoryGroup">
           <mat-form-field class="facility-category-full-width">
-              <input matInput placeholder="Nom de la catégorie d'équipement" type="text" formControlName="nameFacilityCategory" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameFacilityCategory">
+              <input matInput required placeholder="Nom de la catégorie d'équipement" type="text" formControlName="nameFacilityCategory" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameFacilityCategory">
               <mat-error>
                   {{errors.nameFacilityCategory}}
               </mat-error>

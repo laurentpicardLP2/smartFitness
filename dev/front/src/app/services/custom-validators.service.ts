@@ -46,7 +46,7 @@ export const regExps: { [key: string]: RegExp } = {
  * Collection of reusable error messages
  */
 export const errorMessages: { [key: string]: string } = {
-    fullName: 'Votre nom complet doit comporter entre 1 et 128 caractères.',
+    fullname: 'Votre nom complet doit comporter entre 1 et 128 caractères.',
     username: 'Ce username existe déjà, veuillez en choisir un autre.',
     email: 'Email doit être un email valide (username@domain).',
     confirmEmail: 'Les adresses emails doivent correspondre.',

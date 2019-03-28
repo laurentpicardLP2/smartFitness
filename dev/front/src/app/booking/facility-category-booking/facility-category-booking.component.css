@@ -45,7 +45,7 @@
   }
 
   .info-reserve {
-      font-size: 25px;
+      font-size: 18px;
       font-family: 'Times New Roman', Times, serif;
       font-style: italic;
       color: brown;
@@ -53,9 +53,13 @@
   }
 
   .warning-reserve {
-    font-size: 25px;
+    font-size: 18px;
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
     color: brown;
     font-weight: 900;
 }
+
+  .img-facility{
+    max-width: 250px;
+  }

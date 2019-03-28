@@ -18,10 +18,12 @@ public class SubscriptionCategory implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idSubscriptionCategory;
 
-	private String lastSubscription;
+	private int nbLast;
+	
+	private String typeLast;
 
 	private String nameSubscription;
 
@@ -43,12 +45,20 @@ public class SubscriptionCategory implements Serializable {
 		this.idSubscriptionCategory = idSubscriptionCategory;
 	}
 
-	public String getLastSubscription() {
-		return lastSubscription;
+	public int getNbLast() {
+		return nbLast;
 	}
 
-	public void setLastSubscription(String lastSubscription) {
-		this.lastSubscription = lastSubscription;
+	public void setNbLast(int nbLast) {
+		this.nbLast = nbLast;
+	}
+
+	public String getTypeLast() {
+		return typeLast;
+	}
+
+	public void setTypeLast(String typeLast) {
+		this.typeLast = typeLast;
 	}
 
 	public String getNameSubscription() {
