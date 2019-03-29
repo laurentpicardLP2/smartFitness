@@ -3,6 +3,7 @@ package laurent.fitness.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
@@ -25,17 +26,27 @@ public class SubscriptionCategory implements Serializable {
 	
 	private String typeLast;
 
+	@Column(unique = true)
 	private String nameSubscription;
 
-	private String priceSubscription;
+	private float priceSubscription;
 
 	//bi-directional many-to-one association to Subscription
 	@OneToMany(mappedBy="subscriptionCategory")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<Subscription> subscriptions;
 
 	public SubscriptionCategory() {
 	}
+	
+	public SubscriptionCategory(String nameSubscription, int nbLast, String typeLast, float priceSubscription) {
+		this.nameSubscription = nameSubscription;
+		this.nbLast = nbLast;
+		this.typeLast = typeLast;
+		this.priceSubscription = priceSubscription;
+	}
+	
+	
 
 	public int getIdSubscriptionCategory() {
 		return this.idSubscriptionCategory;
@@ -69,11 +80,11 @@ public class SubscriptionCategory implements Serializable {
 		this.nameSubscription = nameSubscription;
 	}
 
-	public String getPriceSubscription() {
+	public float getPriceSubscription() {
 		return priceSubscription;
 	}
 
-	public void setPriceSubscription(String priceSubscription) {
+	public void setPriceSubscription(float priceSubscription) {
 		this.priceSubscription = priceSubscription;
 	}
 

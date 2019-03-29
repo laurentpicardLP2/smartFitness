@@ -46,11 +46,6 @@ public class Facility implements Serializable {
 	@JsonBackReference
 	private FacilityCategory facilityCategory;
 
-	//bi-directional many-to-one association to MaintenanceOperation
-	@OneToMany(mappedBy="facility")
-	@JsonManagedReference
-	private List<MaintenanceOperation> maintenanceOperations;
-
 	//bi-directional many-to-one association to TimestampFacility
 	@OneToMany(mappedBy="facility")
 	@JsonManagedReference
@@ -159,28 +154,6 @@ public class Facility implements Serializable {
 
 	public void setFacilityCategory(FacilityCategory facilityCategory) {
 		this.facilityCategory = facilityCategory;
-	}
-
-	public List<MaintenanceOperation> getMaintenanceOperations() {
-		return this.maintenanceOperations;
-	}
-
-	public void setMaintenanceOperations(List<MaintenanceOperation> maintenanceOperations) {
-		this.maintenanceOperations = maintenanceOperations;
-	}
-
-	public MaintenanceOperation addMaintenanceOperation(MaintenanceOperation maintenanceOperation) {
-		getMaintenanceOperations().add(maintenanceOperation);
-		maintenanceOperation.setFacility(this);
-
-		return maintenanceOperation;
-	}
-
-	public MaintenanceOperation removeMaintenanceOperation(MaintenanceOperation maintenanceOperation) {
-		getMaintenanceOperations().remove(maintenanceOperation);
-		maintenanceOperation.setFacility(null);
-
-		return maintenanceOperation;
 	}
 
 	public List<TimestampFacility> getTimestampFacilities() {

@@ -82,6 +82,18 @@ public class Fitness implements CommandLineRunner {
 			}
 		}
 		
+		if( (this.staffRepository.findByUsername("db_manager") == null)) {
+			try {
+				idUser = this.userRepository.findByUsernameIdMax().getIdUser() + 1;
+			} catch (Exception e) {
+				idUser = 1;
+			}
+			finally {
+				this.authorityRepository.save(new Authority("db_manager", "ROLE_MANAGER"));
+				this.staffRepository.save(new Staff(idUser, "db_manager", "sysmanager", "{bcrypt}" + bcrypt.encode("simplon"),"", "", new Date(), (byte)(1), "", ""));				
+			}
+		}
+		
 		if( (this.customerRepository.findByUsername("db_user") == null)) {
 			try {
 				idUser = this.userRepository.findByUsernameIdMax().getIdUser() + 1;

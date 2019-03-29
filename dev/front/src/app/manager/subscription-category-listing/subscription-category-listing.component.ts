@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SubscriptionCategory} from '../../models/subscription-category.model';
+import { OffresService } from '../../services/offres.service';
+import { BehaviorSubject } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MatPaginator, MatTableDataSource, PageEvent, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-subscription-category-listing',
@@ -7,9 +12,55 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubscriptionCategoryListingComponent implements OnInit {
 
-  constructor() { }
+  nameSubscriptionCategory: string;
+  priceSubscription: number;
+  subscriptionCategoryList: BehaviorSubject<SubscriptionCategory[]>;
+
+MyDataSource: any;
+displayedColumns: string[] = ['Name', 'Price', 'Update', 'Delete'];
+@ViewChild(MatPaginator) paginator: MatPaginator;
+@ViewChild(MatSort) sort: MatSort;
+
+
+  constructor(private route: ActivatedRoute,
+              private offresService: OffresService,
+              private router: Router) { }
 
   ngOnInit() {
+  this.offresService.publishSubscriptionCategories();
+  this.subscriptionCategoryList  = this.offresService.listSubscriptionCategories$;
+  this.RenderDataTable();
   }
+
+  RenderDataTable() {
+    this.offresService.getSubscriptionCategories().subscribe(
+      res => {
+      this.MyDataSource = new MatTableDataSource();
+      this.MyDataSource.data = res;
+      this.MyDataSource.sort = this.sort;
+      this.MyDataSource.paginator = this.paginator;
+      console.log(this.MyDataSource.data);
+    },
+      error => {
+      console.log('There was an error !' + error);
+      });
+    }
+
+    onUpdate(idSubscriptionCategory: number) {
+      this.router.navigate(['subscription-category-detail/' + idSubscriptionCategory]);
+    }
+
+    onShow(idSubscriptionCategory: number) {
+      //this.router.navigate(['subscription-category-detail/' + username]);
+    }
+
+    onDelete(idSubscriptionCategory: number){
+      
+      if(confirm("Confirme-vous la suppression du compte " + idSubscriptionCategory + "?")){
+        //this.adminService.delete(username);
+        //setTimeout(() => this.RenderDataTable(), 300);
+      }
+
+    }
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,9 +24,11 @@ import org.springframework.web.multipart.MultipartFile;
 import laurent.fitness.model.Facility;
 import laurent.fitness.model.FacilityCategory;
 import laurent.fitness.model.Room;
+import laurent.fitness.model.SubscriptionCategory;
 import laurent.fitness.services.FacilityCategoryService;
 import laurent.fitness.services.FacilityService;
 import laurent.fitness.services.RoomService;
+import laurent.fitness.services.SubscriptionCategoryService;
 import laurent.fitness.upload.FileInformation;
 import laurent.fitness.upload.exception.UploadFileException;
 
@@ -36,11 +39,13 @@ public class ManagerController {
 	private FacilityService facilityService;
 	private FacilityCategoryService facilityCategoryService;
 	private RoomService roomService;
+	private SubscriptionCategoryService subscriptionCategoryService;
 	
-	public ManagerController(FacilityService facilityService, FacilityCategoryService facilityCategoryService, RoomService roomService) {
+	public ManagerController(FacilityService facilityService, FacilityCategoryService facilityCategoryService, RoomService roomService, SubscriptionCategoryService subscriptionCategoryService) {
 		this.facilityService = facilityService;
 		this.facilityCategoryService = facilityCategoryService;
 		this.roomService = roomService;
+		this.subscriptionCategoryService = subscriptionCategoryService;
 	}
 	
 	
@@ -112,7 +117,7 @@ public class ManagerController {
 		}
 			
 	/**
-	 * Crée un catégorie d'équipement
+	 * Crée une catégorie d'équipement
 	 * @param nameFacilityCategory
 	 * @param priceFacilityCategory
 	 * @return
@@ -177,5 +182,50 @@ public class ManagerController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}	
+	
+	//Return the list of subscriptionCategories
+	@GetMapping("/getsubscriptioncategories")
+	public List<SubscriptionCategory> getSubscriptionCategories() {
+		return this.subscriptionCategoryService.getAllSubscriptionCategories();		
+	}
+	
+	
+	@PostMapping("/addsubscriptioncategory")
+	public ResponseEntity<?> addSubscriptionCategory(@RequestBody SubscriptionCategory pSubscriptionCategory) {
+		try {
+			SubscriptionCategory subscriptionCategory = new SubscriptionCategory(pSubscriptionCategory.getNameSubscription(), pSubscriptionCategory.getNbLast(), pSubscriptionCategory.getTypeLast(), pSubscriptionCategory.getPriceSubscription());
+		return ResponseEntity.status(HttpStatus.OK).body(this.subscriptionCategoryService.saveSubscriptionCategory(subscriptionCategory));
+		
+		} catch(Exception e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}			
+	}
+	
+	
+	@PutMapping("/updatesubscriptioncategory")
+	public ResponseEntity<?> updateSubscriptionCategory(@RequestBody SubscriptionCategory pSubscriptionCategory) {
+		try {			
+			return ResponseEntity.status(HttpStatus.OK).body(this.subscriptionCategoryService.updateSubscriptionCategory(pSubscriptionCategory.getIdSubscriptionCategory(), pSubscriptionCategory.getNameSubscription(), pSubscriptionCategory.getNbLast(), pSubscriptionCategory.getTypeLast(), pSubscriptionCategory.getPriceSubscription()));
+		
+		} catch(Exception e) {
+			
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}			
+	}
+
+	
+	// Delete a category of subscription
+	@DeleteMapping("/delsubscriptioncategory/{idSubscriptionCategory}")
+	public ResponseEntity<?> delSubscriptionCategory(@PathVariable Integer idSubscriptionCategory){
+		try {
+			this.subscriptionCategoryService.deleteSubscriptionCategory(this.subscriptionCategoryService.findByIdSubscriptionCategory(idSubscriptionCategory));
+			return ResponseEntity.status(HttpStatus.OK).body(null);
+		} catch(Exception e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}
+	}
 
 }

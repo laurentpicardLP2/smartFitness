@@ -30,6 +30,7 @@ import { StaffListingComponent } from './admin/staff-listing/staff-listing.compo
 import { StaffDetailComponent } from './admin/staff-detail/staff-detail.component';
 import { SubscriptionCategoryNewComponent } from './manager/subscription-category-new/subscription-category-new.component';
 import { SubscriptionCategoryListingComponent } from './manager/subscription-category-listing/subscription-category-listing.component';
+import { SubscriptionCategoryDetailComponent } from './manager/subscription-category-detail/subscription-category-detail.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
   { path: 'room-detail/:idRoom', canActivate: [AuthGuardManagerService], component: RoomDetailComponent},
   { path: 'subscription-category-new', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryNewComponent},
   { path: 'subscription-category-listing', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryListingComponent},
+  { path: 'subscription-category-detail/:idSubscriptionCategory', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryDetailComponent},
   { path: 'chart',  component: TimestampFacilityComponent },
   { path: 'paypal',  component: PaypalComponent },
   { path: '', component: HomeComponent },

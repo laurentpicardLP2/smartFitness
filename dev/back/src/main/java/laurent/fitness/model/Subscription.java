@@ -4,7 +4,9 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -22,11 +24,17 @@ public class Subscription extends Item implements Serializable {
 	@JoinColumn(name="Customer_Users_username")
 	@JsonBackReference
 	private Customer customer;
+	
+	@Temporal(TemporalType.DATE)
+	private Date dateEndOfSubscription;
+
+	@Temporal(TemporalType.DATE)
+	private Date dateStartOfSubscription;
 
 	//bi-directional many-to-one association to SubscriptionCategory
 	@ManyToOne
 	@JoinColumn(name="SubscriptionCategory_idSubscriptionCategory")
-	@JsonBackReference
+	@JsonIgnore
 	private SubscriptionCategory subscriptionCategory;
 
 	public Subscription() {
@@ -34,6 +42,22 @@ public class Subscription extends Item implements Serializable {
 	
 	public Subscription(List<Command> commands) {
 		super(commands);
+	}
+	
+	public Date getDateEndOfSubscription() {
+		return this.dateEndOfSubscription;
+	}
+
+	public void setDateEndOfSubscription(Date dateEndOfSubscription) {
+		this.dateEndOfSubscription = dateEndOfSubscription;
+	}
+
+	public Date getDateStartOfSubscription() {
+		return this.dateStartOfSubscription;
+	}
+
+	public void setDateStartOfSubscription(Date dateStartOfSubscription) {
+		this.dateStartOfSubscription = dateStartOfSubscription;
 	}
 	
 	public Subscription(List<Command> commands, String typeItem) {

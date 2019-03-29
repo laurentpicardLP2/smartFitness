@@ -1,6 +1,6 @@
 <div fxFlex fxLayout fxLayoutAlign="center">
   <div class="pad">
-      <form [formGroup]="subscriptionCategoryRegistrationForm" class="subscription-category-form">
+      <form [formGroup]="subscriptionCategoryDetailForm" class="subscription-category-form">
       
           <mat-form-field class="subscription-category-full-width">
               <input required matInput placeholder="Nom de l'abonnement" type="text" formControlName="nameSubscription" [(ngModel)]="nameSubscription">
@@ -33,15 +33,8 @@
          
           </div> -->
 
-          <button mat-raised-button [disabled]="subscriptionCategoryRegistrationForm.invalid" (click)="onRegister()">Register</button>
+          <button mat-raised-button [disabled]="subscriptionCategoryDetailForm.invalid" (click)="onUpdate()">Enregistrer les modifications</button>
       
       </form>
   </div>
 </div>
-
-<!-- 
-public idSubscriptionCategory: number;
-public nameSubscription: string;
-public priceSubscription: number;
-public typeLast: string;
-public nbLast: number; -->

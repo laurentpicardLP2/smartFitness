@@ -66,7 +66,7 @@
           <button mat-menu-item _ngcontent-cl="" tabindex="9" aria-disabled="false" (click)="onAction('/facility-listing')">Lister les équipements</button>
        </mat-menu>
 
-       <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="abonnement">Gestion abonnement</button>
+       <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="abonnement">Gestion offres</button>
        <mat-menu  #abonnement="matMenu">
            <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/subscription-category-new')">Ajout d'une catégorie d'abonnement</button>
            <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/subscription-category-listing')">Listing des catégories d'abonnement</button>

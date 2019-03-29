@@ -42,6 +42,7 @@ import { StaffListingComponent } from './admin/staff-listing/staff-listing.compo
 import { StaffDetailComponent } from './admin/staff-detail/staff-detail.component';
 import { SubscriptionCategoryNewComponent } from './manager/subscription-category-new/subscription-category-new.component';
 import { SubscriptionCategoryListingComponent } from './manager/subscription-category-listing/subscription-category-listing.component';
+import { SubscriptionCategoryDetailComponent } from './manager/subscription-category-detail/subscription-category-detail.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { SubscriptionCategoryListingComponent } from './manager/subscription-cat
     StaffDetailComponent,
     SubscriptionCategoryNewComponent,
     SubscriptionCategoryListingComponent,
+    SubscriptionCategoryDetailComponent,
   ],
   imports: [
     BrowserModule,
