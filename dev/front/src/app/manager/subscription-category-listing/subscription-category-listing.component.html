@@ -12,7 +12,7 @@
     </mat-sidenav>
 
     <div class="alert alert-info">
-        <strong>Liste des catégories d'abonnement.</strong>
+        <strong>Liste des types d'abonnement.</strong>
     </div>
     <div class="pad">>
         <mat-form-field>
@@ -21,7 +21,7 @@
         <div class="example-container mat-elevation-z8">
           <mat-table #Table [dataSource]="MyDataSource" multiTemplateDataRows matSort>
           <ng-container matColumnDef="Name">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Nom de catégorie de l'équipement </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Nom du type de l'abonnement </mat-header-cell>
           <mat-cell *matCellDef="let post"> {{post.nameSubscription}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="Price">
@@ -34,7 +34,7 @@
           </ng-container>
           <ng-container matColumnDef="Delete">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Suppression de l'abonnement </mat-header-cell>
-            <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" id="delsubscriptionCategory" (click)="onDelete(post.idSubscriptionCategory)">Supprimer</button></mat-cell>
+            <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" id="delsubscriptionCategory" (click)="onDelete(post.idSubscriptionCategory, post.nameSubscription)">Supprimer</button></mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onShow(row.idSubscriptionCategory)"></mat-row>

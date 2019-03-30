@@ -57,5 +57,7 @@ export const errorMessages: { [key: string]: string } = {
     nameRoom: 'Ce nom de salle existe déjà, veuillez en choisir un autre.',
     capacityRoom: 'La capacité de la salle doit être comprise entre 4 et 100.',
     nameFacilityCategory: 'Ce nom de catégorie d\'équipement existe déjà.',
-    nameFacility: 'Ce nom d\'équipement existe déjà.'
+    nameFacility: 'Ce nom d\'équipement existe déjà.',
+    nameSubscription: 'Ce type d\'abonnement existe déjà',
+    nbLast: 'La durée de d\'un type d\'abonnement doit être comprise entre 1 et 10'
 };

@@ -1,0 +1,55 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SubscriptionCategory} from '../../models/subscription-category.model';
+import { OffresService } from '../../services/offres.service';
+import { BehaviorSubject } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MatPaginator, MatTableDataSource, PageEvent, MatSort } from '@angular/material';
+
+@Component({
+  selector: 'app-subscription-customer-proposition',
+  templateUrl: './subscription-customer-proposition.component.html',
+  styleUrls: ['./subscription-customer-proposition.component.css']
+})
+export class SubscriptionCustomerPropositionComponent implements OnInit {
+  subscriptionCategoryList: BehaviorSubject<SubscriptionCategory[]>;
+
+  MyDataSource: any;
+  displayedColumns: string[] = ['Name', 'Price', 'Subscribe'];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  
+  
+    constructor(private route: ActivatedRoute,
+                private offresService: OffresService,
+                private router: Router) { }
+  
+    ngOnInit() {
+    this.offresService.publishSubscriptionCategories();
+    this.subscriptionCategoryList  = this.offresService.listSubscriptionCategories$;
+    this.RenderDataTable();
+    }
+  
+    RenderDataTable() {
+      this.offresService.getSubscriptionCategories().subscribe(
+        res => {
+        this.MyDataSource = new MatTableDataSource();
+        this.MyDataSource.data = res;
+        this.MyDataSource.sort = this.sort;
+        this.MyDataSource.paginator = this.paginator;
+        console.log(this.MyDataSource.data);
+      },
+        error => {
+        console.log('There was an error !' + error);
+        });
+      }
+  
+      onSubscribe(idSubscriptionCategory: number) {
+        this.router.navigate(['subscription-customer-new/' + idSubscriptionCategory]);
+      }
+  
+      onShow(idSubscriptionCategory: number) {
+        //this.router.navigate(['subscription-category-detail/' + username]);
+      }
+  
+      
+}

@@ -9,11 +9,11 @@ import { BehaviorSubject } from 'rxjs';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
 
 @Component({
-  selector: 'app-subscription-category-detail',
-  templateUrl: './subscription-category-detail.component.html',
-  styleUrls: ['./subscription-category-detail.component.css']
+  selector: 'app-subscription-customer-new',
+  templateUrl: './subscription-customer-new.component.html',
+  styleUrls: ['./subscription-customer-new.component.css']
 })
-export class SubscriptionCategoryDetailComponent implements OnInit {
+export class SubscriptionCustomerNewComponent implements OnInit {
 
   idSubscriptionCategory: number;
   nameSubscription: string;
@@ -27,10 +27,30 @@ export class SubscriptionCategoryDetailComponent implements OnInit {
   errors = errorMessages;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
 
+  strDateOfStartOfSubscription: string;
+  dateOfStartOfSubscription: Date;
+  startShownYear: string;
+  startCurrentMonth: number;
+  startShownMonth: string;
+  startCurrentDay: number;
+  startShownDay: string;
+  strDateOfEndOfSubscription: string;
+  dateOfEndOfSubscription: Date;
+  endShownYear: string;
+  endCurrentMonth: number;
+  endShownMonth: string;
+  endCurrentDay: number;
+  endShownDay: string;
+
+
   constructor(private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private offresService: OffresService,
-    private router: Router) { }
+    private router: Router) {
+      this.dateOfEndOfSubscription =  new Date();
+      this.initDateOfSubscriptionField();
+      this.setDateOfEndOfSubscriptionField();
+     }
 
   ngOnInit() {
     this.idSubscriptionCategory = +this.route.snapshot.params.idSubscriptionCategory;
@@ -66,7 +86,57 @@ export class SubscriptionCategoryDetailComponent implements OnInit {
       typeLast: ['', [
         Validators.required
     ]],
+      dateOfStartOfSubscription: ['', [
+        Validators.required
+      ]],
+      dateOfEndOfSubscription: ['', [
+        Validators.required
+      ]]
     });
+  }
+
+  
+  initDateOfSubscriptionField(){
+    this.dateOfStartOfSubscription = new Date();
+    this.startShownYear = this.dateOfStartOfSubscription.getFullYear().toString();
+    this.startCurrentMonth = this.dateOfStartOfSubscription.getMonth() + 1;
+    this.startCurrentDay = this.dateOfStartOfSubscription.getDate()
+    
+    if(this.startCurrentMonth <10) {
+      this.startShownMonth = "0" + this.startCurrentMonth.toString();
+    } else{
+      this.startShownMonth = this.startCurrentMonth.toString();
+    }
+    if(this.startCurrentDay < 10) {
+      this.startShownDay = "0" + this.startCurrentDay.toString();
+    } else{
+      this.startShownDay = this.startCurrentDay.toString();
+    }
+    
+    this.strDateOfStartOfSubscription = this.startShownYear + "-" + this.startShownMonth + "-" + this.startShownDay;
+  }
+
+  setDateOfEndOfSubscriptionField(){
+    let splittedDate = this.strDateOfStartOfSubscription.split("-");
+    this.dateOfStartOfSubscription = new Date(parseInt(splittedDate[0],10), parseInt(splittedDate[1],10) -1, parseInt(splittedDate[2],10));
+
+    this.dateOfEndOfSubscription = new Date(this.dateOfStartOfSubscription.getFullYear(), this.dateOfStartOfSubscription.getMonth(), this.dateOfStartOfSubscription.getDate());
+    this.dateOfEndOfSubscription.setDate(this.dateOfEndOfSubscription.getDate() + 1);
+    this.endShownYear = this.dateOfEndOfSubscription.getFullYear().toString();
+    this.endCurrentMonth = this.dateOfEndOfSubscription.getMonth() + 1;
+    this.endCurrentDay = this.dateOfEndOfSubscription.getDate()
+    
+    if(this.endCurrentMonth <10) {
+      this.endShownMonth = "0" + this.endCurrentMonth.toString();
+    } else{
+      this.endShownMonth = this.endCurrentMonth.toString();
+    }
+    if(this.endCurrentDay < 10) {
+      this.endShownDay = "0" + this.endCurrentDay.toString();
+    } else{
+      this.endShownDay = this.endCurrentDay.toString();
+    }
+    this.strDateOfEndOfSubscription = this.endShownYear + "-" + this.endShownMonth + "-" + this.endShownDay;
   }
 
   checkNameSubscription(group: FormGroup){
@@ -96,5 +166,6 @@ export class SubscriptionCategoryDetailComponent implements OnInit {
     updateSubscription.typeLast = this.typeLast;
     this.offresService.updateSubscriptionCategory(updateSubscription);
   }
+
 
 }

@@ -44,53 +44,53 @@ export class SubscriptionCategoryNewComponent implements OnInit {
 
   createForm() {
     this.subscriptionCategoryRegistrationForm = this.formBuilder.group({
-      nameSubscription: ['', [
-            Validators.required,
-            Validators.minLength(1),
-            Validators.maxLength(128)
-        ]],
+      nameSubscriptionGroup: this.formBuilder.group({
+        nameSubscription: ['', [
+          Validators.required,
+          Validators.minLength(1),
+        ]]
+      }, {validator: this.checkNameSubscription.bind(this)}),
         priceSubscription: ['', [
           Validators.required
+        ]],
+        nbLastGroup: this.formBuilder.group({
+        nbLast: ['', [
+          Validators.required,
+          Validators.minLength(1),
         ]]
+      }, {validator: this.checkNbLastSubscription.bind(this)}),
+      typeLast: ['', [
+        Validators.required
+    ]],
     });
-}
+  }
 
-  // createForm() {
-  //     this.subscriptionCategoryRegistrationForm = this.formBuilder.group({
-  //         fullname: ['', [
-  //             Validators.required,
-  //             Validators.minLength(1),
-  //             Validators.maxLength(128)
-  //         ]],
-  //         usernameGroup: this.formBuilder.group({
-  //         username: ['', [
-  //           Validators.required,
-  //           Validators.minLength(1),
-  //         ]]
-  //       }, {validator: this.checkUsername.bind(this)}),
-  //       role: ['ROLE_MANAGER', [
-  //           Validators.required
-  //       ]]
-  //     });
-  // }
+  checkNameSubscription(group: FormGroup){
+    let nameSubscription : string;
+    
+    nameSubscription = group.get("nameSubscription").value;
+    const isValid = !(this.offresService.listSubscriptionCategories.find(subscriptionCategory => subscriptionCategory.nameSubscription === nameSubscription))
+    return isValid ? null : { checkNameSubscription: true };
+  }
+
+
+  checkNbLastSubscription(group: FormGroup) {
+    let nbLast: number;
+
+    nbLast = group.get("nbLast").value;
+    const isValid = (nbLast >0 && nbLast < 11)
+    return isValid ? null : { checkNbLastSubscription: true };
+}
 
 
   onRegister(): void {
       this.newSubscriptionCategory = new SubscriptionCategory();
       this.newSubscriptionCategory.nameSubscription = this.nameSubscription;
-      this.newSubscriptionCategory.nbLast = 3;
-      this.newSubscriptionCategory.typeLast = "month";
+      this.newSubscriptionCategory.nbLast = this.nbLast;
+      this.newSubscriptionCategory.typeLast = this.typeLast;
       this.newSubscriptionCategory.priceSubscription = this.priceSubscription;
 
     this.offresService.addSubscriptionCategory(this.newSubscriptionCategory);
  }
-
-  checkUsername(group: FormGroup){
-    let username : string;
-    
-    username = group.get("username").value;
-    const isValid = !(this.customerService.availableAuthorities.find(authoritary => authoritary.username === username))
-    return isValid ? null : { checkUsername: true };
-  }
 
 }

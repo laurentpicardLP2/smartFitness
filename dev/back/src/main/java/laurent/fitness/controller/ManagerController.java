@@ -205,7 +205,7 @@ public class ManagerController {
 	
 	@PutMapping("/updatesubscriptioncategory")
 	public ResponseEntity<?> updateSubscriptionCategory(@RequestBody SubscriptionCategory pSubscriptionCategory) {
-		try {			
+		try {	
 			return ResponseEntity.status(HttpStatus.OK).body(this.subscriptionCategoryService.updateSubscriptionCategory(pSubscriptionCategory.getIdSubscriptionCategory(), pSubscriptionCategory.getNameSubscription(), pSubscriptionCategory.getNbLast(), pSubscriptionCategory.getTypeLast(), pSubscriptionCategory.getPriceSubscription()));
 		
 		} catch(Exception e) {

@@ -42,8 +42,26 @@
               </td>
             </tr>
           </table>
-          <div class="pad"></div>
-          <button mat-raised-button [disabled]="subscriptionCategoryDetailForm.invalid" (click)="onUpdate()">Enregistrer les modifications</button>
+          <table class="subscription-category-full-width" cellspacing="0">
+            <tr>
+              <td>
+                <div>
+                    <mat-form-field class="subscription-category-full-width">
+                        <input matInput type="date" placeholder="Début de l'abonnement" formControlName="dateOfStartOfSubscription" [(ngModel)]="strDateOfStartOfSubscription"  (keyup)="setDateOfEndOfSubscriptionField()" (click)="setDateOfEndOfSubscriptionField()">
+                    </mat-form-field>
+                </div>
+              </td>
+              <td>
+                <div>
+                    <mat-form-field class="subscription-category-full-width">
+                        <input matInput readonly type="date" placeholder="Fin de l'abonnement" formControlName="dateOfEndOfSubscription" [(ngModel)]="strDateOfEndOfSubscription">
+                    </mat-form-field>
+                </div>
+              </td>
+            </tr>
+          </table>
+        <div class="pad"></div>
+          <button mat-raised-button [disabled]="subscriptionCategoryDetailForm.invalid" (click)="onUpdate()">Ajouter au panier</button>
         </form>
     </div>
   </div>

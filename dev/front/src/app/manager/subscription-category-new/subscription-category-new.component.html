@@ -1,47 +1,49 @@
 <div fxFlex fxLayout fxLayoutAlign="center">
   <div class="pad">
       <form [formGroup]="subscriptionCategoryRegistrationForm" class="subscription-category-form">
-      
+        <div formGroupName="nameSubscriptionGroup">
           <mat-form-field class="subscription-category-full-width">
-              <input required matInput placeholder="Nom de l'abonnement" type="text" formControlName="nameSubscription" [(ngModel)]="nameSubscription">
-              <!-- <mat-error>
+              <input required matInput placeholder="Nom du type d'abonnement" type="text" formControlName="nameSubscription" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameSubscription">
+              <mat-error>
                   {{errors.nameSubscription}}
-              </mat-error> -->
+              </mat-error>
           </mat-form-field>
-          <div>
-            <mat-form-field class="subscription-category-full-width">
-                <input matInput required placeholder="Prix de l'abonnement" type="number" formControlName="priceSubscription" [(ngModel)]="priceSubscription">
-            </mat-form-field>
-          </div>
-          <!-- <div formGroupName="usernameGroup"> -->
-          <!-- <mat-form-field class="subscription-category-full-width">
-            <input required matInput placeholder="Username" type="text" formControlName="username" [(ngModel)]="username"> -->
-            <!-- <input required matInput placeholder="Username" type="text" formControlName="username" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="username"> -->
-              <!-- <mat-error>
-                  {{errors.username}}
-              </mat-error> -->
-          <!-- </mat-form-field> -->
-          <!-- </div> -->
-          <!-- <div>
-              <mat-form-field class="subscription-category-full-width">
-                  <mat-label>Rôle du collaborateur</mat-label>
-                  <mat-select required name="role" formControlName="role" [(ngModel)]="role">
-                    <mat-option value="ROLE_MANAGER">ROLE_MANAGER</mat-option>
-                    <mat-option value="ROLE_ADMIN">ROLE_ADMIN</mat-option>
-                  </mat-select>
-                </mat-form-field>
-         
-          </div> -->
+        </div>
+        <div>
+          <mat-form-field class="subscription-category-full-width">
+              <input matInput required placeholder="Prix de l'abonnement" type="number" formControlName="priceSubscription" [(ngModel)]="priceSubscription">
+          </mat-form-field>
+        </div>
 
-          <button mat-raised-button [disabled]="subscriptionCategoryRegistrationForm.invalid" (click)="onRegister()">Register</button>
-      
+        <table class="subscription-category-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <div formGroupName="nbLastGroup">
+                <mat-form-field class="subscription-category-full-width">
+                  <input matInput required placeholder="Durée de l'abonnement" formControlName="nbLast" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nbLast">
+                  <mat-error>
+                      {{errors.nbLast}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </td>
+            <td>
+              <div>
+                  <mat-form-field class="subscription-category-full-width">
+                      <mat-label>Unité de temps de l'abonnement</mat-label>
+                      <mat-select required name="typeLast" formControlName="typeLast" [(ngModel)]="typeLast">
+                        <mat-option value="Day">Jour</mat-option>
+                        <mat-option value="Week">Semaine</mat-option>
+                        <mat-option value="Month">Mois</mat-option>
+                        <mat-option value="Year">Année</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <div class="pad"></div>
+        <button mat-raised-button [disabled]="subscriptionCategoryRegistrationForm.invalid" (click)="onRegister()">Register</button>
       </form>
   </div>
 </div>
-
-<!-- 
-public idSubscriptionCategory: number;
-public nameSubscription: string;
-public priceSubscription: number;
-public typeLast: string;
-public nbLast: number; -->

@@ -29,11 +29,8 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
   selectedYear: string;
   currentMonth: number;
   shownMonth: string;
-  selectedMonth: string;
   currentDay: number;
   shownDay: string;
-  selectedDay: string;
-  selectedConcatFields: string;
   isOpen: boolean; // boolean rendant ou non disabled le bouton "Consulter" selon que l'on se situe ou sur la plage horaire 6h - 22h
   command: Command;
   username: string;

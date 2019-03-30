@@ -12,8 +12,6 @@ import { MatPaginator, MatTableDataSource, PageEvent, MatSort } from '@angular/m
 })
 export class SubscriptionCategoryListingComponent implements OnInit {
 
-  nameSubscriptionCategory: string;
-  priceSubscription: number;
   subscriptionCategoryList: BehaviorSubject<SubscriptionCategory[]>;
 
 MyDataSource: any;
@@ -54,11 +52,11 @@ displayedColumns: string[] = ['Name', 'Price', 'Update', 'Delete'];
       //this.router.navigate(['subscription-category-detail/' + username]);
     }
 
-    onDelete(idSubscriptionCategory: number){
+    onDelete(idSubscriptionCategory: number, nameSubscription: string){
       
-      if(confirm("Confirme-vous la suppression du compte " + idSubscriptionCategory + "?")){
-        //this.adminService.delete(username);
-        //setTimeout(() => this.RenderDataTable(), 300);
+      if(confirm("Confirme-vous la suppression du compte " + nameSubscription + "?")){
+        this.offresService.deleteSubscriptionCategory(idSubscriptionCategory);
+        setTimeout(() => this.RenderDataTable(), 300);
       }
 
     }

@@ -29,8 +29,14 @@
         <div class="mat-button-focus-overlay"></div>
       </a> 
 
-      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="choix">Mes choix</button>
-      <mat-menu  #choix="matMenu">
+      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="offres">Mes offres</button>
+      <mat-menu  #offres="matMenu">
+        <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/subscription-customer-proposition')">Souscrire à un abonnement</button>
+        <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/watch-customer-proposition')">Acheter une montre connectée</button>
+     </mat-menu>
+
+      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="seances">Mes séances</button>
+      <mat-menu  #seances="matMenu">
         <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/seance-booking')">Ajouter une séance</button>
         <button mat-menu-item [matMenuTriggerFor]="suivis" _ngcontent-cl="" tabindex="1" aria-disabled="false">Mes suivis</button>
       </mat-menu>
@@ -68,8 +74,8 @@
 
        <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="abonnement">Gestion offres</button>
        <mat-menu  #abonnement="matMenu">
-           <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/subscription-category-new')">Ajout d'une catégorie d'abonnement</button>
-           <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/subscription-category-listing')">Listing des catégories d'abonnement</button>
+           <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/subscription-category-new')">Ajout d'un type d'abonnement</button>
+           <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/subscription-category-listing')">Listing des types d'abonnement</button>
         </mat-menu>
 
        <button *ngIf="isAuth && authority.authority=='ROLE_ADMIN'"  mat-button [matMenuTriggerFor]="staff">Gestion staff</button>

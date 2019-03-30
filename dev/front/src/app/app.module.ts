@@ -43,6 +43,8 @@ import { StaffDetailComponent } from './admin/staff-detail/staff-detail.componen
 import { SubscriptionCategoryNewComponent } from './manager/subscription-category-new/subscription-category-new.component';
 import { SubscriptionCategoryListingComponent } from './manager/subscription-category-listing/subscription-category-listing.component';
 import { SubscriptionCategoryDetailComponent } from './manager/subscription-category-detail/subscription-category-detail.component';
+import { SubscriptionCustomerNewComponent } from './offres/subscription-customer-new/subscription-customer-new.component';
+import { SubscriptionCustomerPropositionComponent } from './offres/subscription-customer-proposition/subscription-customer-proposition.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +79,8 @@ import { SubscriptionCategoryDetailComponent } from './manager/subscription-cate
     SubscriptionCategoryNewComponent,
     SubscriptionCategoryListingComponent,
     SubscriptionCategoryDetailComponent,
+    SubscriptionCustomerNewComponent,
+    SubscriptionCustomerPropositionComponent,
   ],
   imports: [
     BrowserModule,

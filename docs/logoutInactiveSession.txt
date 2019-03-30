@@ -1,0 +1,182 @@
+https://stackoverflow.com/questions/38143993/session-auto-logout-after-inactivity
+
+
+
+var AutoLogout = (function() {
+  function AutoLogout() {
+    this.events = ['load', 'mousemove', 'mousedown',
+                   'click', 'scroll', 'keypress'];
+
+    this.warn = this.warn.bind(this);
+    this.logout = this.logout.bind(this);
+    this.resetTimeout = this.resetTimeout.bind(this);
+
+    var self = this;
+    this.events.forEach(function(event) {
+      window.addEventListener(event, self.resetTimeout);
+    });
+
+    this.setTimeout();
+  }
+
+  var _p = AutoLogout.prototype;
+
+  _p.clearTimeout = function() {
+    if(this.warnTimeout)
+      clearTimeout(this.warnTimeout);
+
+    if(this.logoutTimeout)
+      clearTimeout(this.logoutTimeout);
+  };
+
+  _p.setTimeout = function() {
+    this.warnTimeout = setTimeout(this.warn, 29 * 60 * 1000);
+
+    this.logoutTimeout = setTimeout(this.logout, 30 * 60 * 1000);
+  };
+
+  _p.resetTimeout = function() {
+    this.clearTimeout();
+    this.setTimeout();
+  };
+
+  _p.warn = function() {
+    alert('You will be logged out automatically in 1 minute.');
+  };
+
+  _p.logout = function() {
+    // Send a logout request to the API
+    console.log('Sending a logout request to the API...');
+
+    this.destroy();  // Cleanup
+  };
+
+  _p.destroy = function() {
+    this.clearTimeout();
+
+    var self = this;
+    this.forEach(function(event) {
+      window.removeEventListener(event, self.resetTimeout);
+    });
+  };
+
+  return AutoLogout;
+})();
+
+
+
+
+
+
+
+===============================================================================================================
+===============================================================================================================
+===============================================================================================================
+es2015:
+
+
+ clearTimeout() {
+    if(this.warnTimeout)
+      clearTimeout(this.warnTimeout);
+
+    if(this.logoutTimeout)
+      clearTimeout(this.logoutTimeout);
+  }
+
+  setTimeout() {
+    this.warnTimeout = setTimeout(this.warn, 29 * 60 * 1000);
+
+    this.logoutTimeout = setTimeout(this.logout, 30 * 60 * 1000);
+  }
+
+  resetTimeout() {
+    this.clearTimeout();
+    this.setTimeout();
+  }
+
+  warn() {
+    alert('You will be logged out automatically in 1 minute.');
+  }
+
+  logout() {
+    // Send a logout request to the API
+    console.log('Sending a logout request to the API...');
+
+    this.destroy();  // Cleanup
+  }
+
+  destroy() {
+    this.clearTimeout();
+
+    this.events.forEach((event) => {
+      window.removeEventListener(event, this.resetTimeout);
+    });
+  }
+}
+
+
+
+
+===============================================================================================================
+===============================================================================================================
+===============================================================================================================
+
+Partial polling solution:
+
+
+var activityPolling = (function() {
+  var events = ['load', 'mousemove', 'mousedown', 'click', 'scroll', 'keypress'];
+  var active = true;
+  var timeout;
+
+  function poll() {
+    if(active) {
+      console.log('polling the server...')
+    }
+  }
+
+  function setIdle() {
+    active = false;
+  }
+
+  function setActive() {
+    active = true;
+    if(timeout)
+      clearTimeout(timeout);
+    timeout = setTimeout(setIdle, 30 * 60 * 1000);
+  }
+
+  function destroy() {
+    clearInterval(interval);
+
+    events.forEach(function(event) {
+      window.removeEventListener(event, setActive);
+    });
+  }
+
+  events.forEach(function(event) {
+    window.addEventListener(event, setActive);
+  });
+
+  setActive();
+
+  var interval = setInterval(poll, 60 * 1000);
+
+  return {
+    interval: interval,
+    destroy: destroy
+  }
+})();
+
+
+
+
+===============================================================================================================
+===============================================================================================================
+===============================================================================================================
+
+
+Rolling session may solve the purpose. ==> https://github.com/expressjs/session#rolling
+
+
+ maxAge: 30*10000

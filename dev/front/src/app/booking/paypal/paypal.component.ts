@@ -17,7 +17,7 @@ export class PaypalComponent implements OnInit {
 
 export function testFirst(){
   let a: number = 3;
-  let b: number = 7;
+  let b: number = 8;
   return a+b;
   }
  

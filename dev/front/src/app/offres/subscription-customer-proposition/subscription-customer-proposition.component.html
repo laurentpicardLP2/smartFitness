@@ -1,0 +1,44 @@
+
+<mat-sidenav-container class="container">
+  
+    <mat-sidenav-content>
+  
+        <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+      <div class="pad">
+        <router-outlet></router-outlet>  
+      </div>
+      <mat-sidenav #sidenav role="navigation">
+        <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
+      </mat-sidenav>
+  
+      <div class="alert alert-info">
+          <strong>Liste des types d'abonnement.</strong>
+      </div>
+      <div class="pad">>
+          <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </mat-form-field>
+          <div class="example-container mat-elevation-z8">
+            <mat-table #Table [dataSource]="MyDataSource" multiTemplateDataRows matSort>
+            <ng-container matColumnDef="Name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nom du type de l'abonnement </mat-header-cell>
+            <mat-cell *matCellDef="let post"> {{post.nameSubscription}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Price">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Prix de l'abonnement </mat-header-cell>
+            <mat-cell *matCellDef="let post"> {{post.priceSubscription}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Subscribe">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Souscription à l'abonnement </mat-header-cell>
+                <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" (click)="onSubscribe(post.idSubscriptionCategory)">Souscrire</button></mat-cell>
+            </ng-container>
+            
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onShow(row.idSubscriptionCategory)"></mat-row>
+            </mat-table>
+            <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+            </mat-paginator>
+        </div>
+      </div>
+    </mat-sidenav-content> 
+  </mat-sidenav-container>

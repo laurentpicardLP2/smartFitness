@@ -86,7 +86,7 @@ export class OffresService {
         }).subscribe(
           (updatedSubscriptionCategory) =>{ 
             console.log("update SubscriptionCategory OK : ", updatedSubscriptionCategory);
-            //this.router.navigate(['facility-category-listing']);
+            this.router.navigate(['subscription-category-listing']);
           },
           (error) => { 
             console.log("update subscriptionCategory pb : ", error); 
