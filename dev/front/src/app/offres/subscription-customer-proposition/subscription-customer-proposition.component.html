@@ -26,11 +26,15 @@
             </ng-container>
             <ng-container matColumnDef="Price">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Prix de l'abonnement </mat-header-cell>
-            <mat-cell *matCellDef="let post"> {{post.priceSubscription}} </mat-cell>
+            <mat-cell *matCellDef="let post"> {{post.priceSubscription}} €</mat-cell>
             </ng-container>
+            <ng-container matColumnDef="Last">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Durée de l'abonnement </mat-header-cell>
+              <mat-cell *matCellDef="let post"> {{post.nbLast}} {{ convertIntoFormatLastSubscription(post.nbLast, post.typeLast) }} </mat-cell>
+              </ng-container>
             <ng-container matColumnDef="Subscribe">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Souscription à l'abonnement </mat-header-cell>
-                <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" (click)="onSubscribe(post.idSubscriptionCategory)">Souscrire</button></mat-cell>
+                <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" (click)="onSubscribe(post.idSubscriptionCategory, post.nbLast, post.typeLast)">Souscrire</button></mat-cell>
             </ng-container>
             
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

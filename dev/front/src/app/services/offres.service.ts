@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { SubscriptionCategory } from 'src/app/models/subscription-category.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Command } from 'src/app/models/command.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,16 @@ export class OffresService {
               private token: TokenStorageService) { }
 
 
+  public isValidDateOfStartOfSubscriptionSubject: BehaviorSubject<boolean> = new BehaviorSubject(null);
+
+  public setIsValidDateOfStartOfSubscriptionSubject(value: boolean){
+    if(value){
+      this.isValidDateOfStartOfSubscriptionSubject.next(value);
+    } else {
+      this.isValidDateOfStartOfSubscriptionSubject.next(null);
+    }
+  }
+            
 
   public listSubscriptionCategories: SubscriptionCategory [] = [] ;
 
@@ -108,5 +119,30 @@ export class OffresService {
           (error) => console.log("suppression subscriptionCategory pb : ", error) 
       );
     }
+
+    public addSubscriptionToCommand(command: Command, username: string, idSubscriptionCategory: number, dateOfStartOfSubscription: Date, dateOfEndOfSubscription: Date){
+      console.log("command : ", command);
+      console.log("username : ", username);
+      console.log("idSubscriptionCategory : ", idSubscriptionCategory);
+      console.log("dateOfStartOfSubsciption : ", dateOfStartOfSubscription);
+      console.log("dateOfEndOfSubscription : ", dateOfEndOfSubscription);
+
+          //     this.httpClient.post<Seance>('http://localhost:8080/seancectrl/addseance/' + command.idCommand + '/' + username, null, 
+          //   {
+          //     headers: {
+          //         "Content-Type": "application/json",
+          //         "Authorization": this.token.getToken()
+          //     }
+          // }).subscribe(
+          //       (seance) =>{ 
+          //         command.items.push(seance); 
+          //         this.commandService.setCommandSubject(command);
+          //         this.setSeanceSubject(seance);  
+          //       },
+          //       (error) => { console.log("init seance pb : ", error); }
+          //   );
+
+    }
+
   
 }

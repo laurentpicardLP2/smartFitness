@@ -1,3 +1,4 @@
+import { UtilsService } from 'src/app/services/utils.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SubscriptionCategory} from '../../models/subscription-category.model';
 import { OffresService } from '../../services/offres.service';
@@ -14,13 +15,14 @@ export class SubscriptionCustomerPropositionComponent implements OnInit {
   subscriptionCategoryList: BehaviorSubject<SubscriptionCategory[]>;
 
   MyDataSource: any;
-  displayedColumns: string[] = ['Name', 'Price', 'Subscribe'];
+  displayedColumns: string[] = ['Name', 'Price', 'Last', 'Subscribe'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
   
     constructor(private route: ActivatedRoute,
                 private offresService: OffresService,
+                private utilsService : UtilsService,
                 private router: Router) { }
   
     ngOnInit() {
@@ -42,9 +44,13 @@ export class SubscriptionCustomerPropositionComponent implements OnInit {
         console.log('There was an error !' + error);
         });
       }
+
+      convertIntoFormatLastSubscription(nbLast: number, typeLast: string) {
+        return this.utilsService.convertIntoFormatLastSubscription(nbLast, typeLast); 
+      }
   
-      onSubscribe(idSubscriptionCategory: number) {
-        this.router.navigate(['subscription-customer-new/' + idSubscriptionCategory]);
+      onSubscribe(idSubscriptionCategory: number, nbLastSubscription: number , typeLastSubscription: string) {
+        this.router.navigate(['subscription-customer-new/' + idSubscriptionCategory + '/' + nbLastSubscription + '/' + typeLastSubscription]);
       }
   
       onShow(idSubscriptionCategory: number) {

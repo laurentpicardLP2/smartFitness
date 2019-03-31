@@ -91,11 +91,27 @@ export class UtilsService {
     let splitDatePart: string[] = datePart.split("-");
     let timePart = splitDateOfTimestamp[1];
     let splitTimePart = timePart.split(":");
-    let hh = parseInt(splitTimePart[0],10) + 1;
+    let hh = parseInt(splitTimePart[0],10) + 2;
     let date = new Date(parseInt(splitDatePart[0], 10),  parseInt(splitDatePart[1], 10) - 1, parseInt(splitDatePart[2], 10))
     
     return  this.dayName[date.getDay()] + " " + splitDatePart[2] + ' ' + this.monthName[date.getMonth()] + ' ' + splitDatePart[0] + " " 
       + ((hh < 10) ? "0" + hh.toString() : hh.toString()) + ':' + splitTimePart[1];
+    }
+
+    public convertIntoFormatLastSubscription(nbLast: number, typeLast: string) {
+      let strFormatResult: string;
+      switch (typeLast) {
+        case "Day" : strFormatResult = (nbLast > 1) ? "jours" : "jour";
+              break;
+        case "Week" : strFormatResult = (nbLast > 1) ? "semaines" : "semaine";
+              break;
+        case "Month" : strFormatResult = "mois"
+              break;
+        case "Year" : strFormatResult = (nbLast > 1) ? "années" : "année";
+              break;
+        default : strFormatResult = "";
+      }
+      return strFormatResult;
     }
   
 }

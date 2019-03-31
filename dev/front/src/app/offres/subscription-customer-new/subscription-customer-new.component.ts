@@ -1,3 +1,7 @@
+import { CommandService } from 'src/app/services/command.service';
+import { LoginService } from 'src/app/services/login.service';
+import { Command } from 'src/app/models/command.model';
+import { UtilsService } from 'src/app/services/utils.service';
 import { OffresService} from 'src/app/services/offres.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -5,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { SubscriptionCategory } from 'src/app/models/subscription-category.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
 
 @Component({
@@ -16,17 +20,18 @@ import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} f
 export class SubscriptionCustomerNewComponent implements OnInit {
 
   idSubscriptionCategory: number;
+  nbLastSubscription: number;
+  typeLastSubscription: string;
   nameSubscription: string;
-  nameSubscriptionInit: string;
   priceSubscription: number;
   nbLast: number;
   typeLast: string;
-  subscriptionCategoryDetailForm: FormGroup;
+  subscriptionForm: FormGroup;
   listSubscriptionCategories: BehaviorSubject<SubscriptionCategory[]>;
   subscriptionCategories: SubscriptionCategory[];
   errors = errorMessages;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
-
+  isValidDateOfStartOfSubscription: boolean;
   strDateOfStartOfSubscription: string;
   dateOfStartOfSubscription: Date;
   startShownYear: string;
@@ -41,12 +46,22 @@ export class SubscriptionCustomerNewComponent implements OnInit {
   endShownMonth: string;
   endCurrentDay: number;
   endShownDay: string;
+  username: string;
+  command: Command;
 
 
   constructor(private route: ActivatedRoute,
     private formBuilder: FormBuilder,
+    private commandService: CommandService,
+    private loginService: LoginService,
     private offresService: OffresService,
+    private utilsService: UtilsService,
     private router: Router) {
+      this.nbLastSubscription = +this.route.snapshot.params.nbLastSubscription;
+      this.typeLastSubscription = this.route.snapshot.params.typeLastSubscription;
+      this.offresService.isValidDateOfStartOfSubscriptionSubject.subscribe(res => {
+        this.isValidDateOfStartOfSubscription = res;
+      });
       this.dateOfEndOfSubscription =  new Date();
       this.initDateOfSubscriptionField();
       this.setDateOfEndOfSubscriptionField();
@@ -58,40 +73,40 @@ export class SubscriptionCustomerNewComponent implements OnInit {
     this.offresService.findSubscriptionCategory(this.idSubscriptionCategory).subscribe(subscriptionCategory => {
       this.idSubscriptionCategory = subscriptionCategory.idSubscriptionCategory;
       this.nameSubscription = subscriptionCategory.nameSubscription;
-      this.nameSubscriptionInit = subscriptionCategory.nameSubscription;
       this.priceSubscription = subscriptionCategory.priceSubscription;
       this.nbLast = subscriptionCategory.nbLast;
       this.typeLast = subscriptionCategory.typeLast;
     });
+
+    this.loginService.usernameSubject.subscribe(res => {
+      this.username = res;
+    });
+    this.commandService.commandSubject.subscribe(res => {
+      this.command = res;
+    });
+
     this.createForm();
   }
 
   createForm() {
-    this.subscriptionCategoryDetailForm = this.formBuilder.group({
-      nameSubscriptionGroup: this.formBuilder.group({
+    this.subscriptionForm = this.formBuilder.group({
         nameSubscription: ['', [
           Validators.required,
           Validators.minLength(1),
-        ]]
-      }, {validator: this.checkNameSubscription.bind(this)}),
+        ]],
         priceSubscription: ['', [
           Validators.required
         ]],
-        nbLastGroup: this.formBuilder.group({
-        nbLast: ['', [
+        typeAndNbLastSubscription: [this.nbLast + " " + this.utilsService.convertIntoFormatLastSubscription(this.nbLast, this.typeLast), [
           Validators.required,
           Validators.minLength(1),
+        ]],
+       dateOfStartOfSubscription: ['', [
+        Validators.required
+        ]],
+        dateOfEndOfSubscription: ['', [
+          Validators.required
         ]]
-      }, {validator: this.checkNbLastSubscription.bind(this)}),
-      typeLast: ['', [
-        Validators.required
-    ]],
-      dateOfStartOfSubscription: ['', [
-        Validators.required
-      ]],
-      dateOfEndOfSubscription: ['', [
-        Validators.required
-      ]]
     });
   }
 
@@ -119,9 +134,13 @@ export class SubscriptionCustomerNewComponent implements OnInit {
   setDateOfEndOfSubscriptionField(){
     let splittedDate = this.strDateOfStartOfSubscription.split("-");
     this.dateOfStartOfSubscription = new Date(parseInt(splittedDate[0],10), parseInt(splittedDate[1],10) -1, parseInt(splittedDate[2],10));
-
-    this.dateOfEndOfSubscription = new Date(this.dateOfStartOfSubscription.getFullYear(), this.dateOfStartOfSubscription.getMonth(), this.dateOfStartOfSubscription.getDate());
-    this.dateOfEndOfSubscription.setDate(this.dateOfEndOfSubscription.getDate() + 1);
+    if(this.dateOfStartOfSubscription.toString() == "Invalid Date"){
+      this.offresService.setIsValidDateOfStartOfSubscriptionSubject(false);
+      return;
+    }
+    this.offresService.setIsValidDateOfStartOfSubscriptionSubject(true);
+    this.getDateOfEndOfSubscription()
+    
     this.endShownYear = this.dateOfEndOfSubscription.getFullYear().toString();
     this.endCurrentMonth = this.dateOfEndOfSubscription.getMonth() + 1;
     this.endCurrentDay = this.dateOfEndOfSubscription.getDate()
@@ -139,32 +158,29 @@ export class SubscriptionCustomerNewComponent implements OnInit {
     this.strDateOfEndOfSubscription = this.endShownYear + "-" + this.endShownMonth + "-" + this.endShownDay;
   }
 
-  checkNameSubscription(group: FormGroup){
-    let nameSubscription : string;
-    
-    nameSubscription = group.get("nameSubscription").value;
-    const isValid = !(this.offresService.listSubscriptionCategories.find(subscriptionCategory => (subscriptionCategory.nameSubscription === nameSubscription) && nameSubscription != this.nameSubscriptionInit));
-    return isValid ? null : { checkNameFacilityCategory: true };
+  getDateOfEndOfSubscription(){
+      switch (this.typeLastSubscription) {
+        case "Day" : 
+          this.dateOfEndOfSubscription = new Date(this.dateOfStartOfSubscription.getFullYear(), this.dateOfStartOfSubscription.getMonth(), this.dateOfStartOfSubscription.getDate() + (this.nbLastSubscription - 1));
+          break;
+        case "Week" : 
+          this.dateOfEndOfSubscription = new Date(this.dateOfStartOfSubscription.getFullYear(), this.dateOfStartOfSubscription.getMonth(), this.dateOfStartOfSubscription.getDate() + ((this.nbLastSubscription * 7) -1));
+          break;
+        case "Month" :
+          this.dateOfEndOfSubscription = new Date(this.dateOfStartOfSubscription.getFullYear(), this.dateOfStartOfSubscription.getMonth() + this.nbLastSubscription, this.dateOfStartOfSubscription.getDate());
+          this.dateOfEndOfSubscription.setDate(this.dateOfEndOfSubscription.getDate()-1) ;
+          break;
+        case "Year" :
+          this.dateOfEndOfSubscription = new Date(this.dateOfStartOfSubscription.getFullYear() + this.nbLastSubscription, this.dateOfStartOfSubscription.getMonth() , this.dateOfStartOfSubscription.getDate());
+          this.dateOfEndOfSubscription.setDate(this.dateOfEndOfSubscription.getDate()-1) ;
+          break;
+        default: 
+         this.dateOfEndOfSubscription = this.dateOfStartOfSubscription;
+      }
   }
 
-  checkNbLastSubscription(group: FormGroup) {
-    let nbLast: number;
-
-    nbLast = group.get("nbLast").value;
-    const isValid = (nbLast >0 && nbLast < 11)
-    return isValid ? null : { checkNbLastSubscription: true };
-  }
-  
-
-
-  public onUpdate() {
-    let updateSubscription = new SubscriptionCategory();
-    updateSubscription.idSubscriptionCategory = this.idSubscriptionCategory
-    updateSubscription.nameSubscription = this.nameSubscription;
-    updateSubscription.priceSubscription = this.priceSubscription;
-    updateSubscription.nbLast = this.nbLast;
-    updateSubscription.typeLast = this.typeLast;
-    this.offresService.updateSubscriptionCategory(updateSubscription);
+  public onSubscribe() {
+    this.offresService.addSubscriptionToCommand(this.command, this.username, this.idSubscriptionCategory, this.dateOfStartOfSubscription, this.dateOfEndOfSubscription);
   }
 
 

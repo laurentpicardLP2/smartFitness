@@ -22,7 +22,7 @@ public class Subscription extends Item implements Serializable {
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
 	@JoinColumn(name="Customer_Users_username")
-	@JsonBackReference
+	@JsonIgnore
 	private Customer customer;
 	
 	@Temporal(TemporalType.DATE)

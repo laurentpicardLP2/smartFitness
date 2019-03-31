@@ -57,7 +57,7 @@ const routes: Routes = [
   { path: 'subscription-category-new', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryNewComponent},
   { path: 'subscription-category-listing', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryListingComponent},
   { path: 'subscription-category-detail/:idSubscriptionCategory', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryDetailComponent},
-  { path: 'subscription-customer-new/:idSubscriptionCategory', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerNewComponent },
+  { path: 'subscription-customer-new/:idSubscriptionCategory/:nbLastSubscription/:typeLastSubscription', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerNewComponent },
   { path: 'subscription-customer-proposition', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerPropositionComponent },
   { path: 'chart',  component: TimestampFacilityComponent },
   { path: 'paypal',  component: PaypalComponent },
