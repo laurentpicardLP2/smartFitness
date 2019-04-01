@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import laurent.fitness.model.Seance;
 import laurent.fitness.model.Subscription;
 import laurent.fitness.model.SubscriptionCategory;
+import laurent.fitness.model.adaptater.FacilityAvailableAdaptater;
 import laurent.fitness.services.ItemService;
 import laurent.fitness.services.SeanceService;
 import laurent.fitness.services.SubscriptionService;
@@ -53,5 +54,11 @@ public class OffreController {
 	@GetMapping("/getisusernamesubscribed/{username}")
 	public boolean getSubscriptionCategories(@PathVariable String username) {
 		return this.subscriptionService.findIsSubscribedByUsername(username);		
+	}
+	
+	// Reourne la liste des abonnements pour un utilisateur
+	@GetMapping("/getsubscriptionsforanuser/{username}")
+	public List<Subscription> getSubscriptionsForAnUser(@PathVariable String username) {
+		return this.subscriptionService.findAllSubscriptionsByUsername(username);
 	}
 }

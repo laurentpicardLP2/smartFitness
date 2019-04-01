@@ -29,21 +29,26 @@
         <div class="mat-button-focus-overlay"></div>
       </a> 
 
-      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="offres">Mes offres</button>
+      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="offres">Vos offres</button>
       <mat-menu  #offres="matMenu">
-        <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/subscription-customer-proposition')">Souscrire à un abonnement</button>
+        <button mat-menu-item [matMenuTriggerFor]="subscription">Vos abonnements</button>
         <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/watch-customer-proposition')">Acheter une montre connectée</button>
      </mat-menu>
 
-      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="seances">Mes séances</button>
+     <mat-menu  #subscription="matMenu">
+        <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/subscription-customer-proposition')">Souscrire à un abonnement</button>
+        <button mat-menu-item _ngcontent-cl="" tabindex="5" aria-disabled="false" (click)="onAction('/subscription-customer-historic')">Votre historique</button>
+     </mat-menu>
+
+      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="seances">Vos séances</button>
       <mat-menu  #seances="matMenu">
         <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/seance-booking')">Ajouter une séance</button>
-        <button mat-menu-item [matMenuTriggerFor]="suivis" _ngcontent-cl="" tabindex="1" aria-disabled="false">Mes suivis</button>
+        <button mat-menu-item [matMenuTriggerFor]="suivis" _ngcontent-cl="" tabindex="1" aria-disabled="false">Vos suivis</button>
       </mat-menu>
 
       <mat-menu #suivis="matMenu">
-          <button mat-menu-item _ngcontent-cl="" tabindex="2" aria-disabled="false" (click)="onAction('/command-listing')">Mes commandes</button>
-          <button mat-menu-item _ngcontent-cl="" tabindex="3" aria-disabled="false" (click)="onAction('/seance-listing')">Mes séances</button>
+          <button mat-menu-item _ngcontent-cl="" tabindex="2" aria-disabled="false" (click)="onAction('/command-listing')">Vos commandes</button>
+          <button mat-menu-item _ngcontent-cl="" tabindex="3" aria-disabled="false" (click)="onAction('/seance-listing')">Vos séances</button>
       </mat-menu>
       
       <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="centre">Gestion centre</button>

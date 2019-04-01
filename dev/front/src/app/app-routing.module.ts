@@ -33,6 +33,8 @@ import { SubscriptionCategoryListingComponent } from './manager/subscription-cat
 import { SubscriptionCategoryDetailComponent } from './manager/subscription-category-detail/subscription-category-detail.component';
 import { SubscriptionCustomerNewComponent } from './offres/subscription-customer-new/subscription-customer-new.component';
 import { SubscriptionCustomerPropositionComponent } from './offres/subscription-customer-proposition/subscription-customer-proposition.component';
+import { SubscriptionCustomerHistoricComponent } from './offres/subscription-customer-historic/subscription-customer-historic.component';
+import { WatchCustomerPropositionComponent } from './offres/watch-customer-proposition/watch-customer-proposition.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -59,6 +61,8 @@ const routes: Routes = [
   { path: 'subscription-category-detail/:idSubscriptionCategory', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryDetailComponent},
   { path: 'subscription-customer-new/:idSubscriptionCategory/:nbLastSubscription/:typeLastSubscription', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerNewComponent },
   { path: 'subscription-customer-proposition', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerPropositionComponent },
+  { path: 'subscription-customer-historic', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerHistoricComponent },
+  { path: 'watch-customer-proposition', canActivate: [AuthGuardCustomerService], component: WatchCustomerPropositionComponent },
   { path: 'chart',  component: TimestampFacilityComponent },
   { path: 'paypal',  component: PaypalComponent },
   { path: '', component: HomeComponent },

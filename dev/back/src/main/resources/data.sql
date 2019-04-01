@@ -35,4 +35,13 @@ insert into subscription_category (name_subscription, nb_last, price_subscriptio
 insert into subscription_category (name_subscription, nb_last, price_subscription, type_last) values ("Abonnement 6 mois", 6, 500, "Month");
 insert into subscription_category (name_subscription, nb_last, price_subscription, type_last) values ("Abonnement 1 an", 1, 800, "Year");
 
-insert into subscription (id_item, customer_users_username, subscription_category_id_subscription_category, date_start_of_subscription, date_end_of_subscription) values (1, "db_abonne", 7, "2019-03-01", "2020-02-29");
+
+insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (1, current_timestamp(), 0, 15, "db_abonne");
+insert into item (id_item, price, type_item) values (1, 15, "Subscription");
+insert into command_has_item (item_id_item, command_id_command) values (1, 1);
+insert into subscription (id_item, customer_users_username, subscription_category_id_subscription_category, date_start_of_subscription, date_end_of_subscription) values (1, "db_abonne", 2, "2019-02-26", "2020-02-28");
+
+insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (2, current_timestamp(), 0, 800, "db_abonne");
+insert into item (id_item, price, type_item) values (2, 15, "Subscription");
+insert into command_has_item (item_id_item, command_id_command) values (2, 2);
+insert into subscription (id_item, customer_users_username, subscription_category_id_subscription_category, date_start_of_subscription, date_end_of_subscription) values (2, "db_abonne", 7, "2019-03-01", "2020-02-29");
