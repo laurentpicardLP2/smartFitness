@@ -91,8 +91,10 @@ public class CommandController {
 		try {
 						
 			for(Item item : command.getItems()) {
-				Seance tmpSeance = this.seanceService.findSeanceById(item.getIdItem());
-				tmpSeance.setPrice(item.getPrice());
+				if (item.getTypeItem().equals("Séance")) {
+					Seance seance = this.seanceService.findSeanceById(item.getIdItem());
+					seance.setPrice(item.getPrice());
+				}
 				//this.seanceService.saveSeance(command.getIdCommand(), command.getCustomer().get, item.getPrice());				
 			}
 			
