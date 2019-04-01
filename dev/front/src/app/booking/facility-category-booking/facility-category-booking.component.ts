@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/services/login.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators, FormBuilder, AbstractControl} from '@angular/forms';
@@ -29,6 +30,7 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
   isNotAvailableFacilities: boolean;
   isShowableFacilities: boolean;
   priceSeance: number[]=[];
+  isSubscribed: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +39,7 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
     private httpClient: HttpClient,
     private commandService: CommandService,
     private seanceService: SeanceService,
+    private loginService: LoginService,
     private ustilsService: UtilsService
     ) { 
       
@@ -81,15 +84,22 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
     });
 
 
+    this.loginService.isUserSubscribedSubject.subscribe(res => {
+      this.isSubscribed = res;
+    });
+
+
   }
 
   onBookingFacility(nameFacility: string, nameFacilityCategory: string, priceSeance: number){
+    priceSeance = (this.isSubscribed) ? Math.round((priceSeance/2)*100)/100 : Math.round((priceSeance)*100)/100;
+    console.log("priceSeance : ", priceSeance);
     this.seanceService.addTimestampFacilityToSeance(this.seance, this.dateOfTimestamp, nameFacility, nameFacilityCategory, priceSeance, this.priceSeance);
    
   }
 
   public convertIntoMonetaryFormat(priceSeance: number){
-    return this.ustilsService.convertIntoMonetaryFormat(priceSeance);
+    return this.ustilsService.convertIntoMonetaryFormat((this.isSubscribed) ? Math.round((priceSeance/2)*100)/100 : Math.round((priceSeance)*100)/100);
   }
 
 

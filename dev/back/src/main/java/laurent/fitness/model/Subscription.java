@@ -6,6 +6,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +43,16 @@ public class Subscription extends Item implements Serializable {
 	
 	public Subscription(List<Command> commands) {
 		super(commands);
+	}
+	
+	
+	public Subscription (List<Command> commands, String typeItem, Customer customer, float price,
+			SubscriptionCategory subscriptionCategory, Date dateStartOfSubscription, Date dateEndOfSubscription) {
+		super(commands, typeItem, price);
+		this.customer = customer;
+		this.subscriptionCategory = subscriptionCategory;
+		this.dateStartOfSubscription = dateStartOfSubscription;
+		this.dateEndOfSubscription = dateEndOfSubscription;
 	}
 	
 	public Date getDateEndOfSubscription() {

@@ -1,4 +1,3 @@
-
       
 <mat-accordion *ngIf="!isBookedTimestamp && isShowableFacilities">
       <mat-expansion-panel *ngFor="let facilityCategory of listFacilityCategories | async">
@@ -8,13 +7,14 @@
                 {{ facilityCategory.nameFacilityCategory }} (dispo : {{ facilityCategory.quantityAvailable }} )
             </mat-panel-title>
           </mat-expansion-panel-header>
-      
 
           <table>
             <tr *ngFor="let facility of facilityCategory.facilities">
               <td>
                 <div *ngIf="facility.imageFacility ==''">
-                      {{ facility.nameFacility }} : ({{ convertIntoMonetaryFormat(facility.priceSeance) }} les 10') <br>
+                      {{ facility.nameFacility }} : ({{ convertIntoMonetaryFormat(facility.priceSeance) }} les 10')
+                      <span *ngIf="!this.isSubscribed"><em><br> -50% si vous êtes abonné!</em></span>
+                      <br>
                     <span *ngIf="facility.descriptionFacility !=''" >
                       {{ facility.descriptionFacility }}  <br></span>
                     <a mat-flat-button (click)="onBookingFacility(facility.nameFacility, facilityCategory.nameFacilityCategory, facility.priceSeance)">Sélectionner</a>
@@ -27,7 +27,8 @@
                         </td>
                         <td>
                             {{ facility.nameFacility }} : ({{ convertIntoMonetaryFormat(facility.priceSeance) }} les 10') 
-                        </td>
+                            <span *ngIf="!this.isSubscribed"><em><br>> -50% si vous êtes abonné!</em></span>
+                          </td>
                       </tr>
                       <tr>
                         <td>
@@ -44,6 +45,7 @@
                           </td>
                           <td>
                               {{ facility.nameFacility }} : ({{ convertIntoMonetaryFormat(facility.priceSeance) }} les 10') 
+                              <span *ngIf="!this.isSubscribed"><em><br> -50% si vous êtes abonné!</em></span>
                           </td>
                         </tr>
                         <tr>

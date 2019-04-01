@@ -1,8 +1,10 @@
+import { CommandService } from 'src/app/services/command.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { SubscriptionCategory } from 'src/app/models/subscription-category.model';
+import { Subscription } from 'src/app/models/subscription.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Command } from 'src/app/models/command.model';
@@ -14,7 +16,8 @@ export class OffresService {
 
   constructor(private httpClient: HttpClient,
               private router: Router,
-              private token: TokenStorageService) { }
+              private token: TokenStorageService,
+              private commandService: CommandService) { }
 
 
   public isValidDateOfStartOfSubscriptionSubject: BehaviorSubject<boolean> = new BehaviorSubject(null);
@@ -120,28 +123,32 @@ export class OffresService {
       );
     }
 
-    public addSubscriptionToCommand(command: Command, username: string, idSubscriptionCategory: number, dateOfStartOfSubscription: Date, dateOfEndOfSubscription: Date){
-      console.log("command : ", command);
-      console.log("username : ", username);
-      console.log("idSubscriptionCategory : ", idSubscriptionCategory);
-      console.log("dateOfStartOfSubsciption : ", dateOfStartOfSubscription);
-      console.log("dateOfEndOfSubscription : ", dateOfEndOfSubscription);
-
-          //     this.httpClient.post<Seance>('http://localhost:8080/seancectrl/addseance/' + command.idCommand + '/' + username, null, 
-          //   {
-          //     headers: {
-          //         "Content-Type": "application/json",
-          //         "Authorization": this.token.getToken()
-          //     }
-          // }).subscribe(
-          //       (seance) =>{ 
-          //         command.items.push(seance); 
-          //         this.commandService.setCommandSubject(command);
-          //         this.setSeanceSubject(seance);  
-          //       },
-          //       (error) => { console.log("init seance pb : ", error); }
-          //   );
-
+    public addSubscriptionToCommand(command: Command, username: string, idSubscriptionCategory: number, dateStartOfSubscription: Date, dateEndOfSubscription: Date, nbItems: string){
+      this.httpClient.post<Subscription>('http://localhost:8080/offrectrl/addsubscription/' + command.idCommand + '/' + username + '/' +
+        idSubscriptionCategory + '/' + dateStartOfSubscription + '/' + dateEndOfSubscription, null, 
+        {
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": this.token.getToken()
+          }
+        }).subscribe(
+          (subscription) =>{ 
+            command.items.push(subscription); 
+            this.commandService.setCommandSubject(command); 
+            if(nbItems==null || nbItems==undefined || nbItems=="") {
+              nbItems = "0"; 
+            }
+            this.commandService.setNbItemsSubject((parseInt(nbItems, 10) + 1).toString());
+            command.items[command.items.findIndex((item)=> item.idItem == subscription.idItem)].price += subscription.price;
+            this.commandService.setCommandSubject(command);
+            this.commandService.setListCommandItemsSubject(command.items);
+            this.router.navigate(['']);
+          },
+          (error) => { 
+            console.log("add subscription pb : ", error);
+            //this.router.navigate(['error-page']);
+          }
+      );
     }
 
   

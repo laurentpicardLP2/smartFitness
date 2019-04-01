@@ -1,44 +1,72 @@
 package laurent.fitness.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import laurent.fitness.model.Command;
+import laurent.fitness.model.Customer;
+import laurent.fitness.model.Seance;
 import laurent.fitness.model.Subscription;
+import laurent.fitness.model.SubscriptionCategory;
+import laurent.fitness.repository.CommandRepository;
+import laurent.fitness.repository.CustomerRepository;
+import laurent.fitness.repository.SubscriptionCategoryRepository;
+import laurent.fitness.repository.SubscriptionRepository;
 
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService {
+	private CustomerRepository customerRepo;
+	private CommandRepository commandRepo;
+	private SubscriptionCategoryRepository subscriptionCategoryRepo;
+	private SubscriptionRepository subscriptionRepo;
+	
+	public SubscriptionServiceImpl(CustomerRepository customerRepo, CommandRepository commandRepo,
+			SubscriptionCategoryRepository subscriptionCategoryRepo, SubscriptionRepository subscriptionRepo) {
+		this.customerRepo = customerRepo;
+		this.commandRepo = commandRepo;
+		this.subscriptionCategoryRepo = subscriptionCategoryRepo;
+		this.subscriptionRepo = subscriptionRepo;
+	}
+
 
 	@Override
 	public Subscription createSubscription(int idCommand, String username, int idSubscriptionCategory,
-			Date dateOfStartOfSubscription, Date dateOfEndOfSubscription) {
+			Date dateStartOfSubscription, Date dateEndOfSubscription) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Command> commands = new ArrayList<Command>();
+		Customer customer = this.customerRepo.findByUsername(username);
+		Command command = this.commandRepo.findByIdCommand(idCommand);
+		SubscriptionCategory subscriptionCategory = this.subscriptionCategoryRepo.findByIdSubscriptionCategory(idSubscriptionCategory);
+		commands.add(command);
+		return this.subscriptionRepo.save(new Subscription(commands, "Subscription", customer, subscriptionCategory.getPriceSubscription(), 
+				subscriptionCategory, dateStartOfSubscription, dateEndOfSubscription));
 	}
 
 	@Override
-	public List<Subscription> findSubscriptionsByUsername(String username) {
+	public List<Subscription> findAllSubscriptionsByUsername(String username) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.subscriptionRepo.findAllSubscriptionsByUsername(username);
 	}
 
 	@Override
-	public Subscription findLastSubscriptionsByUsername(String username) {
+	public Subscription findLastSubscriptionByUsername(String username) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.subscriptionRepo.findLastSubscriptionByUsername(username);
 	}
 
 	@Override
 	public Subscription findSubscriptionById(int idItem) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.subscriptionRepo.findByIdItem(idItem);
 	}
 
 	@Override
-	public boolean findIsSubscriptionsByUsername(String username) {
+	public boolean findIsSubscribedByUsername(String username) {
 		// TODO Auto-generated method stub
-		return false;
+		return this.subscriptionRepo.findIsSubscridebByUsername(username) > 0;
 	}
 
 }

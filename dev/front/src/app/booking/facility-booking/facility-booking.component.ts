@@ -104,9 +104,9 @@ export class FacilityBookingComponent implements OnInit, OnDestroy {
     }
     this.seanceService.addDateAndNbTimestamp(this.seance);
     this.commandService.setNbItemsSubject((parseInt(this.nbItems, 10) + 1).toString());
-    this.command.items[this.command.items.findIndex((item)=> item.idItem == this.seance.idItem)].price= this.totalPriceSeance;
+    this.command.items[this.command.items.findIndex((item)=> item.idItem == this.seance.idItem)].price += this.totalPriceSeance;
     this.commandService.setCommandSubject(this.command);
-    this.bookingService.setListCommandItemsSubject(this.command.items);
+    this.commandService.setListCommandItemsSubject(this.command.items);
     this.seanceService.setIsValidateSeanceSubject(true);
     this.seanceService.setPriceSeanceSubject([]);
     this.router.navigate(['']);

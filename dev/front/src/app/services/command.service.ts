@@ -39,6 +39,16 @@ export class CommandService {
     }
   }
 
+  public listCommandItemsSubject: BehaviorSubject<Item[]> = new BehaviorSubject(null);
+
+  public setListCommandItemsSubject(value: Item[]){
+    if(value){
+      this.listCommandItemsSubject.next(value);
+    } else {
+      this.listCommandItemsSubject.next(null);
+    }
+  }
+
   public initCommand(user: User){
     this.httpClient.post<Command>('http://localhost:8080/commandctrl/addcommand/' + user.username, null, 
     {

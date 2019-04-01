@@ -21,7 +21,8 @@ export class HeaderComponent implements OnInit {
   public listCommandItems: Item []=[];
   public username: string;
   public nbItems: string;
-  public authority: Authority
+  public authority: Authority;
+  public isSubscribed: boolean;
   
 
   constructor(private loginService: LoginService,
@@ -44,7 +45,7 @@ export class HeaderComponent implements OnInit {
       this.nbItems = res;
     });
 
-    this.bookingService.listCommandItemsSubject.subscribe(res => {
+    this.commandService.listCommandItemsSubject.subscribe(res => {
       this.listCommandItems = res;
     });
 
@@ -55,6 +56,7 @@ export class HeaderComponent implements OnInit {
     this.loginService.authoritySubject.subscribe(res => {
       this.authority = res;
     });
+
   }
 
   public onAction(nameRouting: string){
@@ -96,7 +98,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public onHome(){
-    this.utilsService.delCommand();
+    //this.utilsService.delCommand();
     this.loginService.signOut();
     this.router.navigate(['']);
   }

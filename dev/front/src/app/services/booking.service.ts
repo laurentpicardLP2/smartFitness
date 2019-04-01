@@ -31,16 +31,6 @@ export class BookingService {
       this.isNotAvailableFacilitiesSubject.next(null);
     }
   }
-
-  public listCommandItemsSubject: BehaviorSubject<Item[]> = new BehaviorSubject(null);
-
-  public setListCommandItemsSubject(value: Item[]){
-    if(value){
-      this.listCommandItemsSubject.next(value);
-    } else {
-      this.listCommandItemsSubject.next(null);
-    }
-  }
   
 
   /**

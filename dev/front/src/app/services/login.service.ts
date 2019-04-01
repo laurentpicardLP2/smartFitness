@@ -33,6 +33,17 @@ export class LoginService {
     }
   }
 
+  // Subject permettant de savoir si l'utlisateur a un abonnement en cours
+  public isUserSubscribedSubject: BehaviorSubject<boolean> = new BehaviorSubject(null);
+  public setIsUserSubscribedSubject(value: boolean){
+    if(value){
+      this.isUserSubscribedSubject.next(value);
+    } else {
+      this.isUserSubscribedSubject.next(null);
+    }
+  }
+   
+
    // Subject permettant de connaître à tout instant le nom de l'utlisateur
   public usernameSubject: BehaviorSubject<string> = new BehaviorSubject(null);
   public setUsernameSubject(value: string){
@@ -94,7 +105,16 @@ export class LoginService {
           setTimeout(() => this.router.navigate(['/facility-listing']), 300);
         }
         else {
-          this.router.navigate(['']);
+          this.checkUserIsSubscribed(user.username).subscribe(
+            (isSubscribed) => {
+              this.setIsUserSubscribedSubject(isSubscribed);
+              this.router.navigate(['']);
+            },
+            (error) => {
+              this.setIsUserSubscribedSubject(false);
+              this.router.navigate(['']);
+            }
+          );
         }
       },
       (error) => { console.log("login user pb : ", error); 
@@ -119,13 +139,23 @@ export class LoginService {
   });
   }
 
+  checkUserIsSubscribed(username: string): Observable<boolean>{
+    return this.httpClient.get<boolean>('http://localhost:8080/offrectrl/getisusernamesubscribed/' + username, 
+    {
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+      }
+  });
+  }
+
   public publishAuthority(user) {
     this.getAuthority(user.username).subscribe(
       authority => {
         this.setAuthoritySubject(authority);
         if(authority.authority=="ROLE_CUSTOMER"){
           this.commandService.initCommand(user); 
-          this.bookingService.setListCommandItemsSubject(null); 
+          this.commandService.setListCommandItemsSubject(null); 
         }       
       });
   }

@@ -33,14 +33,14 @@ export class SubscriptionCustomerNewComponent implements OnInit {
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
   isValidDateOfStartOfSubscription: boolean;
   strDateOfStartOfSubscription: string;
-  dateOfStartOfSubscription: Date;
+  dateStartOfSubscription: Date;
   startShownYear: string;
   startCurrentMonth: number;
   startShownMonth: string;
   startCurrentDay: number;
   startShownDay: string;
   strDateOfEndOfSubscription: string;
-  dateOfEndOfSubscription: Date;
+  dateEndOfSubscription: Date;
   endShownYear: string;
   endCurrentMonth: number;
   endShownMonth: string;
@@ -48,6 +48,7 @@ export class SubscriptionCustomerNewComponent implements OnInit {
   endShownDay: string;
   username: string;
   command: Command;
+  nbItems: string;
 
 
   constructor(private route: ActivatedRoute,
@@ -62,7 +63,7 @@ export class SubscriptionCustomerNewComponent implements OnInit {
       this.offresService.isValidDateOfStartOfSubscriptionSubject.subscribe(res => {
         this.isValidDateOfStartOfSubscription = res;
       });
-      this.dateOfEndOfSubscription =  new Date();
+      this.dateEndOfSubscription =  new Date();
       this.initDateOfSubscriptionField();
       this.setDateOfEndOfSubscriptionField();
      }
@@ -83,6 +84,10 @@ export class SubscriptionCustomerNewComponent implements OnInit {
     });
     this.commandService.commandSubject.subscribe(res => {
       this.command = res;
+    });
+
+    this.commandService.nbItemsSubject.subscribe(res => {
+      this.nbItems = res;
     });
 
     this.createForm();
@@ -112,10 +117,10 @@ export class SubscriptionCustomerNewComponent implements OnInit {
 
   
   initDateOfSubscriptionField(){
-    this.dateOfStartOfSubscription = new Date();
-    this.startShownYear = this.dateOfStartOfSubscription.getFullYear().toString();
-    this.startCurrentMonth = this.dateOfStartOfSubscription.getMonth() + 1;
-    this.startCurrentDay = this.dateOfStartOfSubscription.getDate()
+    this.dateStartOfSubscription = new Date();
+    this.startShownYear = this.dateStartOfSubscription.getFullYear().toString();
+    this.startCurrentMonth = this.dateStartOfSubscription.getMonth() + 1;
+    this.startCurrentDay = this.dateStartOfSubscription.getDate()
     
     if(this.startCurrentMonth <10) {
       this.startShownMonth = "0" + this.startCurrentMonth.toString();
@@ -133,17 +138,17 @@ export class SubscriptionCustomerNewComponent implements OnInit {
 
   setDateOfEndOfSubscriptionField(){
     let splittedDate = this.strDateOfStartOfSubscription.split("-");
-    this.dateOfStartOfSubscription = new Date(parseInt(splittedDate[0],10), parseInt(splittedDate[1],10) -1, parseInt(splittedDate[2],10));
-    if(this.dateOfStartOfSubscription.toString() == "Invalid Date"){
+    this.dateStartOfSubscription = new Date(parseInt(splittedDate[0],10), parseInt(splittedDate[1],10) -1, parseInt(splittedDate[2],10));
+    if(this.dateStartOfSubscription.toString() == "Invalid Date"){
       this.offresService.setIsValidDateOfStartOfSubscriptionSubject(false);
       return;
     }
     this.offresService.setIsValidDateOfStartOfSubscriptionSubject(true);
     this.getDateOfEndOfSubscription()
     
-    this.endShownYear = this.dateOfEndOfSubscription.getFullYear().toString();
-    this.endCurrentMonth = this.dateOfEndOfSubscription.getMonth() + 1;
-    this.endCurrentDay = this.dateOfEndOfSubscription.getDate()
+    this.endShownYear = this.dateEndOfSubscription.getFullYear().toString();
+    this.endCurrentMonth = this.dateEndOfSubscription.getMonth() + 1;
+    this.endCurrentDay = this.dateEndOfSubscription.getDate()
     
     if(this.endCurrentMonth <10) {
       this.endShownMonth = "0" + this.endCurrentMonth.toString();
@@ -161,26 +166,26 @@ export class SubscriptionCustomerNewComponent implements OnInit {
   getDateOfEndOfSubscription(){
       switch (this.typeLastSubscription) {
         case "Day" : 
-          this.dateOfEndOfSubscription = new Date(this.dateOfStartOfSubscription.getFullYear(), this.dateOfStartOfSubscription.getMonth(), this.dateOfStartOfSubscription.getDate() + (this.nbLastSubscription - 1));
+          this.dateEndOfSubscription = new Date(this.dateStartOfSubscription.getFullYear(), this.dateStartOfSubscription.getMonth(), this.dateStartOfSubscription.getDate() + (this.nbLastSubscription - 1));
           break;
         case "Week" : 
-          this.dateOfEndOfSubscription = new Date(this.dateOfStartOfSubscription.getFullYear(), this.dateOfStartOfSubscription.getMonth(), this.dateOfStartOfSubscription.getDate() + ((this.nbLastSubscription * 7) -1));
+          this.dateEndOfSubscription = new Date(this.dateStartOfSubscription.getFullYear(), this.dateStartOfSubscription.getMonth(), this.dateStartOfSubscription.getDate() + ((this.nbLastSubscription * 7) -1));
           break;
         case "Month" :
-          this.dateOfEndOfSubscription = new Date(this.dateOfStartOfSubscription.getFullYear(), this.dateOfStartOfSubscription.getMonth() + this.nbLastSubscription, this.dateOfStartOfSubscription.getDate());
-          this.dateOfEndOfSubscription.setDate(this.dateOfEndOfSubscription.getDate()-1) ;
+          this.dateEndOfSubscription = new Date(this.dateStartOfSubscription.getFullYear(), this.dateStartOfSubscription.getMonth() + this.nbLastSubscription, this.dateStartOfSubscription.getDate());
+          this.dateEndOfSubscription.setDate(this.dateEndOfSubscription.getDate()-1) ;
           break;
         case "Year" :
-          this.dateOfEndOfSubscription = new Date(this.dateOfStartOfSubscription.getFullYear() + this.nbLastSubscription, this.dateOfStartOfSubscription.getMonth() , this.dateOfStartOfSubscription.getDate());
-          this.dateOfEndOfSubscription.setDate(this.dateOfEndOfSubscription.getDate()-1) ;
+          this.dateEndOfSubscription = new Date(this.dateStartOfSubscription.getFullYear() + this.nbLastSubscription, this.dateStartOfSubscription.getMonth() , this.dateStartOfSubscription.getDate());
+          this.dateEndOfSubscription.setDate(this.dateEndOfSubscription.getDate()-1) ;
           break;
         default: 
-         this.dateOfEndOfSubscription = this.dateOfStartOfSubscription;
+         this.dateEndOfSubscription = this.dateStartOfSubscription;
       }
   }
 
   public onSubscribe() {
-    this.offresService.addSubscriptionToCommand(this.command, this.username, this.idSubscriptionCategory, this.dateOfStartOfSubscription, this.dateOfEndOfSubscription);
+    this.offresService.addSubscriptionToCommand(this.command, this.username, this.idSubscriptionCategory, this.dateStartOfSubscription, this.dateEndOfSubscription, this.nbItems);
   }
 
 

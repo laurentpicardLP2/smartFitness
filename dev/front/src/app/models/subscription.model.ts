@@ -1,9 +1,13 @@
-export class Subscription {
-    public idSubscriptionCategory: number;
-    public nameSubscription: string;
-    public priceSubscription: number;
-    public typeLast: string;
-    public nbLast: number;
+import { Item } from './item.model';
 
-    constructor() {}
+export class Subscription extends Item {
+    public idSubscriptionCategory: number;
+    public dateStartOfSubscription: Date;
+    public dateEndOfSubscription: Date;
+    
+    constructor(public idItem: number,
+                public typeItem: string,
+                public price : number) { 
+                    super(idItem,typeItem, price)
+                }
 }
