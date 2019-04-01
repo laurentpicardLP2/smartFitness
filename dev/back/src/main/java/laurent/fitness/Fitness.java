@@ -37,26 +37,7 @@ public class Fitness implements CommandLineRunner {
     public boolean someLibraryMethod() {
         return true;
     }
-    @Autowired
-	private AuthorityRepository authorityRepository;
-    
-    @Autowired
-	private StaffRepository staffRepository;
-    
-    @Autowired
-	private CustomerRepository customerRepository;
-    
-    @Autowired
-	private UserRepository userRepository;
-    
-    @Autowired 
-    private RoomRepository roomRepository;
-    
-    @Autowired
-    private FacilityCategoryRepository facilityCategoryRepository;
-    
-    @Autowired
-    private FacilityRepository facilityRepository;
+
 
 
 	public static void main(String[] args) throws Exception, MalformedURLException, IOException, ClassNotFoundException, SQLException {
@@ -67,57 +48,6 @@ public class Fitness implements CommandLineRunner {
 	public void run(String... args)
 			throws Exception,  MalformedURLException, IOException, ClassNotFoundException, SQLException {
 		
-//		int idUser = 0;
-//		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
-//		
-//		if( (this.staffRepository.findByUsername("db_abonne") == null)) {
-//			try {
-//				idUser = this.userRepository.findByUsernameIdMax().getIdUser() + 1;
-//			} catch (Exception e) {
-//				idUser = 1;
-//			}
-//			finally {
-//				this.authorityRepository.save(new Authority("db_abonne", "ROLE_CUSTOMER"));
-//				this.staffRepository.save(new Staff(idUser, "db_abonne", "sysabonne", "{bcrypt}" + bcrypt.encode("simplon"),"", "", new Date(), (byte)(1), "", ""));				
-//			}
-//		}
-//		
-//		if( (this.staffRepository.findByUsername("db_manager") == null)) {
-//			try {
-//				idUser = this.userRepository.findByUsernameIdMax().getIdUser() + 1;
-//			} catch (Exception e) {
-//				idUser = 1;
-//			}
-//			finally {
-//				this.authorityRepository.save(new Authority("db_manager", "ROLE_MANAGER"));
-//				this.staffRepository.save(new Staff(idUser, "db_manager", "sysmanager", "{bcrypt}" + bcrypt.encode("simplon"),"", "", new Date(), (byte)(1), "", ""));				
-//			}
-//		}
-//		
-//		if( (this.customerRepository.findByUsername("db_user") == null)) {
-//			try {
-//				idUser = this.userRepository.findByUsernameIdMax().getIdUser() + 1;
-//			} catch (Exception e) {
-//				idUser = 1;
-//			}
-//			finally {
-//				this.authorityRepository.save(new Authority("db_user", "ROLE_CUSTOMER"));
-//				this.customerRepository.save(new Customer(idUser, "db_user", "customer", "{bcrypt}" + bcrypt.encode("simplon"),"", "", new Date(), (byte)(1), new Date(),"","","","","","","",""));
-//			}
-//		}
-//
-//		if( (this.customerRepository.findByUsername("db_sebastien") == null)) {
-//			try {
-//				idUser = this.userRepository.findByUsernameIdMax().getIdUser() + 1;
-//			} catch (Exception e) {
-//				idUser = 1;
-//			}
-//			finally {
-//				this.authorityRepository.save(new Authority("db_sebastien", "ROLE_CUSTOMER"));
-//				this.customerRepository.save(new Customer(idUser, "db_sebastien", "customer", "{bcrypt}" + bcrypt.encode("Azerty12!"),"", "", new Date(), (byte)(1), new Date(),"","","","","","","",""));
-//			}
-//		}
-
 
 	}
 	
