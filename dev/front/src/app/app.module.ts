@@ -48,6 +48,7 @@ import { SubscriptionCustomerPropositionComponent } from './offres/subscription-
 import { SubscriptionCustomerHistoricComponent } from './offres/subscription-customer-historic/subscription-customer-historic.component';
 import { WatchCustomerPropositionComponent } from './offres/watch-customer-proposition/watch-customer-proposition.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,6 +86,7 @@ import { WatchCustomerPropositionComponent } from './offres/watch-customer-propo
     SubscriptionCustomerPropositionComponent,
     SubscriptionCustomerHistoricComponent,
     WatchCustomerPropositionComponent,
+
   ],
   imports: [
     BrowserModule,

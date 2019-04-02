@@ -22,11 +22,13 @@ export class SyntheseService {
   private listSeancesForAnUser: Seance [] ;
   private listTimestampForASeance: TimestampFacilityAdaptater [] ;
   private listHistoricSubscriptionsForAnUser: Subscription [] = [] ;
+  private listNextSubscriptionsForAnUser: Subscription [] = [] ;
 
   listCommandsForAnUser$: BehaviorSubject<Command[]> = new BehaviorSubject(null);
   listSeancesForAnUser$: BehaviorSubject<Seance[]> = new BehaviorSubject(null);
   listTimestampForASeance$: BehaviorSubject<TimestampFacilityAdaptater[]> = new BehaviorSubject(null);
   listHistoricSubscriptionsForAnUser$: BehaviorSubject<Subscription[]> = new BehaviorSubject(null);
+  listNextSubscriptionsForAnUser$: BehaviorSubject<Subscription[]> = new BehaviorSubject(null);
   
   public getCommandsForAnUser(username: string): Observable<Command[]> {
     return this.httpClient.get<Command[]>('http://localhost:8080/synthesectrl/getcommands/' + username, 
@@ -50,6 +52,16 @@ export class SyntheseService {
 
   public getHistoricSubscriptionsForAnUser(username: string): Observable<Subscription[]> {
     return this.httpClient.get<Subscription[]>('http://localhost:8080/offrectrl/gethistoricsubscriptionsforanuser/' + username, 
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+        }
+      });
+  }
+
+  public getNextSubscriptionsForAnUser(username: string): Observable<Subscription[]> {
+    return this.httpClient.get<Subscription[]>('http://localhost:8080/offrectrl/getnextsubscriptionsforanuser/' + username, 
       {
         headers: {
           "Content-Type": "application/json",
@@ -102,6 +114,14 @@ export class SyntheseService {
       historicSubscriptionsForAnUserList => {
         this.listHistoricSubscriptionsForAnUser = historicSubscriptionsForAnUserList;
         this.listHistoricSubscriptionsForAnUser$.next(this.listHistoricSubscriptionsForAnUser);
+      });
+  }
+
+  public publishNextSubscriptionsForAnUser(username: string) {
+    this.getNextSubscriptionsForAnUser(username).subscribe(
+      nextSubscriptionsForAnUserList => {
+        this.listNextSubscriptionsForAnUser = nextSubscriptionsForAnUserList;
+        this.listNextSubscriptionsForAnUser$.next(this.listNextSubscriptionsForAnUser);
       });
   }
 

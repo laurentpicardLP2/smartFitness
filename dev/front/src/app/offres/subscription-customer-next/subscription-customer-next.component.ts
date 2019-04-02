@@ -7,16 +7,14 @@ import { Subscription } from 'src/app/models/subscription.model';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'app-subscription-customer-historic',
-  templateUrl: './subscription-customer-historic.component.html',
-  styleUrls: ['./subscription-customer-historic.component.css']
+  selector: 'app-subscription-customer-next',
+  templateUrl: './subscription-customer-next.component.html',
+  styleUrls: ['./subscription-customer-next.component.css']
 })
-export class SubscriptionCustomerHistoricComponent implements OnInit {
+export class SubscriptionCustomerNextComponent implements OnInit {
 
   public username: string;
   nextSubscriptionsList: BehaviorSubject<Subscription[]>;
-  historicSubscriptionsList: BehaviorSubject<Subscription[]>;
-  next: number = 0;
  
 
   constructor(private router: Router,
@@ -28,17 +26,8 @@ export class SubscriptionCustomerHistoricComponent implements OnInit {
     this.loginService.usernameSubject.subscribe(res => {
       this.username = res;
     });
-  this.syntheseService.publishNextSubscriptionsForAnUser(this.username);
-  this.nextSubscriptionsList  = this.syntheseService.listNextSubscriptionsForAnUser$; 
-   this.syntheseService.publishHistoricSubscriptionsForAnUser(this.username);
-   this.historicSubscriptionsList  = this.syntheseService.listHistoricSubscriptionsForAnUser$; 
-
-   this.syntheseService.getNextSubscriptionsForAnUser(this.username).subscribe(
-    nextSubscriptionsForAnUserList => {
-      this.next = nextSubscriptionsForAnUserList.length;
-      
-    });
-   
+   this.syntheseService.publishNextSubscriptionsForAnUser(this.username);
+   this.nextSubscriptionsList  = this.syntheseService.listNextSubscriptionsForAnUser$; 
   }
 
 
@@ -49,7 +38,6 @@ export class SubscriptionCustomerHistoricComponent implements OnInit {
     convertIntoMonetaryFormat(price: number){
       return this.utilsService.convertIntoMonetaryFormat(price);
     } 
-
 
 
 }

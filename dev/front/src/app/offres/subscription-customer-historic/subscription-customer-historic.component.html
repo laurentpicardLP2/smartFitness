@@ -1,95 +1,7 @@
 
- <!DOCTYPE html>
- <html lang="fr">
-   <head>
-     <meta charset="utf-8"/>
-     <title>Tableau responsive</title>
-     <style>
- 
- table {
-   background:#666;
-   border-collapse:collapse;
-   width:100%;
- }
- th {
-   color:white;
- }
- th, td {
-   text-align:center;
-   padding:5px;
-   border-right:1px solid black;
- }
- th:last-child, td:last-child {
-   border-right:0;
- }
- tbody tr:nth-child(odd) {
-   background:#ccc;
- }
- tbody tr:nth-child(even) {
-   background:#aaa;
- }
- @media screen and (max-width:800px) {
-   table {
-     display:flex;
-   }
-   thead {
-     width:20%;
-     min-width:90px;
-   }
-   tbody {
-     flex:1;
-   }
-   tr {
-     display:flex;
-     flex-direction:column;
-   }
-   th, td {
-     text-align:left;
-     border-right:0;
-     border-bottom:1px solid black;
-   }
-   tr:last-child td:last-child {
-     border-bottom:0;
-   }
-   tbody tr:not(:first-child) td::before {
-     position:absolute;
-     content:'Type';
-     color:white;
-     font-weight:bold;
-     width:calc(20% - 13px);
-     min-width:90px;
-     padding:5px;
-     border-bottom:1px solid black;
-     margin-left:calc(-20% - 2px);
-     margin-top:-5px;
-   }
-   tbody tr:last-child td:last-child::before {
-     border-bottom:0;
-   }
-   tbody tr:not(:first-child) td:nth-of-type(2)::before {
-     content:'Début';
-   }
-   tbody tr:not(:first-child) td:nth-of-type(3)::before {
-     content:'Fin';
-   }
-   tbody tr:not(:first-child) td:nth-of-type(4)::before {
-     content:'Prix';
-   }
- 
- }
- @media screen and (max-width:461px) {
-   tbody tr:not(:first-child) td::before {
-     margin-left:-95px;
-   }
- }
-     </style>
-   </head>
-   <body>
-    <div style="width:100%; text-align: center; height: 50px;">
-      <strong>L'historique de vos abonnements.</strong>
-    </div>
 
- <table cellpadding="0" cellspacing="0">
+
+<table cellpadding="0" cellspacing="0">
    <thead>
      <tr>
        <th>Type</th>
@@ -99,7 +11,28 @@
      </tr>
    </thead>
    <tbody>
-    <tr *ngFor="let subscription of historicSubscriptionsList | async; let i=index">
+
+      <tr *ngFor="let subscription of nextSubscriptionsList | async; let i = index">
+          <td>{{i}} : {{ subscription.typeItem }} (actif)</td>
+          <td>{{convertIntoDateSubscription(subscription.dateStartOfSubscription)}}</td>
+          <td>{{convertIntoDateSubscription(subscription.dateEndOfSubscription)}}</td>
+          <td >{{convertIntoMonetaryFormat(subscription.price)}}</td>
+      </tr>
+      <tr *ngIf="next == 0">
+          <td><div style="height: 18px;"></div></td>
+          <td><div style="height: 18px;"></div></td>
+          <td><div style="height: 18px;"></div></td>
+          <td><div style="height: 18px;"></div></td>
+      </tr>
+     <tr><td colspan="4"><div class="title">Vos prochains abonnements.</div></td></tr>
+    <tr *ngFor="let subscription of nextSubscriptionsList | async">
+        <td>{{ subscription.typeItem }}</td>
+        <td>{{convertIntoDateSubscription(subscription.dateStartOfSubscription)}}</td>
+        <td>{{convertIntoDateSubscription(subscription.dateEndOfSubscription)}}</td>
+        <td >{{convertIntoMonetaryFormat(subscription.price)}}</td>
+      </tr>
+      <tr><td colspan="4"><div class="title">L'historique de vos abonnements.</div></td></tr>  
+    <tr *ngFor="let subscription of historicSubscriptionsList | async">
       <td>{{ subscription.typeItem }}</td>
       <td>{{convertIntoDateSubscription(subscription.dateStartOfSubscription)}}</td>
       <td>{{convertIntoDateSubscription(subscription.dateEndOfSubscription)}}</td>
@@ -108,7 +41,5 @@
    </tbody>
  </table>
  
-   </body>
- </html>
-  
+
 

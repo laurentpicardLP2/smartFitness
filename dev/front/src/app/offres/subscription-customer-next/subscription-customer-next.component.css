@@ -1,5 +1,4 @@
 
-
  table {
     background:#666;
     border-collapse:collapse;
@@ -36,13 +35,11 @@
     tr {
       display:flex;
       flex-direction:column;
-      font-family: 'Courier New', Courier, monospace;
     }
     th, td {
       text-align:left;
       border-right:0;
       border-bottom:1px solid black;
-      font-family: 'Courier New', Courier, monospace;
     }
     tr:last-child td:last-child {
       border-bottom:0;
@@ -58,7 +55,6 @@
       border-bottom:1px solid black;
       margin-left:calc(-20% - 2px);
       margin-top:-5px;
-      font-family: 'Courier New', Courier, monospace;
     }
     tbody tr:last-child td:last-child::before {
       border-bottom:0;
@@ -85,5 +81,4 @@
     text-align: center; 
     height: 50px;
     font-weight: bold;
-    vertical-align: baseline;
   }
