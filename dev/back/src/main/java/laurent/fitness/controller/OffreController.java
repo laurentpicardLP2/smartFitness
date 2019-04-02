@@ -56,9 +56,21 @@ public class OffreController {
 		return this.subscriptionService.findIsSubscribedByUsername(username);		
 	}
 	
-	// Reourne la liste des abonnements pour un utilisateur
-	@GetMapping("/getsubscriptionsforanuser/{username}")
-	public List<Subscription> getSubscriptionsForAnUser(@PathVariable String username) {
-		return this.subscriptionService.findAllSubscriptionsByUsername(username);
+	// Retourne l'historique des abonnements pour un utilisateur
+	@GetMapping("/gethistoricsubscriptionsforanuser/{username}")
+	public List<Subscription> getHistoricSubscriptionsForAnUser(@PathVariable String username) {
+		return this.subscriptionService.findHistoricSubscriptionsByUsername(username);
+	}
+	
+	// Retourne l'abonnement en cours s'il y en a un pour l'utilisateur username
+	@GetMapping("/getactivesubscriptionforanuser/{username}")
+	public Subscription getActiveSubscriptionsForAnUser(@PathVariable String username) {
+		return this.subscriptionService.findActiveSubscriptionByUsername(username);
+	}
+	
+	// Retourne les abonnements à venir pour un utilisateur
+	@GetMapping("/getnextsubscriptionsforanuser/{username}")
+	public List<Subscription> getNextSubscriptionsForAnUser(@PathVariable String username) {
+		return this.subscriptionService.findNextSubscriptionsByUsername(username);
 	}
 }

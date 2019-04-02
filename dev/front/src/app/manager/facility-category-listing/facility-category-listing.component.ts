@@ -49,6 +49,10 @@ displayedColumns: string[] = ['Name', 'Price', 'Update'];
     onShow(idFacilityCategory: number) {
       this.router.navigate(['facility-category-detail/' + idFacilityCategory]);
     }
+
+    applyFilter(filterValue: string) {
+      this.MyDataSource.filter = filterValue.trim().toLowerCase();
+    }
     
 
 }

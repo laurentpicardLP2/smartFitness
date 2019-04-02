@@ -50,4 +50,8 @@ export class RoomListingComponent implements OnInit {
     this.router.navigate(['room-detail/' + idRoom]);
   }
 
+  applyFilter(filterValue: string) {
+    this.MyDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
 }

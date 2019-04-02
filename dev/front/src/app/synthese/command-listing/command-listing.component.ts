@@ -54,6 +54,10 @@ export class CommandListingComponent implements OnInit {
     onShow(idCommand: number) {
       //this.router.navigate(['googlebooks-detail/' + idCommand]);
     }
+
+    applyFilter(filterValue: string) {
+      this.MyDataSource.filter = filterValue.trim().toLowerCase();
+    }
     
 
 }

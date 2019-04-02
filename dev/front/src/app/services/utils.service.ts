@@ -113,5 +113,11 @@ export class UtilsService {
       }
       return strFormatResult;
     }
+
+    public convertIntoDateSubscriptionListing(pDateOfSubscription: string): string{
+    
+      let splitDateSubscription: string[] = pDateOfSubscription.split("-");      
+      return  splitDateSubscription[2] +  '-' + splitDateSubscription[1] + '-' + splitDateSubscription[0] ;
+      }
   
 }

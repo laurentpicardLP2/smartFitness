@@ -1,10 +1,12 @@
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { TimestampFacilityAdaptater } from 'src/app/models/timestamp-facility-adaptater.model';
+import { Subscription } from 'src/app/models/subscription.model';
 import { Command } from '../models/command.model';
 import { Seance } from '../models/seance.model';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -19,10 +21,12 @@ export class SyntheseService {
   private listCommandsForAnUser: Command [] ;
   private listSeancesForAnUser: Seance [] ;
   private listTimestampForASeance: TimestampFacilityAdaptater [] ;
+  private listHistoricSubscriptionsForAnUser: Subscription [] = [] ;
 
   listCommandsForAnUser$: BehaviorSubject<Command[]> = new BehaviorSubject(null);
   listSeancesForAnUser$: BehaviorSubject<Seance[]> = new BehaviorSubject(null);
   listTimestampForASeance$: BehaviorSubject<TimestampFacilityAdaptater[]> = new BehaviorSubject(null);
+  listHistoricSubscriptionsForAnUser$: BehaviorSubject<Subscription[]> = new BehaviorSubject(null);
   
   public getCommandsForAnUser(username: string): Observable<Command[]> {
     return this.httpClient.get<Command[]>('http://localhost:8080/synthesectrl/getcommands/' + username, 
@@ -42,6 +46,16 @@ export class SyntheseService {
           "Authorization": this.token.getToken()
       }
   });
+  }
+
+  public getHistoricSubscriptionsForAnUser(username: string): Observable<Subscription[]> {
+    return this.httpClient.get<Subscription[]>('http://localhost:8080/offrectrl/gethistoricsubscriptionsforanuser/' + username, 
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+        }
+      });
   }
 
   /**
@@ -66,21 +80,44 @@ export class SyntheseService {
       });
     }
 
-    public publishSeancesForAnUser(username: string) {
-      this.getSeancesForAnUser(username).subscribe(
-        seancesForAnUserList => {
-          this.listSeancesForAnUser = seancesForAnUserList;
-          this.listSeancesForAnUser$.next(this.listSeancesForAnUser);
-        });
-      }
+  public publishSeancesForAnUser(username: string) {
+    this.getSeancesForAnUser(username).subscribe(
+      seancesForAnUserList => {
+        this.listSeancesForAnUser = seancesForAnUserList;
+        this.listSeancesForAnUser$.next(this.listSeancesForAnUser);
+      });
+    }
   
-    public publishTimestampFor(idItem: number) {
-      this.getTimestampForASeance(idItem).subscribe(
-        timestampForASeanceList => {
-          console.log("timestampForASeanceList : ", timestampForASeanceList);
-          this.listTimestampForASeance = timestampForASeanceList;
-          this.listTimestampForASeance$.next(this.listTimestampForASeance);
-        });
+  public publishTimestampFor(idItem: number) {
+    this.getTimestampForASeance(idItem).subscribe(
+      timestampForASeanceList => {
+        console.log("timestampForASeanceList : ", timestampForASeanceList);
+        this.listTimestampForASeance = timestampForASeanceList;
+        this.listTimestampForASeance$.next(this.listTimestampForASeance);
+      });
+    }
+
+  public publishHistoricSubscriptionsForAnUser(username: string) {
+    this.getHistoricSubscriptionsForAnUser(username).subscribe(
+      historicSubscriptionsForAnUserList => {
+        this.listHistoricSubscriptionsForAnUser = historicSubscriptionsForAnUserList;
+        this.listHistoricSubscriptionsForAnUser$.next(this.listHistoricSubscriptionsForAnUser);
+      });
+  }
+
+    /**
+   * Cette fonction permet de trouver une entité subscription dans la liste des subscription grâce à son ID.
+   * @param idSubscriptionCategory l'id qu'il faut rechercher dans la liste. 
+    * @param username la liste des subscriptions correspondant à username
+    */
+   public findHistoricSubscription(idSubscriptionForAnUser: number, username: string): Observable<Subscription> {
+    if (idSubscriptionForAnUser) {
+      if (!this.listHistoricSubscriptionsForAnUser) {
+        return this.getHistoricSubscriptionsForAnUser(username).pipe(map(subscriptionsHistoricForAnUser => subscriptionsHistoricForAnUser.find(subscription => subscription.idItem === idSubscriptionForAnUser)));
       }
+      return of(this.listHistoricSubscriptionsForAnUser.find(subscription => subscription.idItem === idSubscriptionForAnUser));
+    } 
+  }
+  
 
 }

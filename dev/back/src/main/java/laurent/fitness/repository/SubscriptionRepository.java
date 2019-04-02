@@ -15,10 +15,14 @@ public interface SubscriptionRepository  extends JpaRepository<Subscription, Int
 			" AND date_end_of_subscription >= current_date()", nativeQuery = true)
 	int findIsSubscridebByUsername(String username);
 	
-	@Query(value = "SELECT subscription.*, item.price, item.type_item FROM subscription INNER JOIN item on subscription.id_item = item.id_item WHERE item.price>0 AND customer_users_username like ?1 ORDER BY date_start_of_subscription DESC ", nativeQuery = true)
-	List<Subscription> findAllSubscriptionsByUsername(String username);
+	@Query(value = "SELECT subscription.*, item.price, item.type_item FROM subscription INNER JOIN item on subscription.id_item = item.id_item WHERE item.price>0 AND customer_users_username like ?1 AND date_end_of_subscription < current_date() ORDER BY date_start_of_subscription DESC ", nativeQuery = true)
+	List<Subscription> findHistoricSubscriptionsByUsername(String username);
 
-	@Query(value = "SELECT subscription.*, item.price, item.type_item FROM subscription INNER JOIN item on subscription.id_item = item.id_item WHERE item.price>0 AND customer_users_username like ?1 ORDER BY date_start_of_subscription DESC limit 1", nativeQuery = true)
-	Subscription findLastSubscriptionByUsername(String username);
+	@Query(value = "SELECT subscription.*, item.price, item.type_item FROM subscription INNER JOIN item on subscription.id_item = item.id_item WHERE item.price>0 AND customer_users_username like ?1 AND date_start_of_subscription <= current_date()\n" + 
+			" AND date_end_of_subscription >= current_date() limit 1", nativeQuery = true)
+	Subscription findActiveSubscriptionByUsername(String username);
+
+	@Query(value = "SELECT subscription.*, item.price, item.type_item FROM subscription INNER JOIN item on subscription.id_item = item.id_item WHERE item.price>0 AND customer_users_username like ?1 AND date_start_of_subscription > current_date() ORDER BY date_start_of_subscription DESC ", nativeQuery = true)
+	List<Subscription> findNextSubscriptionsByUsername(String username);
 
 }

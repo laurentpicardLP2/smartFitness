@@ -31,23 +31,11 @@ export class OffresService {
   }
             
   public listSubscriptionCategories: SubscriptionCategory [] = [] ;
-  public listSubscriptionForAnUser: Subscription [] = [] ;
-
+  
   listSubscriptionCategories$: BehaviorSubject<SubscriptionCategory[]> = new BehaviorSubject(null);
-  listSubscriptionForAnUser$: BehaviorSubject<Subscription[]> = new BehaviorSubject(null);
-
+  
   public getSubscriptionCategories(): Observable<SubscriptionCategory[]> {
     return this.httpClient.get<SubscriptionCategory[]>('http://localhost:8080/managerctrl/getsubscriptioncategories', 
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": this.token.getToken()
-        }
-      });
-  }
-
-  public getSubscriptionForAnUser(username: string): Observable<Subscription[]> {
-    return this.httpClient.get<Subscription[]>('http://localhost:8080/offrectrl/getsubscriptionsforanuser/' + username, 
       {
         headers: {
           "Content-Type": "application/json",
@@ -61,14 +49,6 @@ export class OffresService {
       subscriptionCategoriesList => {
         this.listSubscriptionCategories = subscriptionCategoriesList;
         this.listSubscriptionCategories$.next(this.listSubscriptionCategories);
-      });
-  }
-
-  public publishSubscriptionForAnUser(username: string) {
-    this.getSubscriptionForAnUser(username).subscribe(
-      subscriptionForAnUserList => {
-        this.listSubscriptionForAnUser = subscriptionForAnUserList;
-        this.listSubscriptionForAnUser$.next(this.listSubscriptionForAnUser);
       });
   }
 
@@ -86,21 +66,6 @@ export class OffresService {
       return of(new SubscriptionCategory());
     }
   }
-
-   /**
-   * Cette fonction permet de trouver une entité subscription dans la liste des subscription grâce à son ID.
-   * @param idSubscriptionCategory l'id qu'il faut rechercher dans la liste. 
-    * @param username la liste des subscriptions correspondant à username
-    */
-  public findSubscription(idSubscriptionForAnUser: number, username: string): Observable<Subscription> {
-    if (idSubscriptionForAnUser) {
-      if (!this.listSubscriptionForAnUser) {
-        return this.getSubscriptionForAnUser(username).pipe(map(subscriptionForAnUser => subscriptionForAnUser.find(subscription => subscription.idItem === idSubscriptionForAnUser)));
-      }
-      return of(this.listSubscriptionForAnUser.find(subscription => subscription.idItem === idSubscriptionForAnUser));
-    } 
-  }
-  
 
  
   

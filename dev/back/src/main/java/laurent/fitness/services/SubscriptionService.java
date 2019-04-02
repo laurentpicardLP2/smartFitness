@@ -7,8 +7,9 @@ import laurent.fitness.model.Subscription;
 
 public interface SubscriptionService {
 	public Subscription createSubscription(int idCommand, String username, int idSubscriptionCategory, Date dateStartOfSubscription, Date dateEndOfSubscription);
-	public List<Subscription> findAllSubscriptionsByUsername(String username);
-	public Subscription findLastSubscriptionByUsername(String username);
+	public List<Subscription> findHistoricSubscriptionsByUsername(String username);
+	public Subscription findActiveSubscriptionByUsername(String username);
+	public List<Subscription> findNextSubscriptionsByUsername(String username);
 	public Subscription findSubscriptionById(int idItem);
 	public boolean findIsSubscribedByUsername(String username);
 }

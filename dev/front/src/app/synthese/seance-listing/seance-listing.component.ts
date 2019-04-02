@@ -62,5 +62,9 @@ export class SeanceListingComponent implements OnInit {
       this.router.navigate(['seance-detail/' + idItem]);
     }
 
+    applyFilter(filterValue: string) {
+      this.MyDataSource.filter = filterValue.trim().toLowerCase();
+    }
+
 
 }

@@ -50,4 +50,7 @@ displayedColumns: string[] = ['Name', 'Price', 'Update'];
       this.router.navigate(['facility-detail/' + idFacility]);
     }
     
+    applyFilter(filterValue: string) {
+      this.MyDataSource.filter = filterValue.trim().toLowerCase();
+    }
 }

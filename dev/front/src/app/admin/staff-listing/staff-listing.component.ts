@@ -64,4 +64,8 @@ displayedColumns: string[] = ['Fullname', 'Username', 'Update', 'Delete'];
 
     }
 
+  applyFilter(filterValue: string) {
+    this.MyDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
 }

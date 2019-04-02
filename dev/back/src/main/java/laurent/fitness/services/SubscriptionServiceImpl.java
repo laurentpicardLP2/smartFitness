@@ -41,20 +41,20 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		Command command = this.commandRepo.findByIdCommand(idCommand);
 		SubscriptionCategory subscriptionCategory = this.subscriptionCategoryRepo.findByIdSubscriptionCategory(idSubscriptionCategory);
 		commands.add(command);
-		return this.subscriptionRepo.save(new Subscription(commands, "Subscription", customer, subscriptionCategory.getPriceSubscription(), 
+		return this.subscriptionRepo.save(new Subscription(commands, subscriptionCategory.getNameSubscription(), customer, subscriptionCategory.getPriceSubscription(), 
 				subscriptionCategory, dateStartOfSubscription, dateEndOfSubscription));
 	}
 
 	@Override
-	public List<Subscription> findAllSubscriptionsByUsername(String username) {
+	public List<Subscription> findHistoricSubscriptionsByUsername(String username) {
 		// TODO Auto-generated method stub
-		return this.subscriptionRepo.findAllSubscriptionsByUsername(username);
+		return this.subscriptionRepo.findHistoricSubscriptionsByUsername(username);
 	}
 
 	@Override
-	public Subscription findLastSubscriptionByUsername(String username) {
+	public Subscription findActiveSubscriptionByUsername(String username) {
 		// TODO Auto-generated method stub
-		return this.subscriptionRepo.findLastSubscriptionByUsername(username);
+		return this.subscriptionRepo.findActiveSubscriptionByUsername(username);
 	}
 
 	@Override
@@ -67,6 +67,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	public boolean findIsSubscribedByUsername(String username) {
 		// TODO Auto-generated method stub
 		return this.subscriptionRepo.findIsSubscridebByUsername(username) > 0;
+	}
+
+
+	@Override
+	public List<Subscription> findNextSubscriptionsByUsername(String username) {
+		// TODO Auto-generated method stub
+		return this.subscriptionRepo.findNextSubscriptionsByUsername(username);
 	}
 
 }
