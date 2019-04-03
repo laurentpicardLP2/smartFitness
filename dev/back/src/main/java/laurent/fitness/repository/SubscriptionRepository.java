@@ -19,8 +19,8 @@ public interface SubscriptionRepository  extends JpaRepository<Subscription, Int
 	List<Subscription> findHistoricSubscriptionsByUsername(String username);
 
 	@Query(value = "SELECT subscription.*, item.price, item.type_item FROM subscription INNER JOIN item on subscription.id_item = item.id_item WHERE item.price>0 AND customer_users_username like ?1 AND date_start_of_subscription <= current_date()\n" + 
-			" AND date_end_of_subscription >= current_date() limit 1", nativeQuery = true)
-	Subscription findActiveSubscriptionByUsername(String username);
+			" AND date_end_of_subscription >= current_date()", nativeQuery = true)
+	List<Subscription> findActiveSubscriptionsByUsername(String username);
 
 	@Query(value = "SELECT subscription.*, item.price, item.type_item FROM subscription INNER JOIN item on subscription.id_item = item.id_item WHERE item.price>0 AND customer_users_username like ?1 AND date_start_of_subscription > current_date() ORDER BY date_start_of_subscription DESC ", nativeQuery = true)
 	List<Subscription> findNextSubscriptionsByUsername(String username);

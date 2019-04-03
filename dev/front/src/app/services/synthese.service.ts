@@ -22,12 +22,14 @@ export class SyntheseService {
   private listSeancesForAnUser: Seance [] ;
   private listTimestampForASeance: TimestampFacilityAdaptater [] ;
   private listHistoricSubscriptionsForAnUser: Subscription [] = [] ;
+  private listActiveSubscriptionsForAnUser: Subscription [] = [] ;
   private listNextSubscriptionsForAnUser: Subscription [] = [] ;
 
   listCommandsForAnUser$: BehaviorSubject<Command[]> = new BehaviorSubject(null);
   listSeancesForAnUser$: BehaviorSubject<Seance[]> = new BehaviorSubject(null);
   listTimestampForASeance$: BehaviorSubject<TimestampFacilityAdaptater[]> = new BehaviorSubject(null);
   listHistoricSubscriptionsForAnUser$: BehaviorSubject<Subscription[]> = new BehaviorSubject(null);
+  listActiveSubscriptionsForAnUser$: BehaviorSubject<Subscription[]> = new BehaviorSubject(null);
   listNextSubscriptionsForAnUser$: BehaviorSubject<Subscription[]> = new BehaviorSubject(null);
   
   public getCommandsForAnUser(username: string): Observable<Command[]> {
@@ -52,6 +54,16 @@ export class SyntheseService {
 
   public getHistoricSubscriptionsForAnUser(username: string): Observable<Subscription[]> {
     return this.httpClient.get<Subscription[]>('http://localhost:8080/offrectrl/gethistoricsubscriptionsforanuser/' + username, 
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+        }
+      });
+  }
+
+  public getActiveSubscriptionsForAnUser(username: string): Observable<Subscription[]> {
+    return this.httpClient.get<Subscription[]>('http://localhost:8080/offrectrl/getactivesubscriptionsforanuser/' + username, 
       {
         headers: {
           "Content-Type": "application/json",
@@ -114,6 +126,14 @@ export class SyntheseService {
       historicSubscriptionsForAnUserList => {
         this.listHistoricSubscriptionsForAnUser = historicSubscriptionsForAnUserList;
         this.listHistoricSubscriptionsForAnUser$.next(this.listHistoricSubscriptionsForAnUser);
+      });
+  }
+
+  public publishActiveSubscriptionsForAnUser(username: string) {
+    this.getActiveSubscriptionsForAnUser(username).subscribe(
+      activeSubscriptionsForAnUserList => {
+        this.listActiveSubscriptionsForAnUser = activeSubscriptionsForAnUserList;
+        this.listActiveSubscriptionsForAnUser$.next(this.listActiveSubscriptionsForAnUser);
       });
   }
 

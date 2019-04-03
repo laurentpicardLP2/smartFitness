@@ -63,9 +63,9 @@ public class OffreController {
 	}
 	
 	// Retourne l'abonnement en cours s'il y en a un pour l'utilisateur username
-	@GetMapping("/getactivesubscriptionforanuser/{username}")
-	public Subscription getActiveSubscriptionsForAnUser(@PathVariable String username) {
-		return this.subscriptionService.findActiveSubscriptionByUsername(username);
+	@GetMapping("/getactivesubscriptionsforanuser/{username}")
+	public List<Subscription> getActiveSubscriptionsForAnUser(@PathVariable String username) {
+		return this.subscriptionService.findActiveSubscriptionsByUsername(username);
 	}
 	
 	// Retourne les abonnements à venir pour un utilisateur

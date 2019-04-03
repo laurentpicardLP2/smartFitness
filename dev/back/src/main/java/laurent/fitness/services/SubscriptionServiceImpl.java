@@ -52,9 +52,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
-	public Subscription findActiveSubscriptionByUsername(String username) {
+	public List<Subscription> findActiveSubscriptionsByUsername(String username) {
 		// TODO Auto-generated method stub
-		return this.subscriptionRepo.findActiveSubscriptionByUsername(username);
+		return this.subscriptionRepo.findActiveSubscriptionsByUsername(username);
 	}
 
 	@Override

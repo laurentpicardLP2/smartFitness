@@ -11,34 +11,45 @@
      </tr>
    </thead>
    <tbody>
-
-      <tr *ngFor="let subscription of nextSubscriptionsList | async; let i = index">
-          <td>{{i}} : {{ subscription.typeItem }} (actif)</td>
-          <td>{{convertIntoDateSubscription(subscription.dateStartOfSubscription)}}</td>
-          <td>{{convertIntoDateSubscription(subscription.dateEndOfSubscription)}}</td>
-          <td >{{convertIntoMonetaryFormat(subscription.price)}}</td>
-      </tr>
-      <tr *ngIf="next == 0">
-          <td><div style="height: 18px;"></div></td>
-          <td><div style="height: 18px;"></div></td>
-          <td><div style="height: 18px;"></div></td>
-          <td><div style="height: 18px;"></div></td>
-      </tr>
-     <tr><td colspan="4"><div class="title">Vos prochains abonnements.</div></td></tr>
+    <tr *ngFor="let subscription of activeSubscriptionsList | async">
+        <td>{{ subscription.typeItem }} (en cours)</td>
+        <td>{{convertIntoDateSubscription(subscription.dateStartOfSubscription)}}</td>
+        <td>{{convertIntoDateSubscription(subscription.dateEndOfSubscription)}}</td>
+        <td >{{convertIntoMonetaryFormat(subscription.price)}}</td>
+    </tr>
+    <tr *ngIf="active == 0">
+        <td><div style="height: 18px;">Pas d'abonnement en cours</div></td>
+        <td><div style="height: 18px;"></div></td>
+        <td><div style="height: 18px;"></div></td>
+        <td><div style="height: 18px;"></div></td>
+    </tr>
+     <tr *ngIf="next > 0"><td colspan="4"><br><div class="title">Vos prochains abonnements.</div></td></tr>
     <tr *ngFor="let subscription of nextSubscriptionsList | async">
         <td>{{ subscription.typeItem }}</td>
         <td>{{convertIntoDateSubscription(subscription.dateStartOfSubscription)}}</td>
         <td>{{convertIntoDateSubscription(subscription.dateEndOfSubscription)}}</td>
         <td >{{convertIntoMonetaryFormat(subscription.price)}}</td>
       </tr>
-      <tr><td colspan="4"><div class="title">L'historique de vos abonnements.</div></td></tr>  
+    <tr *ngIf="next == 0">
+        <td><div style="height: 18px;"></div></td>
+        <td><div style="height: 18px;"></div></td>
+        <td><div style="height: 18px;"></div></td>
+        <td><div style="height: 18px;"></div></td>
+    </tr>
+    <tr *ngIf="historic > 0"><td colspan="4"><br><div class="title">L'historique de vos abonnements.</div></td></tr>  
     <tr *ngFor="let subscription of historicSubscriptionsList | async">
       <td>{{ subscription.typeItem }}</td>
       <td>{{convertIntoDateSubscription(subscription.dateStartOfSubscription)}}</td>
       <td>{{convertIntoDateSubscription(subscription.dateEndOfSubscription)}}</td>
       <td >{{convertIntoMonetaryFormat(subscription.price)}}</td>
     </tr>
-   </tbody>
+    <tr *ngIf="historic == 0">
+      <td><div style="height: 18px;"></div></td>
+      <td><div style="height: 18px;"></div></td>
+      <td><div style="height: 18px;"></div></td>
+      <td><div style="height: 18px;"></div></td>
+    </tr>
+  </tbody>
  </table>
  
 

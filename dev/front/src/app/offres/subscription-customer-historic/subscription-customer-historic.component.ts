@@ -15,7 +15,10 @@ export class SubscriptionCustomerHistoricComponent implements OnInit {
 
   public username: string;
   nextSubscriptionsList: BehaviorSubject<Subscription[]>;
+  activeSubscriptionsList: BehaviorSubject<Subscription[]>;
   historicSubscriptionsList: BehaviorSubject<Subscription[]>;
+  historic: number = 0;
+  active: number = 0;
   next: number = 0;
  
 
@@ -28,16 +31,30 @@ export class SubscriptionCustomerHistoricComponent implements OnInit {
     this.loginService.usernameSubject.subscribe(res => {
       this.username = res;
     });
-  this.syntheseService.publishNextSubscriptionsForAnUser(this.username);
-  this.nextSubscriptionsList  = this.syntheseService.listNextSubscriptionsForAnUser$; 
-   this.syntheseService.publishHistoricSubscriptionsForAnUser(this.username);
-   this.historicSubscriptionsList  = this.syntheseService.listHistoricSubscriptionsForAnUser$; 
+  
+    this.syntheseService.publishHistoricSubscriptionsForAnUser(this.username);
+    this.historicSubscriptionsList  = this.syntheseService.listHistoricSubscriptionsForAnUser$;
+    this.syntheseService.getHistoricSubscriptionsForAnUser(this.username).subscribe(
+      historicSubscriptionsForAnUserList => {
+        this.historic = historicSubscriptionsForAnUserList.length;
+        
+      });
 
-   this.syntheseService.getNextSubscriptionsForAnUser(this.username).subscribe(
-    nextSubscriptionsForAnUserList => {
-      this.next = nextSubscriptionsForAnUserList.length;
-      
-    });
+    this.syntheseService.publishActiveSubscriptionsForAnUser(this.username);
+    this.activeSubscriptionsList  = this.syntheseService.listActiveSubscriptionsForAnUser$;
+    this.syntheseService.getActiveSubscriptionsForAnUser(this.username).subscribe(
+      activeSubscriptionsForAnUserList => {
+        this.active = activeSubscriptionsForAnUserList.length;
+        
+      });
+
+    this.syntheseService.publishNextSubscriptionsForAnUser(this.username);
+    this.nextSubscriptionsList  = this.syntheseService.listNextSubscriptionsForAnUser$; 
+    this.syntheseService.getNextSubscriptionsForAnUser(this.username).subscribe(
+      nextSubscriptionsForAnUserList => {
+        this.next = nextSubscriptionsForAnUserList.length;
+        
+      });
    
   }
 
