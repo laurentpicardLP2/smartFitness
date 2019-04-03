@@ -35,6 +35,8 @@ import { SubscriptionCustomerNewComponent } from './offres/subscription-customer
 import { SubscriptionCustomerPropositionComponent } from './offres/subscription-customer-proposition/subscription-customer-proposition.component';
 import { SubscriptionCustomerHistoricComponent } from './offres/subscription-customer-historic/subscription-customer-historic.component';
 import { WatchCustomerPropositionComponent } from './offres/watch-customer-proposition/watch-customer-proposition.component';
+import { WatchCategoryNewComponent } from './manager/watch-category-new/watch-category-new.component';
+import { WatchCategoryListingComponent } from './manager/watch-category-listing/watch-category-listing.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -59,6 +61,8 @@ const routes: Routes = [
   { path: 'subscription-category-new', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryNewComponent},
   { path: 'subscription-category-listing', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryListingComponent},
   { path: 'subscription-category-detail/:idSubscriptionCategory', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryDetailComponent},
+  { path: 'watch-category-new', canActivate: [AuthGuardManagerService], component: WatchCategoryNewComponent},
+  { path: 'watch-category-listing', canActivate: [AuthGuardManagerService], component: WatchCategoryListingComponent},
   { path: 'subscription-customer-new/:idSubscriptionCategory/:nbLastSubscription/:typeLastSubscription', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerNewComponent },
   { path: 'subscription-customer-proposition', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerPropositionComponent },
   { path: 'subscription-customer-historic', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerHistoricComponent },

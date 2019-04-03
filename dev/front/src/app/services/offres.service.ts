@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { SubscriptionCategory } from 'src/app/models/subscription-category.model';
+import { WatchCategory } from 'src/app/models/watch-category.model';
 import { Subscription } from 'src/app/models/subscription.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -31,8 +32,10 @@ export class OffresService {
   }
             
   public listSubscriptionCategories: SubscriptionCategory [] = [] ;
+  public listWatchCategories: WatchCategory [] = [] ;
   
   listSubscriptionCategories$: BehaviorSubject<SubscriptionCategory[]> = new BehaviorSubject(null);
+  listWatchCategories$: BehaviorSubject<WatchCategory[]> = new BehaviorSubject(null);
   
   public getSubscriptionCategories(): Observable<SubscriptionCategory[]> {
     return this.httpClient.get<SubscriptionCategory[]>('http://localhost:8080/managerctrl/getsubscriptioncategories', 
@@ -44,11 +47,31 @@ export class OffresService {
       });
   }
 
+
+  public getWatchCategories(): Observable<WatchCategory[]> {
+    return this.httpClient.get<WatchCategory[]>('http://localhost:8080/managerctrl/getwatchcategories', 
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+        }
+      });
+  }
+
+
   public publishSubscriptionCategories() {
     this.getSubscriptionCategories().subscribe(
       subscriptionCategoriesList => {
         this.listSubscriptionCategories = subscriptionCategoriesList;
         this.listSubscriptionCategories$.next(this.listSubscriptionCategories);
+      });
+  }
+
+  public publishWatchCategories() {
+    this.getWatchCategories().subscribe(
+      watchCategoriesList => {
+        this.listWatchCategories = watchCategoriesList;
+        this.listWatchCategories$.next(this.listWatchCategories);
       });
   }
 
@@ -67,8 +90,22 @@ export class OffresService {
     }
   }
 
- 
-  
+
+  /**
+   * Cette fonction permet de trouver une entité watchCategory dans la liste des watchCategories grâce à son ID.
+   * @param idWatchCategory l'id qu'il faut rechercher dans la liste. 
+   */
+  public findwatchCategory(idWatchCategory: number): Observable<WatchCategory> {
+    if (idWatchCategory) {
+      if (!this.listWatchCategories) {
+        return this.getWatchCategories().pipe(map(watchCategories => watchCategories.find(watchCategory => watchCategory.idWatchCategory === idWatchCategory)));
+      }
+      return of(this.listWatchCategories.find(watchCategory => watchCategory.idWatchCategory === idWatchCategory));
+    } else {
+      return of(new WatchCategory());
+    }
+  }
+
   public addSubscriptionCategory(newSubscriptionCategory: SubscriptionCategory){
     this.httpClient.post<SubscriptionCategory>('http://localhost:8080/managerctrl/addsubscriptioncategory' , newSubscriptionCategory, 
         {
@@ -78,7 +115,7 @@ export class OffresService {
         }
       }).subscribe(
         (newSubscriptionCategory) =>{ 
-          console.log("add SubscriptionCategory pb : ", newSubscriptionCategory);
+          console.log("add SubscriptionCategory ok : ", newSubscriptionCategory);
           this.router.navigate(['subscription-category-listing']);
         },
         (error) => { 
@@ -86,7 +123,26 @@ export class OffresService {
           this.router.navigate(['error-page'])
         }
     );
-  }e
+  }
+  //addwatchcategory/{nameWatch}/{priceWatch}/{descriptionWatch}/{imageWatch}
+  public addWatchCategory(nameWatch: string, priceWatch: number,  descriptionWatch: string, imageWatch: string){
+    this.httpClient.post<WatchCategory>('http://localhost:8080/managerctrl/addwatchcategory/' + nameWatch + '/' + priceWatch + '/' + descriptionWatch + '/' + imageWatch  , null, 
+        {
+        headers: {
+        "Content-Type": "application/json",
+        "Authorization": this.token.getToken()
+        }
+      }).subscribe(
+        (newWatchCategory) =>{ 
+          console.log("add WatchCategory ok : ", newWatchCategory);
+          this.router.navigate(['watch-category-listing']);
+        },
+        (error) => { 
+          console.log("add WatchCategory pb : ", error); 
+          this.router.navigate(['error-page'])
+        }
+    );
+  }
 
     public updateSubscriptionCategory(updateSubscriptionCategory: SubscriptionCategory){
       this.httpClient.put<SubscriptionCategory>('http://localhost:8080/managerctrl/updatesubscriptioncategory' , updateSubscriptionCategory, 
@@ -107,6 +163,26 @@ export class OffresService {
       );
     }
 
+    public updateWatchCategory(updateWatchCategory: WatchCategory){
+      this.httpClient.put<WatchCategory>('http://localhost:8080/managerctrl/updatewatchcategory' , updateWatchCategory, 
+          {
+          headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+          }
+        }).subscribe(
+          (updatedWatchCategory) =>{ 
+            console.log("update WatchCategory OK : ", updatedWatchCategory);
+            this.router.navigate(['watch-category-listing']);
+          },
+          (error) => { 
+            console.log("update watchCategory pb : ", error); 
+            this.router.navigate(['error-page']);
+          }
+      );
+    }
+
+
     public deleteSubscriptionCategory(idSubscriptionCategory: number){
       this.httpClient.delete('http://localhost:8080/managerctrl/delsubscriptioncategory/' + idSubscriptionCategory, 
       {
@@ -118,6 +194,20 @@ export class OffresService {
           () =>{ console.log("suppression subscriptionCategory OK : ",idSubscriptionCategory);
               },
           (error) => console.log("suppression subscriptionCategory pb : ", error) 
+      );
+    }
+
+    public deleteWatchCategory(idWatchCategory: number){
+      this.httpClient.delete('http://localhost:8080/managerctrl/delwatchcategory/' + idWatchCategory, 
+      {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+        }
+    }).subscribe(
+          () =>{ console.log("suppression watchCategory OK : ",idWatchCategory);
+              },
+          (error) => console.log("suppression watchCategory pb : ", error) 
       );
     }
 
@@ -144,6 +234,34 @@ export class OffresService {
           },
           (error) => { 
             console.log("add subscription pb : ", error);
+            //this.router.navigate(['error-page']);
+          }
+      );
+    }
+
+    public addWatchToCommand(command: Command, username: string, idWatchCategory: number, nameWatch: string, priceWatch: Date, descriptionWatch: string, imageWatch: string, nbItems: string){
+      this.httpClient.post<Subscription>('http://localhost:8080/offrectrl/addsubscription/' + command.idCommand + '/' + username + '/' +
+        idWatchCategory  + '/' + nameWatch + '/' + priceWatch + '/' + descriptionWatch + '/' + imageWatch, null, 
+        {
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": this.token.getToken()
+          }
+        }).subscribe(
+          (watch) =>{ 
+            command.items.push(watch); 
+            this.commandService.setCommandSubject(command); 
+            if(nbItems==null || nbItems==undefined || nbItems=="") {
+              nbItems = "0"; 
+            }
+            this.commandService.setNbItemsSubject((parseInt(nbItems, 10) + 1).toString());
+            command.items[command.items.findIndex((item)=> item.idItem == watch.idItem)].price += watch.price;
+            this.commandService.setCommandSubject(command);
+            this.commandService.setListCommandItemsSubject(command.items);
+            this.router.navigate(['']);
+          },
+          (error) => { 
+            console.log("add watch pb : ", error);
             //this.router.navigate(['error-page']);
           }
       );

@@ -59,5 +59,6 @@ export const errorMessages: { [key: string]: string } = {
     nameFacilityCategory: 'Ce nom de catégorie d\'équipement existe déjà.',
     nameFacility: 'Ce nom d\'équipement existe déjà.',
     nameSubscription: 'Ce type d\'abonnement existe déjà',
-    nbLast: 'La durée de d\'un type d\'abonnement doit être comprise entre 1 et 10'
+    nbLast: 'La durée de d\'un type d\'abonnement doit être comprise entre 1 et 10',
+    nameWatch: 'Ce nom de modèle existe déjà, veuillez en choisir un autre.'
 };

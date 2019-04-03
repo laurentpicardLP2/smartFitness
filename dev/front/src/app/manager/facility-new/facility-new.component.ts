@@ -33,7 +33,7 @@ export class FacilityNewComponent implements OnInit {
   nameFacility: string;
   priceFacility: number;
   descriptionFacility: string;
-  imageFacility: string;;
+  imageFacility: string;
   idFacilityCategory: number;
   idRoom: number;
   errors = errorMessages;
@@ -139,7 +139,7 @@ export class FacilityNewComponent implements OnInit {
         this.imageFacility = this.nameFacility + "_" + this.file.name;
         this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceFacility);
         data.append('data', this.file, this.nameFacility + "_" + this.file.name);
-        this.managerService.addImage(data, this.username, this.password);
+        this.managerService.addImage(data, this.username, this.password, "facilityForm");
       }
       else {
         this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceFacility);

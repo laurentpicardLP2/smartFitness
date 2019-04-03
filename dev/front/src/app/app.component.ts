@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   public typeRole: string = "ROLE_ANONYMOUS";
   username: string;
   password: string;
+
   constructor(private loginService: LoginService) { }
 
   ngOnInit(){
@@ -25,6 +26,8 @@ export class AppComponent implements OnInit {
     
     this.username=window.localStorage.getItem("username");
     this.password=window.localStorage.getItem("password");
+
+
      if (this.username != null && this.password != null){
       this.loginService.signIn(new User(this.username, this.password), true);
      }

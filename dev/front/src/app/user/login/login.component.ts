@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.bReload = window.localStorage.getItem("username") == null ? false : true;
-    window.localStorage.clear();
   }
 
   createForm() {

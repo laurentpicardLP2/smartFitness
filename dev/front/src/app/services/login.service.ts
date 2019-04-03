@@ -100,9 +100,18 @@ export class LoginService {
         this.setIsUserLoggedSubject(true); 
         this.setUsernameSubject(user.username);
         this.setPasswordSubject(user.password);
+
+        
         
         if(bReload){
-          setTimeout(() => this.router.navigate(['/facility-listing']), 300);
+          let fromForm = window.localStorage.getItem("fromForm") ;
+          window.localStorage.clear();
+          if(fromForm == "facilityForm") {
+            setTimeout(() => this.router.navigate(['/facility-listing']), 350);
+          } else {
+            setTimeout(() => this.router.navigate(['/watch-category-listing']), 350);
+          }
+          
         }
         else {
           this.checkUserIsSubscribed(user.username).subscribe(

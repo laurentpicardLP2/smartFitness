@@ -77,11 +77,22 @@
           <button mat-menu-item _ngcontent-cl="" tabindex="9" aria-disabled="false" (click)="onAction('/facility-listing')">Lister les équipements</button>
        </mat-menu>
 
-       <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="abonnement">Gestion offres</button>
-       <mat-menu  #abonnement="matMenu">
-           <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/subscription-category-new')">Ajout d'un type d'abonnement</button>
-           <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/subscription-category-listing')">Listing des types d'abonnement</button>
-        </mat-menu>
+       <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="offres">Gestion offres</button>
+       <mat-menu  #offres="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="abonnement">Gestion abonnements</button>
+          <button mat-menu-item [matMenuTriggerFor]="watch">Gestion montres</button>
+
+       </mat-menu>
+
+      <mat-menu  #abonnement="matMenu">
+        <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/subscription-category-new')">Ajout d'un type d'abonnement</button>
+        <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/subscription-category-listing')">Listing des types d'abonnement</button>
+      </mat-menu>
+
+      <mat-menu  #watch="matMenu">
+        <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/watch-category-new')">Ajout d'un modèle de montre</button>
+        <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/watch-category-listing')">Listing des modèles de montres</button>
+      </mat-menu>
 
        <button *ngIf="isAuth && authority.authority=='ROLE_ADMIN'"  mat-button [matMenuTriggerFor]="staff">Gestion staff</button>
        <mat-menu  #staff="matMenu">

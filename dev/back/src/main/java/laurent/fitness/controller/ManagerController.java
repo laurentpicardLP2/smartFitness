@@ -25,10 +25,12 @@ import laurent.fitness.model.Facility;
 import laurent.fitness.model.FacilityCategory;
 import laurent.fitness.model.Room;
 import laurent.fitness.model.SubscriptionCategory;
+import laurent.fitness.model.WatchCategory;
 import laurent.fitness.services.FacilityCategoryService;
 import laurent.fitness.services.FacilityService;
 import laurent.fitness.services.RoomService;
 import laurent.fitness.services.SubscriptionCategoryService;
+import laurent.fitness.services.WatchCategoryService;
 import laurent.fitness.upload.FileInformation;
 import laurent.fitness.upload.exception.UploadFileException;
 
@@ -40,12 +42,18 @@ public class ManagerController {
 	private FacilityCategoryService facilityCategoryService;
 	private RoomService roomService;
 	private SubscriptionCategoryService subscriptionCategoryService;
+	private WatchCategoryService watchCategoryService;
 	
-	public ManagerController(FacilityService facilityService, FacilityCategoryService facilityCategoryService, RoomService roomService, SubscriptionCategoryService subscriptionCategoryService) {
+	public ManagerController(FacilityService facilityService, 
+							FacilityCategoryService facilityCategoryService, 
+							RoomService roomService, 
+							SubscriptionCategoryService subscriptionCategoryService,
+							WatchCategoryService watchCategoryService) {
 		this.facilityService = facilityService;
 		this.facilityCategoryService = facilityCategoryService;
 		this.roomService = roomService;
 		this.subscriptionCategoryService = subscriptionCategoryService;
+		this.watchCategoryService = watchCategoryService;
 	}
 	
 	
@@ -227,5 +235,49 @@ public class ManagerController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}
+	
+	//Retourne la liste des modèles de montres
+	@GetMapping("/getwatchcategories")
+	public List<WatchCategory> getWatchCategories() {
+		return this.watchCategoryService.getAllWatchCategories();
+		//return this.subscriptionCategoryService.getAllSubscriptionCategories();		
+	}
+	
+	@PostMapping("/addwatchcategory/{nameWatch}/{priceWatch}/{descriptionWatch}/{imageWatch}")
+	public ResponseEntity<?> addWatchCategory(@PathVariable String nameWatch, @PathVariable Float priceWatch, @PathVariable String descriptionWatch, @PathVariable String imageWatch) {
+		try {
+			WatchCategory watchCategory = new WatchCategory(nameWatch, priceWatch, descriptionWatch, imageWatch);
+		return ResponseEntity.status(HttpStatus.OK).body(this.watchCategoryService.saveWatchCategory(watchCategory));
+		
+		} catch(Exception e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}			
+	}
+	
+	@PutMapping("/updatewatchcategory")
+	public ResponseEntity<?> updateWatchCategory(@RequestBody WatchCategory pWatchCategory) {
+		try {	
+			return ResponseEntity.status(HttpStatus.OK).body(this.watchCategoryService.updateWatchCategory(pWatchCategory.getIdWatchCategory(), pWatchCategory.getNameWatch(), pWatchCategory.getPriceWatch(), pWatchCategory.getDescriptionWatch(), pWatchCategory.getImageWatch()));
+		
+		} catch(Exception e) {
+			
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}			
+	}
+	
+	// Supprime un modèle de montre 
+	@DeleteMapping("/delwatchcategory/{idSubscriptionCategory}")
+	public ResponseEntity<?> delWatchCategory(@PathVariable Integer idWatchCategory){
+		try {
+			this.watchCategoryService.deleteWatchCategory(this.watchCategoryService.findByIdWatchCategory(idWatchCategory));
+			return ResponseEntity.status(HttpStatus.OK).body(null);
+		} catch(Exception e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}
+	}
+
 
 }

@@ -44,10 +44,10 @@ public class Customer extends User implements Serializable {
 	@OneToMany(mappedBy="customer")
 	private List<Seance> seances;
 		
-	//bi-directional many-to-one association to ConnectedWatch
+	//bi-directional many-to-one association to Watch
 	@OneToMany(mappedBy="customer")
 	@JsonIgnore
-	private List<ConnectedWatch> connectedWatches;
+	private List<Watch> watches;
 
 //	//bi-directional many-to-many association to SessionTraining
 //	@ManyToMany(mappedBy="customers")
@@ -199,26 +199,26 @@ public class Customer extends User implements Serializable {
 		this.domesticCp = domesticCp;
 	}
 
-	public List<ConnectedWatch> getConnectedWatches() {
-		return this.connectedWatches;
+	public List<Watch> getWatches() {
+		return this.watches;
 	}
 
-	public void setConnectedWatches(List<ConnectedWatch> connectedWatches) {
-		this.connectedWatches = connectedWatches;
+	public void setWatches(List<Watch> cwatches) {
+		this.watches = watches;
 	}
 
-	public ConnectedWatch addConnectedWatch(ConnectedWatch connectedWatch) {
-		getConnectedWatches().add(connectedWatch);
-		connectedWatch.setCustomer(this);
+	public Watch addWatch(Watch watch) {
+		getWatches().add(watch);
+		watch.setCustomer(this);
 
-		return connectedWatch;
+		return watch;
 	}
 
-	public ConnectedWatch removeConnectedWatch(ConnectedWatch connectedWatch) {
-		getConnectedWatches().remove(connectedWatch);
-		connectedWatch.setCustomer(null);
+	public Watch removeWatch(Watch watch) {
+		getWatches().remove(watch);
+		watch.setCustomer(null);
 
-		return connectedWatch;
+		return watch;
 	}
 	
 	public List<Seance> getSeances() {

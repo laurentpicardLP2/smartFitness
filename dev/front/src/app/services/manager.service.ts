@@ -152,11 +152,12 @@ export class ManagerService {
     }
 
 
-    public addImage(data, username, password){
+    public addImage(data, username, password, fromForm: string){
       this.httpClient.post(
         'http://localhost:8080/managerctrl/upload', data).subscribe(() => {
           window.localStorage.setItem("username", username);
           window.localStorage.setItem("password", password);
+          window.localStorage.setItem("fromForm", fromForm);
         },
           (error) => {console.log("pb upload fichier ", error);}
         );
