@@ -11,7 +11,7 @@ Mode opératoire pour lancer l'application :
 8. Saisir http://localhost:4200
 9. Avec le compte db_user (mot de passe : simplon), on peut ajouter des séances constituées d'activités (chaque activité dure 10').
 10. Avec un compte de type 'ROLE_CUSTOMER' (Le compte db_user en est un), on peut souscrire à un abonnement et bénéficier des activités à moitié prix. Pour illustrer ce cas, le compte db_abonne (mot de passe : simplon) visualise les activités à 50% de leur tarif plein.
-11. CHaque compte 'ROLE_CUSTOMER' peut consulter le suivi (en cours, à venir et l'historique) de l'ensemble de leurs abonnements souscrits. 
+11. CHaque compte 'ROLE_CUSTOMER' peut consulter le suivi (en cours, à venir et l'historique) de l'ensemble de leurs abonnements souscrits. (TO DO, le tableau étant responsive, ce modèle sera repris pour la feuille de route d'une séance ainsi que le détail d'une commande).
 12. L'utilisateur a également la possibilité de vider ou valider son panier. Dans ce dernier cas, il peut visualiser les séances validées par le menu Mon choix > Mes suivis > mes séances. En cliquant sur une ligne, il obtient le détail de la feuille de route de sa séance.
 13. Avec les comptes db_admin (mot de passe : simplon) ou db_manager(mot de passe : simplon), on peut ajouter et modifier des salles, des catégories d'équipement et des équipements. Il s'agit donc de créer des équipements, appartenant à une catégorie et localisée dans une salle,  pour que les utilisateurs puissent bénéficier d'un choix élargi d'appareils lorsqu'ils sont sur une séquence de réservation.
 14. Toujours avec les comptes db_admin ou db_manager, on peut créer et gérer des abonnements en tant que services pour les clients.
