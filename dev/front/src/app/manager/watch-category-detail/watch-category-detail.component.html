@@ -1,0 +1,46 @@
+
+<div fxFlex fxLayout fxLayoutAlign="center">
+    <div class="pad">
+      <form [formGroup]="watchCategoryForm" >        
+        <div formGroupName="nameWatchGroup">
+            <mat-form-field class="watch-category-full-width">
+                <input matInput required placeholder="Nom du modele" type="text" formControlName="nameWatch" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameWatch">
+                <mat-error>
+                    {{errors.nameWatch}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="watch-category-full-width">
+              <input matInput required placeholder="Prix de la montre" type="number" formControlName="priceWatch" [(ngModel)]="priceWatch">
+          </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="watch-category-full-width">
+                <textarea matInput placeholder="Description de la montre" type="text" formControlName="descriptionWatch" [(ngModel)]="descriptionWatch"></textarea>
+            </mat-form-field>
+    
+          </div>
+        <div>
+          <input type="file" id="userFile" (change)="onSelectFile($event)" #fileInput style="display: none">
+          <mat-form-field class="watch-category-full-width">
+            <input matInput formControlName="imageWatch" placeholder="Image à uploader" readonly [(ngModel)]="imageWatch">
+          </mat-form-field>
+          <button mat-raised-button (click)="selectFile()">Selectionner</button>
+        </div>
+  
+        <button mat-raised-button [disabled]="watchCategoryForm.invalid" (click)="onUpdate()">Modifier</button>
+        <div>
+          <br>
+          <img *ngIf="imageWatch!='' && !bChangeImage" class="img-watch" src="assets/images/facilities/{{ imageWatch }}" />
+        </div>
+        <div *ngIf="imageWatch!='' && bChangeImage">
+            <br>
+            Cliquez sur "modifier" pour procéder à l'upload de l'image
+          </div>
+        
+      </form>
+    </div> 
+    
+  </div>
+         

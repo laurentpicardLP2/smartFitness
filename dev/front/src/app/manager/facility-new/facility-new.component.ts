@@ -31,7 +31,7 @@ export class FacilityNewComponent implements OnInit {
   facilities: Facility[];
   rooms: Room[];
   nameFacility: string;
-  priceFacility: number;
+  priceSeance: number;
   descriptionFacility: string;
   imageFacility: string;
   idFacilityCategory: number;
@@ -94,7 +94,7 @@ export class FacilityNewComponent implements OnInit {
           Validators.minLength(1),
         ]]
       }, {validator: this.checkNameFacility.bind(this)}),
-      priceFacility: ['', [
+      priceSeance: ['', [
         Validators.required
       ]],
       descriptionFacility: '',
@@ -137,16 +137,13 @@ export class FacilityNewComponent implements OnInit {
       
       if (this.file !== undefined){
         this.imageFacility = this.nameFacility + "_" + this.file.name;
-        this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceFacility);
+        this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceSeance);
         data.append('data', this.file, this.nameFacility + "_" + this.file.name);
         this.managerService.addImage(data, this.username, this.password, "facilityForm");
       }
       else {
-        this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceFacility);
-      }
-       
-  
-      
+        this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceSeance);
+      }    
        
   }
 

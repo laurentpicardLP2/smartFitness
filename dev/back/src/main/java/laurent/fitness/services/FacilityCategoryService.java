@@ -21,4 +21,6 @@ public interface FacilityCategoryService {
 	public FacilityCategory updateFacilityCategory(String nameFacilityCategory, String quantityFacilityCategory,
 			String priceFacilityCategory);
 
+	public FacilityCategory getFacilityCategoryAssociateToFacility(int idFacility);
+
 }

@@ -112,17 +112,14 @@ export class WatchCategoryNewComponent implements OnInit {
       
       if (this.file !== undefined){
         this.imageWatch = this.nameWatch + "_" + this.file.name;
-        this.offresService.addWatchCategory(this.nameWatch, this.priceWatch, this.descriptionWatch, this.imageWatch);
         data.append('data', this.file, this.nameWatch + "_" + this.file.name);
+        this.offresService.addWatchCategory(this.nameWatch, this.priceWatch, this.descriptionWatch, this.imageWatch);
         this.managerService.addImage(data, this.username, this.password, "watchCategoryForm");
       }
       else {
         this.offresService.addWatchCategory(this.nameWatch, this.priceWatch, this.descriptionWatch, this.imageWatch);
       }
-       
-  
-      
-       
+     
   }
 
 }

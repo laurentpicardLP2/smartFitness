@@ -135,7 +135,7 @@ export class OffresService {
       }).subscribe(
         (newWatchCategory) =>{ 
           console.log("add WatchCategory ok : ", newWatchCategory);
-          this.router.navigate(['watch-category-listing']);
+          setTimeout(() => this.router.navigate(['watch-category-listing']), 500);
         },
         (error) => { 
           console.log("add WatchCategory pb : ", error); 
@@ -163,8 +163,8 @@ export class OffresService {
       );
     }
 
-    public updateWatchCategory(updateWatchCategory: WatchCategory){
-      this.httpClient.put<WatchCategory>('http://localhost:8080/managerctrl/updatewatchcategory' , updateWatchCategory, 
+    public updateWatchCategory(idWatchCategory: number, nameWatch: string, priceWatch: number,  descriptionWatch: string, imageWatch: string){
+      this.httpClient.put<WatchCategory>('http://localhost:8080/managerctrl/updatewatchcategory/' + idWatchCategory + '/' + nameWatch + '/' + priceWatch + '/' + descriptionWatch + '/' + imageWatch  , null, 
           {
           headers: {
           "Content-Type": "application/json",
@@ -173,7 +173,7 @@ export class OffresService {
         }).subscribe(
           (updatedWatchCategory) =>{ 
             console.log("update WatchCategory OK : ", updatedWatchCategory);
-            this.router.navigate(['watch-category-listing']);
+            setTimeout(() => this.router.navigate(['watch-category-listing']), 500);
           },
           (error) => { 
             console.log("update watchCategory pb : ", error); 

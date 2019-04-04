@@ -20,16 +20,53 @@ export class ManagerService {
         private router: Router,
         private token: TokenStorageService) { }
 
+    // facilityCategorySubject permet d'afficher le facilityCategory associé à un facility lorsq'un manager accède à la page de détails d'un facility
+    // public facilityCategorySubject: BehaviorSubject<FacilityCategory> = new BehaviorSubject(null);
+
+    // public setFacilityCategorySubject(value: FacilityCategory){
+    //   if(value){
+    //     this.facilityCategorySubject.next(value);
+    //   } else {
+    //     this.facilityCategorySubject.next(null);
+    //   }
+    // }
+
+    // roomSubject permet d'afficher la room associée à un facility lorsq'un manager accède à la page de détails d'un facility
+    // public roomSubject: BehaviorSubject<Room> = new BehaviorSubject(null);
+
+    // public setRoomSubject(value: Room){
+    //   if(value){
+    //     this.roomSubject.next(value);
+    //   } else {
+    //     this.roomSubject.next(null);
+    //   }
+    // }
+
+
     public listFacilityCategories: FacilityCategory [] = [] ;
+    public facilityCategoryAssociateToFacility = null;
     public listFacilities: Facility [] = [] ;
     public listRooms: Room [] = [] ;
+    public roomAssociateToFacility: Room = null;
 
     listFacilityCategories$: BehaviorSubject<FacilityCategory[]> = new BehaviorSubject(null);
+    facilityCategoryAssociateToFacility$ = new BehaviorSubject(null);
     listFacilities$: BehaviorSubject<Facility[]> = new BehaviorSubject(null);
     listRooms$: BehaviorSubject<Room[]> = new BehaviorSubject(null);
+    roomAssociateToFacility$ = new BehaviorSubject(null);;
 
     public getFacilityCategories(): Observable<FacilityCategory[]> {
       return this.httpClient.get<FacilityCategory[]>('http://localhost:8080/managerctrl/getfacilitycategories', 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        });
+    }
+
+    public getFacilityCategoryAssociateToFacility(idFacility: number): Observable<FacilityCategory> {
+      return this.httpClient.get<FacilityCategory>('http://localhost:8080/managerctrl/getfacilitycategoryassociatetofacility/' + idFacility, 
         {
           headers: {
             "Content-Type": "application/json",
@@ -58,11 +95,29 @@ export class ManagerService {
         });
     }
 
+    public getRoomAssociateToFacility(idFacility: number): Observable<Room> {
+      return this.httpClient.get<Room>('http://localhost:8080/managerctrl/getroomassociatetofacility/' + idFacility, 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        });
+    }
+
     public publishFacilityCategories() {
       this.getFacilityCategories().subscribe(
         facilityCategoriesList => {
           this.listFacilityCategories = facilityCategoriesList;
           this.listFacilityCategories$.next(this.listFacilityCategories);
+        });
+    }
+
+    public publishFacilityCategoryAssociateToFacility(idFacility: number) {
+      this.getFacilityCategoryAssociateToFacility(idFacility).subscribe(
+        facilityCategory => {
+          this.facilityCategoryAssociateToFacility = facilityCategory;
+          this.facilityCategoryAssociateToFacility$.next(this.facilityCategoryAssociateToFacility);
         });
     }
 
@@ -81,6 +136,14 @@ export class ManagerService {
         this.listRooms$.next(this.listRooms);
       });
     }
+
+    public publishRoomAssociateToFacility(idFacility: number) {
+      this.getRoomAssociateToFacility(idFacility).subscribe(
+        room => {
+          this.roomAssociateToFacility = room;
+          this.roomAssociateToFacility$.next(this.roomAssociateToFacility);
+        });
+      }
 
     /**
    * Cette fonction permet de trouver une entité room dans la liste des rooms grâce à son ID.
@@ -129,10 +192,10 @@ export class ManagerService {
   }
   
 
-    public addFacility(idFacilityCategory: number, idRoom: number, nameFacility: string, descriptionFacility:string, imageFacility: string, priceFacility: number){
+    public addFacility(idFacilityCategory: number, idRoom: number, nameFacility: string, descriptionFacility:string, imageFacility: string, priceSeance: number){
 
       this.httpClient.post<Facility>('http://localhost:8080/managerctrl/addfacility/' + idFacilityCategory + '/' + idRoom + '/' + 
-        nameFacility + '/' + descriptionFacility + '/' + imageFacility + '/' + priceFacility, null, 
+        nameFacility + '/' + descriptionFacility + '/' + imageFacility + '/' + priceSeance, null, 
           {
           headers: {
           "Content-Type": "application/json",
@@ -242,8 +305,8 @@ export class ManagerService {
       );
     }
 
-    public updateFacility(idFacility:number, nameFacility: string, priceSeance: number){
-      this.httpClient.put<Facility>('http://localhost:8080/managerctrl/updatefacility/' + idFacility + '/' + nameFacility + '/' + priceSeance, null, 
+    public updateFacility(idFacility:number, nameFacility: string, priceSeance: number, descriptionFacility: string, imageFacility: string){
+      this.httpClient.put<Facility>('http://localhost:8080/managerctrl/updatefacility/' + idFacility + '/' + nameFacility + '/' + priceSeance+ '/' + descriptionFacility + '/' + imageFacility, null, 
           {
           headers: {
           "Content-Type": "application/json",

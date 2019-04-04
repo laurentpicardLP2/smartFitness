@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ import laurent.fitness.model.SubscriptionCategory;
 import laurent.fitness.model.WatchCategory;
 import laurent.fitness.services.FacilityCategoryService;
 import laurent.fitness.services.FacilityService;
+import laurent.fitness.services.FileStorageService;
 import laurent.fitness.services.RoomService;
 import laurent.fitness.services.SubscriptionCategoryService;
 import laurent.fitness.services.WatchCategoryService;
@@ -38,6 +40,9 @@ import laurent.fitness.upload.exception.UploadFileException;
 @RequestMapping("/managerctrl")
 @CrossOrigin("http://localhost:4200")
 public class ManagerController {
+	 @Autowired
+	 private FileStorageService fileStorageService;
+	 
 	private FacilityService facilityService;
 	private FacilityCategoryService facilityCategoryService;
 	private RoomService roomService;
@@ -69,6 +74,12 @@ public class ManagerController {
 		return(this.facilityCategoryService.getAllFacilityCategories());			
 	}
 	
+	// Fonction retournant le facilityCategory associé à un facility lorsq'un manager accède à la page de détails d'un facility
+	@GetMapping("/getfacilitycategoryassociatetofacility/{idFacility}")
+	public FacilityCategory getFacilityCategories(@PathVariable Integer idFacility) {
+		return(this.facilityCategoryService.getFacilityCategoryAssociateToFacility(idFacility));			
+	}
+	
 	//Ajoute un facility dans la catégorie idFacilityCategory et la room idRoom + met à jour le nombre d'équipement
 	@PostMapping("/addfacility/{idFacilityCategory}/{idRoom}/{nameFacility}/{descriptionFacility}/{imageFacility}/{priceSeance}")
 
@@ -97,7 +108,10 @@ public class ManagerController {
 	      throw new UploadFileException();
 	    }
 	    
-	    multipartFile.transferTo(new File("/home/laurent/smartFitness/dev/front/src/assets/images/facilities/" + multipartFile.getOriginalFilename()));
+	    this.fileStorageService.storeFile(multipartFile);
+
+	    
+	    //multipartFile.transferTo(new File("/home/laurent/smartFitness/dev/front/src/assets/images/facilities/" + multipartFile.getOriginalFilename()));
 	    return new ResponseEntity<>(new FileInformation(multipartFile.getOriginalFilename(), multipartFile.getSize()), HttpStatus.CREATED);
 	  }
 
@@ -114,15 +128,15 @@ public class ManagerController {
 	}
 	
 	// Update a facilityCategory
-		@PutMapping("/updatefacilitycategory/{idFacilityCategory}/{nameFacilityCategory}/{priceFacilityCategory}") 
-		public ResponseEntity<?> updateFacilityCategory(@PathVariable Integer idFacilityCategory, @PathVariable String nameFacilityCategory, @PathVariable Float priceFacilityCategory){
-			try {
-				return ResponseEntity.status(HttpStatus.OK).body(this.facilityCategoryService.updateFacilityCategory(idFacilityCategory, nameFacilityCategory, priceFacilityCategory));
-			} catch(Exception e) {
-				System.out.println(e);
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
-			}
+	@PutMapping("/updatefacilitycategory/{idFacilityCategory}/{nameFacilityCategory}/{priceFacilityCategory}") 
+	public ResponseEntity<?> updateFacilityCategory(@PathVariable Integer idFacilityCategory, @PathVariable String nameFacilityCategory, @PathVariable Float priceFacilityCategory){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.facilityCategoryService.updateFacilityCategory(idFacilityCategory, nameFacilityCategory, priceFacilityCategory));
+		} catch(Exception e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
+	}
 			
 	/**
 	 * Crée une catégorie d'équipement
@@ -255,10 +269,10 @@ public class ManagerController {
 		}			
 	}
 	
-	@PutMapping("/updatewatchcategory")
-	public ResponseEntity<?> updateWatchCategory(@RequestBody WatchCategory pWatchCategory) {
+	@PutMapping("/updatewatchcategory/{idWatchCategory}/{nameWatch}/{priceWatch}/{descriptionWatch}/{imageWatch}")
+	public ResponseEntity<?> updateWatchCategory(@PathVariable Integer idWatchCategory, @PathVariable String nameWatch, @PathVariable Float priceWatch, @PathVariable String descriptionWatch, @PathVariable String imageWatch) {
 		try {	
-			return ResponseEntity.status(HttpStatus.OK).body(this.watchCategoryService.updateWatchCategory(pWatchCategory.getIdWatchCategory(), pWatchCategory.getNameWatch(), pWatchCategory.getPriceWatch(), pWatchCategory.getDescriptionWatch(), pWatchCategory.getImageWatch()));
+			return ResponseEntity.status(HttpStatus.OK).body(this.watchCategoryService.updateWatchCategory(idWatchCategory, nameWatch, priceWatch, descriptionWatch, imageWatch));
 		
 		} catch(Exception e) {
 			
@@ -268,7 +282,7 @@ public class ManagerController {
 	}
 	
 	// Supprime un modèle de montre 
-	@DeleteMapping("/delwatchcategory/{idSubscriptionCategory}")
+	@DeleteMapping("/delwatchcategory/{idWatchCategory}")
 	public ResponseEntity<?> delWatchCategory(@PathVariable Integer idWatchCategory){
 		try {
 			this.watchCategoryService.deleteWatchCategory(this.watchCategoryService.findByIdWatchCategory(idWatchCategory));

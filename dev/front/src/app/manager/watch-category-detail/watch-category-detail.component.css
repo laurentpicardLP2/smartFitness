@@ -1,5 +1,4 @@
-
-  .facility-form {
+.watch-category-form {
     min-width: 150px;
     max-width: 600px;
     width: 100%;
@@ -7,12 +6,12 @@
 
 
   
-  .facility-full-width {
+  .watch-category-full-width {
     min-width:400px;
     max-width: 800px;
   }
 
-  .facility-border {
+  .watch-category-border {
     border-style: solid;
   }
 
@@ -21,6 +20,6 @@
     padding: 5px;
   }
 
-  .img-facility{
+  .img-watch{
     max-width: 250px;
   }

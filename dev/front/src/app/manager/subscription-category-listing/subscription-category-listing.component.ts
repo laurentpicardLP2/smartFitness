@@ -56,7 +56,7 @@ displayedColumns: string[] = ['Name', 'Price', 'Update', 'Delete'];
       
       if(confirm("Confirme-vous la suppression du compte " + nameSubscription + "?")){
         this.offresService.deleteSubscriptionCategory(idSubscriptionCategory);
-        setTimeout(() => this.RenderDataTable(), 300);
+        setTimeout(() => this.RenderDataTable(), 350);
       }
 
     }

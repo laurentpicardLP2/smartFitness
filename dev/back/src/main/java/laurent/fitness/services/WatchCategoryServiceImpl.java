@@ -40,6 +40,8 @@ private WatchCategoryRepository watchCategoryRepo;
 			String imageWatch) {
 		// TODO Auto-generated method stub
 		WatchCategory watchCategory = this.watchCategoryRepo.findByIdWatchCategory(idWatchCategory);
+		descriptionWatch = (descriptionWatch.equals("undefined")) ? "" : descriptionWatch;
+		imageWatch = (imageWatch.equals("undefined")) ? "" : imageWatch;
 		watchCategory.setNameWatch(nameWatch);
 		watchCategory.setPriceWatch(priceWatch);
 		watchCategory.setDescriptionWatch(descriptionWatch);

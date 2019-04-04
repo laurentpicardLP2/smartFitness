@@ -26,6 +26,7 @@ public class WatchCategory implements Serializable {
 
 	private float priceWatch;
 	
+	@Lob
 	private String descriptionWatch;
 
 	private String imageWatch;
@@ -41,8 +42,8 @@ public class WatchCategory implements Serializable {
 	public WatchCategory(String nameWatch, float priceWatch, String descriptionWatch, String imageWatch) {
 		this.nameWatch = nameWatch;
 		this.priceWatch = priceWatch;
-		this.descriptionWatch = descriptionWatch;
-		this.imageWatch = imageWatch;
+		this.descriptionWatch = (descriptionWatch.equals("undefined")) ? "" : descriptionWatch;
+		this.imageWatch = (imageWatch.equals("undefined")) ? "" : imageWatch;
 	}
 
 	public int getIdWatchCategory() {

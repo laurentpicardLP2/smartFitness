@@ -12,4 +12,8 @@ public interface FacilityCategoryRepository extends JpaRepository<FacilityCatego
 	@Query("SELECT fc FROM FacilityCategory fc WHERE fc.idFacilityCategory = ?1")
 	FacilityCategory findByIdFacilityCategory(int idFacilityCategory);
 	
+	@Query(value = "SELECT facility_category.* FROM facility_category INNER JOIN facility ON"
+			+ " facility_category.id_facility_Category = facility.facility_category_id_facility_category WHERE facility_category_id_facility_category = ?1", nativeQuery = true)
+	FacilityCategory findByIdFacilityCategoryAssociateToFacility(int idFacility);
+
 }

@@ -1,10 +1,14 @@
 import { ManagerService } from 'src/app/services/manager.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { LoginService } from 'src/app/services/login.service';
+import { FileInformation } from '../file-information';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
+import { FacilityCategory } from 'src/app/models/facility-category.model';
 import { Facility } from 'src/app/models/facility.model';
+import { Room } from 'src/app/models/room.model';
 import { BehaviorSubject } from 'rxjs';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
 
@@ -14,30 +18,89 @@ import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} f
   styleUrls: ['./facility-detail.component.css']
 })
 export class FacilityDetailComponent implements OnInit {
+  file: File;
+  fileInformation: FileInformation;
+  listFacilityCategories: BehaviorSubject<FacilityCategory[]>;
+  listRooms: BehaviorSubject<Room[]>;
+  facilityCategories: FacilityCategory[];
+  listFacilities: BehaviorSubject<Facility[]>;
+  facilities: Facility[];
+  rooms: Room[];
   idFacility: number;
   nameFacility: string;
   nameFacilityInit: string;
   priceSeance: number;
+  descriptionFacility: string;
+  imageFacility: string;
   facilityForm: FormGroup;
-  listFacilities: BehaviorSubject<Facility[]>;
-  facilities: Facility[];
+  bChangeImage: boolean = false;
+  idFacilityCategory: number;
+  idRoom: number;
+  facilityCategoryAssociateToFacility: FacilityCategory;
+  roomAssociateToFacility: Room;
   errors = errorMessages;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
+
+  @ViewChild('fileInput')
+  fileInput: ElementRef;
+  username: string;
+  password: string;
 
   constructor(private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private managerService: ManagerService,
+    private loginService: LoginService,
     private router: Router) { }
 
   ngOnInit() {
     this.idFacility = +this.route.snapshot.params.idFacility;
-    this.managerService.publishFacilities;
+    this.managerService.publishFacilities();
     this.managerService.findFacility(this.idFacility).subscribe(facility => {
       this.idFacility = facility.idFacility;
+      this.managerService.publishFacilityCategoryAssociateToFacility(this.idFacility);
       this.nameFacility = facility.nameFacility;
       this.nameFacilityInit = facility.nameFacility;
       this.priceSeance = facility.priceSeance;
+      this.descriptionFacility = facility.descriptionFacility;
+      this.imageFacility = facility.imageFacility;
+      this.managerService.getFacilityCategoryAssociateToFacility(this.idFacility).subscribe(res => {
+        this.facilityCategoryAssociateToFacility = res;
+        this.managerService.publishFacilityCategoryAssociateToFacility(this.idFacility);
+        console.log("this.facilityCategoryAssociateToFacility.nameFacilityCategory : ", this.facilityCategoryAssociateToFacility.nameFacilityCategory);
+      });
     });
+
+    //this.idFacilityCategory = facility.facilityCategory.idFacilityCategory;
+    //this.idRoom = facility.room.idRoom;
+    //console.log("idRoom : ", this.idRoom);
+
+    this.managerService.getFacilityCategories().subscribe(res => {
+      this.facilityCategories = res;
+      this.managerService.publishFacilityCategories();
+      this.listFacilityCategories = this.managerService.listFacilityCategories$;
+    });
+
+    this.managerService.getFacilities().subscribe(res => {
+      this.facilities = res;
+      this.managerService.publishFacilities();
+      this.listFacilities = this.managerService.listFacilities$;
+    });
+
+    this.managerService.getRooms().subscribe(res => {
+      this.rooms = res;
+      this.managerService.publishRooms();
+      this.listRooms = this.managerService.listRooms$;
+    });
+
+
+    this.loginService.usernameSubject.subscribe(res => {
+      this.username = res;
+    });
+
+    this.loginService.passwordSubject.subscribe(res => {
+      this.password = res;
+    });
+
     this.createForm();
   }
 
@@ -49,7 +112,16 @@ export class FacilityDetailComponent implements OnInit {
           Validators.minLength(1),
         ]]
       }, {validator: this.checkNameFacility.bind(this)}),
-        priceSeance: ['', ]
+      priceSeance: ['', [
+        Validators.required
+      ]],
+      descriptionFacility: '',
+      imageFacility: '',
+      userFile: null,
+      idFacilityCategory: null,
+      idRoom: [null, [
+        Validators.required
+    ]]
     }); 
   }
 
@@ -63,11 +135,41 @@ export class FacilityDetailComponent implements OnInit {
     return isValid ? null : { checkNameFacility: true };
   }
 
+  onSelectFile(event) {
+    if(event.target.files && event.target.files.length > 0) {
+      this.file = event.target.files[0];
+      this.facilityForm.get('imageFacility').setValue(this.file.name);
+      console.log(`file: ${JSON.stringify(this.file.name)}`);
+      console.log(`file: ${JSON.stringify(this.file.size)}`);
+      this.fileInformation = null;
+    }
+  }
+
+  selectFile(): void {
+    this.bChangeImage = true;
+    this.fileInput.nativeElement.click();
+  }
+
   
 
 
   public onUpdate() {
-    this.managerService.updateFacility(this.idFacility,this.nameFacility, this.priceSeance);
+    const data: FormData = new FormData();
+      
+    if (this.file !== undefined){
+      this.imageFacility = this.nameFacility + "_" + this.file.name;
+      this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceSeance);
+      data.append('data', this.file, this.nameFacility + "_" + this.file.name);
+      this.managerService.addImage(data, this.username, this.password, "facilityForm");
+    }
+    else {
+      this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceSeance);
+    }
+
+
+
+
+    this.managerService.updateFacility(this.idFacility,this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility);
   }
 
 }

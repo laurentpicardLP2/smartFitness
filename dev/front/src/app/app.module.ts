@@ -49,6 +49,7 @@ import { SubscriptionCustomerHistoricComponent } from './offres/subscription-cus
 import { WatchCustomerPropositionComponent } from './offres/watch-customer-proposition/watch-customer-proposition.component';
 import { WatchCategoryNewComponent } from './manager/watch-category-new/watch-category-new.component';
 import { WatchCategoryListingComponent } from './manager/watch-category-listing/watch-category-listing.component';
+import { WatchCategoryDetailComponent } from './manager/watch-category-detail/watch-category-detail.component';
 
 
 @NgModule({
@@ -90,6 +91,7 @@ import { WatchCategoryListingComponent } from './manager/watch-category-listing/
     WatchCustomerPropositionComponent,
     WatchCategoryNewComponent,
     WatchCategoryListingComponent,
+    WatchCategoryDetailComponent,
 
   ],
   imports: [
