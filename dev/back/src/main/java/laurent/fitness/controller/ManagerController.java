@@ -76,7 +76,7 @@ public class ManagerController {
 	
 	// Fonction retournant le facilityCategory associé à un facility lorsq'un manager accède à la page de détails d'un facility
 	@GetMapping("/getfacilitycategoryassociatetofacility/{idFacility}")
-	public FacilityCategory getFacilityCategories(@PathVariable Integer idFacility) {
+	public FacilityCategory getFacilityCategoryAssociateToFacility(@PathVariable Integer idFacility) {
 		return(this.facilityCategoryService.getFacilityCategoryAssociateToFacility(idFacility));			
 	}
 	
@@ -114,13 +114,14 @@ public class ManagerController {
 	    //multipartFile.transferTo(new File("/home/laurent/smartFitness/dev/front/src/assets/images/facilities/" + multipartFile.getOriginalFilename()));
 	    return new ResponseEntity<>(new FileInformation(multipartFile.getOriginalFilename(), multipartFile.getSize()), HttpStatus.CREATED);
 	  }
-
-	
+    		 	
 	// Update a facility
-	@PutMapping("/updatefacility/{idFacility}/{nameFacility}/{priceSeance}")
-	public ResponseEntity<?> updateFacility(@PathVariable Integer idFacility, @PathVariable String nameFacility, @PathVariable Float priceSeance){
+	@PutMapping("/updatefacility/{idFacility}/{nameFacilityCategory}/{nameRoom}/{nameFacility}/{priceSeance}/{descriptionFacility}/{imageFacility}")
+	public ResponseEntity<?> updateFacility(@PathVariable Integer idFacility, @PathVariable String nameFacilityCategory,
+			@PathVariable String nameRoom, @PathVariable String nameFacility, @PathVariable Float priceSeance,
+			@PathVariable String descriptionFacility, @PathVariable String imageFacility){
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(this.facilityService.updateFacility(idFacility, nameFacility, priceSeance));
+			return ResponseEntity.status(HttpStatus.OK).body(this.facilityService.updateFacility(idFacility, nameFacilityCategory, nameRoom, nameFacility, priceSeance, descriptionFacility, imageFacility));
 		} catch(Exception e) {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
@@ -177,6 +178,13 @@ public class ManagerController {
 	@GetMapping("/getrooms")
 	public List<Room> getRooms() {
 		return this.roomService.getAllRooms();			
+	}
+	
+	
+	// Fonction retournant la room associée à un facility lorsq'un manager accède à la page de détails d'un facility
+	@GetMapping("/getroomassociatetofacility/{idFacility}")
+	public Room getRoomAssociateToFacility(@PathVariable Integer idFacility) {
+		return this.roomService.getRoomAssociateToFacility(idFacility);			
 	}
 
 	

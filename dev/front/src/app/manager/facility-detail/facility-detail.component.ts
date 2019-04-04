@@ -34,10 +34,10 @@ export class FacilityDetailComponent implements OnInit {
   imageFacility: string;
   facilityForm: FormGroup;
   bChangeImage: boolean = false;
-  idFacilityCategory: number;
-  idRoom: number;
   facilityCategoryAssociateToFacility: FacilityCategory;
+  nameFacilityCategory: string = "";
   roomAssociateToFacility: Room;
+  nameRoom: string ="";
   errors = errorMessages;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
 
@@ -66,13 +66,16 @@ export class FacilityDetailComponent implements OnInit {
       this.managerService.getFacilityCategoryAssociateToFacility(this.idFacility).subscribe(res => {
         this.facilityCategoryAssociateToFacility = res;
         this.managerService.publishFacilityCategoryAssociateToFacility(this.idFacility);
-        console.log("this.facilityCategoryAssociateToFacility.nameFacilityCategory : ", this.facilityCategoryAssociateToFacility.nameFacilityCategory);
+        this.nameFacilityCategory = this.facilityCategoryAssociateToFacility.nameFacilityCategory;
+      });
+      this.managerService.getRoomAssociateToFacility(this.idFacility).subscribe(res => {
+        this.roomAssociateToFacility = res;
+        this.managerService.publishRoomAssociateToFacility(this.idFacility);
+        this.nameRoom = this.roomAssociateToFacility.nameRoom;
       });
     });
 
-    //this.idFacilityCategory = facility.facilityCategory.idFacilityCategory;
-    //this.idRoom = facility.room.idRoom;
-    //console.log("idRoom : ", this.idRoom);
+    
 
     this.managerService.getFacilityCategories().subscribe(res => {
       this.facilityCategories = res;
@@ -118,10 +121,12 @@ export class FacilityDetailComponent implements OnInit {
       descriptionFacility: '',
       imageFacility: '',
       userFile: null,
-      idFacilityCategory: null,
-      idRoom: [null, [
+      nameFacilityCategory: ['', [
         Validators.required
-    ]]
+      ]],
+      nameRoom: ['', [
+        Validators.required
+      ]]
     }); 
   }
 
@@ -155,21 +160,22 @@ export class FacilityDetailComponent implements OnInit {
 
   public onUpdate() {
     const data: FormData = new FormData();
+    this.descriptionFacility = (this.descriptionFacility == "") ? "undefined" : this.descriptionFacility;
+    this.imageFacility = (this.imageFacility == "") ? "undefined" : this.imageFacility;
       
     if (this.file !== undefined){
       this.imageFacility = this.nameFacility + "_" + this.file.name;
-      this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceSeance);
+      this.managerService.updateFacility(this.idFacility, this.nameFacilityCategory, this.nameRoom, this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility);
       data.append('data', this.file, this.nameFacility + "_" + this.file.name);
       this.managerService.addImage(data, this.username, this.password, "facilityForm");
     }
     else {
-      this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceSeance);
+      this.managerService.updateFacility(this.idFacility, this.nameFacilityCategory, this.nameRoom, this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility);
     }
 
 
 
 
-    this.managerService.updateFacility(this.idFacility,this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility);
   }
 
 }

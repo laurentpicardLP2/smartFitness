@@ -172,7 +172,6 @@ export class OffresService {
           }
         }).subscribe(
           (updatedWatchCategory) =>{ 
-            console.log("update WatchCategory OK : ", updatedWatchCategory);
             setTimeout(() => this.router.navigate(['watch-category-listing']), 500);
           },
           (error) => { 

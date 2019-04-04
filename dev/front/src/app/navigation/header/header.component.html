@@ -29,8 +29,8 @@
         <div class="mat-button-focus-overlay"></div>
       </a> 
 
-      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="offres">Vos offres</button>
-      <mat-menu  #offres="matMenu">
+      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="offrescustomer">Vos offres</button>
+      <mat-menu  #offrescustomer="matMenu">
         <button mat-menu-item [matMenuTriggerFor]="subscription">Vos abonnements</button>
         <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/watch-customer-proposition')">Acheter une montre connectée</button>
      </mat-menu>

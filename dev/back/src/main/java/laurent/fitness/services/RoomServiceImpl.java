@@ -56,4 +56,10 @@ public class RoomServiceImpl implements RoomService {
 		return this.roomRepo.save(room);
 	}
 
+	@Override
+	public Room getRoomAssociateToFacility(int idFacility) {
+		// TODO Auto-generated method stub
+		return this.roomRepo.findByIdRoomAssociateToFacility(idFacility);
+	}
+
 }

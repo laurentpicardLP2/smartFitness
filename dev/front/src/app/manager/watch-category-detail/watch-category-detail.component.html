@@ -32,11 +32,11 @@
         <button mat-raised-button [disabled]="watchCategoryForm.invalid" (click)="onUpdate()">Modifier</button>
         <div>
           <br>
-          <img *ngIf="imageWatch!='' && !bChangeImage" class="img-watch" src="assets/images/facilities/{{ imageWatch }}" />
+          <img *ngIf="imageWatch!='' && imageWatch!='undefined' &&  !bChangeImage" class="img-watch" src="assets/images/facilities/{{ imageWatch }}" />
         </div>
-        <div *ngIf="imageWatch!='' && bChangeImage">
+        <div *ngIf="imageWatch!='' && imageWatch!='undefined' && bChangeImage">
             <br>
-            Cliquez sur "modifier" pour procéder à l'upload de l'image
+            Cliquez sur "modifier" pour procéder à l'upload de l'image.
           </div>
         
       </form>

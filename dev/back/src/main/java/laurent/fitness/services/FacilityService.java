@@ -8,8 +8,8 @@ public interface FacilityService {
 	
 	public Facility saveNewFacility(String facilityName, String roomName, String facilityCategoryName);
 	
-	public Facility updateFacility(int idFacility, String nameFacility, float priceSeance);
-
+	public Facility updateFacility(int idFacility, String nameFacilityCategory, String nameRoom, String nameFacility, float priceSeance, String descriptionFacility, String imageFacility);
+	 
 	public Facility saveFacility(Facility facility);
 	
 	public Facility updateFacility(String facilityName, String roomName);

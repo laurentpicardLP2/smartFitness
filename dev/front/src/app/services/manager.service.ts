@@ -305,8 +305,8 @@ export class ManagerService {
       );
     }
 
-    public updateFacility(idFacility:number, nameFacility: string, priceSeance: number, descriptionFacility: string, imageFacility: string){
-      this.httpClient.put<Facility>('http://localhost:8080/managerctrl/updatefacility/' + idFacility + '/' + nameFacility + '/' + priceSeance+ '/' + descriptionFacility + '/' + imageFacility, null, 
+    public updateFacility(idFacility:number, nameFacilityCategory: string, nameRoom: string,  nameFacility: string, priceSeance: number, descriptionFacility: string, imageFacility: string){
+      this.httpClient.put<Facility>('http://localhost:8080/managerctrl/updatefacility/' + idFacility + '/' + nameFacilityCategory + '/' + nameRoom + '/' + nameFacility + '/' + priceSeance+ '/' + descriptionFacility + '/' + imageFacility, null, 
           {
           headers: {
           "Content-Type": "application/json",
@@ -314,8 +314,7 @@ export class ManagerService {
           }
         }).subscribe(
           (updatedFacility) =>{ 
-            console.log("update Facility OK : ", updatedFacility);
-            this.router.navigate(['facility-listing']);
+            setTimeout(() => this.router.navigate(['facility-listing']), 500);
           },
           (error) => { 
             console.log("update Facility pb : ", error); 

@@ -11,6 +11,9 @@ insert into facility (facility_category_id_facility_category, room_id_room, name
 insert into facility (facility_category_id_facility_category, room_id_room, name_facility, price_seance, description_facility, image_facility) values(2, 1, "Tapis roulant 2", 0.55, "", "Tapis roulant 2_tapisRoulant.jpeg");
 insert into facility (facility_category_id_facility_category, room_id_room, name_facility, price_seance, description_facility, image_facility) values(3, 1, "Vélo 1", 1.50, "", "");
 
+insert into watch_category (description_watch, image_watch, name_watch, price_watch) values("", "Watch 1_watch.jpg", "Watch 1", 100);
+insert into watch_category (description_watch, image_watch, name_watch, price_watch) values("", "Watch 2_watchXioami.jpg", "Watch 2", 200);
+
 insert into authorities (username, authority) values ("db_admin", "ROLE_ADMIN");
 insert into users (username, enabled, password, fullname, id_user) values ("db_admin", 1, "{bcrypt}$2a$10$woFD.JoUP44f4iyS0YLywO5TLT4xabSvFZF9T4NEwhcGLmjGkKsOe", "sysadmin", 1);
 insert into staff (username) values ("db_admin");

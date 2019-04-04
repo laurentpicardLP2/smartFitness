@@ -1,3 +1,52 @@
-<p>
-  watch-customer-proposition works!
-</p>
+<table>
+  <tr *ngFor="let watch of watchCategoryList | async">
+    <td>
+      <div *ngIf="watch.imagWatch ==''">
+            {{ watch.nameWatch }} : {{ convertIntoMonetaryFormat(watch.priceWatch) }}
+            <br>
+          <span *ngIf="facility.descriptionFacility !=''" >
+            {{ facility.descriptionFacility }}  <br></span>
+          <a mat-flat-button (click)="onBookingWatch(watch.nameWatch, facilityCategory.nameFacilityCategory, facility.priceSeance)">Sélectionner</a>
+      </div>
+        <div *ngIf="watch.imageWatch !='' && watch.descriptionWatch ==''" >
+          <table>
+            <tr>
+              <td rowspan=2>
+                  <img class="img-watch" src="assets/images/facilities/{{ watch.imageWatch }}" />
+              </td>
+              <td>
+                  {{ watch.nameWatch }} : {{ convertIntoMonetaryFormat(watch.priceWatch) }} 
+                </td>
+            </tr>
+            <tr>
+              <td>
+                <a mat-flat-button (click)="onBookingFacility(facility.nameFacility, facilityCategory.nameFacilityCategory, facility.priceSeance)">Sélectionner</a>
+              </td>
+            </tr>
+          </table>   
+        </div>
+        <div *ngIf="watch.imageWatch !='' && watch.descriptionWatch !=''" >
+            <table>
+              <tr>
+                <td rowspan=3>
+                    <img class="img-watch" src="assets/images/facilities/{{ watch.imageWatch }}" />
+                </td>
+                <td>
+                    {{ watch.nameWatch }} : {{ convertIntoMonetaryFormat(watch.priceWatch) }}
+               </td>
+              </tr>
+              <tr>
+                <td>
+                    {{ watch.descriptionWatch }}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a mat-flat-button (click)="onBookingFacility(facility.nameFacility, facilityCategory.nameFacilityCategory, facility.priceSeance)">Sélectionner</a>
+                </td>
+              </tr>
+            </table>   
+          </div>
+      </td>
+    </tr>
+  </table>   
