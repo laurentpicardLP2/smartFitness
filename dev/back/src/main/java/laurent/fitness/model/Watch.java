@@ -40,6 +40,12 @@ public class Watch extends Item implements Serializable {
 	public Watch(List<Command> commands, String typeItem) {
 		super(commands, typeItem);
 	}
+	
+	public Watch(List<Command> commands, String typeItem, float price, Customer customer, WatchCategory watchCategory) {
+		super(commands, typeItem, price);
+		this.customer = customer;
+		this.watchCategory = watchCategory;
+	}
 
 	public WatchCategory getWatchCategory() {
 		return this.watchCategory;

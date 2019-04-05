@@ -15,21 +15,23 @@ import org.springframework.web.bind.annotation.RestController;
 import laurent.fitness.model.Seance;
 import laurent.fitness.model.Subscription;
 import laurent.fitness.model.SubscriptionCategory;
+import laurent.fitness.model.Watch;
 import laurent.fitness.model.adaptater.FacilityAvailableAdaptater;
 import laurent.fitness.services.ItemService;
 import laurent.fitness.services.SeanceService;
 import laurent.fitness.services.SubscriptionService;
+import laurent.fitness.services.WatchService;
 
 @RestController
 @RequestMapping("/offrectrl")
 @CrossOrigin("http://localhost:4200")
 public class OffreController {
 	private SubscriptionService subscriptionService;
-	private ItemService itemService;
+	private WatchService watchService;
 	
-	public OffreController(SubscriptionService subscriptionService, ItemService itemService) {
+	public OffreController(SubscriptionService subscriptionService, WatchService watchService) {
 		this.subscriptionService = subscriptionService;
-		this.itemService = itemService;
+		this.watchService = watchService;
 	}
 	
 	//Ajoute une subscription à une entité command pour un username donné
@@ -72,5 +74,18 @@ public class OffreController {
 	@GetMapping("/getnextsubscriptionsforanuser/{username}")
 	public List<Subscription> getNextSubscriptionsForAnUser(@PathVariable String username) {
 		return this.subscriptionService.findNextSubscriptionsByUsername(username);
+	}
+	
+	//Ajoute une watch à une entité command pour un username donné
+	@PostMapping("/addwatch/{idCommand}/{idWatchCategory}/{username}")
+	public ResponseEntity<?> addWatch(@PathVariable int idCommand, @PathVariable Integer idWatchCategory, @PathVariable String username) {
+
+		try { 
+			return ResponseEntity.status(HttpStatus.OK).body(this.watchService.createWatch(idCommand, idWatchCategory, username));
+		} catch(Exception e) {
+			
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}			
 	}
 }

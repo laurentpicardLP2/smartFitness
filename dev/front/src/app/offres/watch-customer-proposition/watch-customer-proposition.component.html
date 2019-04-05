@@ -1,12 +1,12 @@
 <table>
   <tr *ngFor="let watch of watchCategoryList | async">
     <td>
-      <div *ngIf="watch.imagWatch ==''">
+      <div *ngIf="watch.immageWatch ==''">
             {{ watch.nameWatch }} : {{ convertIntoMonetaryFormat(watch.priceWatch) }}
             <br>
-          <span *ngIf="facility.descriptionFacility !=''" >
-            {{ facility.descriptionFacility }}  <br></span>
-          <a mat-flat-button (click)="onBookingWatch(watch.nameWatch, facilityCategory.nameFacilityCategory, facility.priceSeance)">Sélectionner</a>
+          <span *ngIf="watch.descriptionWatch !=''" >
+            {{ watch.descriptionWatch }}  <br></span>
+          <a mat-flat-button (click)="onOrder(watch.idWatchCategory)">Sélectionner</a>
       </div>
         <div *ngIf="watch.imageWatch !='' && watch.descriptionWatch ==''" >
           <table>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
               <td>
-                <a mat-flat-button (click)="onBookingFacility(facility.nameFacility, facilityCategory.nameFacilityCategory, facility.priceSeance)">Sélectionner</a>
+                <a mat-flat-button (click)="onOrder(watch.idWatchCategory)">Sélectionner</a>
               </td>
             </tr>
           </table>   
@@ -42,7 +42,7 @@
               </tr>
               <tr>
                 <td>
-                  <a mat-flat-button (click)="onBookingFacility(facility.nameFacility, facilityCategory.nameFacilityCategory, facility.priceSeance)">Sélectionner</a>
+                  <a mat-flat-button (click)="onOrder(watch.idWatchCategory)">Sélectionner</a>
                 </td>
               </tr>
             </table>   

@@ -47,6 +47,12 @@
 	.flex-spacer {
 		flex: 1 1 auto;
 	}
+
+	.cart-title {
+		font-family: 'Times New Roman', Times, serif;
+		font-size: 1O px;
+		padding-left: 15px;
+	}
 	
 	
 	

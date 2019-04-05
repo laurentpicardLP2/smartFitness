@@ -237,10 +237,8 @@ export class OffresService {
           }
       );
     }
-
-    public addWatchToCommand(command: Command, username: string, idWatchCategory: number, nameWatch: string, priceWatch: Date, descriptionWatch: string, imageWatch: string, nbItems: string){
-      this.httpClient.post<Subscription>('http://localhost:8080/offrectrl/addsubscription/' + command.idCommand + '/' + username + '/' +
-        idWatchCategory  + '/' + nameWatch + '/' + priceWatch + '/' + descriptionWatch + '/' + imageWatch, null, 
+    public addWatchToCommand(command: Command,  idWatchCategory: number, username: string, nbItems: string){
+      this.httpClient.post<Subscription>('http://localhost:8080/offrectrl/addwatch/' + command.idCommand + '/' + idWatchCategory + '/' + username , null, 
         {
           headers: {
               "Content-Type": "application/json",
@@ -261,7 +259,7 @@ export class OffresService {
           },
           (error) => { 
             console.log("add watch pb : ", error);
-            //this.router.navigate(['error-page']);
+            this.router.navigate(['error-page']);
           }
       );
     }

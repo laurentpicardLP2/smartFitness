@@ -20,17 +20,11 @@ import { WatchCategory } from 'src/app/models/watch-category.model';
 export class WatchCustomerPropositionComponent implements OnInit {
 
   watchCategoryList: BehaviorSubject<WatchCategory[]>; 
-  
-   dateOfTimestamp: Date;
-   listFacilityCategories: BehaviorSubject<FacilityAvailableAdaptater[]>;
-   command: Command;
-   watchCategory: WatchCategory;
-   nameFacility: string;
-   isBookedTimestamp: boolean;
-   isAvailableFacilites: boolean;
-   isNotAvailableFacilities: boolean;
-   isShowableFacilities: boolean;
-   priceSeance: number[]=[];
+  command: Command;
+  watchCategory: WatchCategory;
+  username: string;
+  nbItems: string;
+
   
  
    constructor(
@@ -47,20 +41,26 @@ export class WatchCustomerPropositionComponent implements OnInit {
  
    ngOnInit() {
      
-     this.commandService.commandSubject.subscribe(res => {
-       this.command = res;
-     });
- 
+    this.loginService.usernameSubject.subscribe(res => {
+      this.username = res;
+    });
+    this.commandService.commandSubject.subscribe(res => {
+      this.command = res;
+    });
 
+    this.commandService.nbItemsSubject.subscribe(res => {
+      this.nbItems = res;
+    });
+     
      this.offresService.publishWatchCategories();
     this.watchCategoryList  = this.offresService.listWatchCategories$;
  
  
    }
  
-   onBookingWatch(nameFacility: string, nameFacilityCategory: string, priceSeance: number){
-     //priceSeance = (this.isSubscribed) ? Math.round((priceSeance/2)*100)/100 : Math.round((priceSeance)*100)/100;
-     //this.seanceService.addTimestampFacilityToSeance(this.seance, this.dateOfTimestamp, nameFacility, nameFacilityCategory, priceSeance, this.priceSeance);
+   
+   onOrder(idWatchCategory: number){
+     this.offresService.addWatchToCommand(this.command,  idWatchCategory, this.username, this.nbItems);
     
    }
  

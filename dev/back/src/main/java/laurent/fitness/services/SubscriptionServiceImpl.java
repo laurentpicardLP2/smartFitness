@@ -39,8 +39,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		List<Command> commands = new ArrayList<Command>();
 		Customer customer = this.customerRepo.findByUsername(username);
 		Command command = this.commandRepo.findByIdCommand(idCommand);
-		SubscriptionCategory subscriptionCategory = this.subscriptionCategoryRepo.findByIdSubscriptionCategory(idSubscriptionCategory);
 		commands.add(command);
+		SubscriptionCategory subscriptionCategory = this.subscriptionCategoryRepo.findByIdSubscriptionCategory(idSubscriptionCategory);
 		return this.subscriptionRepo.save(new Subscription(commands, subscriptionCategory.getNameSubscription(), customer, subscriptionCategory.getPriceSubscription(), 
 				subscriptionCategory, dateStartOfSubscription, dateEndOfSubscription));
 	}
