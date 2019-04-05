@@ -38,6 +38,8 @@ import { WatchCustomerPropositionComponent } from './offres/watch-customer-propo
 import { WatchCategoryNewComponent } from './manager/watch-category-new/watch-category-new.component';
 import { WatchCategoryListingComponent } from './manager/watch-category-listing/watch-category-listing.component';
 import { WatchCategoryDetailComponent } from './manager/watch-category-detail/watch-category-detail.component';
+import { MonthlyRateBookingComponent } from './manager/monthly-rate-booking/monthly-rate-booking.component';
+
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -69,6 +71,9 @@ const routes: Routes = [
   { path: 'subscription-customer-proposition', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerPropositionComponent },
   { path: 'subscription-customer-historic', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerHistoricComponent },
   { path: 'watch-customer-proposition', canActivate: [AuthGuardCustomerService], component: WatchCustomerPropositionComponent },
+  { path: 'watch-category-listing', canActivate: [AuthGuardManagerService], component: WatchCategoryListingComponent},
+  { path: 'monthly-rate-booking', canActivate: [AuthGuardManagerService], component: MonthlyRateBookingComponent},
+
   { path: 'chart',  component: TimestampFacilityComponent },
   { path: 'paypal',  component: PaypalComponent },
   { path: '', component: HomeComponent },

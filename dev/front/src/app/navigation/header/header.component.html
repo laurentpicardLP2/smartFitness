@@ -102,7 +102,7 @@
     
       <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="pilotage">Pilotage</button>
       <mat-menu  #pilotage="matMenu">
-          <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false" (click)="onAction('/chart')">Tableaux de bord</button>
+          <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false" (click)="onAction('/monthly-rate-booking')">Tableaux de bord</button>
        </mat-menu>
   
       <a *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onToggleCart()">
@@ -112,14 +112,10 @@
     </a> 
     <div *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" id="cart" class="cart">        
         <div class="cartText" id="cartText">
-            
-                 <span class="cart-title">Votre panier</span>
-                  <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onContinue()">
-                    <mat-icon>close</mat-icon>
-                  </button>
-              <!-- <div class="mat-button-ripple mat-ripple" matripple=""></div>
-              <div class="mat-button-focus-overlay"></div> -->
-            
+            <span class="cart-title">Votre panier</span>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onContinue()">
+              <mat-icon>close</mat-icon>
+            </button>
             <a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onResetCart()">
               <span class="mat-button-wrapper">Vider le panier</span>
             <div class="mat-button-ripple mat-ripple" matripple=""></div>

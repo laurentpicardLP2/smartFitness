@@ -50,7 +50,7 @@ import { WatchCustomerPropositionComponent } from './offres/watch-customer-propo
 import { WatchCategoryNewComponent } from './manager/watch-category-new/watch-category-new.component';
 import { WatchCategoryListingComponent } from './manager/watch-category-listing/watch-category-listing.component';
 import { WatchCategoryDetailComponent } from './manager/watch-category-detail/watch-category-detail.component';
-
+import { MonthlyRateBookingComponent } from './manager/monthly-rate-booking/monthly-rate-booking.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +92,7 @@ import { WatchCategoryDetailComponent } from './manager/watch-category-detail/wa
     WatchCategoryNewComponent,
     WatchCategoryListingComponent,
     WatchCategoryDetailComponent,
+    MonthlyRateBookingComponent,
 
   ],
   imports: [

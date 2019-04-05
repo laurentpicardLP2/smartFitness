@@ -56,15 +56,23 @@ call proc_cadeaux(@augmentation);
 insert into db_procstock.compte(NUMERO, CODETYPECOMPTE, CODETITULAIRE, SOLDE) VALUES (11003, 'L', 1005, 200);
 
 
-use db_procstock;
-drop procedure IF EXISTS `proc_update`;
+use db_fitness;
+drop procedure IF EXISTS `proc_insert_cmd`;
 DELIMITER $$
-CREATE PROCEDURE `proc_update` (IN augmentation INT)
-	COMMENT 'Commande pour accorder une prime patronale de 19€'
+CREATE PROCEDURE `proc_insert_cmd` ()
+	COMMENT 'Procédure'
 BEGIN
-    UPDATE db_procstock.compte  SET solde = solde + augmentation; 
+DECLARE i INT;
+SET i = 5;
+WHILE i < 9 DO
+	insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (i, current_timestamp(), 0, 18, "db_user");
+	insert into command_has_item (item_id_item, command_id_command) values (i, 5);
+    SET i = i + 1;
+END WHILE;
+    
 END$$
 DELIMITER ;
+
 
 
 

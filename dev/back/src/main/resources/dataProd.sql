@@ -20,29 +20,14 @@ insert into staff (username) values ("db_admin");
 insert into authorities (username, authority) values ("db_manager", "ROLE_MANAGER");
 insert into users (username, enabled, password, fullname, id_user) values ("db_manager", 1, "{bcrypt}$2a$10$b6ej/xgpJMm5LJOpNTw/1.hwO08FJCg6cJs2okGi13Elzgt6lKYuu", "sysmanager", 2);
 insert into staff (username) values ("db_manager");
-insert into authorities (username, authority) values ("db_user1", "ROLE_CUSTOMER");
-insert into users (username, enabled, password, fullname, id_user) values ("db_user1", 1, "{bcrypt}$2a$10$vJMerK8BAwOHNSwInrCHBO0r4usIzb8e3x3dNg4TZSo3KCZ4lpsLO", "user1", 3);
-insert into customer (username) values ("db_user1");
-insert into authorities (username, authority) values ("db_user2", "ROLE_CUSTOMER");
-insert into users (username, enabled, password, fullname, id_user) values ("db_user2", 1, "{bcrypt}$2a$10$vJMerK8BAwOHNSwInrCHBO0r4usIzb8e3x3dNg4TZSo3KCZ4lpsLO", "user2", 4);
-insert into customer (username) values ("db_user2");
-insert into authorities (username, authority) values ("db_user3", "ROLE_CUSTOMER");
-insert into users (username, enabled, password, fullname, id_user) values ("db_user3", 1, "{bcrypt}$2a$10$vJMerK8BAwOHNSwInrCHBO0r4usIzb8e3x3dNg4TZSo3KCZ4lpsLO", "user3", 5);
-insert into customer (username) values ("db_user3");
-insert into authorities (username, authority) values ("db_user4", "ROLE_CUSTOMER");
-insert into users (username, enabled, password, fullname, id_user) values ("db_user4", 1, "{bcrypt}$2a$10$vJMerK8BAwOHNSwInrCHBO0r4usIzb8e3x3dNg4TZSo3KCZ4lpsLO", "user1", 6);
-insert into customer (username) values ("db_user4");
-insert into authorities (username, authority) values ("db_user5", "ROLE_CUSTOMER");
-insert into users (username, enabled, password, fullname, id_user) values ("db_user5", 1, "{bcrypt}$2a$10$vJMerK8BAwOHNSwInrCHBO0r4usIzb8e3x3dNg4TZSo3KCZ4lpsLO", "user2", 7);
-insert into customer (username) values ("db_user5");
-insert into authorities (username, authority) values ("db_user6", "ROLE_CUSTOMER");
-insert into users (username, enabled, password, fullname, id_user) values ("db_user6", 1, "{bcrypt}$2a$10$vJMerK8BAwOHNSwInrCHBO0r4usIzb8e3x3dNg4TZSo3KCZ4lpsLO", "user3", 8);
-insert into customer (username) values ("db_user6");
+insert into authorities (username, authority) values ("db_user", "ROLE_CUSTOMER");
+insert into users (username, enabled, password, fullname, id_user) values ("db_user", 1, "{bcrypt}$2a$10$vJMerK8BAwOHNSwInrCHBO0r4usIzb8e3x3dNg4TZSo3KCZ4lpsLO", "user", 3);
+insert into customer (username) values ("db_user");
 insert into authorities (username, authority) values ("db_sebastien", "ROLE_CUSTOMER");
-insert into users (username, enabled, password, fullname, id_user) values ("db_sebastien", 1, "{bcrypt}$2a$10$6mIW8L/KaNOydeoUKSWDzOS4l6tm./HMNyI9NF4d9MEDoM1YPrqcq", "sébastien", 9);
+insert into users (username, enabled, password, fullname, id_user) values ("db_sebastien", 1, "{bcrypt}$2a$10$6mIW8L/KaNOydeoUKSWDzOS4l6tm./HMNyI9NF4d9MEDoM1YPrqcq", "sébastien", 4);
 insert into customer (username) values ("db_sebastien");
 insert into authorities (username, authority) values ("db_abonne", "ROLE_CUSTOMER");
-insert into users (username, enabled, password, fullname, id_user) values ("db_abonne", 1, "{bcrypt}$2a$10$eVEHILc2AIX3pkEr.2JNgus1viVpbLQX.L0tOPfiyJh3juirkv4Pe", "sysabonne", 10);
+insert into users (username, enabled, password, fullname, id_user) values ("db_abonne", 1, "{bcrypt}$2a$10$eVEHILc2AIX3pkEr.2JNgus1viVpbLQX.L0tOPfiyJh3juirkv4Pe", "sysabonne", 5);
 insert into customer (username) values ("db_abonne");
 
 insert into subscription_category (name_subscription, nb_last, price_subscription, type_last) values ("Abonnement 1 jour", 1, 5, "Day");
@@ -73,6 +58,4 @@ insert into command (id_command, date_of_command, status_command, total_price, c
 insert into item (id_item, price, type_item) values (4, 500, "Abonnement 6 mois");
 insert into command_has_item (item_id_item, command_id_command) values (4, 4);
 insert into subscription (id_item, customer_users_username, subscription_category_id_subscription_category, date_start_of_subscription, date_end_of_subscription) values (4, "db_abonne", 6, "2020-03-01", "2020-09-30");
-
-
 

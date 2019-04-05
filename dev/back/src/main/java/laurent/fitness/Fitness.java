@@ -9,6 +9,10 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
 
+import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -34,6 +38,10 @@ import laurent.fitness.repository.UserRepository;
 
 @SpringBootApplication
 public class Fitness implements CommandLineRunner {
+	
+	@Autowired
+	private EntityManager entityManager;
+	
     public boolean someLibraryMethod() {
         return true;
     }
@@ -48,6 +56,14 @@ public class Fitness implements CommandLineRunner {
 	public void run(String... args)
 			throws Exception,  MalformedURLException, IOException, ClassNotFoundException, SQLException {
 		
+//		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_insert_data");
+//	    storedProcedure.execute();
+//	    
+//	    //storedProcedureEnd permet de savoir quand est-ce que l'import est fini
+//	    StoredProcedureQuery storedProcedureEnd = entityManager.createStoredProcedureQuery("proc_insert_end");
+//	    storedProcedureEnd.execute();
+	    
+//		
 
 	}
 	
