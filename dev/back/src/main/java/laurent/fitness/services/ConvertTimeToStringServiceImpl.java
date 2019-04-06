@@ -21,12 +21,6 @@ public class ConvertTimeToStringServiceImpl implements ConvertTimeToStringServic
 		String strMinute = "";
 		Calendar calendar = Calendar.getInstance();
 		
-//		calendar.setTime(new Date());
-//		System.out.println("timestamp.getHours() : " + timestamp.getHours());
-//		
-//		System.out.println("LocalTime.now().getHour() : " + LocalTime.now().getHour());
-//
-		//calendar.setTime(new Date(timestamp.getTime() - 3600000));
 		calendar.setTime(new Date(timestamp.getTime()));
 //		
 //		System.out.println("new Date(timestamp.getTime() - 3600000).getHours() : " + new Date(timestamp.getTime() - 3600000).getHours());

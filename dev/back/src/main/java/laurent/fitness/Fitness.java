@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
@@ -17,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import laurent.fitness.model.Authority;
@@ -33,6 +36,9 @@ import laurent.fitness.repository.FacilityRepository;
 import laurent.fitness.repository.RoomRepository;
 import laurent.fitness.repository.StaffRepository;
 import laurent.fitness.repository.UserRepository;
+import laurent.fitness.services.AuthorityService;
+import laurent.fitness.services.CustomerService;
+import laurent.fitness.services.UserService;
 
 
 
@@ -55,15 +61,14 @@ public class Fitness implements CommandLineRunner {
 	@Override
 	public void run(String... args)
 			throws Exception,  MalformedURLException, IOException, ClassNotFoundException, SQLException {
-		
+			
 //		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_insert_data");
 //	    storedProcedure.execute();
 //	    
 //	    //storedProcedureEnd permet de savoir quand est-ce que l'import est fini
 //	    StoredProcedureQuery storedProcedureEnd = entityManager.createStoredProcedureQuery("proc_insert_end");
 //	    storedProcedureEnd.execute();
-	    
-//		
+				
 
 	}
 	

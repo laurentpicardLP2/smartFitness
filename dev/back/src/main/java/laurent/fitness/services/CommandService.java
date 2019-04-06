@@ -10,4 +10,5 @@ public interface CommandService {
 	public void deleteCommand(Command command);
 	public Command findByIdCommand(int idCommand);
 	public List<Command> findCommandByUsername(String username);
+	public void deleteCommandsZeroByUsername(String username);
 }

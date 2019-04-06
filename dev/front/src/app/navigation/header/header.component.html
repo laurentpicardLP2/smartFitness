@@ -102,7 +102,7 @@
     
       <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="pilotage">Pilotage</button>
       <mat-menu  #pilotage="matMenu">
-          <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false" (click)="onAction('/monthly-rate-booking')">Tableaux de bord</button>
+          <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false" (click)="onReporting()">Tableaux de bord</button>
        </mat-menu>
   
       <a *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onToggleCart()">
@@ -133,9 +133,16 @@
             <div class="mat-button-ripple mat-ripple" matripple=""></div>
             <div class="mat-button-focus-overlay"></div>
           </a>
-        </div>
-          
-    </div>   
+        </div>    
+    </div>  
+    <a *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER' || authority.authority=='ROLE_CUSTOMER')" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onLogout()">
+      <mat-icon>power_settings_new</mat-icon>
+      <div class="mat-button-ripple mat-ripple" matripple=""></div>
+      <div class="mat-button-focus-overlay"></div>
+    </a>
+
   </div>       
     
 </mat-toolbar>
+
+

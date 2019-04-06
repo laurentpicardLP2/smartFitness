@@ -274,10 +274,10 @@ END WHILE;
 SET i = 1405;
 SET i_jour = 1;
 SET i_mois = 7;
-SET i_annee = 2018;
+SET i_annee = 2017;
 SET i_timestamp = 134400;
 SET char_annee = CONCAT("", i_annee,"-");
-WHILE i < 1740 DO
+WHILE i < 2105 DO
 	insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (i, current_timestamp(), 0, 72, "db_user3");
 	insert into command_has_item (item_id_item, command_id_command) values (i, i);
     
@@ -335,7 +335,210 @@ WHILE i < 1740 DO
     
 END WHILE;
 
+######################################################################################
+#insert data for db_user4  => Tapis-roulant 1
+######################################################################################
 
+SET i = 2105;
+SET i_jour = 1;
+SET i_mois = 7;
+SET i_annee = 2017;
+SET i_timestamp = 201600;
+SET char_annee = CONCAT("", i_annee,"-");
+WHILE i < 2805 DO
+	insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (i, current_timestamp(), 0, 72, "db_user4");
+	insert into command_has_item (item_id_item, command_id_command) values (i, i);
+    
+	IF i_jour > 9 THEN
+		SET char_jour = CONCAT("", i_jour, " ");
+	ELSE
+		SET char_jour = CONCAT("0", i_jour, " ");
+	END IF;
+    
+    IF i_mois > 9 THEN
+		SET char_mois = CONCAT("", i_mois,"-");
+	ELSE
+		SET char_mois = CONCAT("0", i_mois, "-");
+	END IF;
+
+	SET date_seance = CONCAT(char_annee, char_mois, char_jour, "06:00:00");
+	insert into seance (date_of_seance, nb_timestamp, status_seance, id_item, customer_users_username) values (date_seance, 96, 0, i, "db_user4");
+    
+    SET i_heure = 6;
+    WHILE i_heure < 22 DO
+		SET i_minute = 0;
+		WHILE i_minute < 6 DO
+			SET i_timestamp = i_timestamp + 1;
+			SET char_minute = CONCAT(i_minute, "0:00");
+            IF i_heure > 9 THEN
+				SET char_heure = CONCAT("", i_heure,":");
+			ELSE
+				SET char_heure = CONCAT("0", i_heure,":");
+			END IF;
+			SET date_seance = CONCAT(char_annee, char_mois, char_jour, char_heure, char_minute);
+			insert into timestamp_facility (id_timestamp_facility, date_of_timestamp, facility_id_facility, facility_category_id_facility_category, seance_id_seance) values (i_timestamp, date_seance, 4, 2, i);
+			SET i_minute = i_minute + 1;
+		END WHILE;
+        SET i_heure = i_heure + 1; 
+	END WHILE;
+       
+    SET i = i + 1;
+    IF i_mois = 12 AND i_jour = 31 THEN
+		SET i_jour = 1;
+		SET i_mois = 1;
+        SET i_annee = i_annee + 1;
+		SET char_annee = CONCAT("", i_annee,"-");
+    ELSEIF (i_mois=1 OR i_mois = 3 OR i_mois = 5 OR i_mois = 7 OR i_mois = 8 OR i_mois = 10) AND i_jour = 31 THEN
+		SET i_mois = i_mois + 1;
+        SET i_jour = 1;
+    ELSEIF (i_mois = 4 OR i_mois = 6 OR i_mois = 9 OR i_mois = 11) AND i_jour = 30 THEN
+		SET i_mois = i_mois + 1;
+        SET i_jour = 1;
+	ELSEIF i_mois = 2 AND i_jour = 28 THEN
+		SET i_mois = i_mois + 1;
+        SET i_jour = 1;
+    ELSE
+		SET i_jour = i_jour + 1;
+	END IF;
+    
+END WHILE;
+
+
+######################################################################################
+#insert data for db_user5  => Tapis-roulant 2
+######################################################################################
+
+SET i = 2805;
+SET i_jour = 1;
+SET i_mois = 7;
+SET i_annee = 2017;
+SET i_timestamp = 268800;
+SET char_annee = CONCAT("", i_annee,"-");
+WHILE i < 3505 DO
+	insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (i, current_timestamp(), 0, 72, "db_user5");
+	insert into command_has_item (item_id_item, command_id_command) values (i, i);
+    
+	IF i_jour > 9 THEN
+		SET char_jour = CONCAT("", i_jour, " ");
+	ELSE
+		SET char_jour = CONCAT("0", i_jour, " ");
+	END IF;
+    
+    IF i_mois > 9 THEN
+		SET char_mois = CONCAT("", i_mois,"-");
+	ELSE
+		SET char_mois = CONCAT("0", i_mois, "-");
+	END IF;
+
+	SET date_seance = CONCAT(char_annee, char_mois, char_jour, "06:00:00");
+	insert into seance (date_of_seance, nb_timestamp, status_seance, id_item, customer_users_username) values (date_seance, 96, 0, i, "db_user5");
+    
+    SET i_heure = 6;
+    WHILE i_heure < 22 DO
+		SET i_minute = 0;
+		WHILE i_minute < 6 DO
+			SET i_timestamp = i_timestamp + 1;
+			SET char_minute = CONCAT(i_minute, "0:00");
+            IF i_heure > 9 THEN
+				SET char_heure = CONCAT("", i_heure,":");
+			ELSE
+				SET char_heure = CONCAT("0", i_heure,":");
+			END IF;
+			SET date_seance = CONCAT(char_annee, char_mois, char_jour, char_heure, char_minute);
+			insert into timestamp_facility (id_timestamp_facility, date_of_timestamp, facility_id_facility, facility_category_id_facility_category, seance_id_seance) values (i_timestamp, date_seance, 5, 2, i);
+			SET i_minute = i_minute + 1;
+		END WHILE;
+        SET i_heure = i_heure + 1; 
+	END WHILE;
+       
+    SET i = i + 1;
+    IF i_mois = 12 AND i_jour = 31 THEN
+		SET i_jour = 1;
+		SET i_mois = 1;
+        SET i_annee = i_annee + 1;
+		SET char_annee = CONCAT("", i_annee,"-");
+    ELSEIF (i_mois=1 OR i_mois = 3 OR i_mois = 5 OR i_mois = 7 OR i_mois = 8 OR i_mois = 10) AND i_jour = 31 THEN
+		SET i_mois = i_mois + 1;
+        SET i_jour = 1;
+    ELSEIF (i_mois = 4 OR i_mois = 6 OR i_mois = 9 OR i_mois = 11) AND i_jour = 30 THEN
+		SET i_mois = i_mois + 1;
+        SET i_jour = 1;
+	ELSEIF i_mois = 2 AND i_jour = 28 THEN
+		SET i_mois = i_mois + 1;
+        SET i_jour = 1;
+    ELSE
+		SET i_jour = i_jour + 1;
+	END IF;
+    
+END WHILE;
+
+######################################################################################
+#insert data for db_user6  => Vélo 1
+######################################################################################
+
+SET i = 3505;
+SET i_jour = 1;
+SET i_mois = 7;
+SET i_annee = 2017;
+SET i_timestamp = 336000;
+SET char_annee = CONCAT("", i_annee,"-");
+WHILE i < 4205 DO
+	insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (i, current_timestamp(), 0, 72, "db_user6");
+	insert into command_has_item (item_id_item, command_id_command) values (i, i);
+    
+	IF i_jour > 9 THEN
+		SET char_jour = CONCAT("", i_jour, " ");
+	ELSE
+		SET char_jour = CONCAT("0", i_jour, " ");
+	END IF;
+    
+    IF i_mois > 9 THEN
+		SET char_mois = CONCAT("", i_mois,"-");
+	ELSE
+		SET char_mois = CONCAT("0", i_mois, "-");
+	END IF;
+
+	SET date_seance = CONCAT(char_annee, char_mois, char_jour, "06:00:00");
+	insert into seance (date_of_seance, nb_timestamp, status_seance, id_item, customer_users_username) values (date_seance, 96, 0, i, "db_user6");
+    
+    SET i_heure = 6;
+    WHILE i_heure < 22 DO
+		SET i_minute = 0;
+		WHILE i_minute < 6 DO
+			SET i_timestamp = i_timestamp + 1;
+			SET char_minute = CONCAT(i_minute, "0:00");
+            IF i_heure > 9 THEN
+				SET char_heure = CONCAT("", i_heure,":");
+			ELSE
+				SET char_heure = CONCAT("0", i_heure,":");
+			END IF;
+			SET date_seance = CONCAT(char_annee, char_mois, char_jour, char_heure, char_minute);
+			insert into timestamp_facility (id_timestamp_facility, date_of_timestamp, facility_id_facility, facility_category_id_facility_category, seance_id_seance) values (i_timestamp, date_seance, 6, 3, i);
+			SET i_minute = i_minute + 1;
+		END WHILE;
+        SET i_heure = i_heure + 1; 
+	END WHILE;
+       
+    SET i = i + 1;
+    IF i_mois = 12 AND i_jour = 31 THEN
+		SET i_jour = 1;
+		SET i_mois = 1;
+        SET i_annee = i_annee + 1;
+		SET char_annee = CONCAT("", i_annee,"-");
+    ELSEIF (i_mois=1 OR i_mois = 3 OR i_mois = 5 OR i_mois = 7 OR i_mois = 8 OR i_mois = 10) AND i_jour = 31 THEN
+		SET i_mois = i_mois + 1;
+        SET i_jour = 1;
+    ELSEIF (i_mois = 4 OR i_mois = 6 OR i_mois = 9 OR i_mois = 11) AND i_jour = 30 THEN
+		SET i_mois = i_mois + 1;
+        SET i_jour = 1;
+	ELSEIF i_mois = 2 AND i_jour = 28 THEN
+		SET i_mois = i_mois + 1;
+        SET i_jour = 1;
+    ELSE
+		SET i_jour = i_jour + 1;
+	END IF;
+    
+END WHILE;
 
 END$$
 DELIMITER ;

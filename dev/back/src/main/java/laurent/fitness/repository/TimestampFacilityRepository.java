@@ -1,10 +1,10 @@
 package laurent.fitness.repository;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
 import laurent.fitness.model.TimestampFacility;
 
 public interface TimestampFacilityRepository extends JpaRepository <TimestampFacility, Integer> {
@@ -26,10 +26,12 @@ public interface TimestampFacilityRepository extends JpaRepository <TimestampFac
 			+ " FROM facility_category WHERE facility_category.name_facility_category like ?1", nativeQuery = true)
 	int findByFacilityCategoryCount(String nameFacility, String timestamp);
 	
-	@Query(value = "SELECT * FROM db_fitness.timestamp_facility WHERE seance_id_seance = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM db_fitness.timestamp_facility WHERE seance_id_seance = ?1 ORDER BY date_of_timestamp ASC", nativeQuery = true)
 	List<TimestampFacility> findTimestampByIdSeance(int idItem);
 	
-	//SELECT * FROM db_fitness.timestamp_facility where date_of_timestamp like "3919-03-21 21:50:00";
+	@Query(value = "SELECT count(*) FROM db_fitness.timestamp_facility WHERE month(date_of_timestamp) = ?1 and year(date_of_timestamp) = ?2", nativeQuery = true)
+	int findTimestampByMonth(int pMonth, int pYear);
+	
 
 }
 

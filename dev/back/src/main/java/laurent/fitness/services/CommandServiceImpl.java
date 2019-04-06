@@ -46,4 +46,13 @@ public class CommandServiceImpl implements CommandService {
 		return this.commandRepo.findCommandsByUsername(username);
 	}
 
+	@Override
+	public void deleteCommandsZeroByUsername(String username) {
+		// TODO Auto-generated method stub
+		List<Command> commands = this.commandRepo.findCommandsZeroByUsername(username);
+		for (Command command : commands) {
+			this.commandRepo.delete(command);
+		}
+	}
+
 }

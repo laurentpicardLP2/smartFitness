@@ -70,6 +70,18 @@ public class CommandController {
 		}
 	}
 	
+	// Supprime les commandes à 0 pour un username lorsqu'il ouvre une sessio
+	@DeleteMapping("/cleancommand/{username}")
+	public ResponseEntity<?> cleanCommand(@PathVariable String username){
+		try {
+			this.commandService.deleteCommandsZeroByUsername(username);
+			return ResponseEntity.status(HttpStatus.OK).body(null);
+		} catch(Exception e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}
+	}
+	
 	// Reset a command resetcommand
 	@PutMapping("/resetcommand/{idCommand}/{username}")
 	public ResponseEntity<?> resetCommand(@PathVariable int idCommand, @PathVariable String username){

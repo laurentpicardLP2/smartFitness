@@ -100,4 +100,13 @@ export class CommandService {
     );
       
   }
+
+  
+  // this.httpClient.delete('http://localhost:8080/commandctrl/cleancommand/' + user.username, 
+  //         {
+  //           headers: {
+  //               "Content-Type": "application/json",
+  //               "Authorization": this.token.getToken()
+  //           }
+  //       });
 }

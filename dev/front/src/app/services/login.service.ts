@@ -100,7 +100,6 @@ export class LoginService {
         this.setIsUserLoggedSubject(true); 
         this.setUsernameSubject(user.username);
         this.setPasswordSubject(user.password);
-
         
         
         if(bReload){

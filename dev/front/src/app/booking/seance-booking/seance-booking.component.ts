@@ -26,7 +26,6 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
   strDateOfBooking: string;
   dateOfBooking: Date;
   shownYear: string;
-  selectedYear: string;
   currentMonth: number;
   shownMonth: string;
   currentDay: number;
@@ -87,6 +86,19 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
       this.priceSeance = res;
       this.bOpenedSeance = (this.priceSeance.length == 0);
     });
+
+    this.seanceService.checkAnotherSeanceIsOpen(this.username).subscribe(
+      (res) => { 
+        if(res == true) {
+          alert("Une séance est déjà en cours de réservation, veuillez la finaliser ou l'annuler, merci.");
+          this.router.navigate(['']);
+        }
+      },
+      (error) => {
+        console.log("error checkAnotherSeanceIsOpen() : ", error);
+      }
+    );
+
     
   }
 
@@ -220,19 +232,34 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
     let isBookedTimestamp = false;
     let dateOfTimestamp = this.getDateTimeFields();
     
-      for(let i=0; i< this.seance.timestampFacilities.length; i++){
-        //console.log("test égalité : ", new Date(this.seance.timestampFacilities[i].dateOfTimestamp.toString().split(".")[0]).toString() === new Date(dateOfTimestamp).toString());
-        //console.log("test égalité timestampFacilities : ", new Date(this.seance.timestampFacilities[i].dateOfTimestamp.toString().split(".")[0]).toString());
-        //console.log("test égalité : ", new Date(dateOfTimestamp).toString());
-        //if( new Date(this.seance.timestampFacilities[i].dateOfTimestamp.toString().split(".")[0]).toString() === new Date(dateOfTimestamp).toString()){
+    for(let i=0; i< this.seance.timestampFacilities.length; i++){
+      //console.log("test égalité : ", new Date(this.seance.timestampFacilities[i].dateOfTimestamp.toString().split(".")[0]).toString() === new Date(dateOfTimestamp).toString());
+      //console.log("test égalité timestampFacilities : ", new Date(this.seance.timestampFacilities[i].dateOfTimestamp.toString().split(".")[0]).toString());
+      //console.log("test égalité : ", new Date(dateOfTimestamp).toString());
+      //if( new Date(this.seance.timestampFacilities[i].dateOfTimestamp.toString().split(".")[0]).toString() === new Date(dateOfTimestamp).toString()){
 
-         // console.log("test égalité (this.seance.timestampFacilities[i].dateOfTimestamp): ", this.seance.timestampFacilities[i].dateOfTimestamp);
-          //console.log("test égalité (dateOfTimestamp) : ", dateOfTimestamp);
-        if( this.seance.timestampFacilities[i].dateOfTimestamp.toString() === dateOfTimestamp.toString() ){
-          isBookedTimestamp = true;
-        }
+        // console.log("test égalité (this.seance.timestampFacilities[i].dateOfTimestamp): ", this.seance.timestampFacilities[i].dateOfTimestamp);
+        //console.log("test égalité (dateOfTimestamp) : ", dateOfTimestamp);
+      if( this.seance.timestampFacilities[i].dateOfTimestamp.toString() === dateOfTimestamp.toString() ){
+        isBookedTimestamp = true;
+        this.seanceService.setIsBookedTimestampSubject(true);
       }
-    this.seanceService.setIsBookedTimestampSubject(isBookedTimestamp);
+    }
+
+    if(isBookedTimestamp == false){
+      this.seanceService.getCheckTimestampIsTaken(dateOfTimestamp, this.username).subscribe(
+        (res) => {
+          isBookedTimestamp = res;
+          this.seanceService.setIsBookedTimestampSubject(isBookedTimestamp);
+        },
+        (error) => {
+          console.log("isBookedTimestamp error : ", error);
+          this.seanceService.setIsBookedTimestampSubject(false);
+        });
+    }
+    
+
+    
   }
 
   getDateTimeFields(){
@@ -244,10 +271,10 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
   }
 
 
-  ngOnDestroy(){ // à supprimer
-    console.log("destroy");
+  ngOnDestroy(){
     if(this.isAuth  && !this.isValidateSeance){
-      //this.seanceService.removeSeanceFromCommand(this.command, this.seance);
+        this.seanceService.removeSeanceFromCommand(this.command, this.seance);
+      //
       //this.seanceService.priceSeanceSubject.unsubscribe();
     }
   }

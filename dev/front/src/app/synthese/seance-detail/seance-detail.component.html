@@ -1,4 +1,27 @@
-<mat-sidenav-container class="container">
+
+ <div *ngFor="let timestamp of timstampFacilitiesList | async; let i=index">
+   <div *ngIf="i==0" class="title" >Votre feuille de route de la séance du {{timestamp.dayName}} {{timestamp.dayOfMonth}} {{timestamp.monthName}} {{timestamp.year}}</div>
+</div>
+<table cellpadding="0" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Début</th>
+      <th>Fin</th>
+      <th>Activité</th>
+      <th>Equipement</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let timestamp of timstampFacilitiesList | async">
+          <td>{{showTwoDigitsHour(timestamp.hourStart)}}:{{showTwoDigitsMinute(timestamp.minuteStart)}}</td>
+          <td>{{ showTwoDigitsHour(timestamp.hourEnd)}}:{{showTwoDigitsMinute(timestamp.minuteEnd)}}</td>
+          <td>{{ timestamp.nameFacilityCategory }}</td>
+          <td>{{ timestamp.nameFacility }}</td>
+      </tr>
+    </tbody>
+</table>
+
+<!-- <mat-sidenav-container class="container">
   
   <mat-sidenav-content>
     <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
@@ -27,8 +50,8 @@
           </div>
           <div class="footer">
           <mat-card-content></mat-card-content>
-          </div>
+          </div> -->
           <!-- <mat-card-actions><button mat-button class="boutton" (click)="onOrder(googleBook.bookId)">Commander</button></mat-card-actions> -->
-    </div>
+    <!--</div>
   </mat-sidenav-content> 
-</mat-sidenav-container>
+</mat-sidenav-container> -->

@@ -192,6 +192,28 @@ export class SeanceService {
         (error) => { console.log("init timestamp pb : ", error); }
     );
   }
+
+  // Indique si un customer a déjà réservé cette tranche horaire au cours d'une précédente réservation
+  public getCheckTimestampIsTaken(dateOfTimestamp: Date, username: string): Observable<boolean> {
+    return this.httpClient.get<boolean>('http://localhost:8080/seancectrl/getisusernamebooked/' + dateOfTimestamp + '/' + username, 
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+        }
+      });
+  }
+
+  // Indique si un customer a déjà ouvert une autre instance de réservation de séance non clôturée
+  public checkAnotherSeanceIsOpen(username: string): Observable<boolean> {
+    return this.httpClient.get<boolean>('http://localhost:8080/seancectrl/getisopenseance/' + username, 
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+        }
+      });
+  }
 }
 
 

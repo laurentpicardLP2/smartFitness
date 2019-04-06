@@ -70,10 +70,6 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
       this.isShowableFacilities = res;
     });
 
-    this.seanceService.isBookedTimestampSubject.subscribe(res => {
-      this.isBookedTimestamp = res;
-    });
-
     this.bookingService.isNotAvailableFacilitiesSubject.subscribe(res => {
       this.isNotAvailableFacilities = res;
     });
@@ -93,7 +89,6 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
 
   onBookingFacility(nameFacility: string, nameFacilityCategory: string, priceSeance: number){
     priceSeance = (this.isSubscribed) ? Math.round((priceSeance/2)*100)/100 : Math.round((priceSeance)*100)/100;
-    console.log("priceSeance : ", priceSeance);
     this.seanceService.addTimestampFacilityToSeance(this.seance, this.dateOfTimestamp, nameFacility, nameFacilityCategory, priceSeance, this.priceSeance);
    
   }

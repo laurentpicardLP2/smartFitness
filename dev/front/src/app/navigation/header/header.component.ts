@@ -1,12 +1,12 @@
 import { Authority } from 'src/app/models/authority.model';
-import { BookingService } from 'src/app/services/booking.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { CommandService } from 'src/app/services/command.service';
 import { Command } from 'src/app/models/command.model';
 import { Item } from 'src/app/models/item.model';
 import { Router } from '@angular/router';
-import { UtilsService } from '../../services/utils.service';
+import { UtilsService } from 'src/app/services/utils.service';
+import { ReportingService } from 'src/app/services/reporting.service';
 
 @Component({
   selector: 'app-header',
@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private loginService: LoginService,
               private commandService: CommandService,
-              private bookingService: BookingService,
+              private reportingService: ReportingService,
               private utilsService: UtilsService,
               private router: Router) { }
 
@@ -98,9 +98,17 @@ export class HeaderComponent implements OnInit {
   }
 
   public onHome(){
-    //this.utilsService.delCommand();
+    this.router.navigate(['']);
+  }
+
+  public onLogout(){
+    this.utilsService.delCommand();
     this.loginService.signOut();
     this.router.navigate(['']);
+  }
+
+  public onReporting(){
+    this.reportingService.publishDataSet();
   }
 
 }

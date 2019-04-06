@@ -14,4 +14,6 @@ public interface SeanceService {
 	public Date findByDateOfTimestamp(int idItem);
 	public int findNbTimestampBySeance(int idItem);
 	public List<Seance> findSeancesByUsername(String username);
+	public boolean checkTimestampIsTaken(String timestampToString, String username);
+	public boolean checkAnotherSeanceIsOpen(String username);
 }

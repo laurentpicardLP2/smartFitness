@@ -17,7 +17,7 @@ export class SeanceListingComponent implements OnInit {
 
   public username: string;
   MyDataSource: any;
-  displayedColumns: string[] = ['Id', 'Date', 'Nb Activités', 'Prix'];
+  displayedColumns: string[] = ['Date', 'Nb Activités', 'Prix'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 

@@ -48,6 +48,7 @@ public class SeanceServiceImpl implements SeanceService {
 	public Seance updateSeance(int idItem) {
 		// TODO Auto-generated method stub
 		Seance updatedSeance = this.findSeanceById(idItem);
+		updatedSeance.setStatusSeance(1);
 		updatedSeance.setDateOfSeance(this.findByDateOfTimestamp(idItem));
 		updatedSeance.setNbTimestamp(this.findNbTimestampBySeance(idItem));
 		return this.seanceRepo.save(updatedSeance);
@@ -83,6 +84,18 @@ public class SeanceServiceImpl implements SeanceService {
 	public List<Seance> findSeancesByUsername(String username) {
 		// TODO Auto-generated method stub
 		return this.seanceRepo.findSeancesByUsername(username);
+	}
+
+	@Override
+	public boolean checkTimestampIsTaken(String timestampToString, String username) {
+		// TODO Auto-generated method stub
+		return (this.seanceRepo.findTimestampIsTakenByUsername(timestampToString, username) > 0 ? true : false);
+	}
+
+	@Override
+	public boolean checkAnotherSeanceIsOpen(String username) {
+		// TODO Auto-generated method stub
+		return (this.seanceRepo.findAnotherSeanceIsOpenByUsername(username) > 0 ? true : false);
 	}
 
 }

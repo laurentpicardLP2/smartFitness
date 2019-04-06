@@ -1,3 +1,4 @@
+import { ReportingService } from 'src/app/services/reporting.service';
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 
@@ -8,44 +9,31 @@ import { Chart } from 'chart.js';
 })
 export class MonthlyRateBookingComponent implements OnInit {
   chart: Chart;
-  
+  previousMonth: number;
+  monthDataSet: string[] = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+  monthLabels: string[] = [];
 
-  constructor() { }
+  constructor(private reportingService: ReportingService) { }
 
   ngOnInit() {
 
-  //   this.chart = new Chart('myChart', {
-  //     type: 'bar',
-  //     data: {
-  //       labels: ["1900", "1950", "1999", "2050"],
-  //       datasets: [
-  //         {
-  //           label: "Africa",
-  //           backgroundColor: "#3e95cd",
-  //           data: [133,221,783,2478]
-  //         }, {
-  //           label: "Europe",
-  //           backgroundColor: "#8e5ea2",
-  //           data: [408,547,675,734]
-  //         }
-  //       ]
-  //     },
-  //     options: {
-  //       title: {
-  //         display: true,
-  //         text: 'Population growth (millions)'
-  //       }
-  //     }
-  // });
+  this.previousMonth = ((new Date()).getMonth() > 0) ? (new Date()).getMonth() - 1 : 11;
+    for(let m = this.previousMonth; m < 12; m++){
+      this.monthLabels.push(this.monthDataSet[m]);
+    }
+    for(let m = 0; m < this.previousMonth; m++){
+      this.monthLabels.push(this.monthDataSet[m]);
+    }
 
+    console.log("new Date()).getMonth() : ", new Date().getFullYear())
 
     this.chart = new Chart('myChart', {
       type: 'bar',
       data: {
-        labels: ["Janvier", "February", "March", "April", "May", "June", "July"],
+        labels: this.monthLabels,
         datasets: [
             {
-                label: "2017-2018",
+                label: (new Date().getFullYear()-2) + "-" + (new Date().getFullYear()-1),
                 fill: false,
                 lineTension: 0.1,
                 backgroundColor: "rgba(75,192,192,0.4)",
@@ -63,11 +51,11 @@ export class MonthlyRateBookingComponent implements OnInit {
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data: [9440, 8000, 7000, 6000, 6500, 7500, 8500],
+                data: this.reportingService.listDataSet1,
                 spanGaps: false,
             },
             {
-              label: "2018-2019",
+              label: (new Date().getFullYear()-1) + "-" + (new Date().getFullYear()),
               fill: false,
               lineTension: 0.1,
               backgroundColor: "#8e5ea2",
@@ -85,7 +73,7 @@ export class MonthlyRateBookingComponent implements OnInit {
               pointHoverBorderWidth: 2,
               pointRadius: 1,
               pointHitRadius: 10,
-              data: [13440, 12000, 11000, 10000, 10500, 11500, 12500],
+              data: this.reportingService.listDataSet2,
               spanGaps: false,
           }
         ]

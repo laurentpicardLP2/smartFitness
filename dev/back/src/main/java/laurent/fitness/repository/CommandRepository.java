@@ -13,4 +13,7 @@ public interface CommandRepository extends JpaRepository<Command, Integer> {
 	
 	@Query(value = "SELECT * FROM command WHERE total_price > 0 AND customer_users_username like ?1 ORDER BY date_of_command DESC ", nativeQuery = true)
 	List<Command> findCommandsByUsername(String username);
+	
+	@Query(value = "SELECT * FROM command WHERE status_command = 0 AND customer_users_username like ?1 ", nativeQuery = true)
+	List<Command> findCommandsZeroByUsername(String username);
 }
