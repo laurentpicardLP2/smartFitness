@@ -205,15 +205,15 @@ export class SeanceService {
   }
 
   // Indique si un customer a déjà ouvert une autre instance de réservation de séance non clôturée
-  public checkAnotherSeanceIsOpen(username: string): Observable<boolean> {
-    return this.httpClient.get<boolean>('http://localhost:8080/seancectrl/getisopenseance/' + username, 
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": this.token.getToken()
-        }
-      });
-  }
+  // public checkAnotherSeanceIsOpen(username: string): Observable<boolean> {
+  //   return this.httpClient.get<boolean>('http://localhost:8080/seancectrl/getisopenseance/' + username, 
+  //     {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Authorization": this.token.getToken()
+  //       }
+  //     });
+  // }
 }
 
 

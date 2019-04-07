@@ -1,3 +1,4 @@
+import { Command } from 'src/app/models/command.model';
 import { Router } from '@angular/router';
 import { BookingService } from './booking.service';
 import { Injectable } from '@angular/core';
@@ -14,6 +15,7 @@ import { Authority } from 'src/app/models/authority.model';
 export class LoginService {
   public isAuth: boolean;
   public authority: string;
+  public command: Command;
 
   constructor(private httpClient: HttpClient,
               private commandService: CommandService,
@@ -96,11 +98,41 @@ export class LoginService {
        
         this.token.saveToken(data.token);
         console.log("data.token", data.token);
-        this.publishAuthority(user);
+
+        this.httpClient.get<boolean>('http://localhost:8080/commandctrl/detectsessionopen/' + user.username, 
+        {
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": this.token.getToken()
+          }
+      }).subscribe(
+        (detectedCommandZero) => {
+          console.log("detectedCommandZero OK : ", detectedCommandZero);
+          if(detectedCommandZero == false){this.signInAfterCheckIsOnlySession(user, bReload); }
+          else{alert("Une session est déjà ouverte, veuillez la clôturer ou attendre 10 minutes");
+                this.signOut();
+                this.router.navigate(['/login']);}
+        },
+        (error) => {
+          console.log("deletedCommandZero pb : ", error);
+        }
+      );
+    
+
+        
+      },
+      (error) => { console.log("login user pb : ", error); 
+        this.setIsUserLoggedSubject(false);
+        this.setAuthoritySubject(new Authority("","ROLE_ANONYMOUS"));
+      }
+    );
+  }
+
+  signInAfterCheckIsOnlySession(user: User, bReload: boolean){
+    this.publishAuthority(user);
         this.setIsUserLoggedSubject(true); 
         this.setUsernameSubject(user.username);
         this.setPasswordSubject(user.password);
-        
         
         if(bReload){
           let fromForm = window.localStorage.getItem("fromForm") ;
@@ -124,12 +156,6 @@ export class LoginService {
             }
           );
         }
-      },
-      (error) => { console.log("login user pb : ", error); 
-        this.setIsUserLoggedSubject(false);
-        this.setAuthoritySubject(new Authority("","ROLE_ANONYMOUS"));
-      }
-    );
   }
 
   attemptAuth(ussername: string, password: string): Observable<any> {
@@ -171,10 +197,29 @@ export class LoginService {
 
 
   public signOut(){
+    
     this.setIsUserLoggedSubject(false);
     this.setAuthoritySubject(new Authority("","ROLE_ANONYMOUS"));
     this.token.signOut();
     this.router.navigate[('/')];
   }
+
+
+  public deleteCommandZero(username: string){
+    this.httpClient.delete('http://localhost:8080/commandctrl/cleancommand/' + username, 
+        {
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": this.token.getToken()
+          }
+      }).subscribe(
+        (deletedCommandZero) => {
+          console.log("deletedCommandZero OK : ", deletedCommandZero);
+        },
+        (error) => {
+          console.log("deletedCommandZero pb : ", error);
+        }
+      );
+    }
 
 }

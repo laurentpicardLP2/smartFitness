@@ -11,4 +11,6 @@ public interface CommandService {
 	public Command findByIdCommand(int idCommand);
 	public List<Command> findCommandByUsername(String username);
 	public void deleteCommandsZeroByUsername(String username);
+	public boolean isCommandAlwaysExists(int idCommand);
+	public boolean isDetectCommandZeroByUsername(String username);
 }

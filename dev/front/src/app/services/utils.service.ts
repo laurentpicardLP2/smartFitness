@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class UtilsService {
   command: Command;
-
+  public isInit: boolean = true; // détecte qu'un signin suit un signout
   dayName = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
   monthName = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
 
@@ -20,31 +20,35 @@ export class UtilsService {
               private token: TokenStorageService) { }
 
   public delCommand(){
-    
     this.commandService.commandSubject.subscribe(res => {
       this.command = res;
-    });
+      //console.log("this.command : ", this.command);
+        if(this.command == undefined || this.command ==null){
+          this.commandService.setNbItemsSubject("");
+          this.router.navigate(['']);
+          return;
+        }
+        if(this.isInit){
+            this.isInit = false;
+            this.httpClient.delete('http://localhost:8080/commandctrl/delcommand/' + this.command.idCommand, 
+            {
+            headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+            }
+            }).subscribe(
+              () => {
+                      this.commandService.setNbItemsSubject("");
+                      this.router.navigate(['']);
+                    },
+              (error) => {console.log("del command error", error);
+                          this.router.navigate(['/error-page']);}
+            );
+        }
+          });
+      
 
-    //console.log("this.coomand : ", this.command);
-    if(this.command == undefined || this.command ==null){
-      this.router.navigate(['']);
-      return;
-    }
-
-    this.httpClient.delete('http://localhost:8080/commandctrl/delcommand/' + this.command.idCommand, 
-    {
-    headers: {
-    "Content-Type": "application/json",
-    "Authorization": this.token.getToken()
-    }
-    }).subscribe(
-      () => {
-              this.commandService.setNbItemsSubject("");
-              this.router.navigate(['']);
-            },
-      (error) => {console.log("del command error", error);
-                  this.router.navigate(['/error-page']);}
-    );
+    
   }
 
   /**

@@ -1,17 +1,33 @@
       
+<div *ngIf="isBookedTimestamp">
+    
+  <div style="position: relative; width:100%; top: 90px; text-align:center;"><span class="info-reserve">Votre équipement est réservé <br>pour cette tranche horaire.</span>
+    <div style="position: relative; text-align:left; top: -160px; height: 270px; vertical-align: bottom; background-image: url('assets/images/infoReservation.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.2;">
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="isNotAvailableFacilities && !isBookedTimestamp">
+  <div style="position: relative; width:100%; top: 90px; text-align:center;"><span class="warning-reserve">Tous les équipements sont réservés.</span>
+    <div style="position: relative; text-align:left; top: -160px; height: 270px; vertical-align: bottom; background-image: url('assets/images/warningReservation.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.2;">
+    </div>
+  </div>
+</div>
+
 <mat-accordion *ngIf="!isBookedTimestamp && isShowableFacilities">
-      <mat-expansion-panel *ngFor="let facilityCategory of listFacilityCategories | async">
+      <mat-expansion-panel *ngFor="let facilityCategory of listFacilityCategories | async"  >
           
-          <mat-expansion-panel-header *ngIf="facilityCategory.quantityAvailable > 0">
+          <mat-expansion-panel-header *ngIf="facilityCategory.quantityAvailable > 0 && !isBookedTimestamp">
             <mat-panel-title>
-                {{ facilityCategory.nameFacilityCategory }} (dispo : {{ facilityCategory.quantityAvailable }} )
+              <span *ngIf="!isBookedTimestamp">{{ facilityCategory.nameFacilityCategory }} (dispo : {{ facilityCategory.quantityAvailable }} )</span>
             </mat-panel-title>
           </mat-expansion-panel-header>
 
           <table>
             <tr *ngFor="let facility of facilityCategory.facilities">
               <td>
-                <div *ngIf="facility.imageFacility ==''">
+                <div *ngIf="facility.imageFacility =='' ">
                       {{ facility.nameFacility }} : ({{ convertIntoMonetaryFormat(facility.priceSeance) }} les 10')
                       <span *ngIf="!this.isSubscribed"><em><br> -50% si vous êtes abonné!</em></span>
                       <br>
@@ -68,20 +84,5 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <div *ngIf="isBookedTimestamp">
-    
-      <div style="position: relative; width:100%; top: 90px; text-align:center;"><span class="info-reserve">Votre équipement est réservé <br>pour cette tranche horaire.</span>
-        <div style="position: relative; text-align:left; top: -160px; height: 270px; vertical-align: bottom; background-image: url('assets/images/infoReservation.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.2;">
-        </div>
-      </div>
-    
-  </div>
-
-  <div *ngIf="isNotAvailableFacilities && !isBookedTimestamp">
-      <div style="position: relative; width:100%; top: 90px; text-align:center;"><span class="warning-reserve">Tous les équipements sont réservés.</span>
-        <div style="position: relative; text-align:left; top: -160px; height: 270px; vertical-align: bottom; background-image: url('assets/images/warningReservation.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.2;">
-        </div>
-      </div>
-  </div>
-
+  
   

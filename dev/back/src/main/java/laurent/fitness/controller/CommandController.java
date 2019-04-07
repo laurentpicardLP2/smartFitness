@@ -70,7 +70,8 @@ public class CommandController {
 		}
 	}
 	
-	// Supprime les commandes à 0 pour un username lorsqu'il ouvre une sessio
+	// Supprime les commandes à 0 lorsqu'un customer ouvre une session
+	// Supprime les commandes à 0 lorsque le customer quitte une session sans faire de logout (fermeture de la fenêtre)
 	@DeleteMapping("/cleancommand/{username}")
 	public ResponseEntity<?> cleanCommand(@PathVariable String username){
 		try {
@@ -82,6 +83,18 @@ public class CommandController {
 		}
 	}
 	
+	// Vérifie que le numéro de commande est toujours valide (cas où l'utilisateur ouvrirait deux instances simultanées de réservation)
+	@GetMapping("/getiscommandok/{idCommand}")
+	public boolean isCommandeOk(@PathVariable Integer idCommand) {
+		return this.commandService.isCommandAlwaysExists(idCommand);
+	}
+	
+	// Vérifie qu'il n y a pas de session déjà ouverte
+	@GetMapping("/detectsessionopen/{username}")
+	public boolean isAnotherSessionOpen(@PathVariable String username) {
+		return this.commandService.isDetectCommandZeroByUsername(username);
+	}
+		
 	// Reset a command resetcommand
 	@PutMapping("/resetcommand/{idCommand}/{username}")
 	public ResponseEntity<?> resetCommand(@PathVariable int idCommand, @PathVariable String username){

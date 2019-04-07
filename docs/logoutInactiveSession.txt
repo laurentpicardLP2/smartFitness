@@ -180,3 +180,62 @@ Rolling session may solve the purpose. ==> https://github.com/expressjs/session#
 
 
  maxAge: 30*10000
+
+
+
+
+
+===============================================================================================================
+===============================================================================================================
+===============================================================================================================
+
+https://www.google.com/search?ei=CVqqXIK3DIWqgwfQ0aBg&q=auto+logout+or+expire+the+session+after+5+minutes+of+user+inactivity+in+node+js&oq=auto+logout+or+expire+the+session+after+5+minutes+of+user+inactivity+in+node+js&gs_l=psy-ab.3...5829.7408..7641...0.0..0.59.378.7......0....1..gws-wiz.diXYsVFqzw0
+
+
+const store = require('store');
+
+const MINUTES_UNITL_AUTO_LOGOUT = 5 // in mins
+const CHECK_INTERVAL = 1000 // in ms
+const STORE_KEY =  'lastAction';
+
+class AutoLogoutService {
+
+  get lastAction() {
+    return parseInt(store.get(STORE_KEY));
+  }
+  set lastAction(value) {
+    store.set(STORE_KEY, value);
+  }
+
+  constructor(authService) {
+    this.auth = authService;
+    this.check();
+    this.initListener();
+    this.initInterval();
+  }
+
+  initListener() {
+    document.body.addEventListener('click', () => this.reset());
+  }
+
+  reset() {
+    this.lastAction = Date.now();
+  }
+
+  initInterval() {
+    setInterval(() => {
+      this.check();
+    }, CHECK_INTERVAL);
+  }
+
+  check() {
+    const now = Date.now();
+    const timeleft = this.lastAction + MINUTES_UNITL_AUTO_LOGOUT * 60 * 1000;
+    const diff = timeleft - now;
+    const isTimeout = diff < 0;
+
+    if (isTimeout && this.auth.loggedIn) {
+      this.auth.logout();
+    }
+  }
+}

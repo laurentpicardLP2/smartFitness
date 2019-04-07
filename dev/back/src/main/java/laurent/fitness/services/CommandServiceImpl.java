@@ -55,4 +55,20 @@ public class CommandServiceImpl implements CommandService {
 		}
 	}
 
+	@Override
+	public boolean isCommandAlwaysExists(int idCommand) {
+		// TODO Auto-generated method stub
+		return this.commandRepo.findByIdCommand(idCommand) != null;
+	}
+
+	@Override
+	public boolean isDetectCommandZeroByUsername(String username) {
+		// TODO Auto-generated method stub
+		List<Command> commands = this.commandRepo.findCountCommandsZeroSup1000ByUsername(username);
+		for (Command command : commands) {
+			this.commandRepo.delete(command);
+		}
+		return this.commandRepo.findCountCommandsZeroByUsername(username) > 0;
+	}
+
 }

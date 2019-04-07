@@ -57,7 +57,7 @@ export class CommandService {
           "Authorization": this.token.getToken()
       }
   }).subscribe(
-        (command) =>{ console.log("init command OK : ", command); this.setCommandSubject(command); this.router.navigate(['']);},
+        (command) =>{ console.log("init command OK : ", command); this.setCommandSubject(command); this.router.navigate(['']); this.setNbItemsSubject("");},
         (error) => { console.log("init command pb : ", error); this.setCommandSubject(null); this.router.navigate(['']);}
     );
     
@@ -100,13 +100,5 @@ export class CommandService {
     );
       
   }
-
   
-  // this.httpClient.delete('http://localhost:8080/commandctrl/cleancommand/' + user.username, 
-  //         {
-  //           headers: {
-  //               "Content-Type": "application/json",
-  //               "Authorization": this.token.getToken()
-  //           }
-  //       });
 }

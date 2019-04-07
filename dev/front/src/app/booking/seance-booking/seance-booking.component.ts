@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { BookingService } from './../../services/booking.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators, FormBuilder, AbstractControl} from '@angular/forms';
@@ -7,6 +8,7 @@ import { CommandService } from 'src/app/services/command.service';
 import { Command } from 'src/app/models/command.model';
 import { Seance } from 'src/app/models/seance.model';
 import { LoginService } from 'src/app/services/login.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-seance-booking',
@@ -46,7 +48,9 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
     private bookingService: BookingService,
     private seanceService: SeanceService,
     private commandService: CommandService,
-    private loginService: LoginService) {
+    private loginService: LoginService,
+    private httpClient: HttpClient,
+    private token: TokenStorageService) {
       this.createForm();
       this.initTimeBookingField();
       this.routingInit();
@@ -87,17 +91,17 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
       this.bOpenedSeance = (this.priceSeance.length == 0);
     });
 
-    this.seanceService.checkAnotherSeanceIsOpen(this.username).subscribe(
-      (res) => { 
-        if(res == true) {
-          alert("Une séance est déjà en cours de réservation, veuillez la finaliser ou l'annuler, merci.");
-          this.router.navigate(['']);
-        }
-      },
-      (error) => {
-        console.log("error checkAnotherSeanceIsOpen() : ", error);
-      }
-    );
+    // this.seanceService.checkAnotherSeanceIsOpen(this.username).subscribe(
+    //   (res) => { 
+    //     if(res == true) {
+    //       alert("Une séance est déjà en cours de réservation, veuillez la finaliser ou l'annuler, merci.");
+    //       this.router.navigate(['']);
+    //     }
+    //   },
+    //   (error) => {
+    //     console.log("error checkAnotherSeanceIsOpen() : ", error);
+    //   }
+    // );
 
     
   }
@@ -209,7 +213,29 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
   }
 
   public onChangeDateTime(fieldType: string) {
+
+    this.httpClient.get<boolean>('http://localhost:8080/commandctrl/getiscommandok/' + this.command.idCommand, 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        }).subscribe(
+          (res) => {
+            if(res == false) {
+              this.loginService.signOut();
+              this.router.navigate(['/login']);
+            }
+            else {
+              this.onChangeDateTimeCheckedCommand(fieldType);
+            }
+        },
+          (error) => {this.loginService.signOut();}
+        ); 
     
+  }
+    
+    public onChangeDateTimeCheckedCommand(fieldType: string) {
     if(fieldType === 'd' && this.priceSeance.length > 0){
       alert("Veuillez supprimer les éléments de la séance afin de pouvoir changer de date.");
       return;

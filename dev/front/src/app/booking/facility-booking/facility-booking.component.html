@@ -12,7 +12,7 @@
     Total séance : {{ convertIntoMonetaryFormat(totalPriceSeance) }}
       <div *ngIf="isEmptySeance===false">
         <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button mat-raised-button color="accent" (click)="onValidateSeance()">Valider séance</button>
+        <button mat-raised-button color="accent" (click)="onValidateSeance(1)">Valider séance</button>
       </div>
   </div>
 </div>

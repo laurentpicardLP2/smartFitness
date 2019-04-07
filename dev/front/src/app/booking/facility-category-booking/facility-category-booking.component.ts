@@ -11,6 +11,7 @@ import { CommandService } from 'src/app/services/command.service';
 import { Command } from 'src/app/models/command.model';
 import { SeanceService } from 'src/app/services/seance.service';
 import { Seance } from 'src/app/models/seance.model';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 
 @Component({
@@ -40,7 +41,8 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
     private commandService: CommandService,
     private seanceService: SeanceService,
     private loginService: LoginService,
-    private ustilsService: UtilsService
+    private ustilsService: UtilsService,
+    private token: TokenStorageService
     ) { 
       
       }
@@ -88,9 +90,29 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
   }
 
   onBookingFacility(nameFacility: string, nameFacilityCategory: string, priceSeance: number){
+    this.httpClient.get<boolean>('http://localhost:8080/commandctrl/getiscommandok/' + this.command.idCommand, 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        }).subscribe(
+          (res) => {
+            if(res == false) {
+              this.loginService.signOut();
+              this.router.navigate(['/login']);
+            }
+            else {
+              this.onBookingFacilityCheckedCommand(nameFacility, nameFacilityCategory, priceSeance);
+            }
+        },
+          (error) => {this.loginService.signOut();}
+        ); 
+  }
+
+  public onBookingFacilityCheckedCommand(nameFacility: string, nameFacilityCategory: string, priceSeance: number){
     priceSeance = (this.isSubscribed) ? Math.round((priceSeance/2)*100)/100 : Math.round((priceSeance)*100)/100;
     this.seanceService.addTimestampFacilityToSeance(this.seance, this.dateOfTimestamp, nameFacility, nameFacilityCategory, priceSeance, this.priceSeance);
-   
   }
 
   public convertIntoMonetaryFormat(priceSeance: number){
