@@ -1,3 +1,4 @@
+import { UtilsService } from 'src/app/services/utils.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { LoginService } from 'src/app/services/login.service';
 import { HttpClient } from '@angular/common/http';
@@ -22,7 +23,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private loginService: LoginService,
               private httpClient: HttpClient,
-              private token: TokenStorageService) { }
+              private token: TokenStorageService,
+              private utilsService: UtilsService) { }
 
   ngOnInit(){
      this.loginService.setIsUserLoggedSubject(false);
@@ -50,44 +52,22 @@ export class AppComponent implements OnInit, OnDestroy {
 
       
 
-  //   window.addEventListener('beforeunload', function() {
-  //     chrome.runtime.sendMessage({ info: "Here is the info you would like to pass to background page"});
-  // });
+    //   window.addEventListener('beforeunload', function() {
+    //     chrome.runtime.sendMessage({ info: "Here is the info you would like to pass to background page"});
+    // });
 
   
-    //store.set(STORE_KEY, value);
-
-    this.lastAction = new Date();
+   
 
 
-    setTimeout(() => this.autoclose(), 10000);
-  window.addEventListener('click', () => this.reset());
+  window.addEventListener('click', () => this.loginService.resetLastAction());
 
   }
 
-  reset() {
-    console.log('last action');
-    this.lastAction = new Date();
-  }
-
-  public autoclose(){
-    let diff = new Date().getTime() - this.lastAction.getTime();
-    console.log("diff = ", diff);
-    if(diff > 10000){
-      console.log("autoclose()");
-    }
-    setTimeout(() => this.autoclose(), 10000);
-  }
 
   @HostListener('window:beforeunload', ['$event'])
     beforeunloadHandler(event) {
-      this.httpClient.delete('http://localhost:8080/commandctrl/cleancommand/' + this.username, 
-      {
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
-        }
-    }).subscribe();
+      this.utilsService.delCommand();
   }
 
   

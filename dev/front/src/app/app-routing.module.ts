@@ -39,7 +39,7 @@ import { WatchCategoryNewComponent } from './manager/watch-category-new/watch-ca
 import { WatchCategoryListingComponent } from './manager/watch-category-listing/watch-category-listing.component';
 import { WatchCategoryDetailComponent } from './manager/watch-category-detail/watch-category-detail.component';
 import { MonthlyRateBookingComponent } from './manager/monthly-rate-booking/monthly-rate-booking.component';
-
+import { CommandDetailComponent } from './synthese/command-detail/command-detail.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -50,6 +50,7 @@ const routes: Routes = [
   { path: 'staff-detail/:username', canActivate: [AuthGuardAdminService], component: StaffDetailComponent },
   { path: 'login', component: LoginComponent },
   { path: 'command-listing', canActivate: [AuthGuardCustomerService], component: CommandListingComponent },
+  { path: 'command-detail/:idCommand', canActivate: [AuthGuardCustomerService], component: CommandDetailComponent},
   { path: 'seance-listing', canActivate: [AuthGuardCustomerService], component: SeanceListingComponent },
   { path: 'seance-detail/:idItem', canActivate: [AuthGuardCustomerService], component: SeanceDetailComponent},
   { path: 'facility-new', canActivate: [AuthGuardManagerService], component: FacilityNewComponent},

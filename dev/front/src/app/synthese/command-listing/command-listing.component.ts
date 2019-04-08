@@ -6,6 +6,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatPaginator, MatTableDataSource, PageEvent, MatSort } from '@angular/material'
 import { MatPaginatorModule } from '@angular/material/paginator'
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-command-listing',
@@ -16,14 +17,15 @@ export class CommandListingComponent implements OnInit {
   public username: string;
   public command: Command;
   MyDataSource: any;
-  displayedColumns: string[] = ['Id', 'Date', 'Prix', 'Statut'];
+  displayedColumns: string[] = ['Date', 'Prix', 'Statut'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private router: Router,
       private commandService: CommandService,
       private loginService: LoginService,
-      private syntheseService: SyntheseService) { }
+      private syntheseService: SyntheseService,
+      private utilsService: UtilsService) { }
 
   ngOnInit() {
     this.loginService.usernameSubject.subscribe(res => {
@@ -51,8 +53,16 @@ export class CommandListingComponent implements OnInit {
       });
     }
 
+    public convertIntoDateTime(pDateOfSeance) {
+      return pDateOfSeance = (pDateOfSeance==null) ? "" : this.utilsService.convertIntoDateTimeSeanceListing(pDateOfSeance);
+    }
+
+    convertIntoMonetaryFormat(price: number){
+      return this.utilsService.convertIntoMonetaryFormat(price);
+    } 
+
     onShow(idCommand: number) {
-      //this.router.navigate(['googlebooks-detail/' + idCommand]);
+      this.router.navigate(['command-detail/' + idCommand]);
     }
 
     applyFilter(filterValue: string) {

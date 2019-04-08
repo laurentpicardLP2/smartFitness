@@ -226,7 +226,7 @@ export class OffresService {
               nbItems = "0"; 
             }
             this.commandService.setNbItemsSubject((parseInt(nbItems, 10) + 1).toString());
-            command.items[command.items.findIndex((item)=> item.idItem == subscription.idItem)].price += subscription.price;
+            //command.items[command.items.findIndex((item)=> item.idItem == subscription.idItem)].price += subscription.price;
             this.commandService.setCommandSubject(command);
             this.commandService.setListCommandItemsSubject(command.items);
             this.router.navigate(['']);
@@ -252,7 +252,7 @@ export class OffresService {
               nbItems = "0"; 
             }
             this.commandService.setNbItemsSubject((parseInt(nbItems, 10) + 1).toString());
-            command.items[command.items.findIndex((item)=> item.idItem == watch.idItem)].price += watch.price;
+            //command.items[command.items.findIndex((item)=> item.idItem == watch.idItem)].price += watch.price;
             this.commandService.setCommandSubject(command);
             this.commandService.setListCommandItemsSubject(command.items);
             this.router.navigate(['']);

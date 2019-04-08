@@ -19,17 +19,13 @@
         </mat-form-field>
         <div class="example-container mat-elevation-z8">
           <mat-table #Table [dataSource]="MyDataSource" multiTemplateDataRows matSort>
-          <ng-container matColumnDef="Id" >
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
-          <mat-cell *matCellDef="let post"> {{post.idCommand}} </mat-cell>
-          </ng-container>
           <ng-container matColumnDef="Date">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Date </mat-header-cell>
-          <mat-cell *matCellDef="let post"> {{post.dateOfCommand}} </mat-cell>
+          <mat-cell *matCellDef="let post"> {{convertIntoDateTime(post.dateOfCommand)}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="Prix">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Prix </mat-header-cell>
-          <mat-cell *matCellDef="let post"> {{post.totalPrice}} </mat-cell>
+          <mat-cell *matCellDef="let post"> {{convertIntoMonetaryFormat(post.totalPrice)}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="Statut">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Statut </mat-header-cell>

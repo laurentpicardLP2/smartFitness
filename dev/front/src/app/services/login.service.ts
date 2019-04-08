@@ -1,3 +1,4 @@
+import { UtilsService } from 'src/app/services/utils.service';
 import { Command } from 'src/app/models/command.model';
 import { Router } from '@angular/router';
 import { BookingService } from './booking.service';
@@ -16,12 +17,14 @@ export class LoginService {
   public isAuth: boolean;
   public authority: string;
   public command: Command;
+  public lastAction: Date;
 
   constructor(private httpClient: HttpClient,
               private commandService: CommandService,
               private bookingService: BookingService,
               private router: Router,
-              private token: TokenStorageService) { }
+              private token: TokenStorageService,
+              private utilsService: UtilsService) { }
 
   // Subject permettant de savoir à tout instant si l'utlisateur est connecté
   public isUserLoggedSubject: BehaviorSubject<boolean> = new BehaviorSubject(null);
@@ -108,10 +111,14 @@ export class LoginService {
       }).subscribe(
         (detectedCommandZero) => {
           console.log("detectedCommandZero OK : ", detectedCommandZero);
-          if(detectedCommandZero == false){this.signInAfterCheckIsOnlySession(user, bReload); }
-          else{alert("Une session est déjà ouverte, veuillez la clôturer ou attendre 10 minutes");
-                this.signOut();
-                this.router.navigate(['/login']);}
+
+          // A supprimer en prod
+          this.signInAfterCheckIsOnlySession(user, bReload); 
+
+          // if(detectedCommandZero == false){this.signInAfterCheckIsOnlySession(user, bReload); }
+          // else{alert("Une session est déjà ouverte, veuillez la clôturer ou attendre 10 minutes");
+          //       this.signOut();
+          //       this.router.navigate(['/login']);}
         },
         (error) => {
           console.log("deletedCommandZero pb : ", error);
@@ -126,6 +133,18 @@ export class LoginService {
         this.setAuthoritySubject(new Authority("","ROLE_ANONYMOUS"));
       }
     );
+  }
+
+  resetLastAction() {
+    this.lastAction = new Date();
+  }
+
+  public autoclose(){
+    let diff = new Date().getTime() - this.lastAction.getTime();
+    if(diff > 600000){
+      this.utilsService.delCommand();
+    }
+    setTimeout(() => this.autoclose(), 10000);
   }
 
   signInAfterCheckIsOnlySession(user: User, bReload: boolean){
@@ -145,6 +164,8 @@ export class LoginService {
           
         }
         else {
+          this.lastAction = new Date();
+          setTimeout(() => this.autoclose(), 10000);
           this.checkUserIsSubscribed(user.username).subscribe(
             (isSubscribed) => {
               this.setIsUserSubscribedSubject(isSubscribed);

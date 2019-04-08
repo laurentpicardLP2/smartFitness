@@ -51,7 +51,13 @@ export class SeanceListingComponent implements OnInit {
     }
 
     public convertIntoDateTime(pDateOfSeance) {
-      return pDateOfSeance = (pDateOfSeance==null) ? "" : this.utilsService.convertIntoDateTimeSeanceListing(pDateOfSeance);
+      
+      if(pDateOfSeance==null) {
+        return "";
+      } else {
+        return this.utilsService.convertIntoDateTimeSeanceListing(pDateOfSeance);
+      }
+        
     }
 
     convertIntoMonetaryFormat(price: number){

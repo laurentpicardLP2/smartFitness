@@ -145,7 +145,7 @@ export class SyntheseService {
       });
   }
 
-    /**
+  /**
    * Cette fonction permet de trouver une entité subscription dans la liste des subscription grâce à son ID.
    * @param idSubscriptionCategory l'id qu'il faut rechercher dans la liste. 
     * @param username la liste des subscriptions correspondant à username
@@ -156,6 +156,20 @@ export class SyntheseService {
         return this.getHistoricSubscriptionsForAnUser(username).pipe(map(subscriptionsHistoricForAnUser => subscriptionsHistoricForAnUser.find(subscription => subscription.idItem === idSubscriptionForAnUser)));
       }
       return of(this.listHistoricSubscriptionsForAnUser.find(subscription => subscription.idItem === idSubscriptionForAnUser));
+    } 
+  }
+
+   /**
+   * Cette fonction permet de trouver une entité commande dans la liste des commandes grâce à son ID.
+   * @param idCommand l'id qu'il faut rechercher dans la liste. 
+    * 
+    */
+   public findCommand(idCommand: number, username: string): Observable<Command> {
+    if (idCommand) {
+      if (!this.listCommandsForAnUser) {
+        return this.getCommandsForAnUser(username).pipe(map(commandsForAnUser => commandsForAnUser.find(command => command.idCommand === idCommand)));
+      }
+      return of(this.listCommandsForAnUser.find(command => command.idCommand === idCommand));
     } 
   }
   

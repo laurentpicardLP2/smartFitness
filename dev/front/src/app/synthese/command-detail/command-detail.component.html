@@ -1,0 +1,26 @@
+
+ <div>
+  <div  class="title" >Votre commande du {{convertIntoDateTime(command.dateOfCommand)}}  </div>
+</div>
+<table cellpadding="0" cellspacing="0">
+ <thead>
+   <tr>
+     <th>Objet</th>
+     <th>Prix</th>
+   </tr>
+ </thead>
+
+
+   <tbody>
+       <tr *ngFor="let commandDetail of command.items">
+           <td>
+             <a *ngIf="getTypeItem(commandDetail.typeItem)=='seance'" routerLink="/{{getTypeItem(commandDetail.typeItem)}}-detail/{{ commandDetail.idItem }}" routerlinkactive="active" 
+            ng-reflect-router-link-active="active" >{{ getTopicName(commandDetail.typeItem) }} : {{ convertIntoDateTime(commandDetail.dateOfSeance) }}</a>
+          <span *ngIf="getTypeItem(commandDetail.typeItem)!='seance'">{{ getTopicName(commandDetail.typeItem) }}</span>
+          </td>
+           <td>{{ convertIntoMonetaryFormat(commandDetail.price) }}</td>
+          
+       </tr>
+     </tbody>
+  </table><!-- /seance-detail/{{ commandDetail.idItem }} -->
+  

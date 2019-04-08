@@ -56,6 +56,12 @@ public class CommandController {
 		}			
 	}
 	
+	//Retourne la commande dont l'identifiant est idCommand
+//	@GetMapping("/getcommand/{idCommand}")
+//	public Command getCommand(@PathVariable Integer idCommand) {
+//		return this.commandService.findByIdCommand(idCommand);		
+//	}
+	
 	// Delete a command
 	@DeleteMapping("/delcommand/{idCommand}")
 	public ResponseEntity<?> delCommand(@PathVariable int idCommand){
@@ -116,7 +122,8 @@ public class CommandController {
 		try {
 						
 			for(Item item : command.getItems()) {
-				if (item.getTypeItem().equals("Séance")) {
+				
+				if (item.getTypeItem().split(":")[1].equals("seance")) {
 					Seance seance = this.seanceService.findSeanceById(item.getIdItem());
 					seance.setPrice(item.getPrice());
 				}

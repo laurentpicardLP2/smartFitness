@@ -40,8 +40,8 @@
         <button mat-menu-item _ngcontent-cl="" tabindex="5" aria-disabled="false" (click)="onAction('/subscription-customer-historic')">Votre suivi</button>
      </mat-menu>
 
-      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="seances">Vos séances</button>
-      <mat-menu  #seances="matMenu">
+      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="prestations">Vos prestations</button>
+      <mat-menu  #prestations="matMenu">
         <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/seance-booking')">Ajouter une séance</button>
         <button mat-menu-item [matMenuTriggerFor]="suivis" _ngcontent-cl="" tabindex="1" aria-disabled="false">Vos suivis</button>
       </mat-menu>

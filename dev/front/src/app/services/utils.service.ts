@@ -39,7 +39,7 @@ export class UtilsService {
             }).subscribe(
               () => {
                       this.commandService.setNbItemsSubject("");
-                      this.router.navigate(['']);
+                      this.router.navigate(['/login']);
                     },
               (error) => {console.log("del command error", error);
                           this.router.navigate(['/error-page']);}
@@ -86,16 +86,16 @@ export class UtilsService {
    * Met en forme la parie date (pDateOfTimestamp) présente dans chaque ligne du listing des séances pour un utilisateur
    * @param pDateOfTimestamp 
    *  ATTENTION : Il existe un décalage d'une heure (voir deux ? en GMT + 2) entre la date renvoyée par springboot
-   * et celle reçue par Angular
+   * et celle reçue par Angular => gestion du décalage horaire par la fonction getTimezoneOffset
    */
   public convertIntoDateTimeSeanceListing(pDateOfTimestamp: string): string{
-    
     let splitDateOfTimestamp = pDateOfTimestamp.split("T");
     let datePart = splitDateOfTimestamp[0];
     let splitDatePart: string[] = datePart.split("-");
     let timePart = splitDateOfTimestamp[1];
+    let timeZoneOffset = (new Date(parseInt(splitDatePart[0], 10),  parseInt(splitDatePart[1], 10) - 1, parseInt(splitDatePart[2], 10))).getTimezoneOffset();
     let splitTimePart = timePart.split(":");
-    let hh = parseInt(splitTimePart[0],10) + 2;
+    let hh = parseInt(splitTimePart[0],10) - (timeZoneOffset/60);
     let date = new Date(parseInt(splitDatePart[0], 10),  parseInt(splitDatePart[1], 10) - 1, parseInt(splitDatePart[2], 10))
     
     return  this.dayName[date.getDay()] + " " + splitDatePart[2] + ' ' + this.monthName[date.getMonth()] + ' ' + splitDatePart[0] + " " 

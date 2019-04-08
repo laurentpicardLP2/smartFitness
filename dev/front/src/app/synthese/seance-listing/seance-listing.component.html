@@ -19,10 +19,6 @@
         </mat-form-field>
         <div class="example-container mat-elevation-z8">
           <mat-table #Table [dataSource]="MyDataSource" multiTemplateDataRows matSort>
-          <ng-container matColumnDef="Id" >
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
-          <mat-cell *matCellDef="let post"> {{post.idItem}} </mat-cell>
-          </ng-container>
           <ng-container matColumnDef="Date">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Date </mat-header-cell>
           <mat-cell *matCellDef="let post"> {{convertIntoDateTime(post.dateOfSeance)}} </mat-cell>
