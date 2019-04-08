@@ -39,7 +39,7 @@ public class WatchServiceImpl implements WatchService {
 		commands.add(command);
 		Customer customer = this.customerRepo.findByUsername(username);
 		WatchCategory watchCategory = this.watchCategoryRepo.findByIdWatchCategory(idWatchCategory);
-		return this.watchRepo.save(new Watch(commands, watchCategory.getNameWatch() + ":watch", watchCategory.getPriceWatch(), customer, watchCategory));
+		return this.watchRepo.save(new Watch(commands, watchCategory.getNameWatch() + ":watch" + ":" + idWatchCategory, watchCategory.getPriceWatch(), customer, watchCategory));
 	}
 
 	@Override

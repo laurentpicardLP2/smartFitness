@@ -40,6 +40,7 @@ import { WatchCategoryListingComponent } from './manager/watch-category-listing/
 import { WatchCategoryDetailComponent } from './manager/watch-category-detail/watch-category-detail.component';
 import { MonthlyRateBookingComponent } from './manager/monthly-rate-booking/monthly-rate-booking.component';
 import { CommandDetailComponent } from './synthese/command-detail/command-detail.component';
+import { WatchDetailComponent } from './synthese/watch-detail/watch-detail.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -68,6 +69,7 @@ const routes: Routes = [
   { path: 'watch-category-new', canActivate: [AuthGuardManagerService], component: WatchCategoryNewComponent},
   { path: 'watch-category-listing', canActivate: [AuthGuardManagerService], component: WatchCategoryListingComponent},
   { path: 'watch-category-detail/:idWatchCategory', canActivate: [AuthGuardManagerService], component: WatchCategoryDetailComponent},
+  { path: 'watch-detail/:idWatchCategory', canActivate: [AuthGuardCustomerService], component: WatchDetailComponent},
   { path: 'subscription-customer-new/:idSubscriptionCategory/:nbLastSubscription/:typeLastSubscription', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerNewComponent },
   { path: 'subscription-customer-proposition', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerPropositionComponent },
   { path: 'subscription-customer-historic', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerHistoricComponent },

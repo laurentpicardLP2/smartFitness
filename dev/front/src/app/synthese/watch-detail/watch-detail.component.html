@@ -1,0 +1,13 @@
+
+<div fxFlex fxLayout fxLayoutAlign="center">
+  <div class="pad">Nom du modele :  {{nameWatch}}   <div>
+  <div class="pad">Prix du modele :  {{priceWatch}} €  <div>
+  <div class="pad" *ngIf="descriptionWatch != ''">Description du modele :  {{descriptionWatch}} </div>             
+  <br>
+  <div class="pad"><img *ngIf="imageWatch!='' && imageWatch!='undefined'" class="img-watch" src="assets/images/facilities/{{ imageWatch }}" />
+  
+  </div>
+      
+
+  
+

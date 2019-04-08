@@ -55,8 +55,8 @@ export class CommandDetailComponent implements OnInit {
     
   }
 
-  public itemLink(link: string){
-    this.router.navigate([link]);
+  getIdWatchCategory(typeItemWatch: string){
+    return parseInt(typeItemWatch.split(":")[2], 10);
   }
 
 
