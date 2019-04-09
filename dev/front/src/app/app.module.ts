@@ -53,6 +53,7 @@ import { WatchCategoryDetailComponent } from './manager/watch-category-detail/wa
 import { MonthlyRateBookingComponent } from './manager/monthly-rate-booking/monthly-rate-booking.component';
 import { CommandDetailComponent } from './synthese/command-detail/command-detail.component';
 import { WatchDetailComponent } from './synthese/watch-detail/watch-detail.component';
+import { FacilityMaintenanceComponent } from './manager/facility-maintenance/facility-maintenance.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { WatchDetailComponent } from './synthese/watch-detail/watch-detail.compo
     MonthlyRateBookingComponent,
     CommandDetailComponent,
     WatchDetailComponent,
+    FacilityMaintenanceComponent,
 
   ],
   imports: [

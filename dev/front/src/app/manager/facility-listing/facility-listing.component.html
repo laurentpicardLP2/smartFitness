@@ -24,12 +24,16 @@
           <mat-cell *matCellDef="let post"> {{post.nameFacility}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="Price">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Tarif prestation (10') en € </mat-header-cell>
-          <mat-cell *matCellDef="let post"> {{post.priceSeance}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Tarif prestation </mat-header-cell>
+          <mat-cell *matCellDef="let post"> {{post.priceSeance}} €</mat-cell>
           </ng-container>
           <ng-container matColumnDef="Update">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Modification de l'équipement </mat-header-cell>
-              <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" (click)="onShow(post.idFacility)">Modifier</button></mat-cell>
+              <mat-cell  *matCellDef="let post"> 
+                <button mat-raised-button color="accent" (click)="onUpdate(post.idFacility)">Modifier</button>
+                <span>&nbsp;&nbsp;</span>
+                <button mat-raised-button color="accent" (click)="onMaintenance(post.idFacility)">Maintenance</button>
+              </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onShow(row.idFacility)"></mat-row>

@@ -192,10 +192,9 @@ export class ManagerService {
   }
   
 
-    public addFacility(idFacilityCategory: number, idRoom: number, nameFacility: string, descriptionFacility:string, imageFacility: string, priceSeance: number){
-
+    public addFacility(idFacilityCategory: number, idRoom: number, nameFacility: string, descriptionFacility:string, imageFacility: string, priceSeance: number, priceFacility: number, dateOfPurchase: Date){
       this.httpClient.post<Facility>('http://localhost:8080/managerctrl/addfacility/' + idFacilityCategory + '/' + idRoom + '/' + 
-        nameFacility + '/' + descriptionFacility + '/' + imageFacility + '/' + priceSeance, null, 
+        nameFacility + '/' + descriptionFacility + '/' + imageFacility + '/' + priceSeance  + '/' + priceFacility + '/' + dateOfPurchase, null, 
           {
           headers: {
           "Content-Type": "application/json",
@@ -246,8 +245,8 @@ export class ManagerService {
       );
     }
   
-    public addFacilityCategory(nameFacilityCategory: string, priceFacilityCategory: number){
-      this.httpClient.post<FacilityCategory>('http://localhost:8080/managerctrl/addfacilitycategory/' + nameFacilityCategory + '/' + priceFacilityCategory, null, 
+    public addFacilityCategory(nameFacilityCategory: string){
+      this.httpClient.post<FacilityCategory>('http://localhost:8080/managerctrl/addfacilitycategory/' + nameFacilityCategory , null, 
           {
           headers: {
           "Content-Type": "application/json",
@@ -283,11 +282,11 @@ export class ManagerService {
       );
     }
 
-    public updateFacilityCategory(idFacilityCategory:number, nameFacilityCategory: string, priceFacilityCategory: number){
+    public updateFacilityCategory(idFacilityCategory:number, nameFacilityCategory: string){
       console.log(idFacilityCategory);
       console.log(idFacilityCategory);
       console.log(idFacilityCategory);
-      this.httpClient.put<FacilityCategory>('http://localhost:8080/managerctrl/updatefacilitycategory/' + idFacilityCategory + '/' + nameFacilityCategory + '/' + priceFacilityCategory, null, 
+      this.httpClient.put<FacilityCategory>('http://localhost:8080/managerctrl/updatefacilitycategory/' + idFacilityCategory + '/' + nameFacilityCategory, null, 
           {
           headers: {
           "Content-Type": "application/json",
@@ -305,8 +304,8 @@ export class ManagerService {
       );
     }
 
-    public updateFacility(idFacility:number, nameFacilityCategory: string, nameRoom: string,  nameFacility: string, priceSeance: number, descriptionFacility: string, imageFacility: string){
-      this.httpClient.put<Facility>('http://localhost:8080/managerctrl/updatefacility/' + idFacility + '/' + nameFacilityCategory + '/' + nameRoom + '/' + nameFacility + '/' + priceSeance+ '/' + descriptionFacility + '/' + imageFacility, null, 
+    public updateFacility(idFacility:number, nameFacilityCategory: string, nameRoom: string,  nameFacility: string, priceSeance: number, descriptionFacility: string, imageFacility: string, priceFacility: number){
+      this.httpClient.put<Facility>('http://localhost:8080/managerctrl/updatefacility/' + idFacility + '/' + nameFacilityCategory + '/' + nameRoom + '/' + nameFacility + '/' + priceSeance+ '/' + descriptionFacility + '/' + imageFacility + '/' + priceFacility, null, 
           {
           headers: {
           "Content-Type": "application/json",

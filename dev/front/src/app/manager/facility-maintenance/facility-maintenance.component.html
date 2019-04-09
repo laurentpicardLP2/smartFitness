@@ -1,0 +1,40 @@
+<div fxFlex fxLayout fxLayoutAlign="center">
+  <div class="pad">
+    <form [formGroup]="maintenanceForm" >
+        <div>
+          <mat-form-field class="facility-full-width">
+              <input matInput readonly placeholder="Catégorie de l'équipement" type="text" formControlName="nameFacilityCategory" [(ngModel)]="nameFacilityCategory">
+        </mat-form-field>
+        </div>
+         <div>
+        <mat-form-field class="facility-full-width">
+            <input matInput readonly placeholder="Nom de l'équipement" type="text" formControlName="nameFacility" [(ngModel)]="nameFacility">
+        </mat-form-field>
+
+      </div>
+      <div>
+          <mat-form-field class="facility-full-width">
+              <input matInput placeholder="Coût de l'intervention" type="number" formControlName="costOfIntervetion" [(ngModel)]="costOfIntervetion">
+          </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+              <input matInput type="date" placeholder="Date de l'intervetion" formControlName="dateOfIntervention" [(ngModel)]="dateOfIntervention">
+              </mat-form-field>
+          </div>
+          <div>
+              <mat-form-field class="facility-full-width">
+                  <textarea matInput placeholder="Type de l'intervention" type="text" formControlName="typeOfIntervention" [(ngModel)]="typeOfIntervention"></textarea>
+              </mat-form-field>
+            </div>
+          <div>
+          <mat-form-field class="facility-full-width">
+              <textarea matInput placeholder="Description de l'intervention" type="text" formControlName="descOfIntervention" [(ngModel)]="descriptionOfIntervention"></textarea>
+          </mat-form-field>
+        </div>
+
+      <button mat-raised-button [disabled]="maintenanceForm.invalid" (click)="onValidate()">Valider</button>
+
+    </form>
+  </div> 
+</div>

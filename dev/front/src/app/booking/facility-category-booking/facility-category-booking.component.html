@@ -9,8 +9,8 @@
 </div>
 
 <div *ngIf="isNotAvailableFacilities && !isBookedTimestamp">
-  <div style="position: relative; width:100%; top: 90px; text-align:center;"><span class="warning-reserve">Tous les équipements sont réservés.</span>
-    <div style="position: relative; text-align:left; top: -160px; height: 270px; vertical-align: bottom; background-image: url('assets/images/warningReservation.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.2;">
+  <div style="position: relative; width:100%; top: 150px; text-align:center;"><span class="warning-reserve">Tous les équipements sont réservés.</span>
+    <div style="position: relative; text-align:left; top: -195px; height: 250px; vertical-align: bottom; background-image: url('assets/images/warningReservation.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.2;">
     </div>
   </div>
 </div>
@@ -38,14 +38,14 @@
                   <div *ngIf="facility.imageFacility !='' && facility.descriptionFacility ==''" >
                     <table>
                       <tr>
-                        <td rowspan=2>
-                            <img class="img-facility" src="assets/images/facilities/{{ facility.imageFacility }}" />
-                        </td>
-                        <td>
+                       <td>
                             {{ facility.nameFacility }} : ({{ convertIntoMonetaryFormat(facility.priceSeance) }} les 10') 
                             <span *ngIf="!this.isSubscribed"><em><br>> -50% si vous êtes abonné!</em></span>
                           </td>
-                      </tr>
+                          <td rowspan=2>
+                            <img class="img-facility" src="assets/images/facilities/{{ facility.imageFacility }}" />
+                        </td>
+                       </tr>
                       <tr>
                         <td>
                           <a mat-flat-button (click)="onBookingFacility(facility.nameFacility, facilityCategory.nameFacilityCategory, facility.priceSeance)">Sélectionner</a>
@@ -56,14 +56,14 @@
                   <div *ngIf="facility.imageFacility !='' && facility.descriptionFacility !=''" >
                       <table>
                         <tr>
-                          <td rowspan=3>
+                          <td>
+                            {{ facility.nameFacility }} : ({{ convertIntoMonetaryFormat(facility.priceSeance) }} les 10') 
+                            <span *ngIf="!this.isSubscribed"><em><br> -50% si vous êtes abonné!</em></span>
+                        </td>
+                         <td rowspan=3>
                               <img class="img-facility" src="assets/images/facilities/{{ facility.imageFacility }}" />
                           </td>
-                          <td>
-                              {{ facility.nameFacility }} : ({{ convertIntoMonetaryFormat(facility.priceSeance) }} les 10') 
-                              <span *ngIf="!this.isSubscribed"><em><br> -50% si vous êtes abonné!</em></span>
-                          </td>
-                        </tr>
+                       </tr>
                         <tr>
                           <td>
                               {{ facility.descriptionFacility }}

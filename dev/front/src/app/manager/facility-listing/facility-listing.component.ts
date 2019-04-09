@@ -35,6 +35,7 @@ displayedColumns: string[] = ['Name', 'Price', 'Update'];
   RenderDataTable() {
     this.managerService.getFacilities().subscribe(
       res => {
+        console.log("res getFacilities : ", res);
       this.MyDataSource = new MatTableDataSource();
       this.MyDataSource.data = res;
       this.MyDataSource.sort = this.sort;
@@ -46,9 +47,18 @@ displayedColumns: string[] = ['Name', 'Price', 'Update'];
       });
     }
 
-    onShow(idFacility: number) {
+    onUpdate(idFacility: number) {
       this.router.navigate(['facility-detail/' + idFacility]);
     }
+
+    onMaintenance(idFacility: number){
+      this.router.navigate(['facility-maintenance/' + idFacility]);
+    }
+
+    onShow(idFacility: number) {
+
+    }
+
     
     applyFilter(filterValue: string) {
       this.MyDataSource.filter = filterValue.trim().toLowerCase();

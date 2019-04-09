@@ -3,10 +3,12 @@
     position:absolute; top:-35px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-style: oblique;
+    font-size: 13px;
+    font-weight: bolder;
 }
 
-.example-form-field {
-    width: 220px;
+.form-field {
+    width: 200px;
   }
 
 .root-div {

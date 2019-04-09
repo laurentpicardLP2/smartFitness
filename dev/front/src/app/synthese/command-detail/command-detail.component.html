@@ -15,10 +15,12 @@
        <tr *ngFor="let commandDetail of command.items">
            <td>
              <a *ngIf="getTypeItem(commandDetail.typeItem)=='seance'" routerLink="/seance-detail/{{ commandDetail.idItem }}" routerlinkactive="active" 
-            ng-reflect-router-link-active="active" >{{ getTopicName(commandDetail.typeItem) }} : {{ convertIntoDateTime(commandDetail.dateOfSeance) }}</a>
+            ng-reflect-router-link-active="active" >{{ getTopicName(commandDetail.typeItem) }}</a> <span class="date-seance" *ngIf="getTypeItem(commandDetail.typeItem)=='seance'">  ({{ convertIntoDateTime(commandDetail.dateOfSeance) }})</span>
             <a *ngIf="getTypeItem(commandDetail.typeItem)=='watch'" routerLink="/watch-detail/{{ getIdWatchCategory(commandDetail.typeItem) }}" routerlinkactive="active" 
             ng-reflect-router-link-active="active" >{{ getTopicName(commandDetail.typeItem) }}</a>
-            <!-- <span *ngIf="getTypeItem(commandDetail.typeItem)='subscription'">{{ getTopicName(commandDetail.typeItem) }}</span> -->
+            <span *ngIf="getTypeItem(commandDetail.typeItem)=='subscription'">{{ getTopicName(commandDetail.typeItem) }}</span>
+            <a *ngIf="getTypeItem(commandDetail.typeItem)=='subscription'" routerLink="/subscription-customer-historic" routerlinkactive="active" 
+            ng-reflect-router-link-active="active" >(mes abonnements)</a>
           </td>
            <td>{{ convertIntoMonetaryFormat(commandDetail.price) }}</td>
           

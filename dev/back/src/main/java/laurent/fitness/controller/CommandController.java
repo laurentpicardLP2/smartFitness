@@ -129,7 +129,7 @@ public class CommandController {
 				}
 				//this.seanceService.saveSeance(command.getIdCommand(), command.getCustomer().get, item.getPrice());				
 			}
-			
+			command.setStatusCommand(1);
 			this.commandService.saveCommand(command);
 			// ATTENTION il faudra remettre return ResponseEntity.status(HttpStatus.OK).body(command); 
 			// pour l'étape effective du paiement en ligne

@@ -13,11 +13,10 @@ import { MatPaginator, MatTableDataSource, PageEvent, MatSort } from '@angular/m
 })
 export class FacilityCategoryListingComponent implements OnInit {
   nameFacilityCategory: string;
-  priceFacilityCategory: number;
   FacilityCategoriesList: BehaviorSubject<FacilityCategory[]>;
 
 MyDataSource: any;
-displayedColumns: string[] = ['Name', 'Price', 'Update'];
+displayedColumns: string[] = ['Name', 'Update'];
 @ViewChild(MatPaginator) paginator: MatPaginator;
 @ViewChild(MatSort) sort: MatSort;
 

@@ -44,12 +44,10 @@ public class FacilityCategoryServiceImpl implements FacilityCategoryService {
 	}
 
 	@Override
-	public FacilityCategory updateFacilityCategory(String nameFacilityCategory, String quantityFacilityCategory,
-			String priceFacilityCategory) {
+	public FacilityCategory updateFacilityCategory(String nameFacilityCategory, String quantityFacilityCategory) {
 		// TODO Auto-generated method stub
 		FacilityCategory facilityCategoryToUpdate = this.facilityCategoryRepo.findByFacilityCategoryName(nameFacilityCategory);
 		facilityCategoryToUpdate.setQuantityFacilityCategory((Integer.parseInt(quantityFacilityCategory)));
-		facilityCategoryToUpdate.setPriceFacilityCategory((Float.parseFloat(priceFacilityCategory)));
 		return this.facilityCategoryRepo.save(facilityCategoryToUpdate);
 	}
 
@@ -60,12 +58,10 @@ public class FacilityCategoryServiceImpl implements FacilityCategoryService {
 	}
 
 	@Override
-	public FacilityCategory updateFacilityCategory(int idFacilityCategory, String nameFacilityCategory,
-			float priceFacilityCategory) {
+	public FacilityCategory updateFacilityCategory(int idFacilityCategory, String nameFacilityCategory) {
 		// TODO Auto-generated method stub
 		FacilityCategory facilityCategory = this.facilityCategoryRepo.findByIdFacilityCategory(idFacilityCategory);
 		facilityCategory.setNameFacilityCategory(nameFacilityCategory);
-		facilityCategory.setPriceFacilityCategory(priceFacilityCategory);
 		return this.facilityCategoryRepo.save(facilityCategory);
 	}
 

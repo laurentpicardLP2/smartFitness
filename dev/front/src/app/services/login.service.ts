@@ -141,10 +141,15 @@ export class LoginService {
 
   public autoclose(){
     let diff = new Date().getTime() - this.lastAction.getTime();
+    console.log("diff : ", diff);
     if(diff > 600000){
       this.utilsService.delCommand();
-    }
-    setTimeout(() => this.autoclose(), 10000);
+      this.signOut();
+      this.router.navigate[('/login')];
+      window.location.reload();
+      this.lastAction = null;
+    } else {setTimeout(() => this.autoclose(), 10000);}
+    
   }
 
   signInAfterCheckIsOnlySession(user: User, bReload: boolean){
@@ -222,7 +227,7 @@ export class LoginService {
     this.setIsUserLoggedSubject(false);
     this.setAuthoritySubject(new Authority("","ROLE_ANONYMOUS"));
     this.token.signOut();
-    this.router.navigate[('/')];
+    this.router.navigate[('/login')];
   }
 
 

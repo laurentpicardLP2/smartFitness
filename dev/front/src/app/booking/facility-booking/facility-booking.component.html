@@ -1,5 +1,5 @@
 <div *ngIf="totalPriceSeance > 0" class="root-div">
-  <mat-form-field class="example-form-field" *ngFor="let timestampFacility of timestampFacilities | async; let i=index">
+  <mat-form-field class="form-field" *ngFor="let timestampFacility of timestampFacilities | async; let i=index">
     <div *ngIf="i==0" class="seance-title" >Votre séance du {{ getDateSeance(timestampFacility.dateOfTimestamp) }} : </div>
     <input matInput type="text" readonly placeholder="{{ timestampFacility.nameFacility }} : {{ getTimeSeance(timestampFacility.dateOfTimestamp) }}" >
     <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onDeleteTimestamp(i, timestampFacility.idTimestampFacility)">
@@ -12,7 +12,7 @@
     Total séance : {{ convertIntoMonetaryFormat(totalPriceSeance) }}
       <div *ngIf="isEmptySeance===false">
         <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button mat-raised-button color="accent" (click)="onValidateSeance(1)">Valider séance</button>
+        <button mat-raised-button color="accent" (click)="onValidateSeance()">Valider séance</button>
       </div>
   </div>
 </div>

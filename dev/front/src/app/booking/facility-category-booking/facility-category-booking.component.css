@@ -23,7 +23,7 @@
   }
 
   .info-reserve {
-      font-size: 18px;
+      font-size: 14px;
       font-family: 'Times New Roman', Times, serif;
       font-style: italic;
       color: brown;
@@ -31,7 +31,7 @@
   }
 
   .warning-reserve {
-    font-size: 18px;
+    font-size: 14px;
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
     color: brown;
@@ -39,5 +39,10 @@
 }
 
   .img-facility{
-    max-width: 250px;
+    max-width: 170px;
   }
+
+  .card {
+    max-width: 200px;
+  }
+  

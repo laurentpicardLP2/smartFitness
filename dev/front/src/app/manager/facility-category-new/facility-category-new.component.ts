@@ -19,7 +19,6 @@ export class FacilityCategoryNewComponent implements OnInit {
   listFacilityCategories: BehaviorSubject<FacilityCategory[]>;
   facilityCategories: FacilityCategory[];
   nameFacilityCategory : string;
-  priceFacilityCategory: number;
   errors = errorMessages;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
 
@@ -48,8 +47,7 @@ export class FacilityCategoryNewComponent implements OnInit {
           Validators.required,
           Validators.minLength(1),
         ]]
-      }, {validator: this.checkNameFacilityCategory.bind(this)}),
-        priceFacilityCategory: ['', ]
+      }, {validator: this.checkNameFacilityCategory.bind(this)})
     }); 
   }
 
@@ -67,6 +65,6 @@ export class FacilityCategoryNewComponent implements OnInit {
 
 
   public onValidate() {
-    this.managerService.addFacilityCategory(this.nameFacilityCategory, this.priceFacilityCategory);
+    this.managerService.addFacilityCategory(this.nameFacilityCategory);
   }
 }

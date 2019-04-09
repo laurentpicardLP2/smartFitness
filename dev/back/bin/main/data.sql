@@ -1,15 +1,15 @@
 insert into room (capacity_room, name_room) values (15, "Salle A");
 insert into room (capacity_room, name_room) values (20, "Salle B");
 insert into room (capacity_room, name_room) values (10, "Salle C");
-insert into facility_category (name_facility_category, quantity_facility_category, price_facility_category) values ("Elliptique", 3, 0);
-insert into facility_category (name_facility_category, quantity_facility_category, price_facility_category) values ("Tapis roulant", 2, 0);
-insert into facility_category (name_facility_category, quantity_facility_category, price_facility_category) values ("Vélo", 1, 0);
-insert into facility (facility_category_id_facility_category, room_id_room, name_facility, price_seance, description_facility, image_facility) values(1, 1, "Elliptique 1", 0.75, "", "Elliptique 1_elliptique.jpeg");
-insert into facility (facility_category_id_facility_category, room_id_room, name_facility, price_seance, description_facility, image_facility) values(1, 1, "Elliptique 2", 0.80, "", "Elliptique 2_elliptique.jpeg");
-insert into facility (facility_category_id_facility_category, room_id_room, name_facility, price_seance, description_facility, image_facility) values(1, 1, "Elliptique 3", 0.45, "", "Elliptique 3_elliptique.jpeg");
-insert into facility (facility_category_id_facility_category, room_id_room, name_facility, price_seance, description_facility, image_facility) values(2, 1, "Tapis roulant 1", 0.50, "", "Tapis roulant 1_tapisRoulant.jpeg");
-insert into facility (facility_category_id_facility_category, room_id_room, name_facility, price_seance, description_facility, image_facility) values(2, 1, "Tapis roulant 2", 0.55, "", "Tapis roulant 2_tapisRoulant.jpeg");
-insert into facility (facility_category_id_facility_category, room_id_room, name_facility, price_seance, description_facility, image_facility) values(3, 1, "Vélo 1", 1.50, "", "");
+insert into facility_category (name_facility_category, quantity_facility_category) values ("Elliptique", 3);
+insert into facility_category (name_facility_category, quantity_facility_category) values ("Tapis roulant", 2);
+insert into facility_category (name_facility_category, quantity_facility_category) values ("Vélo", 1);
+insert into facility (facility_category_id_facility_category, room_id_room, name_facility, price_facility, date_of_purchase, price_seance, description_facility, image_facility) values(1, 1, "Elliptique 1", 1500, '2019-04-18', 0.75, "", "Elliptique 1_elliptique.jpeg");
+insert into facility (facility_category_id_facility_category, room_id_room, name_facility, price_facility, date_of_purchase, price_seance, description_facility, image_facility) values(1, 1, "Elliptique 2", 1500, '2018-03-04', 0.80, "", "Elliptique 2_elliptique.jpeg");
+insert into facility (facility_category_id_facility_category, room_id_room, name_facility, price_facility, date_of_purchase, price_seance, description_facility, image_facility) values(1, 1, "Elliptique 3", 1500, '2015-05-15', 0.45, "", "Elliptique 3_elliptique.jpeg");
+insert into facility (facility_category_id_facility_category, room_id_room, name_facility, price_facility, date_of_purchase, price_seance, description_facility, image_facility) values(2, 1, "Tapis roulant 1", 1800, '2016-08-16', 0.50, "", "Tapis roulant 1_tapisRoulant.jpeg");
+insert into facility (facility_category_id_facility_category, room_id_room, name_facility, price_facility, date_of_purchase, price_seance, description_facility, image_facility) values(2, 1, "Tapis roulant 2", 1800, '2014-12-25', 0.55, "", "Tapis roulant 2_tapisRoulant.jpeg");
+insert into facility (facility_category_id_facility_category, room_id_room, name_facility, price_facility, date_of_purchase, price_seance, description_facility, image_facility) values(3, 1, "Vélo 1", 2000, '2019-06-27', 1.50, "", "");
 
 insert into watch_category (description_watch, image_watch, name_watch, price_watch) values("", "Watch 1_watch.jpg", "Watch 1", 100);
 insert into watch_category (description_watch, image_watch, name_watch, price_watch) values("", "Watch 2_watchXioami.jpg", "Watch 2", 200);

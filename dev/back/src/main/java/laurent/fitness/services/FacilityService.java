@@ -1,5 +1,6 @@
 package laurent.fitness.services;
 
+import java.util.Date;
 import java.util.List;
 import laurent.fitness.model.Facility;
 
@@ -8,7 +9,7 @@ public interface FacilityService {
 	
 	public Facility saveNewFacility(String facilityName, String roomName, String facilityCategoryName);
 	
-	public Facility updateFacility(int idFacility, String nameFacilityCategory, String nameRoom, String nameFacility, float priceSeance, String descriptionFacility, String imageFacility);
+	public Facility updateFacility(int idFacility, String nameFacilityCategory, String nameRoom, String nameFacility, float priceSeance, String descriptionFacility, String imageFacility, float priceFacility);
 	 
 	public Facility saveFacility(Facility facility);
 	
@@ -18,6 +19,6 @@ public interface FacilityService {
 	
 	public Facility findByFacilityName(String facilityName);
 	
-	public Facility addFacility(int idFacilityCategory, int idRoom, String nameFacility, String descriptionFacility, String imageFacility, float priceSeance);
+	public Facility addFacility(int idFacilityCategory, int idRoom, String nameFacility, String descriptionFacility, String imageFacility, float priceSeance, float priceFacility, Date dateOfPurchase);
 	
 }

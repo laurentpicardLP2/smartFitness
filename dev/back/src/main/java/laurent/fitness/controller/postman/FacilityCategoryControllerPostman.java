@@ -78,8 +78,8 @@ public class FacilityCategoryControllerPostman {
 	@PostMapping("/addfacilitycategory")
 	public ResponseEntity<?> addFacilityCategory(@Valid String nameFacilityCategory, @Valid String quantityFacilityCategory,  @Valid String priceFacilityCategory) {
 		try {
-			FacilityCategory facilityCategory = new FacilityCategory(nameFacilityCategory, Integer.parseInt(quantityFacilityCategory), Float.parseFloat(priceFacilityCategory));
-			this.facilityCategoryService.saveFacilityCategory(facilityCategory);
+			//FacilityCategory facilityCategory = new FacilityCategory(nameFacilityCategory, Integer.parseInt(quantityFacilityCategory), Float.parseFloat(priceFacilityCategory));
+			//this.facilityCategoryService.saveFacilityCategory(facilityCategory);
 			
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 		
@@ -97,7 +97,7 @@ public class FacilityCategoryControllerPostman {
 				@Valid String quantityFacilityCategory,
 				@Valid String priceFacilityCategory){
 			try {
-				this.facilityCategoryService.updateFacilityCategory(nameFacilityCategory, quantityFacilityCategory,priceFacilityCategory);
+				//this.facilityCategoryService.updateFacilityCategory(nameFacilityCategory, quantityFacilityCategory,priceFacilityCategory);
 				return ResponseEntity.status(HttpStatus.OK).body(null);
 			} catch(Exception e) {
 				System.out.println(e);

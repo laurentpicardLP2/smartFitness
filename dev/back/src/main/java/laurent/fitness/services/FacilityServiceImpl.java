@@ -1,5 +1,6 @@
 package laurent.fitness.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -69,13 +70,13 @@ public class FacilityServiceImpl implements FacilityService {
 	}
 
 	@Override
-	public Facility addFacility(int idFacilityCategory, int idRoom, String nameFacility, String descriptionFacility, String imageFacility, float priceSeance) {
+	public Facility addFacility(int idFacilityCategory, int idRoom, String nameFacility, String descriptionFacility, String imageFacility, float priceSeance, float priceFacility, Date dateOfPurchase) {
 		// TODO Auto-generated method stub
 		FacilityCategory facilityCategory = this.facilityCategoryRepo.findByIdFacilityCategory(idFacilityCategory);
 		Room facilityRoom = this.roomRepo.findByIdRoom(idRoom);
 		descriptionFacility = (descriptionFacility.equals("undefined")) ? "" : descriptionFacility;
 		imageFacility = (imageFacility.equals("undefined")) ? "" : imageFacility;
-		Facility saveNewFacility = new Facility(nameFacility, facilityRoom,facilityCategory, descriptionFacility, imageFacility, priceSeance);
+		Facility saveNewFacility = new Facility(nameFacility, facilityRoom,facilityCategory, descriptionFacility, imageFacility, priceSeance, priceFacility, dateOfPurchase);
 		this.facilityRepo.save(saveNewFacility);
 		
 		//mise à jour de la quantité(+1) pour la catégorie d'équipement à laquelle appartient la facility
@@ -87,7 +88,7 @@ public class FacilityServiceImpl implements FacilityService {
 	}
 
 	@Override
-	public Facility updateFacility(int idFacility, String nameFacilityCategory, String nameRoom, String nameFacility, float priceSeance, String descriptionFacility, String imageFacility) {
+	public Facility updateFacility(int idFacility, String nameFacilityCategory, String nameRoom, String nameFacility, float priceSeance, String descriptionFacility, String imageFacility, float priceFacility) {
 		// TODO Auto-generated method stub
 		Facility facility = this.facilityRepo.findByIdFacility(idFacility);
 		FacilityCategory facilityCategory = this.facilityCategoryRepo.findByFacilityCategoryName(nameFacilityCategory);
@@ -100,6 +101,7 @@ public class FacilityServiceImpl implements FacilityService {
 		facility.setPriceSeance(priceSeance);
 		facility.setDescriptionFacility(descriptionFacility);
 		facility.setImageFacility(imageFacility);
+		facility.setPriceFacility(priceFacility);
 		return this.facilityRepo.save(facility);
 	}
 

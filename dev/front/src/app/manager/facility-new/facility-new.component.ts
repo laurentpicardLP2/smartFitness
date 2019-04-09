@@ -32,6 +32,8 @@ export class FacilityNewComponent implements OnInit {
   rooms: Room[];
   nameFacility: string;
   priceSeance: number;
+  priceFacility: number = 0;
+  dateOfPurchase: Date = new Date;
   descriptionFacility: string;
   imageFacility: string;
   idFacilityCategory: number;
@@ -94,6 +96,8 @@ export class FacilityNewComponent implements OnInit {
           Validators.minLength(1),
         ]]
       }, {validator: this.checkNameFacility.bind(this)}),
+      priceFacility: '',
+      dateOfPurchase: '',
       priceSeance: ['', [
         Validators.required
       ]],
@@ -134,15 +138,17 @@ export class FacilityNewComponent implements OnInit {
 
   public onValidate() {
       const data: FormData = new FormData();
-      
+      let splitDateOfPurchase = this.dateOfPurchase.toString().split("-");
+      let transmitDateOfPurchase = new Date(parseInt(splitDateOfPurchase[0], 10), parseInt(splitDateOfPurchase[1], 10) -1 ,parseInt(splitDateOfPurchase[2],10) );
+      console.log("transmitDateOfPurchase : ", transmitDateOfPurchase);
       if (this.file !== undefined){
         this.imageFacility = this.nameFacility + "_" + this.file.name;
-        this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceSeance);
+        this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceSeance, this.priceFacility, transmitDateOfPurchase);
         data.append('data', this.file, this.nameFacility + "_" + this.file.name);
         this.managerService.addImage(data, this.username, this.password, "facilityForm");
       }
       else {
-        this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceSeance);
+        this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceSeance, this.priceFacility, transmitDateOfPurchase);
       }    
        
   }

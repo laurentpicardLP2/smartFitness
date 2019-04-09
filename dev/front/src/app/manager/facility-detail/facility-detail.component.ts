@@ -30,6 +30,8 @@ export class FacilityDetailComponent implements OnInit {
   nameFacility: string;
   nameFacilityInit: string;
   priceSeance: number;
+  priceFacility: number;
+  dateOfPurchase: Date;
   descriptionFacility: string;
   imageFacility: string;
   facilityForm: FormGroup;
@@ -60,6 +62,8 @@ export class FacilityDetailComponent implements OnInit {
       this.managerService.publishFacilityCategoryAssociateToFacility(this.idFacility);
       this.nameFacility = facility.nameFacility;
       this.nameFacilityInit = facility.nameFacility;
+      this.priceFacility = facility.priceFacility;
+      this.dateOfPurchase = facility.dateOfPurchase;
       this.priceSeance = facility.priceSeance;
       this.descriptionFacility = facility.descriptionFacility;
       this.imageFacility = facility.imageFacility;
@@ -115,6 +119,8 @@ export class FacilityDetailComponent implements OnInit {
           Validators.minLength(1),
         ]]
       }, {validator: this.checkNameFacility.bind(this)}),
+      priceFacility: '',
+      dateOfPurchase: '',
       priceSeance: ['', [
         Validators.required
       ]],
@@ -165,12 +171,12 @@ export class FacilityDetailComponent implements OnInit {
       
     if (this.file !== undefined){
       this.imageFacility = this.nameFacility + "_" + this.file.name;
-      this.managerService.updateFacility(this.idFacility, this.nameFacilityCategory, this.nameRoom, this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility);
+      this.managerService.updateFacility(this.idFacility, this.nameFacilityCategory, this.nameRoom, this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility, this.priceFacility);
       data.append('data', this.file, this.nameFacility + "_" + this.file.name);
       this.managerService.addImage(data, this.username, this.password, "facilityForm");
     }
     else {
-      this.managerService.updateFacility(this.idFacility, this.nameFacilityCategory, this.nameRoom, this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility);
+      this.managerService.updateFacility(this.idFacility, this.nameFacilityCategory, this.nameRoom, this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility, this.priceFacility);
     }
 
 

@@ -2,6 +2,7 @@ package laurent.fitness.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -81,7 +82,7 @@ public class ManagerController {
 	}
 	
 	//Ajoute un facility dans la catégorie idFacilityCategory et la room idRoom + met à jour le nombre d'équipement
-	@PostMapping("/addfacility/{idFacilityCategory}/{idRoom}/{nameFacility}/{descriptionFacility}/{imageFacility}/{priceSeance}")
+	@PostMapping("/addfacility/{idFacilityCategory}/{idRoom}/{nameFacility}/{descriptionFacility}/{imageFacility}/{priceSeance}/{priceFacility}/{dateOfPurchase}")
 
 	public ResponseEntity<?> addFacility(
 			@PathVariable int idFacilityCategory, 
@@ -89,9 +90,12 @@ public class ManagerController {
 			@PathVariable String nameFacility,
 			@PathVariable String descriptionFacility,
 			@PathVariable String imageFacility,
-			@PathVariable float priceSeance) {
+			@PathVariable float priceSeance,
+			@PathVariable Float priceFacility,
+			@PathVariable Date dateOfPurchase) {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(this.facilityService.addFacility(idFacilityCategory, idRoom, nameFacility, descriptionFacility, imageFacility, priceSeance));
+			System.out.println("dateOfPurchase : " + dateOfPurchase);
+			return ResponseEntity.status(HttpStatus.OK).body(this.facilityService.addFacility(idFacilityCategory, idRoom, nameFacility, descriptionFacility, imageFacility, priceSeance, priceFacility, dateOfPurchase));
 		} catch(Exception e) {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
@@ -116,12 +120,13 @@ public class ManagerController {
 	  }
     		 	
 	// Update a facility
-	@PutMapping("/updatefacility/{idFacility}/{nameFacilityCategory}/{nameRoom}/{nameFacility}/{priceSeance}/{descriptionFacility}/{imageFacility}")
+	@PutMapping("/updatefacility/{idFacility}/{nameFacilityCategory}/{nameRoom}/{nameFacility}/{priceSeance}/{descriptionFacility}/{imageFacility}/{priceFacility}")
 	public ResponseEntity<?> updateFacility(@PathVariable Integer idFacility, @PathVariable String nameFacilityCategory,
 			@PathVariable String nameRoom, @PathVariable String nameFacility, @PathVariable Float priceSeance,
-			@PathVariable String descriptionFacility, @PathVariable String imageFacility){
+			@PathVariable String descriptionFacility, @PathVariable String imageFacility,
+			@PathVariable Float priceFacility){
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(this.facilityService.updateFacility(idFacility, nameFacilityCategory, nameRoom, nameFacility, priceSeance, descriptionFacility, imageFacility));
+			return ResponseEntity.status(HttpStatus.OK).body(this.facilityService.updateFacility(idFacility, nameFacilityCategory, nameRoom, nameFacility, priceSeance, descriptionFacility, imageFacility, priceFacility));
 		} catch(Exception e) {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
@@ -129,10 +134,10 @@ public class ManagerController {
 	}
 	
 	// Update a facilityCategory
-	@PutMapping("/updatefacilitycategory/{idFacilityCategory}/{nameFacilityCategory}/{priceFacilityCategory}") 
-	public ResponseEntity<?> updateFacilityCategory(@PathVariable Integer idFacilityCategory, @PathVariable String nameFacilityCategory, @PathVariable Float priceFacilityCategory){
+	@PutMapping("/updatefacilitycategory/{idFacilityCategory}/{nameFacilityCategory}") 
+	public ResponseEntity<?> updateFacilityCategory(@PathVariable Integer idFacilityCategory, @PathVariable String nameFacilityCategory){
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(this.facilityCategoryService.updateFacilityCategory(idFacilityCategory, nameFacilityCategory, priceFacilityCategory));
+			return ResponseEntity.status(HttpStatus.OK).body(this.facilityCategoryService.updateFacilityCategory(idFacilityCategory, nameFacilityCategory));
 		} catch(Exception e) {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
@@ -145,10 +150,10 @@ public class ManagerController {
 	 * @param priceFacilityCategory
 	 * @return
 	 */
-	@PostMapping("/addfacilitycategory/{nameFacilityCategory}/{priceFacilityCategory}")
-	public ResponseEntity<?> addFacilityCategory(@PathVariable String nameFacilityCategory, @PathVariable Float priceFacilityCategory) {
+	@PostMapping("/addfacilitycategory/{nameFacilityCategory}")
+	public ResponseEntity<?> addFacilityCategory(@PathVariable String nameFacilityCategory) {
 		try {
-			FacilityCategory facilityCategory = new FacilityCategory(nameFacilityCategory, priceFacilityCategory);
+			FacilityCategory facilityCategory = new FacilityCategory(nameFacilityCategory);
 			this.facilityCategoryService.saveFacilityCategory(facilityCategory);
 			
 		return ResponseEntity.status(HttpStatus.OK).body(null);

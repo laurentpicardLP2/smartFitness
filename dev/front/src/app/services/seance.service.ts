@@ -114,7 +114,6 @@ export class SeanceService {
 
   public addTimestampFacilityToSeance(seance: Seance, dateOfTimestamp: Date, nameFacility: string, nameFacilityCategory: string, priceSeance: number, priceSeanceArray: number[]){
     
-    
     this.httpClient.post<TimestampFacility>('http://localhost:8080/timestampfacilityctrl/addtimestampfacility/' + seance.idItem + '/' +
     dateOfTimestamp + '/' + nameFacility + '/' + nameFacilityCategory, null, 
     {

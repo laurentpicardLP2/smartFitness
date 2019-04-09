@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -28,8 +29,13 @@ public class Facility implements Serializable {
 	
 	private float priceSeance;
 	
+	private float priceFacility;
+	
 	@Lob
 	private String descriptionFacility;
+	
+	@Temporal(TemporalType.DATE)
+	private Date dateOfPurchase;
 
 
 	private String imageFacility;
@@ -50,6 +56,10 @@ public class Facility implements Serializable {
 	@OneToMany(mappedBy="facility")
 	@JsonManagedReference
 	private List<TimestampFacility> timestampFacilities;
+	
+	//bi-directional many-to-many association to MaintenanceOperation
+	@ManyToMany(mappedBy="facilities")
+	private List<MaintenanceOperation> maintenanceOperations;
 
 	public Facility() {
 	}
@@ -100,6 +110,17 @@ public class Facility implements Serializable {
 		this.priceSeance = priceSeance;
 	}
 	
+	public Facility(String nameFacility, Room room, FacilityCategory facilityCategory, String descriptionFacility, String imageFacility, float priceSeance, float priceFacility, Date dateOfPurchase) {
+		this.nameFacility = nameFacility;
+		this.room = room;
+		this.facilityCategory = facilityCategory;
+		this.descriptionFacility = descriptionFacility;
+		this.imageFacility = imageFacility;
+		this.priceSeance = priceSeance;
+		this.priceFacility = priceFacility;
+		this.dateOfPurchase = dateOfPurchase;
+	}
+	
 	public int getIdFacility() {
 		return this.idFacility;
 	}
@@ -122,6 +143,22 @@ public class Facility implements Serializable {
 
 	public void setPriceSeance(float priceSeance) {
 		this.priceSeance = priceSeance;
+	}
+	
+	public float getPriceFacility() {
+		return this.priceFacility;
+	}
+
+	public void setPriceFacility(float priceFacility) {
+		this.priceFacility = priceFacility;
+	}
+	
+	public Date getDateOfPurchase() {
+		return this.dateOfPurchase;
+	}
+
+	public void setDateOfPurchase(Date dateOfPurchase) {
+		this.dateOfPurchase = dateOfPurchase;
 	}
 
 	public String getDescriptionFacility() {
@@ -154,6 +191,14 @@ public class Facility implements Serializable {
 
 	public void setFacilityCategory(FacilityCategory facilityCategory) {
 		this.facilityCategory = facilityCategory;
+	}
+	
+	public List<MaintenanceOperation> getMaintenanceOperations() {
+		return this.maintenanceOperations;
+	}
+
+	public void setMaintenanceOperations(List<MaintenanceOperation> maintenanceOperations) {
+		this.maintenanceOperations = maintenanceOperations;
 	}
 
 	public List<TimestampFacility> getTimestampFacilities() {

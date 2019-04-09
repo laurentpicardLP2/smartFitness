@@ -27,6 +27,16 @@
 
       </div>
       <div>
+          <mat-form-field class="facility-full-width">
+              <input matInput placeholder="Prix d'achat de l'équipement" type="number" formControlName="priceFacility" [(ngModel)]="priceFacility">
+          </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+              <input matInput type="date" placeholder="date of Purchase" formControlName="dateOfPurchase" [(ngModel)]="dateOfPurchase">
+              </mat-form-field>
+          </div>
+      <div>
         <mat-form-field class="facility-full-width">
             <input matInput placeholder="Tarif prestation (10')" type="number" formControlName="priceSeance" [(ngModel)]="priceSeance">
         </mat-form-field>
@@ -35,7 +45,7 @@
           <mat-form-field class="facility-full-width">
               <textarea matInput placeholder="Description de l'équipement" type="text" formControlName="descriptionFacility" [(ngModel)]="descriptionFacility"></textarea>
           </mat-form-field>
-  
+
         </div>
       <div>
         <input type="file" id="userFile" (change)="onSelectFile($event)" #fileInput style="display: none">

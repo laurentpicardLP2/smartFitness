@@ -24,10 +24,6 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header> Nom de catégorie de l'équipement </mat-header-cell>
             <mat-cell *matCellDef="let post"> {{post.nameFacilityCategory}} </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="Price">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Prix d'achat de l'équipement (en €) </mat-header-cell>
-            <mat-cell *matCellDef="let post"> {{post.priceFacilityCategory}} </mat-cell>
-            </ng-container>
             <ng-container matColumnDef="Update">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Modification de la catégorie d'équipement </mat-header-cell>
                 <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" (click)="onShow(post.idFacilityCategory)">Modifier</button></mat-cell>

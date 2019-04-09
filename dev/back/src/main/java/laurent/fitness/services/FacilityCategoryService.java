@@ -10,7 +10,7 @@ public interface FacilityCategoryService {
 	
 	public FacilityCategory saveFacilityCategory(FacilityCategory facilityCategory);
 	
-	public FacilityCategory updateFacilityCategory(int idFacilityCategory, String nameFacilityCategory, float priceFacilityCategory);
+	public FacilityCategory updateFacilityCategory(int idFacilityCategory, String nameFacilityCategory);
 	
 	public void deleteFacilityCategory(FacilityCategory facilityCategory);
 	
@@ -18,8 +18,7 @@ public interface FacilityCategoryService {
 	
 	public FacilityCategory findByIdFacilityCategory(int idFacilityCategory);
 	
-	public FacilityCategory updateFacilityCategory(String nameFacilityCategory, String quantityFacilityCategory,
-			String priceFacilityCategory);
+	public FacilityCategory updateFacilityCategory(String nameFacilityCategory, String quantityFacilityCategory);
 
 	public FacilityCategory getFacilityCategoryAssociateToFacility(int idFacility);
 

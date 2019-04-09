@@ -38,7 +38,6 @@ export class FacilityCategoryDetailComponent implements OnInit {
       this.idFacilityCategory = facilityCategory.idFacilityCategory;
       this.nameFacilityCategory = facilityCategory.nameFacilityCategory;
       this.nameFacilityCategoryInit = facilityCategory.nameFacilityCategory;
-      this.priceFacilityCategory = facilityCategory.priceFacilityCategory;
     });
     this.createForm();
   }
@@ -66,10 +65,8 @@ export class FacilityCategoryDetailComponent implements OnInit {
   }
 
   
-
-
   public onUpdate() {
-    this.managerService.updateFacilityCategory(this.idFacilityCategory,this.nameFacilityCategory, this.priceFacilityCategory);
+    this.managerService.updateFacilityCategory(this.idFacilityCategory,this.nameFacilityCategory);
   }
 
 }

@@ -26,8 +26,6 @@ public class FacilityCategory implements Serializable {
 	@Column(unique = true)
 	private String nameFacilityCategory;
 
-	private float priceFacilityCategory;
-
 	private int quantityFacilityCategory;
 
 
@@ -54,16 +52,6 @@ public class FacilityCategory implements Serializable {
 		this.quantityFacilityCategory = quantityFacilityCategory;
 	}
 	
-	public FacilityCategory(String nameFacilityCategory, float priceFacilityCategory) {
-		this.nameFacilityCategory = nameFacilityCategory;
-		this.priceFacilityCategory = priceFacilityCategory;
-	}
-	
-	public FacilityCategory(String nameFacilityCategory, int quantityFacilityCategory, float priceFacilityCategory) {
-		this.nameFacilityCategory = nameFacilityCategory;
-		this.quantityFacilityCategory = quantityFacilityCategory;
-		this.priceFacilityCategory = priceFacilityCategory;
-	}
 	
 	public int getIdFacilityCategory() {
 		return this.idFacilityCategory;
@@ -79,14 +67,6 @@ public class FacilityCategory implements Serializable {
 
 	public void setNameFacilityCategory(String nameFacilityCategory) {
 		this.nameFacilityCategory = nameFacilityCategory;
-	}
-
-	public float getPriceFacilityCategory() {
-		return priceFacilityCategory;
-	}
-
-	public void setPriceFacilityCategory(float priceFacilityCategory) {
-		this.priceFacilityCategory = priceFacilityCategory;
 	}
 
 	public int getQuantityFacilityCategory() {

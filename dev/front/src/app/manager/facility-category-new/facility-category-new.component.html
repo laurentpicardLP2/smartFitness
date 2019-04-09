@@ -10,11 +10,6 @@
           </mat-form-field>
   
         </div>
-        <div>
-            <mat-form-field class="facility-category-full-width">
-                <input matInput placeholder="Prix d'achat de l'équipement" type="number" formControlName="priceFacilityCategory" [(ngModel)]="priceFacilityCategory">
-            </mat-form-field>
-          </div>
   
         <button mat-raised-button [disabled]="facilityCategoryForm.invalid" (click)="onValidate()">Valider</button>
       </form>
