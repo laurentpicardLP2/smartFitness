@@ -112,6 +112,22 @@ export class HeaderComponent implements OnInit {
     this.reportingService.publishDataSet();
   }
 
+  // menu2Leave(trigger1, trigger2, button) {
+  //   setTimeout(() => {
+  //     if (this.isMatMenu2Open) {
+  //       trigger1.closeMenu();
+  //       this.isMatMenuOpen = false;
+  //       this.isMatMenu2Open = false;
+  //       this.enteredButton = false;
+  //       this.ren.removeClass(button['_elementRef'].nativeElement, 'cdk-focused');
+  //       this.ren.removeClass(button['_elementRef'].nativeElement, 'cdk-program-focused');
+  //     } else {
+  //       this.isMatMenu2Open = false;
+  //       trigger2.closeMenu();
+  //     }
+  //   }, 100)
+  //}
+
 }
 
 

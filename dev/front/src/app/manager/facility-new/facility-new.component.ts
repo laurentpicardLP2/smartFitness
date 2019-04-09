@@ -22,6 +22,12 @@ import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} f
 export class FacilityNewComponent implements OnInit {
 
   facilityForm: FormGroup;
+  strDateOfPurchase: string;
+  shownYear: string;
+  currentMonth: number;
+  shownMonth: string;
+  currentDay: number;
+  shownDay: string;
   file: File;
   fileInformation: FileInformation;
   listFacilityCategories: BehaviorSubject<FacilityCategory[]>;
@@ -32,7 +38,7 @@ export class FacilityNewComponent implements OnInit {
   rooms: Room[];
   nameFacility: string;
   priceSeance: number;
-  priceFacility: number = 0;
+  priceFacility: number;
   dateOfPurchase: Date = new Date;
   descriptionFacility: string;
   imageFacility: string;
@@ -86,6 +92,7 @@ export class FacilityNewComponent implements OnInit {
     });
     
     this.createForm();
+    this.initDatePurchaseField();
   }
 
   createForm(){
@@ -121,6 +128,26 @@ export class FacilityNewComponent implements OnInit {
     return isValid ? null : { checkNameFacility: true };
   }
 
+  initDatePurchaseField(){
+    this.dateOfPurchase = new Date();
+    this.shownYear = this.dateOfPurchase.getFullYear().toString();
+    this.currentMonth = this.dateOfPurchase.getMonth() + 1;
+    this.currentDay = this.dateOfPurchase.getDate()
+    
+    if(this.currentMonth <10) {
+      this.shownMonth = "0" + this.currentMonth.toString();
+    } else{
+      this.shownMonth = this.currentMonth.toString();
+    }
+    if(this.currentDay < 10) {
+      this.shownDay = "0" + this.currentDay.toString();
+    } else{
+      this.shownDay = this.currentDay.toString();
+    }
+    
+    this.strDateOfPurchase = this.shownYear + "-" + this.shownMonth + "-" + this.shownDay;
+  }
+
   onSelectFile(event) {
     if(event.target.files && event.target.files.length > 0) {
       this.file = event.target.files[0];
@@ -138,9 +165,11 @@ export class FacilityNewComponent implements OnInit {
 
   public onValidate() {
       const data: FormData = new FormData();
-      let splitDateOfPurchase = this.dateOfPurchase.toString().split("-");
+      let splitDateOfPurchase = this.strDateOfPurchase.split("-");
       let transmitDateOfPurchase = new Date(parseInt(splitDateOfPurchase[0], 10), parseInt(splitDateOfPurchase[1], 10) -1 ,parseInt(splitDateOfPurchase[2],10) );
-      console.log("transmitDateOfPurchase : ", transmitDateOfPurchase);
+      if(isNaN(this.priceFacility)) {
+        this.priceFacility = 0;
+      }
       if (this.file !== undefined){
         this.imageFacility = this.nameFacility + "_" + this.file.name;
         this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceSeance, this.priceFacility, transmitDateOfPurchase);

@@ -3,7 +3,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { LoginService } from 'src/app/services/login.service';
-import { FileInformation } from '../file-information';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { FacilityCategory } from 'src/app/models/facility-category.model';
@@ -21,7 +20,6 @@ import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} f
 export class FacilityMaintenanceComponent implements OnInit {
   
   file: File;
-  fileInformation: FileInformation;
   listFacilityCategories: BehaviorSubject<FacilityCategory[]>;
   listRooms: BehaviorSubject<Room[]>;
   facilityCategories: FacilityCategory[];
@@ -33,6 +31,12 @@ export class FacilityMaintenanceComponent implements OnInit {
   descOfIntervention: string;
   typeOfIntervention: string;
   dateOfIntervention: Date;
+  strDateOfIntervention: string;
+  shownYear: string;
+  currentMonth: number;
+  shownMonth: string;
+  currentDay: number;
+  shownDay: string;
   maintenanceForm: FormGroup;
   facilityCategoryAssociateToFacility: FacilityCategory;
   nameFacilityCategory: string = "";
@@ -75,6 +79,7 @@ export class FacilityMaintenanceComponent implements OnInit {
     });
 
     this.createForm();
+    this.initDatePurchaseField();
   }
 
   createForm(){
@@ -92,6 +97,27 @@ export class FacilityMaintenanceComponent implements OnInit {
         Validators.required
       ]]
     }); 
+  }
+
+
+  initDatePurchaseField(){
+    this.dateOfIntervention = new Date();
+    this.shownYear = this.dateOfIntervention.getFullYear().toString();
+    this.currentMonth = this.dateOfIntervention.getMonth() + 1;
+    this.currentDay = this.dateOfIntervention.getDate()
+    
+    if(this.currentMonth <10) {
+      this.shownMonth = "0" + this.currentMonth.toString();
+    } else{
+      this.shownMonth = this.currentMonth.toString();
+    }
+    if(this.currentDay < 10) {
+      this.shownDay = "0" + this.currentDay.toString();
+    } else{
+      this.shownDay = this.currentDay.toString();
+    }
+    
+    this.strDateOfIntervention = this.shownYear + "-" + this.shownMonth + "-" + this.shownDay;
   }
 
 

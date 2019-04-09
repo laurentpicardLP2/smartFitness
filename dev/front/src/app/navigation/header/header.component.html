@@ -1,5 +1,14 @@
 <mat-toolbar color="primary" class="mat-elevation-z5" role="heading">
   <!-- <li *ngIf="typeRole === 'ROLE_ADMIN' || typeRole === 'ROLE_USER' || typeRole === 'ROLE_MANAGER' || typeRole === 'ROLE_DEVELOPPER'"><a routerLink="/gendles">Genres</a></li> -->
+  <div>
+    <a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onHome('')">
+      <mat-icon>home</mat-icon>
+      <div class="mat-button-ripple mat-ripple" matripple=""></div>
+      <div class="mat-button-focus-overlay"></div>
+    </a>
+
+  </div>
+
   <div class="flex-spacer" _ngcontent-cl=""></div>
 
   <div fxHide.gt-xs>
@@ -7,14 +16,8 @@
       <mat-icon>menu</mat-icon>
     </button>
   </div>
-
-
+  
   <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
-      <a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onHome('')">
-        <mat-icon>home</mat-icon>
-        <div class="mat-button-ripple mat-ripple" matripple=""></div>
-        <div class="mat-button-focus-overlay"></div>
-      </a>
 
       <a *ngIf="authority.authority=='ROLE_ANONYMOUS'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" routerLink="/login">
         <mat-icon>person</mat-icon>
@@ -104,13 +107,14 @@
       <mat-menu  #pilotage="matMenu">
           <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false" (click)="onReporting()">Tableaux de bord</button>
        </mat-menu>
-  
-      <a *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onToggleCart()">
+  </div>
+  <div *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'">
+      <a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onToggleCart()">
         <mat-icon matBadge="{{ nbItems }}" matBadgeColor="warn">shopping_cart</mat-icon>
       <div class="mat-button-ripple mat-ripple" matripple=""></div>
       <div class="mat-button-focus-overlay"></div>
     </a> 
-    <div *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" id="cart" class="cart">        
+    <div id="cart" class="cart">        
         <div class="cartText" id="cartText">
             <span class="cart-title">Votre panier</span>
             <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onContinue()">
@@ -134,13 +138,15 @@
             <div class="mat-button-focus-overlay"></div>
           </a>
         </div>    
-    </div>  
+      </div>
+  </div>
+    <div> 
     <a *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER' || authority.authority=='ROLE_CUSTOMER')" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onLogout()">
       <mat-icon>power_settings_new</mat-icon>
       <div class="mat-button-ripple mat-ripple" matripple=""></div>
       <div class="mat-button-focus-overlay"></div>
     </a>
-
+ 
   </div>       
     
 </mat-toolbar>

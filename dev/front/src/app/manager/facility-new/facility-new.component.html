@@ -20,7 +20,7 @@
       </div>
       <div formGroupName="nameFacilityGroup">
           <mat-form-field class="facility-full-width">
-              <input matInput required placeholder="Nom de l'équipement" type="text" formControlName="nameFacility" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameFacility">
+              <input matInput required maxlength="15" placeholder="Nom de l'équipement" type="text" formControlName="nameFacility" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameFacility">
               <mat-error>
                   {{errors.nameFacility}}
               </mat-error>
@@ -33,7 +33,7 @@
       </div>
       <div>
         <mat-form-field>
-          <input matInput type="date" placeholder="date of Purchase" formControlName="dateOfPurchase" [(ngModel)]="dateOfPurchase">
+          <input matInput type="date" placeholder="date of Purchase" formControlName="dateOfPurchase" [(ngModel)]="strDateOfPurchase">
           </mat-form-field>
       </div>
          <div>
