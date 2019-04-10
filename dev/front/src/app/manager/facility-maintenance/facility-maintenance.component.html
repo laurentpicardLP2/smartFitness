@@ -36,5 +36,27 @@
       <button mat-raised-button [disabled]="maintenanceForm.invalid" (click)="onValidate()">Valider</button>
 
     </form>
-  </div> 
+
+    <div class="pad">
+      Historique des opérations de maintenance
+      <table cellpadding="0" cellspacing="0">
+        <thead>
+          <td>Date</td>
+          <td>Coût</td>
+          <td>Type</td>
+          <td>Desc.</td>
+        </thead>
+        <tbody>
+          <tr *ngFor="let operation of maintenanceOperations">
+            <td>{{operation.costOfIntervention}}</td>
+            <td>{{operation.dateOfIntervention}}</td>
+            <td>{{operation.descOfIntervention}}</td>
+            <td>{{operation.typeOfIntervention}}</td>
+            <!-- <td><button (click)="onDelete(operation.idMaintenanceOperation)">Delete</button></td> -->
+          </tr>
+        </tbody>
+      </table> 
+    </div>
+
+  </div>
 </div>

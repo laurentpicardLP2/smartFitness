@@ -8,14 +8,17 @@
                     {{errors.fullname}}
                 </mat-error>
             </mat-form-field>
-            <div formGroupName="usernameGroup">
+           
             <mat-form-field class="customer-full-width">
-                <input matInput required placeholder="Username" type="text" formControlName="username" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="username">
-                <mat-error>
+                <input matInput required placeholder="Username" type="text" formControlName="username">
+                <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('username') && userRegistrationForm.value.username">
+                    {{errors.usernameSame}}
+                </mat-error>
+                <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('required')">
                     {{errors.username}}
                 </mat-error>
             </mat-form-field>
-            </div>
+           
             <div formGroupName="emailGroup">
                 <mat-form-field class="customer-full-width">
                     <input matInput required placeholder="Email address" type="email" formControlName="email" [(ngModel)]="email">

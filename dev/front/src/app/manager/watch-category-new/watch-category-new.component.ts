@@ -109,7 +109,11 @@ export class WatchCategoryNewComponent implements OnInit {
 
   public onRegister() {
       const data: FormData = new FormData();
-      
+      data.append('data', this.file, this.nameWatch + "_" + this.file.name);
+      console.log("this.file : ", this.file);
+      console.log("this.fileInput : ", this.fileInput);
+      console.log("data : ", data);
+
       if (this.file !== undefined){
         this.imageWatch = this.nameWatch + "_" + this.file.name;
         data.append('data', this.file, this.nameWatch + "_" + this.file.name);

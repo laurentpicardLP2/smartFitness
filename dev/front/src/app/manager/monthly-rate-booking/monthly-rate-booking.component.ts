@@ -25,8 +25,6 @@ export class MonthlyRateBookingComponent implements OnInit {
       this.monthLabels.push(this.monthDataSet[m]);
     }
 
-    console.log("new Date()).getMonth() : ", new Date().getFullYear())
-
     this.chart = new Chart('myChart', {
       type: 'bar',
       data: {

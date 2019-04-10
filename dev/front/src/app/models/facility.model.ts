@@ -1,5 +1,4 @@
-import { Room } from 'src/app/models/room.model';
-import { FacilityCategory } from 'src/app/models/facility-category.model';
+import { MaintenanceOperation } from './maintenance-operation';
 
 export class Facility {
     public idFacility: number;
@@ -9,6 +8,7 @@ export class Facility {
     public dateOfPurchase: Date;
     public descriptionFacility: string;
     public imageFacility: string;
+    public maintenanceOperations: MaintenanceOperation [];
 
     constructor() {}
 }

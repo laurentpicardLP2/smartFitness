@@ -1,3 +1,4 @@
+import { MaintenanceOperation } from '../models/maintenance-operation.model';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { LoginService } from './login.service';
 import { Facility } from 'src/app/models/facility.model';
@@ -319,6 +320,35 @@ export class ManagerService {
             console.log("update Facility pb : ", error); 
             this.router.navigate(['error-page']);
           }
+      );
+    }
+
+    public addMaintenanceOperationFacility(idFacility: number, operation: MaintenanceOperation){
+      this.httpClient.post<Facility>('http://localhost:8080/managerctrl/addmaintenanceoperationtofacility/' + idFacility, operation, 
+      {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+        }
+    }).subscribe(
+          (facility) =>{ console.log("init facility OK : ", facility); this.router.navigate(['facility-listing']);},
+          (error) => { console.log("init facility pb : ", error);  this.router.navigate(['error-page']);}
+      );
+      
+    }
+
+    public deleteMaintenanceOperationFacility(idFacility: number, idMaintenanceOperation: number){
+      
+      this.httpClient.delete('http://localhost:8080/managerctrl/delmaintenanceoperationtofacility/' + idFacility + '/' + idMaintenanceOperation,
+      {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+        }
+    }).subscribe(
+          () =>{ console.log("suppression idMaintenanceOperation OK : ",idMaintenanceOperation);
+              },
+          (error) => console.log("suppression idMaintenanceOperation pb : ", error) 
       );
     }
 

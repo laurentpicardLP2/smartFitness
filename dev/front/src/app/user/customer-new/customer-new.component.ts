@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators, FormBuilder, AbstractControl} from '@angular/forms';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
 import { HttpClient } from '@angular/common/http';
+import { CustomValidator } from 'src/app/validators/custom.validator';
 
 
 
@@ -58,12 +59,12 @@ export class CustomerNewComponent implements OnInit {
               Validators.minLength(1),
               Validators.maxLength(128)
           ]],
-          usernameGroup: this.formBuilder.group({
+          
           username: ['', [
             Validators.required,
             Validators.minLength(1),
-          ]]
-        }, {validator: this.checkUsername.bind(this)}),
+            CustomValidator.usernameValidator(this.customerService.availableAuthorities)
+          ]],
         emailGroup: this.formBuilder.group({
             email: ['', [
                 Validators.required,

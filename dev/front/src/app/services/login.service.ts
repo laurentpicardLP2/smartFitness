@@ -170,7 +170,7 @@ export class LoginService {
         }
         else {
           this.lastAction = new Date();
-          setTimeout(() => this.autoclose(), 10000);
+          //setTimeout(() => this.autoclose(), 10000);
           this.checkUserIsSubscribed(user.username).subscribe(
             (isSubscribed) => {
               this.setIsUserSubscribedSubject(isSubscribed);

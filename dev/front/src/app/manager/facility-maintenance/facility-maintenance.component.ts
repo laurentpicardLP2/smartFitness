@@ -1,3 +1,4 @@
+import { MaintenanceOperation } from 'src/app/models/maintenance-operation.model';
 import { ManagerService } from 'src/app/services/manager.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -25,6 +26,7 @@ export class FacilityMaintenanceComponent implements OnInit {
   facilityCategories: FacilityCategory[];
   listFacilities: BehaviorSubject<Facility[]>;
   facilities: Facility[];
+  facility: Facility;
   idFacility: number;
   nameFacility: string;
   costOfIntervetion: number;
@@ -40,6 +42,8 @@ export class FacilityMaintenanceComponent implements OnInit {
   maintenanceForm: FormGroup;
   facilityCategoryAssociateToFacility: FacilityCategory;
   nameFacilityCategory: string = "";
+  maintenanceOperations: MaintenanceOperation [];
+  maintenanceOperation: MaintenanceOperation;
   
 
   constructor(private route: ActivatedRoute,
@@ -49,12 +53,23 @@ export class FacilityMaintenanceComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.facility = new Facility();
     this.idFacility = +this.route.snapshot.params.idFacility;
     this.managerService.publishFacilities();
     this.managerService.findFacility(this.idFacility).subscribe(facility => {
+      this.facility.idFacility = facility.idFacility;
+      this.facility.nameFacility = facility.nameFacility;
+      this.facility.priceSeance = facility.priceSeance
+      this.facility.priceFacility = facility.priceFacility;
+      this.facility.dateOfPurchase = facility.dateOfPurchase;
+      this.facility.descriptionFacility = facility.descriptionFacility
+      this.facility.imageFacility = facility.imageFacility;
+      this.facility.maintenanceOperations = facility.maintenanceOperations;
+
       this.idFacility = facility.idFacility;
       this.managerService.publishFacilityCategoryAssociateToFacility(this.idFacility);
       this.nameFacility = facility.nameFacility;
+      this.maintenanceOperations = facility.maintenanceOperations;
       
       this.managerService.getFacilityCategoryAssociateToFacility(this.idFacility).subscribe(res => {
         this.facilityCategoryAssociateToFacility = res;
@@ -122,12 +137,18 @@ export class FacilityMaintenanceComponent implements OnInit {
 
 
   public onValidate() {
+    this.maintenanceOperation = new MaintenanceOperation();
+    this.maintenanceOperation.costOfIntervetion = 35;
+    this.maintenanceOperation.dateOfIntervention = new Date();
+    this.maintenanceOperation.descOfIntervention = "";
+    this.maintenanceOperation.typeOfIntervention = "";
    
-    //this.managerService.updateFacility(this.idFacility, this.nameFacilityCategory, this.nameRoom, this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility, this.priceFacility);
+    this.managerService.addMaintenanceOperationFacility(this.idFacility, this.maintenanceOperation);
 
+  }
 
-
-
+  public onDelete(idMaintenanceOperation: number){
+    this.managerService.deleteMaintenanceOperationFacility(this.idFacility, idMaintenanceOperation);
   }
 
 

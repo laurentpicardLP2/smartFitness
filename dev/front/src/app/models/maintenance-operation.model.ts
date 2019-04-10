@@ -1,4 +1,4 @@
-export class maintenanceOperation {
+export class MaintenanceOperation {
     public idMaintenanceOperation: number;
     public costOfIntervetion: number;
     public dateOfIntervention: Date;
