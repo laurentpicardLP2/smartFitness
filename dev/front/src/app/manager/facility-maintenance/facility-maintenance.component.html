@@ -38,11 +38,19 @@
 
     </form>
 
-    <div class="accountability-border">
-        Recettes de l'équipement : {{revenue}}
-        
-        Dépenses de l'équipement : {{expenditure}}
-       
+    <div class="pad">
+        Recettes : {{balanceSheet[0]}} €<div style="background-color:green; height:20px;" [ngStyle]=" {width: strRevenue}"></div>
+    </div>
+    <div class="pad">
+        Dépenses : {{balanceSheet[1]}} €<div style="background-color:red; height:20px;" [ngStyle]=" {width: strExpenditure}"></div>
+    </div>
+
+    <div *ngIf="balanceSheet[0] > balanceSheet[1]" class="pad">
+        Bilan : {{balanceRes}} €<div style="background-color:green; height:20px;" [ngStyle]=" {width: strBalance}"></div>
+    </div>
+
+    <div *ngIf="balanceSheet[0] < balanceSheet[1]" class="pad">
+        Bilan : {{balanceRes}} €<div style="background-color:red; height:20px;" [ngStyle]=" {width: strBalance}"></div>
     </div>
 
     <div class="pad">
@@ -60,7 +68,7 @@
           <tr *ngFor="let operation of maintenanceOperations">
             <td>{{convertIntoFormatDate(operation.dateOfIntervention)}}</td>
             <td>{{operation.typeOfIntervention}}</td>
-            <td>{{operation.costOfIntervention}} € </td>
+            <td>{{convertIntoMonetaryFormat(operation.costOfIntervention)}}</td>
             <!-- <td><button (click)="onDelete(operation.idMaintenanceOperation)">Delete</button></td> -->
           </tr>
         </tbody>

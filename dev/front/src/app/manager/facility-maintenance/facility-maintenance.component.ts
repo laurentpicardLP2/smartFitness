@@ -43,9 +43,12 @@ export class FacilityMaintenanceComponent implements OnInit {
   maintenanceOperations: MaintenanceOperation [];
   maintenanceOperation: MaintenanceOperation;
   balanceSheet: number[] = [];
-  revenue: number;
+  revenue: number = 100;
   expenditure: number;
-
+  strExpenditure: string;
+  strRevenue: string;
+  strBalance: string;
+  balanceRes: number;
 
   constructor(private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -89,7 +92,18 @@ export class FacilityMaintenanceComponent implements OnInit {
 
     this.managerService.getBalanceSheet(this.idFacility).subscribe(res => {
         console.log(res);
+        this.revenue = res[0];
+        this.expenditure = res[1];
            this.balanceSheet = res;
+           this.strRevenue=((this.revenue/(this.expenditure + this.revenue + 1) * 375)).toString() + "px";
+           this.strExpenditure=((this.expenditure/(this.expenditure + this.revenue + 1) * 375)).toString() + "px";
+      if (this.revenue > this.expenditure){
+        this.strBalance = (((this.revenue - this.expenditure)/(this.expenditure + this.revenue + 1) * 375)).toString() + "px";
+      } else {
+        this.strBalance = (((this.expenditure - this.revenue)/(this.expenditure + this.revenue + 1) * 375)).toString() + "px";
+      }
+      this.balanceRes = this.revenue - this.expenditure;
+           
       },
       (error) => {console.log("error " , error)}
     );
@@ -158,6 +172,9 @@ export class FacilityMaintenanceComponent implements OnInit {
     return this.utilsService.convertIntoFormatDate(rawDate.split("T")[0]);
   }
 
+  public convertIntoMonetaryFormat(price: number){
+    return this.utilsService.convertIntoMonetaryFormat(price);
+  }
 
   
 }
