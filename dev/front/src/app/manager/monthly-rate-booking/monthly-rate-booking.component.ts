@@ -25,7 +25,7 @@ export class MonthlyRateBookingComponent implements OnInit {
       this.monthLabels.push(this.monthDataSet[m]);
     }
 
-    this.chart = new Chart('myChart', {
+    this.chart = new Chart('synthese', {
       type: 'bar',
       data: {
         labels: this.monthLabels,

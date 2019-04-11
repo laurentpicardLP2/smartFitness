@@ -2,9 +2,13 @@ package laurent.fitness.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import laurent.fitness.model.Command;
 import laurent.fitness.model.Facility;
 import laurent.fitness.model.FacilityCategory;
+import laurent.fitness.model.MaintenanceOperation;
 import laurent.fitness.model.Room;
 import laurent.fitness.model.SubscriptionCategory;
 import laurent.fitness.model.WatchCategory;
@@ -43,6 +49,9 @@ import laurent.fitness.upload.exception.UploadFileException;
 public class ManagerController {
 	 @Autowired
 	 private FileStorageService fileStorageService;
+	 
+	@Autowired
+	private EntityManager entityManager;
 	 
 	private FacilityService facilityService;
 	private FacilityCategoryService facilityCategoryService;
@@ -81,6 +90,52 @@ public class ManagerController {
 		return(this.facilityCategoryService.getFacilityCategoryAssociateToFacility(idFacility));			
 	}
 	
+	//Ajoute une opération de maintenance associée à un facility (équipement)
+	@PostMapping("/addmaintenanceoperationtofacility/{idFacility}")
+	public ResponseEntity<?> addMaintenanceOperationToFacility(@PathVariable Integer idFacility, @RequestBody MaintenanceOperation operation ){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.facilityService.addMaintenanceOperationToFacility(idFacility, operation));			
+		} catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+	
+	// Retourne un tableau donnant les dépenses et revenues d'un revenue;
+	@GetMapping("/getbalancesheet/{idFacility}")
+	public List<Float> getBalanceSheet(@PathVariable Integer idFacility) {
+//		System.out.println("getbalancesheet entry : " + idFacility);
+//		List<Float> balanceSheet = this.facilityService.getExpenditureRevenueForAFacility(idFacility);
+//		for (float result : balanceSheet) {
+//			System.out.println("recettes et depenses : " + result);
+//		}
+		List<Float> balanceSheet = new ArrayList<Float>();
+		balanceSheet.add(this.facilityService.getRevenueForAFacility(idFacility));
+		 StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_expenditure");
+		    storedProcedure.registerStoredProcedureParameter(1, Integer.class , ParameterMode.IN);
+		    storedProcedure.registerStoredProcedureParameter(2, Float.class , ParameterMode.OUT);
+		    storedProcedure.setParameter(1, idFacility);
+		    storedProcedure.execute();
+		    System.out.println("storedProcedure.getOutputParameterValue(2) : " + storedProcedure.getOutputParameterValue(2));
+		    Object expenditure =  storedProcedure.getOutputParameterValue(2);
+		    balanceSheet.add(Float.valueOf(expenditure.toString()));
+		    //balanceSheet.add((float)storedProcedure.getOutputParameterValue(2));
+
+		return balanceSheet;
+	}
+	
+	//Supprime une intervention de maintenance
+	@DeleteMapping("delmaintenanceoperationtofacility/{idFacility}/{idMaintenanceOperation}")
+	public ResponseEntity<?> delMaintenanceFromFacility(@PathVariable Integer idFacility, @PathVariable Integer idMaintenanceOperation){
+		try {
+			this.facilityService.deleteMaintenanceOperationFromFacility(idFacility, idMaintenanceOperation);
+			return ResponseEntity.status(HttpStatus.OK).body(null);
+		} catch(Exception e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}
+	}
+
+	
 	//Ajoute un facility dans la catégorie idFacilityCategory et la room idRoom + met à jour le nombre d'équipement
 	@PostMapping("/addfacility/{idFacilityCategory}/{idRoom}/{nameFacility}/{descriptionFacility}/{imageFacility}/{priceSeance}/{priceFacility}/{dateOfPurchase}")
 
@@ -113,7 +168,7 @@ public class ManagerController {
 	    }
 	    
 	    this.fileStorageService.storeFile(multipartFile);
-
+	    System.out.println("multipartFile : " + multipartFile.getOriginalFilename());
 	    
 	    //multipartFile.transferTo(new File("/home/laurent/smartFitness/dev/front/src/assets/images/facilities/" + multipartFile.getOriginalFilename()));
 	    return new ResponseEntity<>(new FileInformation(multipartFile.getOriginalFilename(), multipartFile.getSize()), HttpStatus.CREATED);

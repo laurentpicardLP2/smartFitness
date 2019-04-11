@@ -1,3 +1,4 @@
+
 <div fxFlex fxLayout fxLayoutAlign="center">
   <div class="pad">
     <form [formGroup]="maintenanceForm" >
@@ -14,7 +15,7 @@
       </div>
       <div>
           <mat-form-field class="facility-full-width">
-              <input matInput placeholder="Coût de l'intervention" type="number" formControlName="costOfIntervetion" [(ngModel)]="costOfIntervetion">
+              <input matInput placeholder="Coût de l'intervention" type="number" formControlName="costOfIntervention" [(ngModel)]="costOfIntervention">
           </mat-form-field>
         </div>
         <div>
@@ -37,26 +38,34 @@
 
     </form>
 
+    <div class="accountability-border">
+        Recettes de l'équipement : {{revenue}}
+        
+        Dépenses de l'équipement : {{expenditure}}
+       
+    </div>
+
     <div class="pad">
-      Historique des opérations de maintenance
+      
       <table cellpadding="0" cellspacing="0">
-        <thead>
-          <td>Date</td>
-          <td>Coût</td>
-          <td>Type</td>
-          <td>Desc.</td>
-        </thead>
-        <tbody>
+          <caption>Historique des opérations de maintenance</caption>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Coût</th>
+            </tr>
+          </thead>
+          <tbody>
           <tr *ngFor="let operation of maintenanceOperations">
-            <td>{{operation.costOfIntervention}}</td>
-            <td>{{operation.dateOfIntervention}}</td>
-            <td>{{operation.descOfIntervention}}</td>
+            <td>{{convertIntoFormatDate(operation.dateOfIntervention)}}</td>
             <td>{{operation.typeOfIntervention}}</td>
+            <td>{{operation.costOfIntervention}} € </td>
             <!-- <td><button (click)="onDelete(operation.idMaintenanceOperation)">Delete</button></td> -->
           </tr>
         </tbody>
       </table> 
     </div>
-
   </div>
+  
 </div>

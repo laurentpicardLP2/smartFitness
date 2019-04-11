@@ -123,5 +123,17 @@ export class UtilsService {
       let splitDateSubscription: string[] = pDateOfSubscription.split("-");      
       return  splitDateSubscription[2] +  '-' + splitDateSubscription[1] + '-' + splitDateSubscription[0] ;
       }
+
+    public convertStringToDate(strDate: string): Date {
+      let splitStrDate: string[] = strDate.split("-");
+      
+      return new Date(parseInt(splitStrDate[0], 10), parseInt(splitStrDate[1], 10) - 1, parseInt(splitStrDate[2], 10), 0, 0, 0);
+    }
+
+    public convertIntoFormatDate(rawDateOfSubscription: string): string{
+    
+      let splitRawDate: string[] = rawDateOfSubscription.split("-");      
+      return  splitRawDate[2] +  '-' + splitRawDate[1] + '-' + splitRawDate[0] ;
+      }
   
 }

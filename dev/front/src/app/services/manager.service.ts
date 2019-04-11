@@ -352,5 +352,17 @@ export class ManagerService {
       );
     }
 
+    public getBalanceSheet(idFacility: number): Observable<number[]> {
+      return this.httpClient.get<number[]>('http://localhost:8080/managerctrl/getbalancesheet/' + idFacility, 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        });
+    }
+
+    
+
 
 }

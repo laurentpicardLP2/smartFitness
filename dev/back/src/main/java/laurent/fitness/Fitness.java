@@ -38,6 +38,7 @@ import laurent.fitness.repository.StaffRepository;
 import laurent.fitness.repository.UserRepository;
 import laurent.fitness.services.AuthorityService;
 import laurent.fitness.services.CustomerService;
+import laurent.fitness.services.StaffService;
 import laurent.fitness.services.UserService;
 
 
@@ -48,7 +49,16 @@ public class Fitness implements CommandLineRunner {
 	@Autowired
 	private EntityManager entityManager;
 	
-    public boolean someLibraryMethod() {
+	@Autowired
+	private AuthorityService authorityService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private StaffService staffService;
+	
+   public boolean someLibraryMethod() {
         return true;
     }
 
@@ -61,6 +71,17 @@ public class Fitness implements CommandLineRunner {
 	@Override
 	public void run(String... args)
 			throws Exception,  MalformedURLException, IOException, ClassNotFoundException, SQLException {
+		
+//		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+//		
+//		this.authorityService.saveAuthority(new Authority("db_sam", "ROLE_ADMIN"));
+//		int idUser = this.userService.findByUsernameIdMax();
+//	
+//		
+//		this.staffService.saveStaff(new Staff(idUser,"db_sam", "db_sam", "{bcrypt}" + bcrypt.encode("simplon"), "", "", new Date(), (byte)(1),"", ""));
+//		
+		
+		
 			
 //		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_insert_data");
 //	    storedProcedure.execute();

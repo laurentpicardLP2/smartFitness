@@ -22,6 +22,28 @@ CREATE TRIGGER triggerTimestamp BEFORE INSERT ON timestamp_facility
     END$$
 DELIMITER ;
 
+
+use db_fitness;
+drop procedure IF EXISTS `proc_expenditure`;
+DELIMITER $$
+CREATE PROCEDURE `proc_expenditure` (IN `id_facility` INT, OUT `expenditure` FLOAT)
+	COMMENT 'Procédure determiner les depenses d\' un équipement'
+BEGIN
+	DECLARE nbRow INT;
+		SELECT count(*) INTO nbRow FROM maintenance_operation INNER JOIN facility_has_maintenance_operation 
+		WHERE facility_id_facility = `id_facility`;
+    IF nbRow = 0 THEN
+    SELECT price_facility into `expenditure` FROM facility WHERE facility.id_facility = `id_facility`;
+		
+	ELSE
+		SELECT price_facility + sum(cost_of_intervention) INTO `expenditure` FROM facility_has_maintenance_operation
+			INNER JOIN db_fitness.maintenance_operation ON id_maintenance_operation = maintenance_operation_id_maintenance_operation 
+			INNER JOIN facility ON facility_id_facility = facility.id_facility WHERE facility.id_facility = `id_facility`;
+   END IF;
+END$$
+DELIMITER ;
+
+
 use db_fitness;
 drop procedure IF EXISTS `proc_insert_cmdA`;
 DELIMITER $$
@@ -356,3 +378,34 @@ SET A = 1;
     
 END$$
 DELIMITER ;
+
+
+
+
+
+SELECT count(*) * price_seance FROM db_fitness.timestamp_facility INNER JOIN db_fitness.seance ON seance_id_seance = id_item
+INNER JOIN db_fitness.facility ON id_facility = facility_id_facility
+WHERE facility_id_facility = 1;
+
+USE db_fitness;
+SELECT price_facility + sum(cost_of_intervention) FROM facility_has_maintenance_operation INNER JOIN db_fitness.maintenance_operation 
+ON id_maintenance_operation = maintenance_operation_id_maintenance_operation
+INNER JOIN facility ON facility_id_facility = id_facility WHERE id_facility = 1;
+
+
+SELECT (count(*) * price_seance) - (SELECT price_facility + sum(cost_of_intervention) FROM facility_has_maintenance_operation INNER JOIN db_fitness.maintenance_operation 
+ON id_maintenance_operation = maintenance_operation_id_maintenance_operation
+INNER JOIN facility ON facility_id_facility = id_facility WHERE id_facility = 1) FROM db_fitness.timestamp_facility INNER JOIN db_fitness.seance ON seance_id_seance = id_item
+INNER JOIN db_fitness.facility ON id_facility = facility_id_facility
+WHERE facility_id_facility = 1;
+
+
+
+USE db_fitness;
+SELECT (count(*) * price_seance) - (SELECT price_facility + sum(cost_of_intervention) FROM facility_has_maintenance_operation INNER JOIN db_fitness.maintenance_operation 
+ON id_maintenance_operation = maintenance_operation_id_maintenance_operation INNER JOIN facility ON facility_id_facility = id_facility WHERE id_facility = 1) 
+FROM db_fitness.timestamp_facility INNER JOIN db_fitness.seance ON seance_id_seance = id_item
+INNER JOIN db_fitness.facility ON id_facility = facility_id_facility
+WHERE facility_id_facility = 1;
+
+

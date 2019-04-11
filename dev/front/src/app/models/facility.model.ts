@@ -1,4 +1,4 @@
-import { MaintenanceOperation } from './maintenance-operation';
+import { MaintenanceOperation } from 'src/app/models/maintenance-operation.model';
 
 export class Facility {
     public idFacility: number;

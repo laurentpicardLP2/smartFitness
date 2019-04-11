@@ -2,6 +2,12 @@ package laurent.fitness.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.Date;
 import java.util.List;
 
@@ -19,29 +25,19 @@ public class MaintenanceOperation implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idMaintenanceOperation;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="DateOfIntervention")
+	@Column(columnDefinition="Decimal(10,2) default '0.00'")
+	private float costOfIntervention;
+
+	@Temporal(TemporalType.DATE)
 	private Date dateOfIntervention;
 
-	private float costOfIntervention;
-	
 	@Column(name="DescOfIntervention")
 	private String descOfIntervention;
 
-	@Column(name="TypeOfIntervention")
 	private String typeOfIntervention;
-
-	//bi-directional many-to-many association to Facility
-	@ManyToMany
-	@JoinTable(
-		name="Facility_has_MaintenanceOperation"
-		, joinColumns={
-			@JoinColumn(name="MaintenanceOperation_idMaintenanceOperation")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="Facility_idFacility")
-			}
-		)
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy="maintenanceOperations")
 	private List<Facility> facilities;
 
 	public MaintenanceOperation() {
@@ -54,16 +50,7 @@ public class MaintenanceOperation implements Serializable {
 	public void setIdMaintenanceOperation(int idMaintenanceOperation) {
 		this.idMaintenanceOperation = idMaintenanceOperation;
 	}
-	
 
-	public Date getDateOfIntervention() {
-		return this.dateOfIntervention;
-	}
-
-	public void setDateOfIntervention(Date dateOfIntervention) {
-		this.dateOfIntervention = dateOfIntervention;
-	}
-	
 	public float getCostOfIntervention() {
 		return this.costOfIntervention;
 	}
@@ -72,6 +59,13 @@ public class MaintenanceOperation implements Serializable {
 		this.costOfIntervention = costOfIntervention;
 	}
 
+	public Date getDateOfIntervention() {
+		return this.dateOfIntervention;
+	}
+
+	public void setDateOfIntervention(Date dateOfIntervention) {
+		this.dateOfIntervention = dateOfIntervention;
+	}
 
 	public String getDescOfIntervention() {
 		return this.descOfIntervention;
@@ -88,7 +82,7 @@ public class MaintenanceOperation implements Serializable {
 	public void setTypeOfIntervention(String typeOfIntervention) {
 		this.typeOfIntervention = typeOfIntervention;
 	}
-
+	
 	public List<Facility> getFacilities() {
 		return this.facilities;
 	}

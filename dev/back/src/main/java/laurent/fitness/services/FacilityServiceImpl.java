@@ -1,15 +1,23 @@
 package laurent.fitness.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import laurent.fitness.model.Facility;
 import laurent.fitness.model.FacilityCategory;
+import laurent.fitness.model.MaintenanceOperation;
 import laurent.fitness.model.Room;
 import laurent.fitness.repository.FacilityCategoryRepository;
 import laurent.fitness.repository.FacilityRepository;
+import laurent.fitness.repository.MaintenanceOperationRepository;
 import laurent.fitness.repository.RoomRepository;
 
 @Service
@@ -18,13 +26,16 @@ public class FacilityServiceImpl implements FacilityService {
 	private FacilityRepository facilityRepo;
 	private FacilityCategoryRepository facilityCategoryRepo;
 	private RoomRepository roomRepo;
+	private MaintenanceOperationRepository maintenanceOperationRepo;
 
     public FacilityServiceImpl(FacilityRepository facilityRepo,
     		FacilityCategoryRepository facilityCategoryRepo,
-    		RoomRepository roomRepo) {
+    		RoomRepository roomRepo,
+    		MaintenanceOperationRepository maintenanceOperationRepo) {
     	this.facilityRepo = facilityRepo;
         this.facilityCategoryRepo = facilityCategoryRepo;
         this.roomRepo = roomRepo;
+        this.maintenanceOperationRepo = maintenanceOperationRepo;
     }
 
 	@Override
@@ -103,6 +114,34 @@ public class FacilityServiceImpl implements FacilityService {
 		facility.setImageFacility(imageFacility);
 		facility.setPriceFacility(priceFacility);
 		return this.facilityRepo.save(facility);
+	}
+
+	@Override
+	public Facility addMaintenanceOperationToFacility(int idFacility, MaintenanceOperation operation) {
+		// TODO Auto-generated method stub
+		Facility facility = this.facilityRepo.findByIdFacility(idFacility);
+		this.maintenanceOperationRepo.save(operation);
+		List<MaintenanceOperation> maintenanceOperations = facility.getMaintenanceOperations();
+		maintenanceOperations.add(operation);
+		facility.setMaintenanceOperations(maintenanceOperations);
+		return this.facilityRepo.save(facility);
+	}
+
+	@Override
+	public void deleteMaintenanceOperationFromFacility(int idFacility, int idMaintenanceOperation) {
+		MaintenanceOperation maintenanceOperation = this.maintenanceOperationRepo.findByIdMaintenanceOperation(idMaintenanceOperation);
+		Facility facility = this.facilityRepo.findByIdFacility(idFacility);
+		facility.getMaintenanceOperations().remove(maintenanceOperation);
+		this.maintenanceOperationRepo.delete(maintenanceOperation);
+		this.facilityRepo.save(facility);
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getRevenueForAFacility(int idFacility) {
+		// TODO Auto-generated method stub
+		return this.facilityRepo.findRevenueByFacility(idFacility);		
 	}
 
 }

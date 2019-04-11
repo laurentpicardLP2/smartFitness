@@ -1,3 +1,4 @@
+import { UtilsService } from 'src/app/services/utils.service';
 import { MaintenanceOperation } from 'src/app/models/maintenance-operation.model';
 import { ManagerService } from 'src/app/services/manager.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -10,7 +11,6 @@ import { FacilityCategory } from 'src/app/models/facility-category.model';
 import { Facility } from 'src/app/models/facility.model';
 import { Room } from 'src/app/models/room.model';
 import { BehaviorSubject } from 'rxjs';
-import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
 
 
 @Component({
@@ -21,15 +21,13 @@ import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} f
 export class FacilityMaintenanceComponent implements OnInit {
   
   file: File;
-  listFacilityCategories: BehaviorSubject<FacilityCategory[]>;
   listRooms: BehaviorSubject<Room[]>;
-  facilityCategories: FacilityCategory[];
   listFacilities: BehaviorSubject<Facility[]>;
   facilities: Facility[];
   facility: Facility;
   idFacility: number;
   nameFacility: string;
-  costOfIntervetion: number;
+  costOfIntervention: number;
   descOfIntervention: string;
   typeOfIntervention: string;
   dateOfIntervention: Date;
@@ -44,12 +42,16 @@ export class FacilityMaintenanceComponent implements OnInit {
   nameFacilityCategory: string = "";
   maintenanceOperations: MaintenanceOperation [];
   maintenanceOperation: MaintenanceOperation;
-  
+  balanceSheet: number[] = [];
+  revenue: number;
+  expenditure: number;
+
 
   constructor(private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private managerService: ManagerService,
     private loginService: LoginService,
+    private utilsService: UtilsService,
     private router: Router) { }
 
   ngOnInit() {
@@ -79,22 +81,23 @@ export class FacilityMaintenanceComponent implements OnInit {
       
     });
 
-    
-
-    this.managerService.getFacilityCategories().subscribe(res => {
-      this.facilityCategories = res;
-      this.managerService.publishFacilityCategories();
-      this.listFacilityCategories = this.managerService.listFacilityCategories$;
-    });
-
     this.managerService.getFacilities().subscribe(res => {
       this.facilities = res;
       this.managerService.publishFacilities();
       this.listFacilities = this.managerService.listFacilities$;
     });
 
+    this.managerService.getBalanceSheet(this.idFacility).subscribe(res => {
+        console.log(res);
+           this.balanceSheet = res;
+      },
+      (error) => {console.log("error " , error)}
+    );
+
+
     this.createForm();
     this.initDatePurchaseField();
+    
   }
 
   createForm(){
@@ -104,7 +107,7 @@ export class FacilityMaintenanceComponent implements OnInit {
           Validators.required,
           Validators.minLength(1),
         ]],
-        costOfIntervetion: '',
+        costOfIntervention: '',
         dateOfIntervention: '',
         descOfIntervention: '',
         typeOfIntervention: '',
@@ -138,10 +141,10 @@ export class FacilityMaintenanceComponent implements OnInit {
 
   public onValidate() {
     this.maintenanceOperation = new MaintenanceOperation();
-    this.maintenanceOperation.costOfIntervetion = 35;
-    this.maintenanceOperation.dateOfIntervention = new Date();
-    this.maintenanceOperation.descOfIntervention = "";
-    this.maintenanceOperation.typeOfIntervention = "";
+    this.maintenanceOperation.costOfIntervention = this.costOfIntervention;
+    this.maintenanceOperation.dateOfIntervention = this.utilsService.convertStringToDate(this.strDateOfIntervention);
+    this.maintenanceOperation.descOfIntervention = this.descOfIntervention;
+    this.maintenanceOperation.typeOfIntervention = this.typeOfIntervention;
    
     this.managerService.addMaintenanceOperationFacility(this.idFacility, this.maintenanceOperation);
 
@@ -149,6 +152,10 @@ export class FacilityMaintenanceComponent implements OnInit {
 
   public onDelete(idMaintenanceOperation: number){
     this.managerService.deleteMaintenanceOperationFacility(this.idFacility, idMaintenanceOperation);
+  }
+
+  public convertIntoFormatDate(rawDate: string){
+    return this.utilsService.convertIntoFormatDate(rawDate.split("T")[0]);
   }
 
 

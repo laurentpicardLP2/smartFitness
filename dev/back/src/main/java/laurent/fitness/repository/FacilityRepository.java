@@ -24,5 +24,15 @@ public interface FacilityRepository extends JpaRepository<Facility, Integer> {
 			+ " (SELECT facility_id_facility FROM timestamp_facility INNER JOIN facility_category ON "
 			+ " facility_category_id_facility_category = id_facility_category WHERE date_of_timestamp like ?2 ) ", nativeQuery = true)
 	List<Facility> findByFacilityAvailable(String facilityName, String timestampToString);
+	
+	@Query(value = "SELECT count(*) * (select price_seance from facility where id_facility = ?1) FROM db_fitness.timestamp_facility "
+			+ "INNER JOIN db_fitness.seance ON seance_id_seance = id_item INNER JOIN db_fitness.facility "
+			+ "ON id_facility = facility_id_facility WHERE facility_id_facility = ?1", nativeQuery = true)
+	float findRevenueByFacility(int idFacility);
+	
+	@Query(value = "SELECT price_facility + sum(cost_of_intervention) FROM facility_has_maintenance_operation "
+			+ "INNER JOIN db_fitness.maintenance_operation ON id_maintenance_operation = maintenance_operation_id_maintenance_operation "
+			+ "INNER JOIN facility ON facility_id_facility = id_facility WHERE id_facility = ?1", nativeQuery = true)
+	float findExpenditureByFacility(int idFacility);
 
 }

@@ -29,6 +29,7 @@ public class Facility implements Serializable {
 	
 	private float priceSeance;
 	
+	@Column(columnDefinition="int default 0")
 	private float priceFacility;
 	
 	@Lob
@@ -57,9 +58,21 @@ public class Facility implements Serializable {
 	@JsonManagedReference
 	private List<TimestampFacility> timestampFacilities;
 	
-	//bi-directional many-to-many association to MaintenanceOperation
-	@ManyToMany(mappedBy="facilities")
+	
+	//bi-directional many-to-many association to Facility
+	@JsonManagedReference
+	@ManyToMany
+	@JoinTable(
+		name="Facility_has_MaintenanceOperation"
+		, joinColumns={
+			@JoinColumn(name="Facility_idFacility")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="MaintenanceOperation_idMaintenanceOperation")
+			}
+		)
 	private List<MaintenanceOperation> maintenanceOperations;
+
 
 	public Facility() {
 	}

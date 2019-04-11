@@ -39,64 +39,7 @@
       /* align-content: center; */
     }
     
-    .image {
-        overflow: hidden;
-        border-radius: 50px;
-        width: 40px;
-        height: 40px;
-    }
-    
-    
-    
-    .body {
-      display: flex;
-      height: auto;
-      flex-direction: row;
-      display: block;
-      
-     
-    
-    }
-    
-    .couverture {
-     
-      width: 250px;
-      margin-top: 40px;
-      margin-right: 50px;
-        float: left;
-        
-    
-      
-      
-    }
-    .container-list{
-      justify-content: center;
-      align-content: center;
-    }
-    
-    .matlist {
-    width: 700px;
-    align-content: center;
-    }
-    
-    .footer {
-      align-content: center;
-      flex-grow: auto;
-      margin-top: 40px;
-     
-    
-      
-    }
-    
-    .header {
-      flex-grow: auto;
-     
-    }
-    
-    .boutton{
-      border: 1px white solid;
-      
-    }
+  
     
     
     
@@ -174,6 +117,7 @@
     background:#666;
     border-collapse:collapse;
     width:100%;
+    caption-side: top;
   }
   th {
     color:white;
@@ -219,7 +163,7 @@
     }
     tbody tr:not(:first-child) td::before {
       position:absolute;
-      content:'Début';
+      content:'Date';
       color:white;
       font-weight:bold;
       width:calc(20% - 13px);
@@ -234,13 +178,10 @@
       border-bottom:0;
     }
     tbody tr:not(:first-child) td:nth-of-type(2)::before {
-      content:'Fin';
+      content:'Type';
     }
     tbody tr:not(:first-child) td:nth-of-type(3)::before {
-      content:'Activité';
-    }
-    tbody tr:not(:first-child) td:nth-of-type(4)::before {
-      content:'Equip.';
+      content:'Coût';
     }
   
   }
@@ -257,5 +198,9 @@
     font-weight: bold;
     vertical-align: baseline;
     padding-top: 20px;
+  }
+
+  .accountability {
+    border-style: solid;
   }
     
