@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import laurent.fitness.model.Authority;
 import laurent.fitness.model.User;
-import laurent.fitness.repository.AuthorityRepository;
 import laurent.fitness.repository.UserRepository;
 
 @Service
