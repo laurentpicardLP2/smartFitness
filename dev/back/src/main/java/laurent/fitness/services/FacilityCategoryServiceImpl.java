@@ -15,8 +15,7 @@ public class FacilityCategoryServiceImpl implements FacilityCategoryService {
 	
 
     public FacilityCategoryServiceImpl(FacilityCategoryRepository facilityCategoryRepo) {
-        this.facilityCategoryRepo = facilityCategoryRepo;
-       
+        this.facilityCategoryRepo = facilityCategoryRepo; 
     }
 
 	@Override

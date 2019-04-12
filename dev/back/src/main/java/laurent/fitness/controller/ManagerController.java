@@ -209,9 +209,8 @@ public class ManagerController {
 	public ResponseEntity<?> addFacilityCategory(@PathVariable String nameFacilityCategory) {
 		try {
 			FacilityCategory facilityCategory = new FacilityCategory(nameFacilityCategory);
-			this.facilityCategoryService.saveFacilityCategory(facilityCategory);
 			
-		return ResponseEntity.status(HttpStatus.OK).body(null);
+		return ResponseEntity.status(HttpStatus.OK).body(this.facilityCategoryService.saveFacilityCategory(facilityCategory));
 		
 		} catch(Exception e) {
 			

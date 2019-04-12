@@ -42,9 +42,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
 
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
-
 //    @Autowired(required=true)
 //    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -119,7 +116,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin() //Pour activer la base de donnees MySQL
                 .and()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/").permitAll()
                 .antMatchers("/postman/**").permitAll()
                 .antMatchers("/userctrl/newcustomer").permitAll()
                 .antMatchers("/userctrl/login").permitAll()
