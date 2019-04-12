@@ -1,0 +1,14 @@
+JacksonTester + 
+objectµMapper (autowired)
+
+@Autowired
+MockMvc mockMvc;
+
+@MockBean
+BookingService bookingService;
+
+private Booking booking
+
+@Autowired private ObjectMapper objectMapper;
+
+JacksonTester<Booking> bookingJacksonTeser

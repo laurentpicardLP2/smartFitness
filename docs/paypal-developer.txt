@@ -1,0 +1,30 @@
+Sandbox account
+laurent.picard.lp2@gmail.com
+
+Client ID
+AZWFb3hiEzZMRfHey_y8zixuZH8FmyH4WqgDoJymDGzp9EkqHtHFImLGm49cr5MF9CsDld3WGBJMiE0b
+
+Secret
+ED4wmzabQabrx7xcTYtNWR_S4AzA5Md-a9dWeAGUOcjY3t_P9I8GRoqAf6kujnAS3KFBby7UN_rJc70F
+
+
+
+
+
+
+
+
+
+
+Express Checkout via Braintree SDK Credentials
+To test your PayPal Checkout integration in the sandbox, use the Braintree SDK and our set up instructions. To go live follow these steps.
+
+Credentials
+Sandbox Account
+laurent.picard.lp2@gmail.com
+
+AccessToken
+access_token$sandbox$76vbzvqrbdx74brm$c3ee38047078ea460277a4e43821fafe
+
+ExpiryDate
+11 Apr 2029

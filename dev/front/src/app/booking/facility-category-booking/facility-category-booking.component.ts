@@ -86,6 +86,11 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
       this.isSubscribed = res;
     });
 
+    // @HostListener('window:resize', ['$event'])
+    //   getScreenSize(event?) {
+    //     this.screenWidth = window.innerWidth;
+    //   }
+
 
   }
 

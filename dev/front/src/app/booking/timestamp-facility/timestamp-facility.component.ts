@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CommandService } from 'src/app/services/command.service';
+import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal'
 
-import { Command } from 'src/app/models/command.model';
-import { TimestampFacility } from 'src/app/models/timestamp-facility.model';
-import { Seance } from 'src/app/models/seance.model';
-import { SeanceService } from 'src/app/services/seance.service';
-import { Chart } from 'chart.js';
+declare var hljs: any;
 
 @Component({
   selector: 'app-timestamp-facility',
@@ -14,73 +10,100 @@ import { Chart } from 'chart.js';
 })
 export class TimestampFacilityComponent implements OnInit {
 
-  timestampFacilities: TimestampFacility[]
-  seance: Seance;
-  command: Command;
-  chart;
+  public payPalConfig ? : IPayPalConfig;
+
+  public showSuccess: boolean = false;
+  public showCancel: boolean = false;
+  public showError: boolean = false;
   
 
-  constructor(private commandService: CommandService,
-              private seanceService: SeanceService) { }
+  constructor() { }
 
   ngOnInit() {
-
-    this.chart = new Chart('myChart', {
-      type: 'bar',
-      data: {
-        labels: ["Janvier", "February", "March", "April", "May", "June", "July"],
-        datasets: [
-            {
-                label: "My First dataset",
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: "rgba(75,192,192,0.4)",
-                borderColor: "rgba(75,192,192,1)",
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "rgba(75,192,192,1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                pointHoverBorderColor: "rgba(220,220,220,1)",
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: [65, 59, 80, 81, 56, 55, 40],
-                spanGaps: false,
-            }
-        ]
-    },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  }
-              }]
-          }
-      }
-  });
-
-    // this.seanceService.seanceSubject.subscribe(res => {
-    //   this.seance = res;
-    //   this.timestampFacilities = res.timestampFacilities;
-    //   console.log(" this.timestampFacilities : ",  this.timestampFacilities);
-    // });
-
-    // this.commandService.commandSubject.subscribe(res => {
-    //   this.command = res;
-    // });
-
-
-    // this.commandService.commandSubject.subscribe(res => {
-      
-    //   console.log("facility-booking ", res.items[res.items.length-1]) ;
-      
-      
-    // });
+    this.initConfig();
   }
+
+  ngAfterViewInit(): void {
+    this.prettify();
+  }
+
+  
+
+  private initConfig(): void {
+    this.payPalConfig = {
+      currency: 'EUR',
+      clientId: 'sb',
+      createOrderOnClient: (data) => <ICreateOrderRequest>{
+        intent: 'CAPTURE',
+        purchase_units: [
+          {
+            amount: {
+              currency_code: 'EUR',
+              value: '9.99',
+              breakdown: {
+                item_total: {
+                  currency_code: 'EUR',
+                  value: '9.99'
+                }
+              }
+            },
+            items: [
+              {
+                name: 'Enterprise Subscription',
+                quantity: '1',
+                category: 'DIGITAL_GOODS',
+                unit_amount: {
+                  currency_code: 'EUR',
+                  value: '9.99',
+                },
+              }
+            ]
+          }
+        ]
+      },
+      advanced: {
+        commit: 'true'
+      },
+      style: {
+        label: 'paypal',
+        layout: 'vertical'
+      },
+      onApprove: (data, actions) => {
+        console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        actions.order.get().then((details: any) => {
+          console.log('onApprove - you can get full order details inside onApprove: ', details);
+        });
+
+      },
+      onClientAuthorization: (data) => {
+        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+        this.showSuccess = true;
+      },
+      onCancel: (data, actions) => {
+        console.log('OnCancel', data, actions);
+        this.showCancel = true;
+
+      },
+      onError: err => {
+        console.log('OnError', err);
+        this.showError = true;
+      },
+      onClick: () => {
+        console.log('onClick');
+        this.resetStatus();
+      },
+    };
+  }
+
+  private resetStatus(): void {
+    this.showError = false;
+    this.showSuccess = false;
+    this.showCancel = false;
+  }
+
+  private prettify(): void {
+    hljs.initHighlightingOnLoad();
+  }
+
+ 
 }

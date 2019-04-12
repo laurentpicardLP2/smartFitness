@@ -122,10 +122,7 @@ export class WatchCategoryDetailComponent implements OnInit {
   public onUpdate() {
     this.descriptionWatch = (this.descriptionWatch == "") ? "undefined" : this.descriptionWatch;
     this.imageWatch = (this.imageWatch == "") ? "undefined" : this.imageWatch;
-    //this.offresService.updateWatchCategory(this.idWatchCategory, this.nameWatch, this.priceWatch,  this.descriptionWatch, this.imageWatch);
-    //this.managerServices => upload
-
-
+    
     const data: FormData = new FormData();
       
     if (this.file !== undefined){

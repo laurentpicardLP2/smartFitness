@@ -54,6 +54,7 @@ import { MonthlyRateBookingComponent } from './manager/monthly-rate-booking/mont
 import { CommandDetailComponent } from './synthese/command-detail/command-detail.component';
 import { WatchDetailComponent } from './synthese/watch-detail/watch-detail.component';
 import { FacilityMaintenanceComponent } from './manager/facility-maintenance/facility-maintenance.component';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { FacilityMaintenanceComponent } from './manager/facility-maintenance/fac
     ReactiveFormsModule,
     MaterialModule,
     MatIconModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxPayPalModule
   ],
   providers: [
     TokenStorageService,
