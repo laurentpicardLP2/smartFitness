@@ -55,6 +55,7 @@ import { CommandDetailComponent } from './synthese/command-detail/command-detail
 import { WatchDetailComponent } from './synthese/watch-detail/watch-detail.component';
 import { FacilityMaintenanceComponent } from './manager/facility-maintenance/facility-maintenance.component';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { BalanceByFacilityComponent } from './manager/balance-by-facility/balance-by-facility.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { NgxPayPalModule } from 'ngx-paypal';
     CommandDetailComponent,
     WatchDetailComponent,
     FacilityMaintenanceComponent,
+    BalanceByFacilityComponent,
 
   ],
   imports: [

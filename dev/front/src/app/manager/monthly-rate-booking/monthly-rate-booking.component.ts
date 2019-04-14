@@ -49,7 +49,7 @@ export class MonthlyRateBookingComponent implements OnInit {
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data: this.reportingService.listDataSet1,
+                data: this.reportingService.listDataSetBooking1,
                 spanGaps: false,
             },
             {
@@ -71,7 +71,7 @@ export class MonthlyRateBookingComponent implements OnInit {
               pointHoverBorderWidth: 2,
               pointRadius: 1,
               pointHitRadius: 10,
-              data: this.reportingService.listDataSet2,
+              data: this.reportingService.listDataSetBooking2,
               spanGaps: false,
           }
         ]

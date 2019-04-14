@@ -42,6 +42,7 @@ import { MonthlyRateBookingComponent } from './manager/monthly-rate-booking/mont
 import { CommandDetailComponent } from './synthese/command-detail/command-detail.component';
 import { WatchDetailComponent } from './synthese/watch-detail/watch-detail.component';
 import { FacilityMaintenanceComponent } from './manager/facility-maintenance/facility-maintenance.component';
+import { BalanceByFacilityComponent } from './manager/balance-by-facility/balance-by-facility.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -78,6 +79,7 @@ const routes: Routes = [
   { path: 'watch-category-listing', canActivate: [AuthGuardManagerService], component: WatchCategoryListingComponent},
   { path: 'monthly-rate-booking', canActivate: [AuthGuardManagerService], component: MonthlyRateBookingComponent},
   { path: 'facility-maintenance/:idFacility', canActivate: [AuthGuardManagerService], component: FacilityMaintenanceComponent},
+  { path: 'balance-by-facility', canActivate: [AuthGuardManagerService], component: BalanceByFacilityComponent},
 
   { path: 'chart',  component: TimestampFacilityComponent },
   { path: 'paypal',  component: PaypalComponent },

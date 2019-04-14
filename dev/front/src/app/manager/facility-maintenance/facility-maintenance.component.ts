@@ -47,7 +47,7 @@ export class FacilityMaintenanceComponent implements OnInit {
   expenditure: number;
   strExpenditure: string;
   strRevenue: string;
-  strBalance: string;
+  strBalanceWidth: string;
   balanceRes: number;
 
   constructor(private route: ActivatedRoute,
@@ -91,18 +91,14 @@ export class FacilityMaintenanceComponent implements OnInit {
     });
 
     this.managerService.getBalanceSheet(this.idFacility).subscribe(res => {
-        console.log(res);
         this.revenue = res[0];
         this.expenditure = res[1];
            this.balanceSheet = res;
            this.strRevenue=((this.revenue/(this.expenditure + this.revenue + 1) * 375)).toString() + "px";
            this.strExpenditure=((this.expenditure/(this.expenditure + this.revenue + 1) * 375)).toString() + "px";
-      if (this.revenue > this.expenditure){
-        this.strBalance = (((this.revenue - this.expenditure)/(this.expenditure + this.revenue + 1) * 375)).toString() + "px";
-      } else {
-        this.strBalance = (((this.expenditure - this.revenue)/(this.expenditure + this.revenue + 1) * 375)).toString() + "px";
-      }
-      this.balanceRes = this.revenue - this.expenditure;
+     
+        this.strBalanceWidth = ((Math.abs(this.revenue - this.expenditure)/(this.expenditure + this.revenue + 1) * 375)).toString() + "px";
+        this.balanceRes = this.revenue - this.expenditure;
            
       },
       (error) => {console.log("error " , error)}
@@ -174,6 +170,10 @@ export class FacilityMaintenanceComponent implements OnInit {
 
   public convertIntoMonetaryFormat(price: number){
     return this.utilsService.convertIntoMonetaryFormat(price);
+  }
+
+  getColor(): string{
+    return (this.revenue > this.expenditure ? "green" : "red");
   }
 
   

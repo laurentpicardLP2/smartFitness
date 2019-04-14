@@ -108,8 +108,12 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  public onReporting(){
-    this.reportingService.publishDataSet();
+  public onReportingBooking(){
+    this.reportingService.publishDataSetBooking();
+  }
+
+  public onReportingRentability(){
+    this.reportingService.publishDataSetRentability();
   }
 
   // menu2Leave(trigger1, trigger2, button) {

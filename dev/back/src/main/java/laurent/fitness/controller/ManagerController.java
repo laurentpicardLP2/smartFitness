@@ -110,15 +110,16 @@ public class ManagerController {
 //		}
 		List<Float> balanceSheet = new ArrayList<Float>();
 		balanceSheet.add(this.facilityService.getRevenueForAFacility(idFacility));
-		 StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_expenditure");
-		    storedProcedure.registerStoredProcedureParameter(1, Integer.class , ParameterMode.IN);
-		    storedProcedure.registerStoredProcedureParameter(2, Float.class , ParameterMode.OUT);
-		    storedProcedure.setParameter(1, idFacility);
-		    storedProcedure.execute();
-		    System.out.println("storedProcedure.getOutputParameterValue(2) : " + storedProcedure.getOutputParameterValue(2));
-		    Object expenditure =  storedProcedure.getOutputParameterValue(2);
-		    balanceSheet.add(Float.valueOf(expenditure.toString()));
-		    //balanceSheet.add((float)storedProcedure.getOutputParameterValue(2));
+		
+		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_expenditure");
+	    storedProcedure.registerStoredProcedureParameter(1, Integer.class , ParameterMode.IN);
+	    storedProcedure.registerStoredProcedureParameter(2, Float.class , ParameterMode.OUT);
+	    storedProcedure.setParameter(1, idFacility);
+	    storedProcedure.execute();
+	    System.out.println("storedProcedure.getOutputParameterValue(2) : " + storedProcedure.getOutputParameterValue(2));
+	    Object expenditure =  storedProcedure.getOutputParameterValue(2);
+	    balanceSheet.add(Float.valueOf(expenditure.toString()));
+	    //balanceSheet.add((float)storedProcedure.getOutputParameterValue(2));
 
 		return balanceSheet;
 	}

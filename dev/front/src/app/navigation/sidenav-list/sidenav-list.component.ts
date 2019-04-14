@@ -114,9 +114,14 @@ export class SidenavListComponent implements OnInit {
     this.onSidenavClose();
   }
 
-  public onReporting(){
-    this.reportingService.publishDataSet();
+  public onReportingBooking(){
+    this.reportingService.publishDataSetBooking();
   }
+
+  public onReportingRentability(){
+    this.reportingService.publishDataSetRentability();
+  }
+
 
   
 }

@@ -108,8 +108,9 @@
     <div>
     <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="pilotage">Pilotage</button>
     <mat-menu  #pilotage="matMenu">
-        <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false" (click)="onReporting()">Tableaux de bord</button>
-     </mat-menu>
+      <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false" (click)="onReportingBooking()">Graphique réservation</button>
+      <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false" (click)="onReportingRentability()">Graphique rentabilité</button>
+ </mat-menu>
     </div>
 
 </mat-nav-list>
