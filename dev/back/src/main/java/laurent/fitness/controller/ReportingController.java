@@ -44,17 +44,19 @@ public class ReportingController {
 	
 	//Retourne le dataset du comparatif des recettes et des dépenses pour chq équipement
 	@GetMapping("/getdatasetrentability")
-	public Map<String, List<Float>> getDataSetRentability() {
-		Map<String, List<Float>> data = new HashMap<String, List<Float>>();
+	public List<String> getDataSetRentability() {
+		String data = new String();
+		List<String> result = new ArrayList<String>();
 		for(Facility facility : this.facilityService.getAllFacilities()) {
-			data.put(facility.getNameFacility(), getBalanceSheet(facility.getIdFacility()));
+			data = data + facility.getNameFacility() + ":" + getBalanceSheet(facility.getIdFacility()) + ";";
 		}
-		return data;
+		result.add(data);
+		System.out.println("data : " + data);
+		return result;
 	}
 	
-	public List<Float> getBalanceSheet(int idFacility) {
-		List<Float> balanceSheet = new ArrayList<Float>();
-		balanceSheet.add(this.facilityService.getRevenueForAFacility(idFacility));
+	public String getBalanceSheet(int idFacility) {
+		float balanceSheet = this.facilityService.getRevenueForAFacility(idFacility);
 		
 		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_expenditure");
 	    storedProcedure.registerStoredProcedureParameter(1, Integer.class , ParameterMode.IN);
@@ -62,9 +64,8 @@ public class ReportingController {
 	    storedProcedure.setParameter(1, idFacility);
 	    storedProcedure.execute();
 	    Object expenditure =  storedProcedure.getOutputParameterValue(2);
-	    balanceSheet.add(Float.valueOf(expenditure.toString()));
+	    balanceSheet -= Float.valueOf(expenditure.toString()).floatValue();
 
-
-		return balanceSheet;
+		return Float.toString(balanceSheet);
 	}
 }

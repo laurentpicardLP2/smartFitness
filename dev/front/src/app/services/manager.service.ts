@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { FacilityAdaptater } from '../models/facility-adaptater.model';
 
 
 @Injectable({
@@ -43,6 +44,16 @@ export class ManagerService {
     //   }
     // }
 
+  public isDataLoadedSubject: BehaviorSubject<boolean> = new BehaviorSubject(null);
+
+  public setIsDataLoadedSubject(value: boolean){
+    if(value){
+      this.isDataLoadedSubject.next(value);
+    } else {
+      this.isDataLoadedSubject.next(null);
+    }
+  }
+
 
     public listFacilityCategories: FacilityCategory [] = [] ;
     public facilityCategoryAssociateToFacility = null;
@@ -54,7 +65,9 @@ export class ManagerService {
     facilityCategoryAssociateToFacility$ = new BehaviorSubject(null);
     listFacilities$: BehaviorSubject<Facility[]> = new BehaviorSubject(null);
     listRooms$: BehaviorSubject<Room[]> = new BehaviorSubject(null);
-    roomAssociateToFacility$ = new BehaviorSubject(null);;
+    roomAssociateToFacility$ = new BehaviorSubject(null);
+
+    public isDataLoaded: boolean = false;
 
     public getFacilityCategories(): Observable<FacilityCategory[]> {
       return this.httpClient.get<FacilityCategory[]>('http://localhost:8080/managerctrl/getfacilitycategories', 
@@ -85,6 +98,17 @@ export class ManagerService {
           }
         });
     }
+
+    public getFacilitiesAdaptater(): Observable<FacilityAdaptater[]> {
+      return this.httpClient.get<FacilityAdaptater[]>('http://localhost:8080/managerctrl/getfacilitiesbyname', 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        });
+    }
+
 
     public getRooms(): Observable<Room[]> {
       return this.httpClient.get<Room[]>('http://localhost:8080/managerctrl/getrooms', 
@@ -127,6 +151,7 @@ export class ManagerService {
       facilityList => {
         this.listFacilities = facilityList;
         this.listFacilities$.next(this.listFacilities);
+        this.setIsDataLoadedSubject(true);
       });
     }
 

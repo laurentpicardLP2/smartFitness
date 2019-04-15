@@ -102,7 +102,7 @@ export class TimestampFacilityComponent implements OnInit {
   }
 
   private prettify(): void {
-    hljs.initHighlightingOnLoad();
+    //hljs.initHighlightingOnLoad();
   }
 
  

@@ -131,12 +131,12 @@ public class CommandController {
 			}
 			command.setStatusCommand(1);
 			this.commandService.saveCommand(command);
-			// ATTENTION il faudra remettre return ResponseEntity.status(HttpStatus.OK).body(command); 
-			// pour l'étape effective du paiement en ligne
+			return ResponseEntity.status(HttpStatus.OK).body(command); 
 			
-			// Toutes les instructions suivantes doivent disparaître
-			Customer customer = this.customerService.findByUsername(username);
-			return ResponseEntity.status(HttpStatus.OK).body(this.commandService.saveCommand(new Command(customer, new Date())));
+			
+			// Toutes les instructions suivantes doivent être exécuter dans une autre fonction du controller après la validation du paiment
+			//Customer customer = this.customerService.findByUsername(username);
+			//return ResponseEntity.status(HttpStatus.OK).body(this.commandService.saveCommand(new Command(customer, new Date())));
 		} catch(Exception e) {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	

@@ -29,10 +29,10 @@
           </ng-container>
           <ng-container matColumnDef="Update">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Modification de l'équipement </mat-header-cell>
-              <mat-cell  *matCellDef="let post"> 
-                <button mat-raised-button color="accent" (click)="onUpdate(post.idFacility)">Modifier</button>
+              <mat-cell  *matCellDef="let post">
+                <button mat-raised-button color="accent" [disabled]="!isDataLoaded" (click)="onUpdate(post.idFacility)">Modifier</button>
                 <span>&nbsp;&nbsp;</span>
-                <button mat-raised-button color="accent" (click)="onMaintenance(post.idFacility)">Maintenance</button>
+                <button mat-raised-button color="accent" [disabled]="!isDataLoaded" (click)="onMaintenance(post.idFacility)">Maintenance</button>
               </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

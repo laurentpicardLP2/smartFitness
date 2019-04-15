@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import laurent.fitness.model.Facility;
+import laurent.fitness.model.adaptater.FacilityAdaptater;
 
 
 public interface FacilityRepository extends JpaRepository<Facility, Integer> {
@@ -35,4 +36,6 @@ public interface FacilityRepository extends JpaRepository<Facility, Integer> {
 			+ "INNER JOIN facility ON facility_id_facility = id_facility WHERE id_facility = ?1", nativeQuery = true)
 	float findExpenditureByFacility(int idFacility);
 
+	@Query(value= "SELECT name_Facility, price_seance FROM facility ORDER BY name_facility ASC" , nativeQuery = true)
+	List<FacilityAdaptater> findAllFacilitiesByNameOrder();
 }

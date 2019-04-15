@@ -109,6 +109,7 @@ export class FacilityBookingComponent implements OnInit, OnDestroy {
     this.commandService.setListCommandItemsSubject(this.command.items);
     this.seanceService.setIsValidateSeanceSubject(true);
     this.seanceService.setPriceSeanceSubject([]);
+    //this.commandService.validateCommand(this.command,this.username, 1);
     this.router.navigate(['']);
   }
 

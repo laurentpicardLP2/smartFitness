@@ -1,0 +1,25 @@
+
+  <div class="title" >Votre Panier</div>
+<table cellpadding="0" cellspacing="0">
+ <thead>
+   <tr>
+     <th>Nom</th>
+     <th>Prix</th>
+     <th>Suppression</th>
+   </tr>
+ </thead>
+ <tbody>
+     <tr *ngFor="let cart of command.items">
+         <td>{{formatNameItem(cart.typeItem) }}</td>
+         <td>{{ convertIntoMonetaryFormat(cart.price) }}</td>
+         <td><button mat-raised-button color="primary" (click)="onDeleteItem(cart.idItem)">Supprimer</button></td>
+     </tr>
+   </tbody>
+</table>
+<br>
+<div class="pad">
+  Total de votre panier: {{ convertIntoMonetaryFormat(totalPrice) }}
+</div>
+<div style="text-align: center"><button mat-raised-button color="accent" (click)="onValidateCart()">Valider le panier</button>
+</div>
+

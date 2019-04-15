@@ -37,7 +37,7 @@ public class MaintenanceOperation implements Serializable {
 	private String typeOfIntervention;
 	
 	@JsonIgnore
-	@ManyToMany(mappedBy="maintenanceOperations")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy="maintenanceOperations")
 	private List<Facility> facilities;
 
 	public MaintenanceOperation() {

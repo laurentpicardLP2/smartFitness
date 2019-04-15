@@ -29,7 +29,7 @@ public class TimestampFacility implements Serializable {
 	private Date dateOfTimestamp;
 
 	//bi-directional many-to-one association to Facility
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="Facility_idFacility")
 	@JsonBackReference
 	private Facility facility;

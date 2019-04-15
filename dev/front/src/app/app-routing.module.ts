@@ -43,6 +43,7 @@ import { CommandDetailComponent } from './synthese/command-detail/command-detail
 import { WatchDetailComponent } from './synthese/watch-detail/watch-detail.component';
 import { FacilityMaintenanceComponent } from './manager/facility-maintenance/facility-maintenance.component';
 import { BalanceByFacilityComponent } from './manager/balance-by-facility/balance-by-facility.component';
+import { CartCompositionComponent } from './synthese/cart-composition/cart-composition.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -54,6 +55,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'command-listing', canActivate: [AuthGuardCustomerService], component: CommandListingComponent },
   { path: 'command-detail/:idCommand', canActivate: [AuthGuardCustomerService], component: CommandDetailComponent},
+  { path: 'cart-composition', canActivate: [AuthGuardCustomerService], component: CartCompositionComponent },
   { path: 'seance-listing', canActivate: [AuthGuardCustomerService], component: SeanceListingComponent },
   { path: 'seance-detail/:idItem', canActivate: [AuthGuardCustomerService], component: SeanceDetailComponent},
   { path: 'facility-new', canActivate: [AuthGuardManagerService], component: FacilityNewComponent},
@@ -80,9 +82,9 @@ const routes: Routes = [
   { path: 'monthly-rate-booking', canActivate: [AuthGuardManagerService], component: MonthlyRateBookingComponent},
   { path: 'facility-maintenance/:idFacility', canActivate: [AuthGuardManagerService], component: FacilityMaintenanceComponent},
   { path: 'balance-by-facility', canActivate: [AuthGuardManagerService], component: BalanceByFacilityComponent},
+  { path: 'paypal', canActivate: [AuthGuardCustomerService], component: PaypalComponent },
 
   { path: 'chart',  component: TimestampFacilityComponent },
-  { path: 'paypal',  component: PaypalComponent },
   { path: '', component: HomeComponent },
   
   //{ path: 'seance-booking', component: SeanceBookingComponent},

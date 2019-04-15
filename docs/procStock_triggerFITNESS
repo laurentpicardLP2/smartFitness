@@ -23,6 +23,23 @@ CREATE TRIGGER triggerTimestamp BEFORE INSERT ON timestamp_facility
 DELIMITER ;
 
 
+============================ItemPaypal==============================================
+use db_fitness;
+drop procedure IF EXISTS `proc_item_paypal`;
+DELIMITER $$
+CREATE PROCEDURE `proc_item_paypal` (IN `id_command` INT)
+	COMMENT 'Procédure pour les items d\'une commande par type d\'item'
+BEGIN
+DECLARE i INT;
+delete from item_paypal_adaptater;
+INSERT INTO item_paypal_adaptater
+SELECT type_item, count(*), sum(price) FROM db_fitness.item INNER JOIN command_has_item
+ON id_item = item_id_item WHERE command_id_command = `id_command` group by type_item;
+END$$
+DELIMITER ;
+=====================================================================================
+
+
 use db_fitness;
 drop procedure IF EXISTS `proc_expenditure`;
 DELIMITER $$
@@ -40,6 +57,19 @@ BEGIN
 			INNER JOIN db_fitness.maintenance_operation ON id_maintenance_operation = maintenance_operation_id_maintenance_operation 
 			INNER JOIN facility ON facility_id_facility = facility.id_facility WHERE facility.id_facility = `id_facility`;
    END IF;
+END$$
+DELIMITER ;
+
+
+drop procedure IF EXISTS `proc_facility_adaptater`;
+DELIMITER $$
+CREATE PROCEDURE `proc_facility_adaptater` ()
+	COMMENT 'Procédure pour d\'un jeu de données sur deux années glissantes'
+BEGIN
+delete from facility_adaptater;
+INSERT INTO facility_adaptater
+SELECT id_facility, name_facility, price_seance FROM facility;
+    
 END$$
 DELIMITER ;
 
@@ -183,10 +213,10 @@ WHILE i < 705 DO
 	SET date_seance = CONCAT(char_annee, char_mois, char_jour, "06:00:00");
 	insert into seance (date_of_seance, nb_timestamp, status_seance, id_item, customer_users_username) values (date_seance, 96, 0, i, "db_user1");
     
-    SET i_heure = 6;
-    WHILE i_heure < 22 DO
+    SET i_heure = 8;
+    WHILE i_heure < 11 DO
 		SET i_minute = 0;
-		WHILE i_minute < 6 DO
+		WHILE i_minute < 2 DO
 			SET i_timestamp = i_timestamp + 1;
 			SET char_minute = CONCAT(i_minute, "0:00");
             IF i_heure > 9 THEN
@@ -230,7 +260,7 @@ SET i = 705;
 SET i_jour = 1;
 SET i_mois = 7;
 SET i_annee = 2017;
-SET i_timestamp = 67200;
+SET i_timestamp = 4200;
 SET char_annee = CONCAT("", i_annee,"-");
 WHILE i < 1405 DO
 	insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (i, current_timestamp(), 0, 72, "db_user2");
@@ -252,10 +282,10 @@ WHILE i < 1405 DO
 	SET date_seance = CONCAT(char_annee, char_mois, char_jour, "06:00:00");
 	insert into seance (date_of_seance, nb_timestamp, status_seance, id_item, customer_users_username) values (date_seance, 96, 0, i, "db_user2");
     
-    SET i_heure = 6;
-    WHILE i_heure < 22 DO
+    SET i_heure = 8;
+    WHILE i_heure < 11 DO
 		SET i_minute = 0;
-		WHILE i_minute < 6 DO
+		WHILE i_minute < 2 DO
 			SET i_timestamp = i_timestamp + 1;
 			SET char_minute = CONCAT(i_minute, "0:00");
             IF i_heure > 9 THEN
@@ -299,7 +329,7 @@ SET i = 1405;
 SET i_jour = 1;
 SET i_mois = 7;
 SET i_annee = 2018;
-SET i_timestamp = 134400;
+SET i_timestamp = 8400;
 SET char_annee = CONCAT("", i_annee,"-");
 WHILE i < 1740 DO
 	insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (i, current_timestamp(), 0, 72, "db_user3");
@@ -321,10 +351,10 @@ WHILE i < 1740 DO
 	SET date_seance = CONCAT(char_annee, char_mois, char_jour, "06:00:00");
 	insert into seance (date_of_seance, nb_timestamp, status_seance, id_item, customer_users_username) values (date_seance, 96, 0, i, "db_user3");
     
-    SET i_heure = 6;
-    WHILE i_heure < 22 DO
+    SET i_heure = 8;
+    WHILE i_heure < 11 DO
 		SET i_minute = 0;
-		WHILE i_minute < 6 DO
+		WHILE i_minute < 2 DO
 			SET i_timestamp = i_timestamp + 1;
 			SET char_minute = CONCAT(i_minute, "0:00");
             IF i_heure > 9 THEN

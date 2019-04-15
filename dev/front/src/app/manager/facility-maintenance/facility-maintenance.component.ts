@@ -93,9 +93,9 @@ export class FacilityMaintenanceComponent implements OnInit {
     this.managerService.getBalanceSheet(this.idFacility).subscribe(res => {
         this.revenue = res[0];
         this.expenditure = res[1];
-           this.balanceSheet = res;
-           this.strRevenue=((this.revenue/(this.expenditure + this.revenue + 1) * 375)).toString() + "px";
-           this.strExpenditure=((this.expenditure/(this.expenditure + this.revenue + 1) * 375)).toString() + "px";
+        this.balanceSheet = res;
+        this.strRevenue=((this.revenue/(this.expenditure + this.revenue + 1) * 375)).toString() + "px";
+        this.strExpenditure=((this.expenditure/(this.expenditure + this.revenue + 1) * 375)).toString() + "px";
      
         this.strBalanceWidth = ((Math.abs(this.revenue - this.expenditure)/(this.expenditure + this.revenue + 1) * 375)).toString() + "px";
         this.balanceRes = this.revenue - this.expenditure;

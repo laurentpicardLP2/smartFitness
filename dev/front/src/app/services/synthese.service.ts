@@ -1,7 +1,9 @@
+import { Command } from 'src/app/models/command.model';
+import { CommandService } from 'src/app/services/command.service';
+import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { TimestampFacilityAdaptater } from 'src/app/models/timestamp-facility-adaptater.model';
 import { Subscription } from 'src/app/models/subscription.model';
-import { Command } from '../models/command.model';
 import { Seance } from '../models/seance.model';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -13,9 +15,12 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SyntheseService {
+  command: Command;
 
   constructor(private httpClient: HttpClient,
-              private token: TokenStorageService
+              private token: TokenStorageService,
+              private commandService: CommandService,
+              private router: Router
               ) { }
 
   private listCommandsForAnUser: Command [] ;
@@ -171,6 +176,33 @@ export class SyntheseService {
       }
       return of(this.listCommandsForAnUser.find(command => command.idCommand === idCommand));
     } 
+  }
+
+/**
+ * Fonction supprimant un article du panier 
+ * @param idItem : identifiant de l'article à supprimer
+ */
+  public deleteItemFromCart(command: Command, idItem: number, nbItems: string){
+    this.httpClient.delete('http://localhost:8080/synthesectrl/delitemfromcart/' + idItem, 
+    {
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+      }
+  }).subscribe(
+    () => {
+      if ( parseInt(nbItems, 10) == 1){
+        this.commandService.setNbItemsSubject("");
+        } else {
+          this.commandService.setNbItemsSubject((parseInt(nbItems, 10) - 1).toString());
+        }
+        command.items.splice(command.items.findIndex((item)=> item.idItem === idItem), 1); 
+        this.commandService.setCommandSubject(command);
+
+      this.router.navigate(['cart-composition']);
+    },
+    (error) => {console.log("error delete item from cart");}
+  );
   }
   
 

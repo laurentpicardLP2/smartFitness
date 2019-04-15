@@ -42,26 +42,26 @@ public class Facility implements Serializable {
 	private String imageFacility;
 
 	//bi-directional many-to-one association to Room
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="Room_idRoom")
 	@JsonBackReference
 	private Room room;
 
 	//bi-directional many-to-one association to FacilityCategory
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="FacilityCategory_idFacilityCategory")
 	@JsonBackReference
 	private FacilityCategory facilityCategory;
 
 	//bi-directional many-to-one association to TimestampFacility
-	@OneToMany(mappedBy="facility")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="facility")
 	@JsonManagedReference
 	private List<TimestampFacility> timestampFacilities;
 	
 	
 	//bi-directional many-to-many association to Facility
 	@JsonManagedReference
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 		name="Facility_has_MaintenanceOperation"
 		, joinColumns={

@@ -15,6 +15,7 @@ export class FacilityListingComponent implements OnInit {
   nameFacility: string;
   priceSeance: number;
   FacilitiesList: BehaviorSubject<Facility[]>;
+  isDataLoaded: boolean = false;
 
 MyDataSource: any;
 displayedColumns: string[] = ['Name', 'Price', 'Update'];
@@ -27,13 +28,17 @@ displayedColumns: string[] = ['Name', 'Price', 'Update'];
               private router: Router) { }
 
   ngOnInit() {
+  this.isDataLoaded = false;
+  this.RenderDataTable();
   this.managerService.publishFacilities();
   this.FacilitiesList  = this.managerService.listFacilities$;
-  this.RenderDataTable();
+  this.managerService.isDataLoadedSubject.subscribe(
+    (res) => this.isDataLoaded = res
+    );
   }
 
   RenderDataTable() {
-    this.managerService.getFacilities().subscribe(
+    this.managerService.getFacilitiesAdaptater().subscribe(
       res => {
         console.log("res getFacilities : ", res);
       this.MyDataSource = new MatTableDataSource();

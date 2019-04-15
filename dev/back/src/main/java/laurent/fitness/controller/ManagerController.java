@@ -1,6 +1,5 @@
 package laurent.fitness.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,13 +26,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import laurent.fitness.model.Command;
 import laurent.fitness.model.Facility;
 import laurent.fitness.model.FacilityCategory;
 import laurent.fitness.model.MaintenanceOperation;
 import laurent.fitness.model.Room;
 import laurent.fitness.model.SubscriptionCategory;
 import laurent.fitness.model.WatchCategory;
+import laurent.fitness.model.adaptater.FacilityAdaptater;
+import laurent.fitness.services.FacilityAdaptaterService;
 import laurent.fitness.services.FacilityCategoryService;
 import laurent.fitness.services.FacilityService;
 import laurent.fitness.services.FileStorageService;
@@ -54,17 +54,20 @@ public class ManagerController {
 	private EntityManager entityManager;
 	 
 	private FacilityService facilityService;
+	private FacilityAdaptaterService facilityAdaptaterService;
 	private FacilityCategoryService facilityCategoryService;
 	private RoomService roomService;
 	private SubscriptionCategoryService subscriptionCategoryService;
 	private WatchCategoryService watchCategoryService;
 	
-	public ManagerController(FacilityService facilityService, 
+	public ManagerController(FacilityService facilityService,
+							FacilityAdaptaterService facilityAdaptaterService,
 							FacilityCategoryService facilityCategoryService, 
 							RoomService roomService, 
 							SubscriptionCategoryService subscriptionCategoryService,
 							WatchCategoryService watchCategoryService) {
 		this.facilityService = facilityService;
+		this.facilityAdaptaterService = facilityAdaptaterService;
 		this.facilityCategoryService = facilityCategoryService;
 		this.roomService = roomService;
 		this.subscriptionCategoryService = subscriptionCategoryService;
@@ -76,6 +79,14 @@ public class ManagerController {
 	@GetMapping("/getfacilities")
 	public List<Facility> getFacilities() {
 		return(this.facilityService.getAllFacilities());			
+	}
+	
+	//Retourne la liste des équipements
+	@GetMapping("/getfacilitiesbyname")
+	public List<FacilityAdaptater> getFacilitiesByName() {
+		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_facility_adaptater");
+	    storedProcedure.execute();
+		return this.facilityAdaptaterService.findAllFacilitiesAdapter();		
 	}
 	
 	//Return the list of categories facilities

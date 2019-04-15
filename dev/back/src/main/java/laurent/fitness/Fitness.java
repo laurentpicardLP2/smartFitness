@@ -46,8 +46,8 @@ import laurent.fitness.services.UserService;
 @SpringBootApplication
 public class Fitness implements CommandLineRunner {
 	
-	@Autowired
-	private EntityManager entityManager;
+//	@Autowired
+//	private EntityManager entityManager;
 	
 //	@Autowired
 //	private AuthorityService authorityService;
@@ -83,12 +83,12 @@ public class Fitness implements CommandLineRunner {
 		
 		
 			
-		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_insert_data");
-	    storedProcedure.execute();
-	    
-	    //storedProcedureEnd permet de savoir quand est-ce que l'import est fini
-	    StoredProcedureQuery storedProcedureEnd = entityManager.createStoredProcedureQuery("proc_insert_end");
-	    storedProcedureEnd.execute();
+//		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_insert_data");
+//	    storedProcedure.execute();
+//	    
+//	    //storedProcedureEnd permet de savoir quand est-ce que l'import est fini
+//	    StoredProcedureQuery storedProcedureEnd = entityManager.createStoredProcedureQuery("proc_insert_end");
+//	    storedProcedureEnd.execute();
 				
 
 	}

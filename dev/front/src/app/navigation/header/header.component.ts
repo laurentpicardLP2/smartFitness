@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   
   @Output() public sidenavToggle = new EventEmitter();
   isAuth: boolean;
+  isAlreadyLeftCartZone: boolean = false;
   public command: Command;
   public listCommandItems: Item []=[];
   public username: string;
@@ -69,30 +70,37 @@ export class HeaderComponent implements OnInit {
     this.sidenavToggle.emit();
   }
 
+  public onMouseleave(){
+    if(!this.isAlreadyLeftCartZone) {
+      var popup = document.getElementById("cartText");
+      popup.classList.toggle("show");
+    }
+    this.isAlreadyLeftCartZone = false;
+  }
+
   public onToggleCart(){
     var popup = document.getElementById("cartText");
     popup.classList.toggle("show");
   }
 
   public onResetCart(){
-    console.log("onResetCart()");
+    this.isAlreadyLeftCartZone=true;
     var popup = document.getElementById("cartText");
     popup.classList.toggle("show");
     this.commandService.resetCommand(this.command, this.username);
   }
 
-  public onValidateCart(){
+  public onSeeCart(){
+    this.isAlreadyLeftCartZone=true;
     var popup = document.getElementById("cartText");
     popup.classList.toggle("show");
-    let totalCart = 0;
-    for(let i=0; i<this.command.items.length; i++){
-      totalCart = totalCart + this.command.items[i].price;
-    }
-    this.command.totalPrice = totalCart;
-    this.commandService.validateCommand(this.command,this.username);
+    this.router.navigate(['cart-composition']);
   }
 
+  
+
   public onContinue(){
+    this.isAlreadyLeftCartZone=true;
     var popup = document.getElementById("cartText");
     popup.classList.toggle("show");
   }

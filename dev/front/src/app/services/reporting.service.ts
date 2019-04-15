@@ -71,28 +71,51 @@ export class ReportingService {
       });
   }
 
+  // public publishDataSetRentability() {
+   
+  //   this.managerService.getFacilities().subscribe(
+  //     (res) => {
+  //       this.facilities = res; 
+  //       for(let i=0; i< this.facilities.length; i++){
+  //         this.managerService.getBalanceSheet(this.facilities[i].idFacility).subscribe(
+  //           (res) => {
+  //             this.listLabelSetRentability.push(this.facilities[i].nameFacility);
+  //             this..push(res[0] - res [1]);
+  //             if(i==this.facilities.length-1) {
+  //               setTimeout(() => this.router.navigate(['balance-by-facility']), 750);
+  //             }
+  //           },
+  //           (error) => console.log("publishDataSetRentability error part 2")
+  //         )
+  //       }
+  //     },
+  //     (error) => console.log("publishDataSetRentability error part 1")
+
+  //   )
+  // }
+
   public publishDataSetRentability() {
    
-    this.managerService.getFacilities().subscribe(
-      (res) => {
-        this.facilities = res; 
-        for(let i=0; i< this.facilities.length; i++){
-          this.managerService.getBalanceSheet(this.facilities[i].idFacility).subscribe(
-            (res) => {
-              this.listLabelSetRentability.push(this.facilities[i].nameFacility);
-              this.listDataSetRentability.push(res[0] - res [1]);
-              if(i==this.facilities.length-1) {
-                setTimeout(() => this.router.navigate(['balance-by-facility']), 750);
-              }
-            },
-            (error) => console.log("publishDataSetRentability error part 2")
-          )
+    this.httpClient.get('http://localhost:8080/reportingctrl/getdatasetrentability', 
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": this.token.getToken()
+      }
+    }).subscribe(
+      (res)  => { let data = res.toString();
+        let dataSplit = data.split(";");
+        for(let i=0; i<dataSplit.length; i++){
+          this.listLabelSetRentability.push(dataSplit[i].split(":")[0]);
+          this.listDataSetRentability.push(parseFloat(dataSplit[i].split(":")[1]));
         }
+        this.router.navigate(['balance-by-facility']);
       },
       (error) => console.log("publishDataSetRentability error part 1")
 
     )
   }
+
 
     
 }
