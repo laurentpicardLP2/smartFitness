@@ -39,6 +39,9 @@ export class PaypalComponent implements OnInit {
         this.command = res;
         console.log("res : ", res);
         this.totalPrice = this.command.totalPrice;
+        this.commandService.getItemsPaypalAdaptater(this.command.idCommand).subscribe(
+          
+        )
         this.initConfig();
       });
       
@@ -63,7 +66,7 @@ export class PaypalComponent implements OnInit {
         unit_amount.value = this.command.items[i].price.toString();
 
         item1 = new ItemPaypal();
-        item1.name = this.command.items[i].typeItem;
+        item1.name = this.command.items[i].typeItem.split(":")[0];
         item1.quantity = '1';
         item1.category =  'DIGITAL_GOODS',
         item1.unit_amount = unit_amount;

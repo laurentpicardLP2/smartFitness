@@ -63,9 +63,13 @@ export class SubscriptionCustomerHistoricComponent implements OnInit {
       return pDateOfSeance = (pDateOfSeance==null) ? "" : this.utilsService.convertIntoDateSubscriptionListing(pDateOfSeance);
     }
 
-    convertIntoMonetaryFormat(price: number){
+    public convertIntoMonetaryFormat(price: number){
       return this.utilsService.convertIntoMonetaryFormat(price);
     } 
+
+    public extractTypeItem(rawTypeItem: string){
+      return rawTypeItem.split(":")[0];
+    }
 
 
 

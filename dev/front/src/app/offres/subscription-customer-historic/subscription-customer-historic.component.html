@@ -12,7 +12,7 @@
    </thead>
    <tbody>
     <tr *ngFor="let subscription of activeSubscriptionsList | async">
-        <td>{{ subscription.typeItem }} (en cours)</td>
+        <td>{{ extractTypeItem(subscription.typeItem) }} (en cours)</td>
         <td>{{convertIntoDateSubscription(subscription.dateStartOfSubscription)}}</td>
         <td>{{convertIntoDateSubscription(subscription.dateEndOfSubscription)}}</td>
         <td >{{convertIntoMonetaryFormat(subscription.price)}}</td>
@@ -25,7 +25,7 @@
     </tr>
      <tr *ngIf="next > 0"><td colspan="4"><br><div class="title">Vos prochains abonnements.</div></td></tr>
     <tr *ngFor="let subscription of nextSubscriptionsList | async">
-        <td>{{ subscription.typeItem }}</td>
+        <td>{{ extractTypeItem(subscription.typeItem) }}</td>
         <td>{{convertIntoDateSubscription(subscription.dateStartOfSubscription)}}</td>
         <td>{{convertIntoDateSubscription(subscription.dateEndOfSubscription)}}</td>
         <td >{{convertIntoMonetaryFormat(subscription.price)}}</td>
@@ -38,7 +38,7 @@
     </tr>
     <tr *ngIf="historic > 0"><td colspan="4"><br><div class="title">L'historique de vos abonnements.</div></td></tr>  
     <tr *ngFor="let subscription of historicSubscriptionsList | async">
-      <td>{{ subscription.typeItem }}</td>
+      <td>{{ extractTypeItem(subscription.typeItem) }}</td>
       <td>{{convertIntoDateSubscription(subscription.dateStartOfSubscription)}}</td>
       <td>{{convertIntoDateSubscription(subscription.dateEndOfSubscription)}}</td>
       <td >{{convertIntoMonetaryFormat(subscription.price)}}</td>

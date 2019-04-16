@@ -39,11 +39,11 @@ export class TimestampFacilityComponent implements OnInit {
           {
             amount: {
               currency_code: 'EUR',
-              value: '9.99',
+              value: '2.05',
               breakdown: {
                 item_total: {
                   currency_code: 'EUR',
-                  value: '9.99'
+                  value: '2.05'
                 }
               }
             },
@@ -54,7 +54,16 @@ export class TimestampFacilityComponent implements OnInit {
                 category: 'DIGITAL_GOODS',
                 unit_amount: {
                   currency_code: 'EUR',
-                  value: '9.99',
+                  value: '0.75',
+                },
+              },
+              {
+                name: 'Enterprise Subscription',
+                quantity: '1',
+                category: 'DIGITAL_GOODS',
+                unit_amount: {
+                  currency_code: 'EUR',
+                  value: '1.30',
                 },
               }
             ]

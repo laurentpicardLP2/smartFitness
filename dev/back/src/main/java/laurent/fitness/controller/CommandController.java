@@ -3,8 +3,12 @@ package laurent.fitness.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,8 +26,10 @@ import laurent.fitness.model.Customer;
 import laurent.fitness.model.Item;
 import laurent.fitness.model.Seance;
 import laurent.fitness.model.User;
+import laurent.fitness.model.adaptater.ItemPaypalAdaptater;
 import laurent.fitness.services.CommandService;
 import laurent.fitness.services.CustomerService;
+import laurent.fitness.services.ItemPaypalAdaptaterService;
 import laurent.fitness.services.ItemService;
 import laurent.fitness.services.SeanceService;
 import laurent.fitness.services.UserService;
@@ -32,14 +38,19 @@ import laurent.fitness.services.UserService;
 @RequestMapping("/commandctrl")
 @CrossOrigin("http://localhost:4200")
 public class CommandController {
+	@Autowired
+	private EntityManager entityManager;
+	
 	private CommandService commandService;
 	private CustomerService customerService;
 	private SeanceService seanceService;
+	private ItemPaypalAdaptaterService itemPaypalAdaptaterService;
 	
-	public CommandController(CommandService commandService, CustomerService customerService, SeanceService seanceService) {
+	public CommandController(CommandService commandService, CustomerService customerService, SeanceService seanceService, ItemPaypalAdaptaterService itemPaypalAdaptaterService) {
 		this.commandService = commandService;
 		this.customerService = customerService;
 		this.seanceService = seanceService;
+		this.itemPaypalAdaptaterService = itemPaypalAdaptaterService;
 	}
 	
 	//Initialise une commande lorsqu'un utilisateur se connecte
@@ -141,6 +152,16 @@ public class CommandController {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
+	}
+	
+	//Retourne la liste des items pour une commande d'un client
+	@GetMapping("/getitemsbycommand/{idCommand}")
+	public List<ItemPaypalAdaptater> getItemsPaypalAdaptaterForACommand(@PathVariable Integer idCommand) {
+		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_item_paypal");
+		storedProcedure.registerStoredProcedureParameter(1, Integer.class , ParameterMode.IN);
+	    storedProcedure.setParameter(1, idCommand);
+	    storedProcedure.execute();
+	    return itemPaypalAdaptaterService.findAllItemsPaypalAdaptater();	
 	}
 	
 }

@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import laurent.fitness.model.Command;
 import laurent.fitness.model.Seance;
 import laurent.fitness.model.adaptater.FacilityAdaptater;
+import laurent.fitness.model.adaptater.ItemPaypalAdaptater;
 import laurent.fitness.model.adaptater.TimestampFacilityAdaptater;
 import laurent.fitness.services.CommandService;
+import laurent.fitness.services.ItemPaypalAdaptaterService;
 import laurent.fitness.services.ItemService;
 import laurent.fitness.services.SeanceService;
 import laurent.fitness.services.TimestampFacilityAdaptaterService;
@@ -29,16 +31,15 @@ import laurent.fitness.services.TimestampFacilityAdaptaterService;
 @RequestMapping("/synthesectrl")
 @CrossOrigin("http://localhost:4200")
 public class SyntheseController {
-	
-	@Autowired
-	private EntityManager entityManager;
 
 	private CommandService commandService;
 	private TimestampFacilityAdaptaterService timestampFacilityAdaptaterService;
 	private SeanceService seanceService;
 	private ItemService itemService;
 	
-	public SyntheseController(CommandService commandService, SeanceService seanceService, TimestampFacilityAdaptaterService timestampFacilityAdaptaterService,  ItemService itemService) {
+	
+	public SyntheseController(CommandService commandService, SeanceService seanceService, TimestampFacilityAdaptaterService timestampFacilityAdaptaterService,  
+			ItemService itemService) {
 		this.commandService = commandService;
 		this.timestampFacilityAdaptaterService = timestampFacilityAdaptaterService;
 		this.seanceService = seanceService;
@@ -92,15 +93,6 @@ public class SyntheseController {
 		}
 	}
 	
-	//Retourne la liste des items pour une commande d'un client
-	@GetMapping("/getitemsbycommand/{idCommand}")
-	public List<FacilityAdaptater> getFacilitiesByName(@PathVariable Integer idCommand) {
-		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_item_paypal");
-		storedProcedure.registerStoredProcedureParameter(1, Integer.class , ParameterMode.IN);
-	    storedProcedure.setParameter(1, idCommand);
-	    storedProcedure.execute();
-	    return null;
-		//return this.itemPaypalAdaptaterService.findAllFacilitiesAdapter();		
-	}
+	
 
 }

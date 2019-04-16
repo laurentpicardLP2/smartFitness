@@ -1,10 +1,11 @@
+import { Item } from 'src/app/models/item.model';
 import { TimestampFacility } from 'src/app/models/timestamp-facility.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CommandService } from './command.service';
 import { Seance } from 'src/app/models/seance.model';
 import { Command } from 'src/app/models/command.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { BookingService } from 'src/app/services/booking.service';
 import { TokenStorageService } from './token-storage.service';
 import { Router } from '@angular/router';
@@ -145,10 +146,8 @@ export class SeanceService {
     );
   }
 
-      
- 
 
-  public addDateAndNbTimestamp(seance: Seance){
+  public addDateAndNbTimestamp(seance: Seance, command: Command){
     this.httpClient.put<Seance>('http://localhost:8080/seancectrl/adddateandnbtimestamp/' + seance.idItem, null, 
     {
       headers: {
@@ -158,7 +157,10 @@ export class SeanceService {
   }).subscribe(
         (updatedSeance) =>{ 
           console.log("updated seance OK : ", updatedSeance);
-          this.setSeanceSubject(updatedSeance);  
+          this.setSeanceSubject(updatedSeance);
+          let index = command.items.findIndex(item => item.idItem === updatedSeance.idItem);
+          command.items[index].typeItem = updatedSeance.typeItem;
+          this.commandService.setCommandSubject(command);
         },
         (error) => { console.log("updated seance pb : ", error); }
     );

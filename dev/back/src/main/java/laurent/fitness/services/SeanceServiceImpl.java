@@ -1,6 +1,7 @@
 package laurent.fitness.services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +50,7 @@ public class SeanceServiceImpl implements SeanceService {
 		// TODO Auto-generated method stub
 		Seance updatedSeance = this.findSeanceById(idItem);
 		updatedSeance.setStatusSeance(1);
+		updatedSeance.setTypeItem("Séance " + getStringOfDateOfSeance(this.findByDateOfTimestamp(idItem)) + " :seance");
 		updatedSeance.setDateOfSeance(this.findByDateOfTimestamp(idItem));
 		updatedSeance.setNbTimestamp(this.findNbTimestampBySeance(idItem));
 		return this.seanceRepo.save(updatedSeance);
@@ -96,6 +98,25 @@ public class SeanceServiceImpl implements SeanceService {
 	public boolean checkAnotherSeanceIsOpen(String username) {
 		// TODO Auto-generated method stub
 		return (this.seanceRepo.findAnotherSeanceIsOpenByUsername(username) > 0 ? true : false);
+	}
+	
+	
+	public String getStringOfDateOfSeance(Date dateOfSeance){
+		int year;
+		String strMonth = "";
+		String strDay = "";
+		String strHour = "";
+		String strMinute = "";
+		Calendar calendar = Calendar.getInstance();
+		
+		calendar.setTime(new Date(dateOfSeance.getTime()));
+		year =  calendar.get(Calendar.YEAR);
+		strMonth = (calendar.get(Calendar.MONTH) +1 <10) ? "0" + (calendar.get(Calendar.MONTH) + 1) : "" + (calendar.get(Calendar.MONTH) + 1);
+		strDay = (calendar.get(Calendar.DAY_OF_MONTH)<10) ? "0" + calendar.get(Calendar.DAY_OF_MONTH) : "" + calendar.get(Calendar.DAY_OF_MONTH);
+		strHour = (calendar.get(Calendar.HOUR_OF_DAY) <10) ? "0" + (calendar.get(Calendar.HOUR_OF_DAY))  : "" + (calendar.get(Calendar.HOUR_OF_DAY));
+		strMinute = (calendar.get(Calendar.MINUTE)<10) ? "0" + calendar.get(Calendar.MINUTE) : "" + calendar.get(Calendar.MINUTE);
+		
+		return strDay + "-" + strMonth + "-" + year + " " + strHour + "h" + strMinute;
 	}
 
 }

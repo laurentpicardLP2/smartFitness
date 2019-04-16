@@ -6,9 +6,8 @@ import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
 import { Command } from 'src/app/models/command.model';
 import { Item } from 'src/app/models/item.model';
-import { BehaviorSubject } from 'rxjs';
-import { SeanceService } from 'src/app/services/seance.service';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ItemPaypalAdaptater } from 'src/app/models/item-paypal-adaptater.model';
 
 @Injectable({
   providedIn: 'root'
@@ -100,5 +99,15 @@ export class CommandService {
     );
       
   }
-  
+
+  public getItemsPaypalAdaptater(idCommand: number): Observable<ItemPaypalAdaptater[]> {
+    return this.httpClient.get<ItemPaypalAdaptater[]>('http://localhost:8080/commandctrl/getitemsbycommand/' + idCommand, 
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+        }
+      });
+  }
+
 }
