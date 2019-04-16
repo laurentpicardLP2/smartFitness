@@ -18,5 +18,7 @@ public interface UserService {
 	public User findByUsername(String username);
 	
 	public Authority getAuthorityForAnUser(String username);
+	
+	public String getEmailByUsername(String username);
 
 }

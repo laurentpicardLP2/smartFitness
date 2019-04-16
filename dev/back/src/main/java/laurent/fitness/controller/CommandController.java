@@ -3,6 +3,7 @@ package laurent.fitness.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
@@ -11,6 +12,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -163,5 +166,7 @@ public class CommandController {
 	    storedProcedure.execute();
 	    return itemPaypalAdaptaterService.findAllItemsPaypalAdaptater();	
 	}
+	
+	
 	
 }

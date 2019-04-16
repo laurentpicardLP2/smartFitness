@@ -2,10 +2,9 @@ import { Command } from 'src/app/models/command.model';
 import { UtilsService } from 'src/app/services/utils.service';
 import { LoginService } from 'src/app/services/login.service';
 import { CommandService } from 'src/app/services/command.service';
-import { Component, OnInit } from '@angular/core';
-import { Action } from 'rxjs/internal/scheduler/Action';
+import { Component, OnInit } from '@angular/core';;
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal'
-import { SyntheseService } from 'src/app/services/synthese.service';
+import { EmailService } from 'src/app/services/email.service';
 import { ItemPaypal } from 'src/app/models/item-paypal.model';
 import { UnitAmount } from 'src/app/models/unit-amount.model';
 
@@ -19,9 +18,10 @@ declare var hljs: any;
 export class PaypalComponent implements OnInit {
   command: Command;
   totalPrice: number;
+  username: string;
 
   constructor(private commandService: CommandService,
-    private syntheseService: SyntheseService,
+    private emailService: EmailService,
     private loginService: LoginService,
     private utilsService: UtilsService) {
   }
@@ -39,11 +39,13 @@ export class PaypalComponent implements OnInit {
         this.command = res;
         console.log("res : ", res);
         this.totalPrice = this.command.totalPrice;
-        this.commandService.getItemsPaypalAdaptater(this.command.idCommand).subscribe(
-          
-        )
+        // this.commandService.getItemsPaypalAdaptater(this.command.idCommand).subscribe()
         this.initConfig();
       });
+
+      this.loginService.usernameSubject.subscribe(
+        (res) => this.username = res
+      )
       
     }
   
@@ -123,6 +125,7 @@ export class PaypalComponent implements OnInit {
         onClientAuthorization: (data) => {
           console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
           this.showSuccess = true;
+          this.emailService.sendEmailAfterPaypal(this.command.idCommand, this.command.totalPrice, this.username);
         },
         onCancel: (data, actions) => {
           console.log('OnCancel', data, actions);

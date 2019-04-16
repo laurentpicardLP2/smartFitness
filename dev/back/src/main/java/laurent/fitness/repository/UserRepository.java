@@ -24,6 +24,9 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	@Query("SELECT u FROM User u WHERE u.idUser = ?1")
 	 public User findByIdUser(int idUser);
+	
+	@Query(value = "SELECT email FROM users WHERE username like ?1 ", nativeQuery = true)
+	public String findEmailByUsername(String username);
 }
 
 

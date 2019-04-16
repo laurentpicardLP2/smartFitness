@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal'
 
@@ -17,7 +18,7 @@ export class TimestampFacilityComponent implements OnInit {
   public showError: boolean = false;
   
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
     this.initConfig();
@@ -112,6 +113,13 @@ export class TimestampFacilityComponent implements OnInit {
 
   private prettify(): void {
     //hljs.initHighlightingOnLoad();
+  }
+
+  public onSendEmail() {
+    return this.httpClient.get<string>('http://localhost:8080/emailctrl/simpleemail').subscribe(
+      (res) => {console.log("email Ok : ", res);},
+      (error) => {console.log("error email : ", error);}
+    );
   }
 
  

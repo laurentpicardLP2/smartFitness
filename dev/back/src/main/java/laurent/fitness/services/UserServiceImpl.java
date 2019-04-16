@@ -66,4 +66,10 @@ public class UserServiceImpl implements UserService {
 		return user.getAuthority();
 	}
 
+	@Override
+	public String getEmailByUsername(String username) {
+		// TODO Auto-generated method stub
+		return this.userRepo.findEmailByUsername(username);
+	}
+
 }

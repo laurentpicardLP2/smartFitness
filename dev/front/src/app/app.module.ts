@@ -57,6 +57,7 @@ import { FacilityMaintenanceComponent } from './manager/facility-maintenance/fac
 import { NgxPayPalModule } from 'ngx-paypal';
 import { BalanceByFacilityComponent } from './manager/balance-by-facility/balance-by-facility.component';
 import { CartCompositionComponent } from './synthese/cart-composition/cart-composition.component';
+import { AcknowledgmentComponent } from './booking/acknowledgment/acknowledgment.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +105,7 @@ import { CartCompositionComponent } from './synthese/cart-composition/cart-compo
     FacilityMaintenanceComponent,
     BalanceByFacilityComponent,
     CartCompositionComponent,
+    AcknowledgmentComponent,
 
   ],
   imports: [

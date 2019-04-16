@@ -72,6 +72,20 @@ export class LoginService {
     }
   }
 
+  /**
+   * l'existence de ce subject a pour but de récupérer l'instance active du user
+   * pour permettre d'affecter un nouveau panier au user après la validation du paiment. (utilisé dans acknoledgment component)
+   */
+  public userSubject: BehaviorSubject<User> = new BehaviorSubject(null);
+  public setUserSubject(value: User){
+    if(value){
+      this.userSubject.next(value);
+    } else {
+      this.userSubject.next(null);
+    }
+  }
+
+
 
 
   // Subject informant du rôle (authority) de l'utlisateur
@@ -213,6 +227,7 @@ export class LoginService {
     this.getAuthority(user.username).subscribe(
       authority => {
         this.setAuthoritySubject(authority);
+        this.setUserSubject(user);
         if(authority.authority=="ROLE_CUSTOMER"){
           this.commandService.initCommand(user); 
           this.commandService.setListCommandItemsSubject(null); 

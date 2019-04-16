@@ -44,6 +44,7 @@ import { WatchDetailComponent } from './synthese/watch-detail/watch-detail.compo
 import { FacilityMaintenanceComponent } from './manager/facility-maintenance/facility-maintenance.component';
 import { BalanceByFacilityComponent } from './manager/balance-by-facility/balance-by-facility.component';
 import { CartCompositionComponent } from './synthese/cart-composition/cart-composition.component';
+import { AcknowledgmentComponent } from './booking/acknowledgment/acknowledgment.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -83,7 +84,7 @@ const routes: Routes = [
   { path: 'facility-maintenance/:idFacility', canActivate: [AuthGuardManagerService], component: FacilityMaintenanceComponent},
   { path: 'balance-by-facility', canActivate: [AuthGuardManagerService], component: BalanceByFacilityComponent},
   { path: 'paypal', canActivate: [AuthGuardCustomerService], component: PaypalComponent },
-
+  { path: 'acknoledgment/:email', canActivate: [AuthGuardCustomerService], component: AcknowledgmentComponent },
   { path: 'chart',  component: TimestampFacilityComponent },
   { path: '', component: HomeComponent },
   
