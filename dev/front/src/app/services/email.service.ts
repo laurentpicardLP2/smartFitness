@@ -1,3 +1,4 @@
+import { UtilsService } from 'src/app/services/utils.service';
 import { HttpClient } from '@angular/common/http';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { Injectable } from '@angular/core';
@@ -11,18 +12,19 @@ export class EmailService {
 
   constructor(private httpClient: HttpClient,
     private router: Router,
-    private token:TokenStorageService) { }
+    private token:TokenStorageService,
+    private utilsService: UtilsService) { }
 
   public sendEmailAfterPaypal(idCommand: number, totalPrice: number, username: string){
-    this.httpClient.post<any>('http://localhost:8080/emailctrl/payedcommand/' + idCommand + '/' + totalPrice + '/' + username, null,
+    this.httpClient.post<string[]>('http://localhost:8080/emailctrl/payedcommand/' + idCommand + '/' + this.utilsService.convertIntoMonetaryFormat(totalPrice) + '/' + username, null,
     {
       headers: {
         "Content-Type": "application/json",
         "Authorization": this.token.getToken()
       }
     }).subscribe(
-      (res) => {console.log("send email ok", res);
-        this.router.navigate(['acknoledgment/' + res]);},
+      (res) => {console.log("send email ok", res[0]);
+        this.router.navigate(['acknoledgment/' + res[0] + '/' + idCommand + '/' +totalPrice + '/' + username + '/' + res[1]]);},
       (error) => {console.log("send email pb", error);}
     );
   }

@@ -24,7 +24,7 @@ export class WatchCustomerPropositionComponent implements OnInit {
   watchCategory: WatchCategory;
   username: string;
   nbItems: string;
-
+  totalPriceCommand : number;
   
  
    constructor(
@@ -55,12 +55,15 @@ export class WatchCustomerPropositionComponent implements OnInit {
      this.offresService.publishWatchCategories();
     this.watchCategoryList  = this.offresService.listWatchCategories$;
  
+    this.commandService.totalPriceCommandSubject.subscribe(res => {
+      this.totalPriceCommand = res;
+    });
  
    }
  
    
    onOrder(idWatchCategory: number){
-     this.offresService.addWatchToCommand(this.command,  idWatchCategory, this.username, this.nbItems);
+     this.offresService.addWatchToCommand(this.command,  idWatchCategory, this.username, this.nbItems, this.totalPriceCommand);
     
    }
  

@@ -52,7 +52,7 @@ public class SyntheseController {
 	public List<Command> GetCommands(@PathVariable String username){
 	System.out.println("username : " + username);
 		try {
-			return this.commandService.findCommandByUsername(username);
+			return this.commandService.findCommandsByUsername(username);
 		} catch(Exception e) {
 			System.out.println(e);
 			return null;

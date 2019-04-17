@@ -20,5 +20,7 @@ public interface UserService {
 	public Authority getAuthorityForAnUser(String username);
 	
 	public String getEmailByUsername(String username);
+	
+	public String getFullnameByUsername(String username);
 
 }

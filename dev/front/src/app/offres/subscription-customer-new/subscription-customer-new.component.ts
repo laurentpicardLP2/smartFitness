@@ -49,6 +49,7 @@ export class SubscriptionCustomerNewComponent implements OnInit {
   username: string;
   command: Command;
   nbItems: string;
+  totalPriceCommand : number;
 
 
   constructor(private route: ActivatedRoute,
@@ -88,6 +89,10 @@ export class SubscriptionCustomerNewComponent implements OnInit {
 
     this.commandService.nbItemsSubject.subscribe(res => {
       this.nbItems = res;
+    });
+
+    this.commandService.totalPriceCommandSubject.subscribe(res => {
+      this.totalPriceCommand = res;
     });
 
     this.createForm();
@@ -185,7 +190,7 @@ export class SubscriptionCustomerNewComponent implements OnInit {
   }
 
   public onSubscribe() {
-    this.offresService.addSubscriptionToCommand(this.command, this.username, this.idSubscriptionCategory, this.dateStartOfSubscription, this.dateEndOfSubscription, this.nbItems);
+    this.offresService.addSubscriptionToCommand(this.command, this.username, this.idSubscriptionCategory, this.dateStartOfSubscription, this.dateEndOfSubscription, this.nbItems, this.totalPriceCommand);
   }
 
 

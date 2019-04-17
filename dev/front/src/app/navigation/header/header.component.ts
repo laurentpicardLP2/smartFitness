@@ -71,11 +71,12 @@ export class HeaderComponent implements OnInit {
   }
 
   public onMouseleave(){
-    if(!this.isAlreadyLeftCartZone) {
-      var popup = document.getElementById("cartText");
-      popup.classList.toggle("show");
-    }
-    this.isAlreadyLeftCartZone = false;
+    // if(!this.isAlreadyLeftCartZone) {
+    //   var popup = document.getElementById("cartText");
+    //   popup.classList.toggle("show");
+    // }
+    // this.isAlreadyLeftCartZone = false;
+    console.log("onMouseleave()");
   }
 
   public onToggleCart(){
@@ -84,16 +85,16 @@ export class HeaderComponent implements OnInit {
   }
 
   public onResetCart(){
-    this.isAlreadyLeftCartZone=true;
-    var popup = document.getElementById("cartText");
-    popup.classList.toggle("show");
+    // this.isAlreadyLeftCartZone=true;
+    // var popup = document.getElementById("cartText");
+    // popup.classList.toggle("show");
     this.commandService.resetCommand(this.command, this.username);
   }
 
   public onSeeCart(){
-    this.isAlreadyLeftCartZone=true;
-    var popup = document.getElementById("cartText");
-    popup.classList.toggle("show");
+    // this.isAlreadyLeftCartZone=true;
+    // var popup = document.getElementById("cartText");
+    // popup.classList.toggle("show");
     this.router.navigate(['cart-composition']);
   }
 

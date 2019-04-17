@@ -29,7 +29,8 @@ public class SyntheseControllerPostman {
 		public List<Command> GetCommands(@Valid String username){
 		
 			try {
-				return this.commandService.findCommandByUsername(username);
+				//return this.commandService.findCommandByUsername(username);
+				return null;
 			} catch(Exception e) {
 				System.out.println(e);
 				return null;

@@ -58,6 +58,7 @@ import { NgxPayPalModule } from 'ngx-paypal';
 import { BalanceByFacilityComponent } from './manager/balance-by-facility/balance-by-facility.component';
 import { CartCompositionComponent } from './synthese/cart-composition/cart-composition.component';
 import { AcknowledgmentComponent } from './booking/acknowledgment/acknowledgment.component';
+import { SignupConfirmComponent } from './user/signup-confirm/signup-confirm.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { AcknowledgmentComponent } from './booking/acknowledgment/acknowledgment
     BalanceByFacilityComponent,
     CartCompositionComponent,
     AcknowledgmentComponent,
+    SignupConfirmComponent,
 
   ],
   imports: [

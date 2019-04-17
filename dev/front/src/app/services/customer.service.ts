@@ -62,8 +62,14 @@ export class CustomerService {
 
   public register(newCustomer: Customer){
     this.httpClient.post<Customer>('http://localhost:8080/userctrl/newcustomer', newCustomer).subscribe(
-        (customer) =>{ console.log("création user OK : ",customer); this.router.navigate(['']);},
-        (error) => console.log("création user pb : ", error) 
+        (customer) =>{ console.log("création user OK : ",customer);
+                    this.httpClient.post('http://localhost:8080/emailctrl/signupconfirm/' + customer.username, null).subscribe(
+                    ()=> {
+                      this.router.navigate(['signup-confirm/' + customer.email + '/' + customer.fullname]);
+                       },
+                    (error) => {console.log('error send mail confirm sign up', error); });
+                  },
+                  (error) => console.log("création user pb : ", error) 
     );
   }
 

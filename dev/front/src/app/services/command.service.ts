@@ -48,15 +48,31 @@ export class CommandService {
     }
   }
 
-  public initCommand(user: User){
-    this.httpClient.post<Command>('http://localhost:8080/commandctrl/addcommand/' + user.username, null, 
+  public totalPriceCommandSubject: BehaviorSubject<number> = new BehaviorSubject(null);
+
+  public setTotalPriceCommandSubject(value: number){
+    if(value){
+      this.totalPriceCommandSubject.next(value);
+    } else {
+      this.totalPriceCommandSubject.next(null);
+    }
+  }
+
+  public initCommand(username: string, isRouting: boolean){
+    this.httpClient.post<Command>('http://localhost:8080/commandctrl/addcommand/' + username, null, 
     {
       headers: {
           "Content-Type": "application/json",
           "Authorization": this.token.getToken()
       }
   }).subscribe(
-        (command) =>{ console.log("init command OK : ", command); this.setCommandSubject(command); this.router.navigate(['']); this.setNbItemsSubject("");},
+        (command) =>{ console.log("init command OK : ", command); 
+                      this.setCommandSubject(command); 
+                      this.setTotalPriceCommandSubject(0);
+                      if (isRouting) {
+                        this.router.navigate(['']);
+                      }
+                      this.setNbItemsSubject("");},
         (error) => { console.log("init command pb : ", error); this.setCommandSubject(null); this.router.navigate(['']);}
     );
     
@@ -79,8 +95,8 @@ export class CommandService {
     );
   }
 
-  public validateCommand(command: Command, username: string){
-    this.httpClient.put<Command>('http://localhost:8080/commandctrl/validatecommand/' + username, command, 
+  public validateCommand(command: Command, finalStep: boolean){
+    this.httpClient.put<Command>('http://localhost:8080/commandctrl/validatecommand', command, 
     {
       headers: {
           "Content-Type": "application/json",
@@ -89,9 +105,11 @@ export class CommandService {
   }).subscribe(
     (validatedCommand) =>{ 
         console.log("validate command OK : ", validatedCommand);
-        this.setCommandSubject(validatedCommand);
-        this.setNbItemsSubject("");
-        this.router.navigate(['paypal']);
+        if(finalStep){
+          this.setCommandSubject(validatedCommand);
+          this.setNbItemsSubject("");
+          this.router.navigate(['paypal']);
+        }
       },
       (error) => { console.log("validate command pb : ", error); 
                     this.router.navigate(['error-page']);
@@ -108,6 +126,22 @@ export class CommandService {
           "Authorization": this.token.getToken()
         }
       });
+  }
+
+  public setUpdateStatusAndPriceToCommand(command: Command, totalPriceCommand: number) {
+    this.httpClient.put<Command>('http://localhost:8080/commandctrl/setupdatestatusandpricetocommand/' + command.idCommand + '/' + totalPriceCommand, null, 
+    {
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+      }
+  }).subscribe(
+        (updatedOneCommand) =>{ 
+          console.log("set 1 to command OK : ",updatedOneCommand);
+          this.setCommandSubject(updatedOneCommand);
+        },
+        (error) => { console.log("reset command pb : ", error); }
+    );
   }
 
 }

@@ -89,14 +89,19 @@ public class UserController {
 	public ResponseEntity<?> createCustomer(@RequestBody Customer newCustomer) {
 
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
-		
+				
 		try {
-			this.authorityService.saveAuthority(new Authority(newCustomer.getUsername(), "ROLE_CUSTOMER"));
-			return ResponseEntity.status(HttpStatus.OK).body(this.customerService.saveCustomer(new Customer(this.userService.findByUsernameIdMax(),
+			
+			
+			System.out.println("ewCustomer.getUsername()" + newCustomer.getUsername());
+			Customer customer = new Customer(this.userService.findByUsernameIdMax(),
 					newCustomer.getUsername(), newCustomer.getFullname(), "{bcrypt}" + bcrypt.encode(newCustomer.getPassword()), 
 					newCustomer.getEmail(), newCustomer.getTel(), new Date(), (byte)1, newCustomer.getDateOfBirthday(),
 					newCustomer.getDomesticAddress(), newCustomer.getDomesticCp(), newCustomer.getDeliveryCity(), newCustomer.getDomesticCountry(),
-					newCustomer.getDeliveryAddress(), newCustomer.getDeliveryCp(), newCustomer.getDeliveryCity(), newCustomer.getDeliveryCountry())));
+					newCustomer.getDeliveryAddress(), newCustomer.getDeliveryCp(), newCustomer.getDeliveryCity(), newCustomer.getDeliveryCountry());
+			this.customerService.saveCustomer(customer);
+			this.authorityService.saveAuthority(new Authority("db_laurent", "ROLE_CUSTOMER"));
+			return ResponseEntity.status(HttpStatus.OK).body(customer);
 		
 	} catch(Exception e) {
 		

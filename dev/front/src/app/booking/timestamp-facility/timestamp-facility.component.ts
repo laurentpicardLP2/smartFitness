@@ -116,7 +116,7 @@ export class TimestampFacilityComponent implements OnInit {
   }
 
   public onSendEmail() {
-    return this.httpClient.get<string>('http://localhost:8080/emailctrl/simpleemail').subscribe(
+    return this.httpClient.get('http://localhost:8080/emailctrl/simpleemail').subscribe(
       (res) => {console.log("email Ok : ", res);},
       (error) => {console.log("error email : ", error);}
     );

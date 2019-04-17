@@ -1,5 +1,8 @@
 package laurent.fitness.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,15 +10,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import laurent.fitness.model.Command;
+import laurent.fitness.services.CommandService;
 import laurent.fitness.services.UserService;
  
 @RestController
@@ -27,36 +29,68 @@ public class SimpleEmailController {
     private JavaMailSender sender;
     
     private UserService userService;
+    private CommandService commandService;
     
-    public SimpleEmailController (UserService userService) {
+    public SimpleEmailController (UserService userService, CommandService commandService) {
     	this.userService = userService;
+    	this.commandService = commandService;
     }
  
-    @PostMapping("/payedcommand/{idCommand}/{totalPrice}/{username}")
-    public ResponseEntity<?> sendEmailAfterPaypal(@PathVariable Integer idCommand, @PathVariable Float totalPrice, @PathVariable String username) {
+    @PostMapping("/payedcommand/{idCommand}/{amountFormatted}/{username}")
+    public ResponseEntity<?> sendEmailAfterPaypal(@PathVariable Integer idCommand, @PathVariable String amountFormatted, @PathVariable String username) {
         try {
-        	
-            //sendEmail(idCommand, totalPrice, username, this.userService.getEmailByUsername(username));
-            sendEmail(idCommand, totalPrice, username, "lolo.picard@laposte.net");
-            return ResponseEntity.status(HttpStatus.OK).body(null);
-           // return ResponseEntity.status(HttpStatus.OK).body(this.userService.getEmailByUsername(username));
+        	List<String> infosUsers = new ArrayList<String>();
+            
+            sendEmailPaypal(idCommand, amountFormatted, this.userService.getFullnameByUsername(username), this.userService.getEmailByUsername(username));
+            Command command = this.commandService.findByIdCommand(idCommand);
+            command.setStatusCommand(3);
+            this.commandService.saveCommand(command);
+            infosUsers.add(this.userService.getEmailByUsername(username));
+            infosUsers.add(this.userService.getFullnameByUsername(username));
+            return ResponseEntity.status(HttpStatus.OK).body(infosUsers);
         }catch(Exception ex) {
         	System.out.println(ex);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
  
-    private void sendEmail(int idCommand, float amount, String username, String email) throws Exception{
+    private void sendEmailPaypal(int idCommand, String amountFormatted, String fullname, String email) throws Exception{
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
          
         
-        helper.setTo("lolo.picard@laposte.net");
+        helper.setTo(email);
         
-        helper.setText("Bonjour " + username + ",\n\nL'équipe de Smart Fitness vous accuse réception de la commande n°" + idCommand + 
-        		" pour un montant de " + amount + "€.\nNous vous remercions de votre confiance et nous nous félicitons de vous revoir dans notre centre !\n\nL'équipe de Smart Fitness");
+        helper.setText("Bonjour " + fullname + ",\n\nL'équipe de Smart Fitness vous accuse réception de la commande n°" + idCommand + 
+        		" pour un montant de " + amountFormatted + ".\nNous vous remercions de votre confiance et nous nous félicitons de vous revoir prochainement dans notre centre !\n\nL'équipe Smart Fitness");
         helper.setSubject("Votre commande n°" + idCommand);
          
         sender.send(message);
     }
+    
+    @PostMapping("/signupconfirm/{username}")
+    public ResponseEntity<?> sendEmailAfterSignup(@PathVariable String username) {
+        try {         
+            sendEmailSignup(this.userService.getFullnameByUsername(username), this.userService.getEmailByUsername(username));
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        }catch(Exception ex) {
+        	System.out.println(ex);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+    
+    private void sendEmailSignup(String fullname, String email) throws Exception{
+        MimeMessage message = sender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+         
+        
+        helper.setTo(email);
+        
+        helper.setText("Bonjour " + fullname + ",\n\nL'équipe de Smart Fitness vous souhaite la bienvenue.\n"
+        		+ "Nous vous remercions de votre confiance et nous nous félicitons de vous voir prochainement dans notre centre !\n\nL'équipe Smart Fitness");
+        helper.setSubject("Bienvenue chez SmartFitness.");
+         
+        sender.send(message);
+    }
+
 }

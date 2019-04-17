@@ -6,7 +6,7 @@
     <div class="pad">
       <router-outlet></router-outlet>  
     </div>
-    <mat-sidenav #sidenav role="naigation">
+    <mat-sidenav #sidenav role="navigation">
       <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
     </mat-sidenav>
 
@@ -31,8 +31,9 @@
           <mat-header-cell *matHeaderCellDef mat-sort-header> Statut </mat-header-cell>
           <!-- <mat-cell style="text-align: center;" *matCellDef="let post"> -->
           <mat-cell *matCellDef="let post"> 
-            <span *ngIf="post.statusCommand==0">commande en attente de paiement</span> 
-            <span *ngIf="post.statusCommand==1">commande validée</span> 
+            <span *ngIf="post.statusCommand==1">Commande en cours d'acquisition</span> 
+            <span *ngIf="post.statusCommand==2">Commande validée en attente de paiement</span> 
+            <span *ngIf="post.statusCommand==3">Commande validée et payée</span> 
           </mat-cell>
           <!-- </mat-cell> -->
           </ng-container>

@@ -5,7 +5,13 @@
 	 position:absolute;
 
 	cursor: pointer;
-  }
+	}
+
+	.span-panier{
+		
+		font-weight: bolder;
+		font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	}
   
   /* The actual cart (appears on top) */
   .cart .cartText {

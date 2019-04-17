@@ -9,7 +9,7 @@
    </tr>
  </thead>
  <tbody>
-     <tr *ngFor="let cart of command.items">
+     <tr *ngFor="let cart of command.items; let i=index;">
          <td>{{formatNameItem(cart.typeItem) }}</td>
          <td>{{ convertIntoMonetaryFormat(cart.price) }}</td>
          <td><button mat-raised-button color="primary" (click)="onDeleteItem(cart.idItem)">Supprimer</button></td>
@@ -17,9 +17,11 @@
    </tbody>
 </table>
 <br>
-<div class="pad">
-  Total de votre panier: {{ convertIntoMonetaryFormat(totalPrice) }}
-</div>
-<div style="text-align: center"><button mat-raised-button color="accent" (click)="onValidateCart()">Valider le panier</button>
+<div *ngIf="isHasItems">
+    <div class="pad">
+        Total de votre panier: {{ convertIntoMonetaryFormat(totalPrice) }}
+      </div>
+      <div style="text-align: center"><button mat-raised-button color="accent" (click)="onValidateCart()">Valider le panier</button>
+      </div>      
 </div>
 

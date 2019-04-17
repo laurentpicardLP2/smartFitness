@@ -15,7 +15,8 @@ export class CartCompositionComponent implements OnInit {
   command: Command;
   nbItems: string;
   totalPrice: number;
-  
+  isHasItems: boolean= false;
+
   constructor(private commandService: CommandService,
               private syntheseService: SyntheseService,
               private loginService: LoginService,
@@ -24,7 +25,8 @@ export class CartCompositionComponent implements OnInit {
   ngOnInit() {
     this.commandService.commandSubject.subscribe(res => {
       this.command = res;
-      console.log("this.command.items.length : ", this.command.items.length);
+      console.log("this.command : ", this.command);
+      this.isHasItems = this.command.items.length > 0;
       this.totalPrice = 0;
       for(let i=0; i< this.command.items.length; i++){
         this.totalPrice += this.command.items[i].price;
@@ -55,7 +57,8 @@ export class CartCompositionComponent implements OnInit {
 
   public onValidateCart(){
    this.command.totalPrice = this.totalPrice;
-    this.commandService.validateCommand(this.command,this.username);
+    this.command.statusCommand = 2;
+    this.commandService.validateCommand(this.command, true);
     
   }
 

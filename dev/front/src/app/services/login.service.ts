@@ -18,6 +18,7 @@ export class LoginService {
   public authority: string;
   public command: Command;
   public lastAction: Date;
+  public timer: number = 0;
 
   constructor(private httpClient: HttpClient,
               private commandService: CommandService,
@@ -127,12 +128,12 @@ export class LoginService {
           console.log("detectedCommandZero OK : ", detectedCommandZero);
 
           // A supprimer en prod
-          this.signInAfterCheckIsOnlySession(user, bReload); 
+          //this.signInAfterCheckIsOnlySession(user, bReload); 
 
-          // if(detectedCommandZero == false){this.signInAfterCheckIsOnlySession(user, bReload); }
-          // else{alert("Une session est déjà ouverte, veuillez la clôturer ou attendre 10 minutes");
-          //       this.signOut();
-          //       this.router.navigate(['/login']);}
+          if(detectedCommandZero == false){this.signInAfterCheckIsOnlySession(user, bReload); }
+          else{alert("Une session est déjà ouverte, veuillez la clôturer ou attendre 10 minutes");
+                this.signOut();
+                this.router.navigate(['/login']);}
         },
         (error) => {
           console.log("deletedCommandZero pb : ", error);
@@ -154,8 +155,9 @@ export class LoginService {
   }
 
   public autoclose(){
+    this.timer +=1; 
     let diff = new Date().getTime() - this.lastAction.getTime();
-    console.log("diff : ", diff);
+   // console.log("diff : ", diff);
     if(diff > 600000){
       this.utilsService.delCommand();
       this.signOut();
@@ -168,10 +170,10 @@ export class LoginService {
 
   signInAfterCheckIsOnlySession(user: User, bReload: boolean){
     this.publishAuthority(user);
-        this.setIsUserLoggedSubject(true); 
-        this.setUsernameSubject(user.username);
-        this.setPasswordSubject(user.password);
-        
+    this.setIsUserLoggedSubject(true); 
+    this.setUsernameSubject(user.username);
+    this.setPasswordSubject(user.password);
+    
         if(bReload){
           let fromForm = window.localStorage.getItem("fromForm") ;
           window.localStorage.clear();
@@ -182,9 +184,7 @@ export class LoginService {
           }
           
         }
-        else {
-          this.lastAction = new Date();
-          //setTimeout(() => this.autoclose(), 10000);
+        else {            
           this.checkUserIsSubscribed(user.username).subscribe(
             (isSubscribed) => {
               this.setIsUserSubscribedSubject(isSubscribed);
@@ -223,14 +223,19 @@ export class LoginService {
   });
   }
 
-  public publishAuthority(user) {
+  public publishAuthority(user: User) {
     this.getAuthority(user.username).subscribe(
       authority => {
         this.setAuthoritySubject(authority);
         this.setUserSubject(user);
         if(authority.authority=="ROLE_CUSTOMER"){
-          this.commandService.initCommand(user); 
-          this.commandService.setListCommandItemsSubject(null); 
+          this.commandService.initCommand(user.username, true); 
+          this.commandService.setListCommandItemsSubject(null);
+          this.lastAction = new Date();
+          if(this.timer === 0) {
+            setTimeout(() => this.autoclose(), 2000);
+          }
+         
         }       
       });
   }

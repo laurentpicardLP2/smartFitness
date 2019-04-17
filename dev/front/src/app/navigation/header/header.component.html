@@ -108,14 +108,32 @@
           <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false" (click)="onReportingBooking()">Graphique réservation</button>
           <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false" (click)="onReportingRentability()">Graphique rentabilité</button>
        </mat-menu>
-  </div>
-  <div *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'">
-      <a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onToggleCart()">
-        <mat-icon matBadge="{{ nbItems }}" matBadgeColor="warn">shopping_cart</mat-icon>
-      <div class="mat-button-ripple mat-ripple" matripple=""></div>
-      <div class="mat-button-focus-overlay"></div>
-    </a> 
-    <div id="cart" class="cart">        
+</div>  
+  
+      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="cart">
+          <mat-icon matBadge="{{ nbItems }}" matBadgeColor="warn">shopping_cart</mat-icon>
+        </button>
+       
+        <mat-menu  #cart="matMenu" (mouseleave)="onMouseleave()">
+            <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false"><span class="span-panier">Votre panier</span>
+              &nbsp; &nbsp; &nbsp; <mat-icon>close</mat-icon>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false" (click)="onSeeCart()"><mat-icon>list</mat-icon> Voir le panier</button>
+            <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false" (click)="onResetCart()"><mat-icon>backspace</mat-icon> Vider le panier</button>
+        </mat-menu>
+      
+ 
+
+
+
+
+
+   
+
+
+
+    <!-- <div id="cart" class="cart">        
         <div class="cartText" id="cartText" (mouseleave)="onMouseleave()">
               <span class="cart-title">Votre panier</span>
               <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onContinue()">
@@ -126,7 +144,7 @@
             <span class="mat-button-wrapper">Voir le panier</span>
           <div class="mat-button-ripple mat-ripple" matripple=""></div>
           <div class="mat-button-focus-overlay"></div>
-        </a>
+        </a> -->
 <!-- 
             <br> 
             <a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onValidateCart()">
@@ -134,15 +152,14 @@
               <div class="mat-button-ripple mat-ripple" matripple=""></div>
               <div class="mat-button-focus-overlay"></div>
             </a>  -->
-          <br>        
+          <!-- <br>        
             <a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onResetCart()">
                 <span class="mat-button-wrapper">Vider le panier</span>
               <div class="mat-button-ripple mat-ripple" matripple=""></div>
               <div class="mat-button-focus-overlay"></div>
             </a>
         </div>    
-      </div>
-  </div>
+      </div> -->
     <div> 
     <a *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER' || authority.authority=='ROLE_CUSTOMER')" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onLogout()">
       <mat-icon>power_settings_new</mat-icon>
@@ -151,7 +168,7 @@
     </a>
  
   </div>       
-    
+   
 </mat-toolbar>
 
 

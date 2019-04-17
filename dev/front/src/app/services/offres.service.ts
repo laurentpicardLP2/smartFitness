@@ -210,7 +210,7 @@ export class OffresService {
       );
     }
 
-    public addSubscriptionToCommand(command: Command, username: string, idSubscriptionCategory: number, dateStartOfSubscription: Date, dateEndOfSubscription: Date, nbItems: string){
+    public addSubscriptionToCommand(command: Command, username: string, idSubscriptionCategory: number, dateStartOfSubscription: Date, dateEndOfSubscription: Date, nbItems: string, totalPriceCommand: number){
       this.httpClient.post<Subscription>('http://localhost:8080/offrectrl/addsubscription/' + command.idCommand + '/' + username + '/' +
         idSubscriptionCategory + '/' + dateStartOfSubscription + '/' + dateEndOfSubscription, null, 
         {
@@ -226,8 +226,11 @@ export class OffresService {
               nbItems = "0"; 
             }
             this.commandService.setNbItemsSubject((parseInt(nbItems, 10) + 1).toString());
+            totalPriceCommand += subscription.price;
             //command.items[command.items.findIndex((item)=> item.idItem == subscription.idItem)].price += subscription.price;
+            this.commandService.setTotalPriceCommandSubject(totalPriceCommand);
             this.commandService.setCommandSubject(command);
+            this.commandService.setUpdateStatusAndPriceToCommand(command, totalPriceCommand);
             this.commandService.setListCommandItemsSubject(command.items);
             this.router.navigate(['']);
           },
@@ -237,7 +240,7 @@ export class OffresService {
           }
       );
     }
-    public addWatchToCommand(command: Command,  idWatchCategory: number, username: string, nbItems: string){
+    public addWatchToCommand(command: Command,  idWatchCategory: number, username: string, nbItems: string, totalPriceCommand: number){
       this.httpClient.post<Subscription>('http://localhost:8080/offrectrl/addwatch/' + command.idCommand + '/' + idWatchCategory + '/' + username , null, 
         {
           headers: {
@@ -252,8 +255,11 @@ export class OffresService {
               nbItems = "0"; 
             }
             this.commandService.setNbItemsSubject((parseInt(nbItems, 10) + 1).toString());
+            totalPriceCommand += watch.price;
             //command.items[command.items.findIndex((item)=> item.idItem == watch.idItem)].price += watch.price;
+            this.commandService.setTotalPriceCommandSubject(totalPriceCommand);
             this.commandService.setCommandSubject(command);
+            this.commandService.setUpdateStatusAndPriceToCommand(command, totalPriceCommand);
             this.commandService.setListCommandItemsSubject(command.items);
             this.router.navigate(['']);
           },

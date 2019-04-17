@@ -10,7 +10,7 @@
             </mat-form-field>
            
             <mat-form-field class="customer-full-width">
-                <input matInput required placeholder="Username" type="text" formControlName="username">
+                <input matInput required placeholder="Username" type="text" formControlName="username" [(ngModel)]="username">
                 <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('username') && userRegistrationForm.value.username">
                     {{errors.usernameSame}}
                 </mat-error>

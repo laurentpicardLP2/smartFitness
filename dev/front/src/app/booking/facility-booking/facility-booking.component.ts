@@ -27,6 +27,7 @@ export class FacilityBookingComponent implements OnInit, OnDestroy {
   command: Command;
   priceSeance: number[];
   totalPriceSeance : number = 0;
+  totalPriceCommand : number;
 
   constructor(private bookingService: BookingService,
               private seanceService: SeanceService,
@@ -61,6 +62,10 @@ export class FacilityBookingComponent implements OnInit, OnDestroy {
 
     this.commandService.commandSubject.subscribe(res => {
       this.command = res;
+    });
+
+    this.commandService.totalPriceCommandSubject.subscribe(res => {
+      this.totalPriceCommand = res;
     });
 
     this.seanceService.priceSeanceSubject.subscribe(res => {
@@ -104,12 +109,19 @@ export class FacilityBookingComponent implements OnInit, OnDestroy {
     }
     this.seanceService.addDateAndNbTimestamp(this.seance, this.command);
     this.commandService.setNbItemsSubject((parseInt(this.nbItems, 10) + 1).toString());
+    
     this.command.items[this.command.items.findIndex((item)=> item.idItem == this.seance.idItem)].price += this.totalPriceSeance;
-    this.commandService.setCommandSubject(this.command);
+    
+
+    this.totalPriceCommand += this.totalPriceSeance;
+    this.command.totalPrice += this.totalPriceCommand;
+    this.command.statusCommand = 1;
     this.commandService.setListCommandItemsSubject(this.command.items);
     this.seanceService.setIsValidateSeanceSubject(true);
     this.seanceService.setPriceSeanceSubject([]);
-    //this.commandService.validateCommand(this.command,this.username, 1);
+    this.commandService.setTotalPriceCommandSubject(this.totalPriceCommand);
+    this.commandService.setCommandSubject(this.command);
+    this.commandService.validateCommand(this.command,false);
     this.router.navigate(['']);
   }
 

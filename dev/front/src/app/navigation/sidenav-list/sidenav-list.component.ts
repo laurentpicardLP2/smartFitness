@@ -69,41 +69,23 @@ export class SidenavListComponent implements OnInit {
     this.onSidenavClose();
   }
 
-  public onToggleCart(){
-    var popup = document.getElementById("cartText");
-    popup.classList.toggle("show");
-    this.onSidenavClose();
-  }
-
   public onResetCart(){
-    console.log("onResetCart()");
-    var popup = document.getElementById("cartText");
-    popup.classList.toggle("show");
+    // this.isAlreadyLeftCartZone=true;
+    // var popup = document.getElementById("cartText");
+    // popup.classList.toggle("show");
     this.commandService.resetCommand(this.command, this.username);
-    this.onSidenavClose();
   }
 
-  public onValidateCart(){
-    var popup = document.getElementById("cartText");
-    popup.classList.toggle("show");
-    let totalCart = 0;
-    for(let i=0; i<this.command.items.length; i++){
-      totalCart = totalCart + this.command.items[i].price;
-    }
-    this.command.totalPrice = totalCart;
-    this.commandService.validateCommand(this.command,this.username);
-    this.onSidenavClose();
+  public onSeeCart(){
+    // this.isAlreadyLeftCartZone=true;
+    // var popup = document.getElementById("cartText");
+    // popup.classList.toggle("show");
+    this.router.navigate(['cart-composition']);
   }
 
-  public onContinue(){
-    var popup = document.getElementById("cartText");
-    popup.classList.toggle("show");
-    this.onSidenavClose();
-  }
 
   public onHome(){
     this.router.navigate(['']);
-    this.onSidenavClose();
   }
 
   public onLogout(){
@@ -111,7 +93,6 @@ export class SidenavListComponent implements OnInit {
     this.utilsService.delCommand();
     this.loginService.signOut();
     this.router.navigate(['']);
-    this.onSidenavClose();
   }
 
   public onReportingBooking(){
@@ -121,7 +102,6 @@ export class SidenavListComponent implements OnInit {
   public onReportingRentability(){
     this.reportingService.publishDataSetRentability();
   }
-
 
   
 }

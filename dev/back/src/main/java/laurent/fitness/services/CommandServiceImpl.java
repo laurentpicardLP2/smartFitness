@@ -41,7 +41,7 @@ public class CommandServiceImpl implements CommandService {
 	}
 
 	@Override
-	public List<Command> findCommandByUsername(String username) {
+	public List<Command> findCommandsByUsername(String username) {
 		// TODO Auto-generated method stub
 		return this.commandRepo.findCommandsByUsername(username);
 	}
@@ -69,6 +69,15 @@ public class CommandServiceImpl implements CommandService {
 			this.commandRepo.delete(command);
 		}
 		return this.commandRepo.findCountCommandsZeroByUsername(username) > 0;
+	}
+
+	@Override
+	public Command setUpdateStatusAndPriceToCommand(int idCommand, float totalPrice) {
+		// TODO Auto-generated method stub
+		Command command = this.commandRepo.findByIdCommand(idCommand);
+		command.setStatusCommand(1);
+		command.setTotalPrice(totalPrice);
+		return this.saveCommand(command);
 	}
 
 }

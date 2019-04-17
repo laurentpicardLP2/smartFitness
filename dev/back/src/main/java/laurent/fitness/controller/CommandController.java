@@ -114,7 +114,7 @@ public class CommandController {
 	public boolean isAnotherSessionOpen(@PathVariable String username) {
 		return this.commandService.isDetectCommandZeroByUsername(username);
 	}
-		
+	
 	// Reset a command resetcommand
 	@PutMapping("/resetcommand/{idCommand}/{username}")
 	public ResponseEntity<?> resetCommand(@PathVariable int idCommand, @PathVariable String username){
@@ -130,8 +130,8 @@ public class CommandController {
 	}
 	
 	// Validation du panier : maj en base des prix des différents items du panier
-	@PutMapping("/validatecommand/{username}")
-	public ResponseEntity<?> validateCommand(@RequestBody Command command, @PathVariable String username){
+	@PutMapping("/validatecommand")
+	public ResponseEntity<?> validateCommand(@RequestBody Command command){
 	
 		try {
 						
@@ -140,10 +140,8 @@ public class CommandController {
 				if (item.getTypeItem().split(":")[1].equals("seance")) {
 					Seance seance = this.seanceService.findSeanceById(item.getIdItem());
 					seance.setPrice(item.getPrice());
-				}
-				//this.seanceService.saveSeance(command.getIdCommand(), command.getCustomer().get, item.getPrice());				
+				}			
 			}
-			command.setStatusCommand(1);
 			this.commandService.saveCommand(command);
 			return ResponseEntity.status(HttpStatus.OK).body(command); 
 			
@@ -165,6 +163,20 @@ public class CommandController {
 	    storedProcedure.setParameter(1, idCommand);
 	    storedProcedure.execute();
 	    return itemPaypalAdaptaterService.findAllItemsPaypalAdaptater();	
+	}
+	
+	
+	
+	// Met à 1 le statut de la commande idCommand (correspond au statut 'en cours d'acquisition')
+	@PutMapping("/setupdatestatusandpricetocommand/{idCommand}/{totalPrice}")
+	public ResponseEntity<?> setUpdateStatusAndPriceToCommand(@PathVariable int idCommand, @PathVariable float totalPrice){
+	
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(this.commandService.setUpdateStatusAndPriceToCommand(idCommand, totalPrice));
+		} catch(Exception e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}
 	}
 	
 	
