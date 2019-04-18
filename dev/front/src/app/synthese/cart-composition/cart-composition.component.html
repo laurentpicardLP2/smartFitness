@@ -21,7 +21,10 @@
     <div class="pad">
         Total de votre panier: {{ convertIntoMonetaryFormat(totalPrice) }}
       </div>
-      <div style="text-align: center"><button mat-raised-button color="accent" (click)="onValidateCart()">Valider le panier</button>
+      <div class="div-button">
+        <button mat-raised-button color="accent" (click)="onValidateCart()">Valider le panier</button>
+        &nbsp;&nbsp;
+        <button mat-raised-button color="accent" (click)="onContinuePurchase()">Poursuivre les achats</button>
       </div>      
 </div>
 

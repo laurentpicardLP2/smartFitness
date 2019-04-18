@@ -90,6 +90,7 @@ export class CommandService {
           console.log("reset command OK : ",resetedCommand.idCommand);
           this.setCommandSubject(resetedCommand); 
           this.setNbItemsSubject("");
+          this.router.navigate(['']);
         },
         (error) => { console.log("reset command pb : ", error); }
     );

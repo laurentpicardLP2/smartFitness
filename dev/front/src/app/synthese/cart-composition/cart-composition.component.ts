@@ -4,6 +4,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { Command } from 'src/app/models/command.model';
 import { CommandService } from 'src/app/services/command.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-composition',
@@ -20,7 +21,8 @@ export class CartCompositionComponent implements OnInit {
   constructor(private commandService: CommandService,
               private syntheseService: SyntheseService,
               private loginService: LoginService,
-              private utilsService: UtilsService) { }
+              private utilsService: UtilsService,
+              private router: Router) { }
 
   ngOnInit() {
     this.commandService.commandSubject.subscribe(res => {
@@ -60,6 +62,10 @@ export class CartCompositionComponent implements OnInit {
     this.command.statusCommand = 2;
     this.commandService.validateCommand(this.command, true);
     
+  }
+
+  public onContinuePurchase(){
+    this.router.navigate(['']);
   }
 
 }
