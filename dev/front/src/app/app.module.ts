@@ -1,5 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -112,6 +125,7 @@ import { SignupConfirmComponent } from './user/signup-confirm/signup-confirm.com
   ],
   imports: [
     BrowserModule,
+    MatCarouselModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -119,7 +133,20 @@ import { SignupConfirmComponent } from './user/signup-confirm/signup-confirm.com
     MaterialModule,
     MatIconModule,
     FlexLayoutModule,
-    NgxPayPalModule
+    NgxPayPalModule,
+    
+    FormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatInputModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatToolbarModule,
+    MatTooltipModule
   ],
   providers: [
     TokenStorageService,

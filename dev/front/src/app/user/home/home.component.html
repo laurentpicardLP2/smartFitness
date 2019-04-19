@@ -3,3 +3,39 @@
     
   </div>
   <div style="position: absolute; width:100%; top: 250px; text-align:center;"><span class="welcome">Bienvenue sur Smart Fitness</span></div>
+
+    
+  <div class="demo-container mat-app-background">
+    <mat-card>
+      <mat-card-content>  
+        <div class="demo-carousel">
+          <mat-carousel
+            #matCarousel
+            [timings]="timings"
+            [autoplay]="autoplay"
+            [interval]="interval"
+            [loop]="loop"
+            [hideArrows]="hideArrows"
+            [hideIndicators]="hideIndicators"
+            [color]="color"
+            [maxWidth]="maxWidth"
+            [proportion]="proportion"
+            [useKeyboard]="useKeyboard"
+            [useMouseWheel]="useMouseWheel"
+            [orientation]="orientation"
+            [slides]="slides"
+          >
+            <mat-carousel-slide
+              #matCarouselSlide
+              *ngFor="let slide of slidesList; let i = index"
+              image="assets/facility{{i}}.jpg"
+              [overlayColor]="overlayColor"
+              [hideOverlay]="hideOverlay"
+            >
+            </mat-carousel-slide>
+          </mat-carousel>
+        </div>
+  
+      </mat-card-content>
+    </mat-card>
+  </div>
