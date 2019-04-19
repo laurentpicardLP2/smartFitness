@@ -40,7 +40,6 @@ export class AppComponent implements OnInit, OnDestroy {
      if (this.username != null && this.password != null){
       this.loginService.signIn(new User(this.username, this.password), true);
      }
-     
        
     //  window.addEventListener('beforeunload', function (e) {
 

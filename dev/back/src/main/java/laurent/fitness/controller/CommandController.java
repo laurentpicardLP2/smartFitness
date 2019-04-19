@@ -80,6 +80,7 @@ public class CommandController {
 	@DeleteMapping("/delcommand/{idCommand}")
 	public ResponseEntity<?> delCommand(@PathVariable int idCommand){
 		try {
+			System.out.println("delcommand/{idCommand}  : " + idCommand);
 			if(this.commandService.findByIdCommand(idCommand) != null) {
 				this.commandService.deleteCommand(this.commandService.findByIdCommand(idCommand));
 			}

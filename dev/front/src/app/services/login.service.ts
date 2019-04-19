@@ -21,6 +21,7 @@ export class LoginService {
   public command: Command;
   public lastAction: Date;
   public timer: number = 0;
+  public isCommandInit: boolean = false; // nécessaire dans le cas où il y  a plusieurs onglets de smartFitness ouvert
 
   constructor(private httpClient: HttpClient,
               private commandService: CommandService,
@@ -237,7 +238,8 @@ export class LoginService {
       authority => {
         this.setAuthoritySubject(authority);
         this.setUserSubject(user);
-        if(authority.authority=="ROLE_CUSTOMER"){
+        if(authority.authority=="ROLE_CUSTOMER" && this.isCommandInit == false){
+          this.isCommandInit = true;
           this.commandService.initCommand(user.username, true); 
           this.commandService.setListCommandItemsSubject(null);
           this.lastAction = new Date();

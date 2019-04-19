@@ -125,6 +125,7 @@ export class PaypalComponent implements OnInit {
         onClientAuthorization: (data) => {
           console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
           this.showSuccess = true;
+          this.commandService.setNbItemsSubject("");
           this.emailService.sendEmailAfterPaypal(this.command.idCommand, this.command.totalPrice, this.username);
         },
         onCancel: (data, actions) => {

@@ -108,7 +108,6 @@ export class CommandService {
         console.log("validate command OK : ", validatedCommand);
         if(finalStep){
           this.setCommandSubject(validatedCommand);
-          this.setNbItemsSubject("");
           this.router.navigate(['paypal']);
         }
       },

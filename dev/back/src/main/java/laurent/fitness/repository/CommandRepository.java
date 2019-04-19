@@ -30,10 +30,10 @@ public interface CommandRepository extends JpaRepository<Command, Integer> {
 	@Query(value = "SELECT * FROM db_fitness.command WHERE customer_users_username like ?1 AND status_command < 3 AND (timediff(current_timestamp(), date_of_command) > 1000)", nativeQuery = true)
 	List<Command> findCountCommandsZeroSup1000ByUsername(String username);
 	
-	//ne sert pas => pour se rappeler l'utilité de @Transactional et @Modifying pour des requêtes update ou delete natives
+	//ne sert pas => pour se rappeler l'utilité de @Transactional et de @Modifying pour des requêtes update ou delete natives dans un cadre relationnel
 	@Transactional
 	@Modifying
-    @Query(value = "delete FROM db_fitness.command WHERE customer_users_username like ?1 AND (timediff(current_timestamp(), date_of_command) > 1000)", nativeQuery = true)
+    @Query(value = "delete FROM db_fitness.command WHERE customer_users_username like ?1 AND status_command < 3 AND (timediff(current_timestamp(), date_of_command) > 1000)", nativeQuery = true)
 	void deleteUser(String username);
 	
 }

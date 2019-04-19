@@ -17,6 +17,7 @@ export class AcknowledgmentComponent implements OnInit {
   totalPrice: number;
   username: string;
   fullname: string;
+  isCommandInit: boolean = false; // nécessaire dans le cas où il y  a plusieurs onglets de smartFitness ouvert
 
   constructor(private route: ActivatedRoute,
               private commandService: CommandService,
@@ -33,9 +34,19 @@ export class AcknowledgmentComponent implements OnInit {
     this.loginService.userSubject.subscribe(
       (res) => {
         console.log("init command after payment validation Ok : ", res);
-        this.user = res;
-        this.commandService.initCommand(this.username, false); 
-        this.commandService.setListCommandItemsSubject(null); 
+        if(this.isCommandInit === false){
+          this.isCommandInit = true;
+          this.user = res;
+          this.commandService.initCommand(this.username, false); 
+          this.commandService.setListCommandItemsSubject(null);
+          this.loginService.checkUserIsSubscribed(this.username).subscribe(
+            (isSubscribed) => {
+              this.loginService.setIsUserSubscribedSubject(isSubscribed);
+            },
+            (error) => {this.loginService.setIsUserSubscribedSubject(false);}
+          );
+        }
+        
       }
     )
     
