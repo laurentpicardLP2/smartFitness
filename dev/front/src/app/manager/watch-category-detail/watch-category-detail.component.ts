@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms"
 import { WatchCategory } from 'src/app/models/watch-category.model';
 import { BehaviorSubject } from 'rxjs';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
+import { WatchValidator } from 'src/app/validators/watch.validator';
 
 @Component({
   selector: 'app-watch-category-detail',
@@ -73,12 +74,11 @@ export class WatchCategoryDetailComponent implements OnInit {
 
   createForm(){
     this.watchCategoryForm = this.formBuilder.group({
-      nameWatchGroup: this.formBuilder.group({
-        nameWatch: ['', [
-          Validators.required,
-          Validators.minLength(1),
-        ]]
-      }, {validator: this.checkNameWatch.bind(this)}),
+      nameWatch: ['', [
+        Validators.required,
+        Validators.minLength(1),
+        WatchValidator.nameWatchDetailValidator(this.offresService.listNameWatches, this.nameWatchInit)
+      ]],
       priceWatch: ['', [
         Validators.required
       ]],

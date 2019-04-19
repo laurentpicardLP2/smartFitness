@@ -1,5 +1,7 @@
 package laurent.fitness.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -11,6 +13,9 @@ public interface SubscriptionCategoryRepository extends JpaRepository<Subscripti
 	
 	@Query("SELECT sc FROM SubscriptionCategory sc WHERE sc.idSubscriptionCategory = ?1")
 	SubscriptionCategory findByIdSubscriptionCategory(int idSubscriptionCategory);
+	
+	@Query("SELECT sc.nameSubscription FROM SubscriptionCategory sc")
+	List<String> findByNameSubscriptionsList();
 	
 
 }

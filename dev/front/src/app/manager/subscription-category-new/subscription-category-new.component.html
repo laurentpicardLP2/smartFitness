@@ -1,18 +1,24 @@
 <div fxFlex fxLayout fxLayoutAlign="center">
   <div class="pad">
       <form [formGroup]="subscriptionCategoryRegistrationForm" class="subscription-category-form">
-        <div formGroupName="nameSubscriptionGroup">
+        <div>
           <mat-form-field class="subscription-category-full-width">
-              <input required matInput placeholder="Nom du type d'abonnement" type="text" formControlName="nameSubscription" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameSubscription">
-              <mat-error>
-                  {{errors.nameSubscription}}
-              </mat-error>
-          </mat-form-field>
+            <input matInput placeholder="Nom du type d'abonnement" type="text" formControlName="nameSubscription" [(ngModel)]="nameSubscription">
+            <mat-error *ngIf="subscriptionCategoryRegistrationForm.controls['nameSubscription'].hasError('nameSubscription') && subscriptionCategoryRegistrationForm.value.nameSubscription">
+              {{errors.nameSubscriptionSame}}
+          </mat-error>
+          <mat-error *ngIf="subscriptionCategoryRegistrationForm.controls['nameSubscription'].hasError('required')">
+              {{errors.nameSubscription}}
+          </mat-error>
+          </mat-form-field>        
         </div>
         <div>
           <mat-form-field class="subscription-category-full-width">
               <input matInput required placeholder="Prix de l'abonnement" type="number" formControlName="priceSubscription" [(ngModel)]="priceSubscription">
-          </mat-form-field>
+              <mat-error *ngIf="subscriptionCategoryRegistrationForm.controls['priceSubscription'].hasError('required')">
+                {{errors.priceSubscription}}
+            </mat-error>
+            </mat-form-field>
         </div>
 
         <table class="subscription-category-full-width" cellspacing="0">
@@ -38,7 +44,10 @@
                         <mat-option value="Year">Année</mat-option>
                       </mat-select>
                     </mat-form-field>
-              </div>
+                    <!-- <mat-error *ngIf="subscriptionCategoryRegistrationForm.controls['typeLast'].hasError('required')">
+                      {{errors.typeLast}}
+                  </mat-error> -->
+                    </div>
             </td>
           </tr>
         </table>

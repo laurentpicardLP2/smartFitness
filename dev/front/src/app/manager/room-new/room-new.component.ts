@@ -6,6 +6,7 @@ import { ManagerService } from 'src/app/services/manager.service';
 import { Room } from 'src/app/models/room.model';
 import { BehaviorSubject } from 'rxjs';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
+import { RoomValidator } from 'src/app/validators/room.validator';
 
 @Component({
   selector: 'app-room-new',
@@ -24,8 +25,7 @@ export class RoomNewComponent implements OnInit {
 
   constructor(private httpClient: HttpClient, 
               private formBuilder: FormBuilder,
-              private managerService: ManagerService,
-              private loginService: LoginService) {
+              private managerService: ManagerService) {
  
   }
 
@@ -39,15 +39,14 @@ export class RoomNewComponent implements OnInit {
     
     this.createForm();
   }
-
+  
   createForm(){
     this.roomForm = this.formBuilder.group({
-      nameRoomGroup: this.formBuilder.group({
-        nameRoom: ['', [
-          Validators.required,
-          Validators.minLength(1),
-        ]]
-      }, {validator: this.checkNameRoom.bind(this)}),
+      nameRoom: ['', [
+        Validators.required,
+        Validators.minLength(1),
+        RoomValidator.nameRoomValidator(this.managerService.listNameRooms)
+      ]],
       capacityRoomGroup: this.formBuilder.group({
         capacityRoom: ['', [
           Validators.required,

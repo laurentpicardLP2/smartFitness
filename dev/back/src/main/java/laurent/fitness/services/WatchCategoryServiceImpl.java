@@ -85,4 +85,10 @@ private WatchCategoryRepository watchCategoryRepo;
 		return this.findByNameWatch(nameWatch);
 	}
 
+	@Override
+	public List<String> getListNameWatches() {
+		// TODO Auto-generated method stub
+		return this.watchCategoryRepo.findByNameWatchesList();
+	}
+
 }

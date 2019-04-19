@@ -13,6 +13,7 @@ import { Facility } from 'src/app/models/facility.model';
 import { Room } from 'src/app/models/room.model';
 import { BehaviorSubject } from 'rxjs';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
+import { FacilityValidator } from 'src/app/validators/facility.validator';
 
 @Component({
   selector: 'app-facility-new',
@@ -97,12 +98,11 @@ export class FacilityNewComponent implements OnInit {
 
   createForm(){
     this.facilityForm = this.formBuilder.group({
-      nameFacilityGroup: this.formBuilder.group({
-        nameFacility: ['', [
-          Validators.required,
-          Validators.minLength(1),
-        ]]
-      }, {validator: this.checkNameFacility.bind(this)}),
+      nameFacility: ['', [
+        Validators.required,
+        Validators.minLength(1),
+        FacilityValidator.nameFacilityValidator(this.managerService.listNameFacilities)
+      ]],
       priceFacility: '',
       dateOfPurchase: '',
       priceSeance: ['', [

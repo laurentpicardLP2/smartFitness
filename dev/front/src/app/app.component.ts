@@ -1,3 +1,4 @@
+import { CustomerService } from 'src/app/services/customer.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -22,11 +23,10 @@ export class AppComponent implements OnInit, OnDestroy {
   lastAction: Date;
 
   constructor(private loginService: LoginService,
-              private httpClient: HttpClient,
-              private token: TokenStorageService,
               private utilsService: UtilsService) { }
 
   ngOnInit(){
+    this.utilsService.publishUsernames(); // sert pour s'assurer de l'unicité du username lors du signup
      this.loginService.setIsUserLoggedSubject(false);
      this.loginService.authoritySubject.subscribe();
      this.loginService.setAuthoritySubject(new Authority("","ROLE_ANONYMOUS"));

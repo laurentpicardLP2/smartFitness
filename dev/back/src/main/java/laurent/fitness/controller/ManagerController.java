@@ -372,5 +372,34 @@ public class ManagerController {
 		}
 	}
 
+	//Retourne la liste des nameRooms
+	@GetMapping("/nameroomslist")
+	public List<String> getNameRoomsList() {
+		return this.roomService.getListNameRooms();		
+	}
+	
+	//Retourne la liste des nameFacilityCategories
+	@GetMapping("/namefacilitycategorieslist")
+	public List<String> getNameFacilityCategoriesList() {
+		return this.facilityCategoryService.getListNameFacilityCategories();		
+	}
+	
+	//Retourne la liste des nameFacilities
+	@GetMapping("/namefacilitieslist")
+	public List<String> getNameFacilitiesList() {
+		return this.facilityService.getListNameFacilities();		
+	}
+	
+	//Retourne la liste des nameSubscription
+	@GetMapping("/namesubscriptionslist")
+	public List<String> getNameSubscriptionsList() {
+		return this.subscriptionCategoryService.getListNameSubscriptions();		
+	}
+	
+	//Retourne la liste des nameWatches
+	@GetMapping("/namewatcheslist")
+	public List<String> getNameWatchesList() {
+		return this.watchCategoryService.getListNameWatches();		
+	}
 
 }

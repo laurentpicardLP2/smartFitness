@@ -1,17 +1,17 @@
 <div fxFlex fxLayout fxLayoutAlign="center">
     <div class="pad">
       <form [formGroup]="facilityCategoryForm" >
-          <div formGroupName="nameFacilityCategoryGroup">
-          <mat-form-field class="facility-category-full-width">
-              <input matInput required placeholder="Nom de la catégorie d'équipement" type="text" formControlName="nameFacilityCategory" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameFacilityCategory">
-              <mat-error>
-                  {{errors.nameFacilityCategory}}
-              </mat-error>
-          </mat-form-field>
-  
-        </div>
-  
+        <mat-form-field class="facility-category-full-width">
+          <input matInput placeholder="Nom de la catégorie d'équipement" type="text" formControlName="nameFacilityCategory" [(ngModel)]="nameFacilityCategory">
+          <mat-error *ngIf="facilityCategoryForm.controls['nameFacilityCategory'].hasError('nameFacilityCategory') && facilityCategoryForm.value.nameFacilityCategory">
+            {{errors.nameFacilityCategorySame}}
+        </mat-error>
+        <mat-error *ngIf="facilityCategoryForm.controls['nameFacilityCategory'].hasError('required')">
+            {{errors.nameFacilityCategory}}
+        </mat-error>
+        </mat-form-field>
         <button mat-raised-button [disabled]="facilityCategoryForm.invalid" (click)="onValidate()">Valider</button>
       </form>
     </div> 
   </div>
+

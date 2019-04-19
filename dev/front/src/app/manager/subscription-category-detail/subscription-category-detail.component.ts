@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms"
 import { SubscriptionCategory } from 'src/app/models/subscription-category.model';
 import { BehaviorSubject } from 'rxjs';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
+import { SubscriptionValidator } from 'src/app/validators/subscription.validator';
 
 @Component({
   selector: 'app-subscription-category-detail',
@@ -48,12 +49,11 @@ export class SubscriptionCategoryDetailComponent implements OnInit {
 
   createForm() {
     this.subscriptionCategoryDetailForm = this.formBuilder.group({
-      nameSubscriptionGroup: this.formBuilder.group({
-        nameSubscription: ['', [
-          Validators.required,
-          Validators.minLength(1),
-        ]]
-      }, {validator: this.checkNameSubscription.bind(this)}),
+      nameSubscription: ['', [
+        Validators.required,
+        Validators.minLength(1),
+        SubscriptionValidator.nameSubscriptionDetailValidator(this.offresService.listNameSubscriptions, this.nameSubscriptionInit)
+      ]],
         priceSubscription: ['', [
           Validators.required
         ]],

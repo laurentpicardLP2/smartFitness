@@ -19,5 +19,7 @@ public interface SubscriptionCategoryService {
 	
 	public SubscriptionCategory findByIdSubscriptionCategory(int idSubscriptionCategory);
 	
+	public List<String> getListNameSubscriptions();
+	
 
 }

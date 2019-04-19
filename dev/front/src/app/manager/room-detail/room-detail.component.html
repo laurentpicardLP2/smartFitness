@@ -2,15 +2,15 @@
 <div fxFlex fxLayout fxLayoutAlign="center">
     <div class="pad">
       <form [formGroup]="roomForm" >
-          <div formGroupName="nameRoomGroup">
-          <mat-form-field class="room-full-width">
-              <input matInput placeholder="Nom de la salle" type="text" formControlName="nameRoom" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameRoom">
-              <mat-error>
-                  {{errors.nameRoom}}
-              </mat-error>
-          </mat-form-field>
-  
-        </div>
+        <mat-form-field class="room-full-width">
+          <input matInput placeholder="Nom de la salle" type="text" formControlName="nameRoom" [(ngModel)]="nameRoom">
+          <mat-error *ngIf="roomForm.controls['nameRoom'].hasError('nameRoom') && roomForm.value.nameRoom">
+            {{errors.nameRoomSame}}
+        </mat-error>
+        <mat-error *ngIf="roomForm.controls['nameRoom'].hasError('required')">
+            {{errors.nameRoom}}
+        </mat-error>
+      </mat-form-field>
         <div formGroupName="capacityRoomGroup">
             <mat-form-field class="room-full-width">
                 <input matInput placeholder="Contenance de la salle" type="number" formControlName="capacityRoom" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="capacityRoom">
@@ -24,3 +24,8 @@
       </form>
     </div> 
   </div>
+
+  
+
+
+

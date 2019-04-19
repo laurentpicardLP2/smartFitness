@@ -4,9 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { ManagerService } from 'src/app/services/manager.service';
-import { Room } from 'src/app/models/room.model';
 import { BehaviorSubject } from 'rxjs';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
+import { FacilityCategoryValidator } from 'src/app/validators/facility-category.validator';
 
 @Component({
   selector: 'app-facility-category-new',
@@ -42,12 +42,11 @@ export class FacilityCategoryNewComponent implements OnInit {
 
   createForm(){
     this.facilityCategoryForm = this.formBuilder.group({
-      nameFacilityCategoryGroup: this.formBuilder.group({
-        nameFacilityCategory: ['', [
-          Validators.required,
-          Validators.minLength(1),
-        ]]
-      }, {validator: this.checkNameFacilityCategory.bind(this)})
+      nameFacilityCategory: ['', [
+        Validators.required,
+        Validators.minLength(1),
+        FacilityCategoryValidator.nameFacilityCategoryValidator(this.managerService.listNameFacilityCategories)
+      ]]
     }); 
   }
 

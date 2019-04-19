@@ -144,4 +144,10 @@ public class FacilityServiceImpl implements FacilityService {
 		return this.facilityRepo.findRevenueByFacility(idFacility);		
 	}
 
+	@Override
+	public List<String> getListNameFacilities() {
+		// TODO Auto-generated method stub
+		return this.facilityRepo.findByNameFacilitiesList();
+	}
+
 }

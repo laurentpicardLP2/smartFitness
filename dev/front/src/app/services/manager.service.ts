@@ -59,18 +59,34 @@ export class ManagerService {
     public facilityCategoryAssociateToFacility = null;
     public listFacilities: Facility [] = [] ;
     public listRooms: Room [] = [] ;
+    public listNameRooms: string [] = [] ;
+    public listNameFacilityCategories: string [] = [] ;
+    public listNameFacilities: string [] = [] ;
     public roomAssociateToFacility: Room = null;
 
     listFacilityCategories$: BehaviorSubject<FacilityCategory[]> = new BehaviorSubject(null);
     facilityCategoryAssociateToFacility$ = new BehaviorSubject(null);
     listFacilities$: BehaviorSubject<Facility[]> = new BehaviorSubject(null);
     listRooms$: BehaviorSubject<Room[]> = new BehaviorSubject(null);
+    listNameRooms$: BehaviorSubject<string[]> = new BehaviorSubject(null);
+    listNameFacilityCategories$: BehaviorSubject<string[]> = new BehaviorSubject(null);
+    listNameFacilities$: BehaviorSubject<string[]> = new BehaviorSubject(null);
     roomAssociateToFacility$ = new BehaviorSubject(null);
 
     public isDataLoaded: boolean = false;
 
     public getFacilityCategories(): Observable<FacilityCategory[]> {
       return this.httpClient.get<FacilityCategory[]>('http://localhost:8080/managerctrl/getfacilitycategories', 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        });
+    }
+
+    public getNameFacilityCategories(): Observable<string[]> {
+      return this.httpClient.get<string[]>('http://localhost:8080/managerctrl/namefacilitycategorieslist', 
         {
           headers: {
             "Content-Type": "application/json",
@@ -91,6 +107,16 @@ export class ManagerService {
 
     public getFacilities(): Observable<Facility[]> {
       return this.httpClient.get<Facility[]>('http://localhost:8080/managerctrl/getfacilities', 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        });
+    }
+
+    public getNameFacilities(): Observable<string[]> {
+      return this.httpClient.get<string[]>('http://localhost:8080/managerctrl/namefacilitieslist', 
         {
           headers: {
             "Content-Type": "application/json",
@@ -120,6 +146,17 @@ export class ManagerService {
         });
     }
 
+    public getNameRooms(): Observable<string[]> {
+      return this.httpClient.get<string[]>('http://localhost:8080/managerctrl/nameroomslist', 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        });
+    }
+
+
     public getRoomAssociateToFacility(idFacility: number): Observable<Room> {
       return this.httpClient.get<Room>('http://localhost:8080/managerctrl/getroomassociatetofacility/' + idFacility, 
         {
@@ -137,6 +174,22 @@ export class ManagerService {
           this.listFacilityCategories$.next(this.listFacilityCategories);
         });
     }
+
+    public publishNameFacilityCategories() {
+      this.getNameFacilityCategories().subscribe(
+        facilityCategoriesList => {
+          this.listNameFacilityCategories = facilityCategoriesList;
+          this.listNameFacilityCategories$.next(this.listNameFacilityCategories);
+        });
+      }
+
+    public publishNameFacilities() {
+      this.getNameFacilities().subscribe(
+        facilitiesList => {
+          this.listNameFacilities = facilitiesList;
+          this.listNameFacilities$.next(this.listNameFacilities);
+        });
+      }
 
     public publishFacilityCategoryAssociateToFacility(idFacility: number) {
       this.getFacilityCategoryAssociateToFacility(idFacility).subscribe(
@@ -162,6 +215,14 @@ export class ManagerService {
         this.listRooms$.next(this.listRooms);
       });
     }
+
+    public publishNameRooms() {
+      this.getNameRooms().subscribe(
+        roomNamesList => {
+          this.listNameRooms = roomNamesList;
+          this.listNameRooms$.next(this.listNameRooms);
+        });
+      }
 
     public publishRoomAssociateToFacility(idFacility: number) {
       this.getRoomAssociateToFacility(idFacility).subscribe(
@@ -299,6 +360,14 @@ export class ManagerService {
         }).subscribe(
           (updatedRoom) =>{ 
             console.log("update Room OK : ", updatedRoom);
+            let index = this.listRooms.findIndex(room => room.idRoom === idRoom);
+            this.listRooms[index].nameRoom = nameRoom;
+            this.listRooms$.next(this.listRooms);
+            this.listNameRooms = [];
+            for(let i = 0; i< this.listRooms.length; i++){
+              this.listNameRooms.push(this.listRooms[i].nameRoom);
+            }
+            this.listNameRooms$.next(this.listNameRooms);
             this.router.navigate(['room-listing']);
           },
           (error) => { 
@@ -309,9 +378,6 @@ export class ManagerService {
     }
 
     public updateFacilityCategory(idFacilityCategory:number, nameFacilityCategory: string){
-      console.log(idFacilityCategory);
-      console.log(idFacilityCategory);
-      console.log(idFacilityCategory);
       this.httpClient.put<FacilityCategory>('http://localhost:8080/managerctrl/updatefacilitycategory/' + idFacilityCategory + '/' + nameFacilityCategory, null, 
           {
           headers: {
@@ -321,6 +387,14 @@ export class ManagerService {
         }).subscribe(
           (updatedFacilityCategory) =>{ 
             console.log("update FacilityCategory OK : ", updatedFacilityCategory);
+            let index = this.listFacilityCategories.findIndex(facilityCategory => facilityCategory.idFacilityCategory === idFacilityCategory);
+            this.listFacilityCategories[index].nameFacilityCategory = nameFacilityCategory;
+            this.listFacilityCategories$.next(this.listFacilityCategories);
+            this.listNameFacilityCategories = [];
+            for(let i = 0; i< this.listFacilityCategories.length; i++){
+              this.listNameFacilityCategories.push(this.listFacilityCategories[i].nameFacilityCategory);
+            }
+            this.listNameFacilityCategories$.next(this.listNameFacilityCategories);
             this.router.navigate(['facility-category-listing']);
           },
           (error) => { 
@@ -338,7 +412,17 @@ export class ManagerService {
           "Authorization": this.token.getToken()
           }
         }).subscribe(
-          (updatedFacility) =>{ 
+          (updatedFacility) =>{
+            console.log("update Facility OK : ", updatedFacility);
+            let index = this.listFacilities.findIndex(facility => facility.idFacility === idFacility);
+            this.listFacilities[index].nameFacility = nameFacility;
+            this.listFacilities$.next(this.listFacilities);
+            this.listNameFacilities = [];
+            for(let i = 0; i< this.listFacilities.length; i++){
+              this.listNameFacilities.push(this.listFacilities[i].nameFacility);
+            }
+            this.listNameFacilities$.next(this.listNameFacilities);
+
             setTimeout(() => this.router.navigate(['facility-listing']), 500);
           },
           (error) => { 

@@ -4,6 +4,8 @@ import { Command } from '../models/command.model';
 import { CommandService } from './command.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +16,43 @@ export class UtilsService {
   dayName = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
   monthName = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
 
+  
   constructor(private commandService: CommandService,
               private httpClient: HttpClient,
               private router: Router,
               private token: TokenStorageService) { }
+
+  //la liste des Usernames de l'application
+  public availableUsernames: string[] = [];
+
+  // La liste observable que l'on rend visible partout dans l'application
+  availableUsernames$: BehaviorSubject<string[]> = new BehaviorSubject(this.availableUsernames);
+  
+  /**
+   * La fonction getUsernames() est privée car elle n'a besoin d'être appellée que dans le service.
+   */
+   public getUsernames(): Observable<string[]>{
+    return this.httpClient.get<string[]>('http://localhost:8080/userctrl/usernames');
+  }
+
+  /**
+   * La fonction publishUsernames() est chargée une fois que l'on route vers signup.
+   * Elle récupère la liste des usernames depuis la base de données et met à jour la liste et la liste observable.
+   */
+
+  public publishUsernames(){
+    
+    this.getUsernames().subscribe(
+      usernameList => {
+        this.availableUsernames = usernameList;
+        this.availableUsernames$.next(this.availableUsernames);
+      }
+    )
+  }
+
+  findUsername (pUsername: string): Observable<string> {
+    return this.getUsernames().pipe(map( usernames=> usernames.find(username => username === pUsername)));
+  }
 
   public delCommand(){
     this.commandService.commandSubject.subscribe(res => {

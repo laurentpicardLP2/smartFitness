@@ -26,4 +26,6 @@ public List<WatchCategory> getAllWatchCategories();
 	
 	public WatchCategory findByNameWatch(String nameWatch);
 	
+	public List<String> getListNameWatches();
+	
 }

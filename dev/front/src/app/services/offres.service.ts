@@ -20,6 +20,12 @@ export class OffresService {
               private token: TokenStorageService,
               private commandService: CommandService) { }
 
+  public listNameSubscriptions: string [] = [] ;
+  public listNameWatches: string [] = [] ;
+
+  listNameSubscriptions$: BehaviorSubject<string[]> = new BehaviorSubject(null);
+  listNameWatches$: BehaviorSubject<string[]> = new BehaviorSubject(null);
+
 
   public isValidDateOfStartOfSubscriptionSubject: BehaviorSubject<boolean> = new BehaviorSubject(null);
 
@@ -47,6 +53,16 @@ export class OffresService {
       });
   }
 
+  public getNameSubscriptions(): Observable<string[]> {
+    return this.httpClient.get<string[]>('http://localhost:8080/managerctrl/namesubscriptionslist', 
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+        }
+      });
+  }
+
 
   public getWatchCategories(): Observable<WatchCategory[]> {
     return this.httpClient.get<WatchCategory[]>('http://localhost:8080/managerctrl/getwatchcategories', 
@@ -58,6 +74,17 @@ export class OffresService {
       });
   }
 
+  public getNameWatches(): Observable<string[]> {
+    return this.httpClient.get<string[]>('http://localhost:8080/managerctrl/namewatcheslist', 
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+        }
+      });
+  }
+
+
 
   public publishSubscriptionCategories() {
     this.getSubscriptionCategories().subscribe(
@@ -67,6 +94,14 @@ export class OffresService {
       });
   }
 
+  public publishNameSubscriptions() {
+    this.getNameSubscriptions().subscribe(
+      subscriptionsList => {
+        this.listNameSubscriptions = subscriptionsList;
+        this.listNameSubscriptions$.next(this.listNameSubscriptions);
+      });
+    }
+
   public publishWatchCategories() {
     this.getWatchCategories().subscribe(
       watchCategoriesList => {
@@ -74,6 +109,14 @@ export class OffresService {
         this.listWatchCategories$.next(this.listWatchCategories);
       });
   }
+
+  public publishNameWatches() {
+    this.getNameWatches().subscribe(
+      watchesList => {
+        this.listNameWatches = watchesList;
+        this.listNameWatches$.next(this.listNameWatches);
+      });
+    }
 
   /**
    * Cette fonction permet de trouver une entité subscriptionCategory dans la liste des subscriptionCategories grâce à son ID.
@@ -154,6 +197,14 @@ export class OffresService {
         }).subscribe(
           (updatedSubscriptionCategory) =>{ 
             console.log("update SubscriptionCategory OK : ", updatedSubscriptionCategory);
+            let index = this.listSubscriptionCategories.findIndex(subscriptionCategory => subscriptionCategory.idSubscriptionCategory === updatedSubscriptionCategory.idSubscriptionCategory);
+            this.listSubscriptionCategories[index].nameSubscription = updatedSubscriptionCategory.nameSubscription;
+            this.listSubscriptionCategories$.next(this.listSubscriptionCategories);
+            this.listNameSubscriptions = [];
+            for(let i = 0; i< this.listSubscriptionCategories.length; i++){
+              this.listNameSubscriptions.push(this.listSubscriptionCategories[i].nameSubscription);
+            }
+            this.listNameSubscriptions$.next(this.listNameSubscriptions);
             this.router.navigate(['subscription-category-listing']);
           },
           (error) => { 
@@ -172,6 +223,14 @@ export class OffresService {
           }
         }).subscribe(
           (updatedWatchCategory) =>{ 
+            let index = this.listWatchCategories.findIndex(watchCategory => watchCategory.idWatchCategory === updatedWatchCategory.idWatchCategory);
+            this.listWatchCategories[index].nameWatch = updatedWatchCategory.nameWatch;
+            this.listWatchCategories$.next(this.listWatchCategories);
+            this.listNameWatches = [];
+            for(let i = 0; i< this.listWatchCategories.length; i++){
+              this.listNameWatches.push(this.listWatchCategories[i].nameWatch);
+            }
+            this.listNameWatches$.next(this.listNameWatches);
             setTimeout(() => this.router.navigate(['watch-category-listing']), 500);
           },
           (error) => { 

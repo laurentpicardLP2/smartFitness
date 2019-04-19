@@ -12,6 +12,7 @@ import { Authority } from 'src/app/models/authority.model';
 import { User } from 'src/app/models/user.model';
 import { BehaviorSubject } from 'rxjs';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
+import { WatchValidator } from 'src/app/validators/watch.validator';
 
 @Component({
   selector: 'app-watch-category-new',
@@ -66,12 +67,11 @@ export class WatchCategoryNewComponent implements OnInit {
 
   createForm(){
     this.watchCategoryForm = this.formBuilder.group({
-      nameWatchGroup: this.formBuilder.group({
-        nameWatch: ['', [
-          Validators.required,
-          Validators.minLength(1),
-        ]]
-      }, {validator: this.checkNameWatch.bind(this)}),
+      nameWatch: ['', [
+        Validators.required,
+        Validators.minLength(1),
+        WatchValidator.nameWatchValidator(this.offresService.listNameWatches)
+      ]],
       priceWatch: ['', [
         Validators.required
       ]],
@@ -109,12 +109,13 @@ export class WatchCategoryNewComponent implements OnInit {
 
   public onRegister() {
       const data: FormData = new FormData();
-      data.append('data', this.file, this.nameWatch + "_" + this.file.name);
-      console.log("this.file : ", this.file);
-      console.log("this.fileInput : ", this.fileInput);
-      console.log("data : ", data);
 
       if (this.file !== undefined){
+        data.append('data', this.file, this.nameWatch + "_" + this.file.name);
+        console.log("this.file : ", this.file);
+        console.log("this.fileInput : ", this.fileInput);
+        console.log("data : ", data);
+  
         this.imageWatch = this.nameWatch + "_" + this.file.name;
         data.append('data', this.file, this.nameWatch + "_" + this.file.name);
         this.offresService.addWatchCategory(this.nameWatch, this.priceWatch, this.descriptionWatch, this.imageWatch);

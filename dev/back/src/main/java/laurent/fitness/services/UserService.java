@@ -22,5 +22,7 @@ public interface UserService {
 	public String getEmailByUsername(String username);
 	
 	public String getFullnameByUsername(String username);
+	
+	public List<String> getListUsername();
 
 }

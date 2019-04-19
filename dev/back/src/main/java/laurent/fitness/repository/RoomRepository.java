@@ -1,5 +1,7 @@
 package laurent.fitness.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,4 +19,7 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 	@Query(value = "SELECT room.* FROM room INNER JOIN facility ON"
 			+ " room.id_room = facility.room_id_room WHERE id_facility = ?1", nativeQuery = true)
 	Room findByIdRoomAssociateToFacility(int idFacility);
+	
+	@Query("SELECT r.nameRoom FROM Room r")
+	List<String> findNameRoomsList();
 }

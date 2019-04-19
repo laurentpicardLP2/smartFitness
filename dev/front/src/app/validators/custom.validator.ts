@@ -1,13 +1,12 @@
 import { AbstractControl } from '@angular/forms';
-import { User } from '../models/user.model';
 
 export class CustomValidator {
-    static usernameValidator(users: any[]) {
+    static usernameValidator(usernames: string[]) {
         return (control: AbstractControl): { [key: string]: any } | null => {
             let isValid = false;
             if (control.value) {
-                const username: string = control.value;
-                isValid = !(users.find(user => user.username === username));
+                const checkUsername: string = control.value;
+                isValid = !(usernames.find(username => username === checkUsername));
             }
             if (isValid) {
                 return null;

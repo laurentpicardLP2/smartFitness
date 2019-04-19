@@ -27,4 +27,7 @@ public interface FacilityService {
 	public Facility addFacility(int idFacilityCategory, int idRoom, String nameFacility, String descriptionFacility, String imageFacility, float priceSeance, float priceFacility, Date dateOfPurchase);
 	
 	public float getRevenueForAFacility(int idFacility);
+	
+	public List<String> getListNameFacilities();
+
 }

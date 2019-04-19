@@ -32,10 +32,10 @@
               <mat-header-cell *matHeaderCellDef mat-sort-header> Modification de l'abonnement </mat-header-cell>
               <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" (click)="onUpdate(post.idSubscriptionCategory)">Modifier</button></mat-cell>
           </ng-container>
-          <ng-container matColumnDef="Delete">
+          <!-- <ng-container matColumnDef="Delete">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Suppression de l'abonnement </mat-header-cell>
             <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" id="delsubscriptionCategory" (click)="onDelete(post.idSubscriptionCategory, post.nameSubscription)">Supprimer</button></mat-cell>
-        </ng-container>
+        </ng-container> -->
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onShow(row.idSubscriptionCategory)"></mat-row>
           </mat-table>

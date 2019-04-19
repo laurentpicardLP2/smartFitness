@@ -148,14 +148,29 @@ public class UserController {
 	}
 	
 	/**
-	 * retourne la liste des customer (username + authority). 
+	 * retourne la liste des username (username). 
 	 * Permet lors du signup d'un nouvel utilisateur de contrôler l'unicité du champ username
+	 * @return
+	 */
+	
+	@GetMapping("/usernames")
+	public List<String> getAllUsernames() {
+		return this.userService.getListUsername();
+	}
+	
+	
+	
+	/**
+	 * retourne la liste des customer (username + authority). 
+	 * Permet de connaître le rôle du user
 	 * @return
 	 */
 	@GetMapping("/authorities")
 	public List<Authority> getAllAuthorities() {
 		return this.authorityService.getAllAuthorities();
 	}
+	
+	
 	
 	
 	//temporary login process 

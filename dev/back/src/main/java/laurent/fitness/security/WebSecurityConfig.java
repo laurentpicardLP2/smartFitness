@@ -121,6 +121,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/userctrl/newcustomer").permitAll()
                 .antMatchers("/userctrl/login").permitAll()
                 .antMatchers("/userctrl/authorities").permitAll()
+                .antMatchers("/userctrl/usernames").permitAll()
                 .antMatchers("/emailctrl/signupconfirm/**").permitAll()
                 .antMatchers("/userctrl/authority/**").hasAnyRole("ADMIN", "MANAGER", "CUSTOMER")
                 .antMatchers("/emailctrl/payedcommand/**").hasAnyRole("ADMIN", "MANAGER", "CUSTOMER")

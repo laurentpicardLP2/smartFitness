@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms"
 import { FacilityCategory } from 'src/app/models/facility-category.model';
 import { BehaviorSubject } from 'rxjs';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
+import { FacilityCategoryValidator } from 'src/app/validators/facility-category.validator';
 
 
 @Component({
@@ -44,13 +45,11 @@ export class FacilityCategoryDetailComponent implements OnInit {
 
   createForm(){
     this.facilityCategoryForm = this.formBuilder.group({
-      nameFacilityCategoryGroup: this.formBuilder.group({
-        nameFacilityCategory: ['', [
-          Validators.required,
-          Validators.minLength(1),
-        ]]
-      }, {validator: this.checkNameFacilityCategory.bind(this)}),
-        priceFacilityCategory: ['', ]
+      nameFacilityCategory: ['', [
+        Validators.required,
+        Validators.minLength(1),
+        FacilityCategoryValidator.nameFacilityCategoryDetailValidator(this.managerService.listNameFacilityCategories,this.nameFacilityCategoryInit )
+      ]]
     }); 
   }
 

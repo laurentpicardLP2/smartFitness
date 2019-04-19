@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms"
 import { Room } from 'src/app/models/room.model';
 import { BehaviorSubject } from 'rxjs';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
-
+import { RoomValidator } from 'src/app/validators/room.validator';
 
 @Component({
   selector: 'app-room-detail',
@@ -45,12 +45,11 @@ export class RoomDetailComponent implements OnInit {
 
   createForm(){
     this.roomForm = this.formBuilder.group({
-      nameRoomGroup: this.formBuilder.group({
-        nameRoom: ['', [
-          Validators.required,
-          Validators.minLength(1),
-        ]]
-      }, {validator: this.checkNameRoom.bind(this)}),
+      nameRoom: ['', [
+        Validators.required,
+        Validators.minLength(1),
+        RoomValidator.nameRoomDetailValidator(this.managerService.listNameRooms, this.nameRoomInit)
+      ]],
       capacityRoomGroup: this.formBuilder.group({
         capacityRoom: ['', [
           Validators.required,

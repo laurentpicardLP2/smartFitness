@@ -2,18 +2,24 @@
 <div fxFlex fxLayout fxLayoutAlign="center">
   <div class="pad">
     <form [formGroup]="watchCategoryForm" >        
-      <div formGroupName="nameWatchGroup">
-          <mat-form-field class="watch-category-full-width">
-              <input matInput required placeholder="Nom du modele" type="text" formControlName="nameWatch" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameWatch">
-              <mat-error>
-                  {{errors.nameWatch}}
-              </mat-error>
-          </mat-form-field>
+      <div>
+        <mat-form-field class="watch-category-full-width">
+          <input matInput placeholder="Nom du modele de montre" type="text" formControlName="nameWatch" [(ngModel)]="nameWatch">
+          <mat-error *ngIf="watchCategoryForm.controls['nameWatch'].hasError('nameWatch') && watchCategoryForm.value.nameWatch">
+            {{errors.nameWatchSame}}
+        </mat-error>
+        <mat-error *ngIf="watchCategoryForm.controls['nameWatch'].hasError('required')">
+            {{errors.nameWatch}}
+        </mat-error>
+        </mat-form-field>
       </div>
       <div>
         <mat-form-field class="watch-category-full-width">
             <input matInput required placeholder="Prix de la montre" type="number" formControlName="priceWatch" [(ngModel)]="priceWatch">
-        </mat-form-field>
+            <mat-error *ngIf="watchCategoryForm.controls['priceWatch'].hasError('required')">
+              {{errors.priceWatch}}
+          </mat-error>
+      </mat-form-field>
       </div>
       <div>
           <mat-form-field class="watch-category-full-width">

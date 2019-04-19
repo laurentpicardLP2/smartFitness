@@ -1,5 +1,7 @@
 package laurent.fitness.repository;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -30,6 +32,9 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	@Query(value = "SELECT fullname FROM users WHERE username like ?1 ", nativeQuery = true)
 	public String findFullnameByUsername(String username);
+	
+	@Query("SELECT u.username FROM User u")
+	public List<String> findUsernameList();
 }
 
 

@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { CustomerService } from 'src/app/services/customer.service';
 import { OffresService } from 'src/app/services/offres.service';
 import { SubscriptionCategory } from 'src/app/models/subscription-category.model'
+import { SubscriptionValidator } from 'src/app/validators/subscription.validator';
 
 
 @Component({
@@ -44,12 +45,11 @@ export class SubscriptionCategoryNewComponent implements OnInit {
 
   createForm() {
     this.subscriptionCategoryRegistrationForm = this.formBuilder.group({
-      nameSubscriptionGroup: this.formBuilder.group({
-        nameSubscription: ['', [
-          Validators.required,
-          Validators.minLength(1),
-        ]]
-      }, {validator: this.checkNameSubscription.bind(this)}),
+      nameSubscription: ['', [
+        Validators.required,
+        Validators.minLength(1),
+        SubscriptionValidator.nameSubscriptionValidator(this.offresService.listNameSubscriptions)
+      ]],
         priceSubscription: ['', [
           Validators.required
         ]],
@@ -63,14 +63,6 @@ export class SubscriptionCategoryNewComponent implements OnInit {
         Validators.required
     ]],
     });
-  }
-
-  checkNameSubscription(group: FormGroup){
-    let nameSubscription : string;
-    
-    nameSubscription = group.get("nameSubscription").value;
-    const isValid = !(this.offresService.listSubscriptionCategories.find(subscriptionCategory => subscriptionCategory.nameSubscription === nameSubscription))
-    return isValid ? null : { checkNameSubscription: true };
   }
 
 

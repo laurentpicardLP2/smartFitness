@@ -1,3 +1,4 @@
+import { UtilsService } from 'src/app/services/utils.service';
 import { CustomerService } from '../../services/customer.service';
 import { Customer } from '../../models/customer.model';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,7 @@ import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators, FormBuil
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
 import { HttpClient } from '@angular/common/http';
 import { CustomValidator } from 'src/app/validators/custom.validator';
+import { Router } from '@angular/router';
 
 
 
@@ -41,14 +43,17 @@ export class CustomerNewComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private customerService: CustomerService,
-    private httpClient: HttpClient
+    private utilsService: UtilsService,
+    private router: Router
 ) {
     this.createForm();
 }
 
 
   ngOnInit() {
-    this.customerService.publishAuthorities();
+    if(this.utilsService.availableUsernames.length === 0) {
+        this.router.navigate(['']);
+    }
     this.checkedAdrCopy = false;
   }
 
@@ -63,7 +68,7 @@ export class CustomerNewComponent implements OnInit {
           username: ['', [
             Validators.required,
             Validators.minLength(1),
-            CustomValidator.usernameValidator(this.customerService.availableAuthorities)
+            CustomValidator.usernameValidator(this.utilsService.availableUsernames)
           ]],
         emailGroup: this.formBuilder.group({
             email: ['', [
@@ -154,12 +159,12 @@ export class CustomerNewComponent implements OnInit {
     this.customerService.register(this.newCustomer);
  }
 
-  checkUsername(group: FormGroup){
-    let username : string;
+//   checkUsername(group: FormGroup){
+//     let username : string;
     
-    username = group.get("username").value;
-    const isValid = !(this.customerService.availableAuthorities.find(authoritary => authoritary.username === username))
-    return isValid ? null : { checkUsername: true };
-  }
+//     username = group.get("username").value;
+//     const isValid = !(this.customerService.availableAuthorities.find(authoritary => authoritary.username === username))
+//     return isValid ? null : { checkUsername: true };
+//  }
 }
 

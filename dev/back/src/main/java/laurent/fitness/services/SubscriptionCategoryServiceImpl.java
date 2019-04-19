@@ -71,4 +71,10 @@ public class SubscriptionCategoryServiceImpl implements SubscriptionCategoryServ
 		return this.subscriptionCategoryRepo.findByIdSubscriptionCategory(idSubscriptionCategory);
 	}
 
+	@Override
+	public List<String> getListNameSubscriptions() {
+		// TODO Auto-generated method stub
+		return this.subscriptionCategoryRepo.findByNameSubscriptionsList();
+	}
+
 }

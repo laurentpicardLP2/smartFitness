@@ -70,6 +70,12 @@ public class FacilityCategoryServiceImpl implements FacilityCategoryService {
 		return this.facilityCategoryRepo.findByIdFacilityCategoryAssociateToFacility(idFacility);
 	}
 
+	@Override
+	public List<String> getListNameFacilityCategories() {
+		// TODO Auto-generated method stub
+		return this.facilityCategoryRepo.findByNameFacilityCategoriesList();
+	}
+
 
 
 

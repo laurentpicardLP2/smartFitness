@@ -15,7 +15,7 @@ export class SubscriptionCategoryListingComponent implements OnInit {
   subscriptionCategoryList: BehaviorSubject<SubscriptionCategory[]>;
 
 MyDataSource: any;
-displayedColumns: string[] = ['Name', 'Price', 'Update', 'Delete'];
+displayedColumns: string[] = ['Name', 'Price', 'Update'];
 @ViewChild(MatPaginator) paginator: MatPaginator;
 @ViewChild(MatSort) sort: MatSort;
 

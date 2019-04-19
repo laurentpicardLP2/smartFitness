@@ -21,5 +21,7 @@ public interface FacilityCategoryService {
 	public FacilityCategory updateFacilityCategory(String nameFacilityCategory, String quantityFacilityCategory);
 
 	public FacilityCategory getFacilityCategoryAssociateToFacility(int idFacility);
+	
+	public List<String> getListNameFacilityCategories();
 
 }

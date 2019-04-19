@@ -32,10 +32,10 @@
               <mat-header-cell *matHeaderCellDef mat-sort-header> Mise à jour </mat-header-cell>
               <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" (click)="onUpdate(post.idWatchCategory)">Modifier</button></mat-cell>
           </ng-container>
-          <ng-container matColumnDef="Delete">
+          <!-- <ng-container matColumnDef="Delete">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Suppression  </mat-header-cell>
             <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" id="delwatchCategory" (click)="onDelete(post.idWatchCategory, post.nameWatch)">Supprimer</button></mat-cell>
-        </ng-container>
+        </ng-container> -->
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onShow(row.idWatchCategory)"></mat-row>
           </mat-table>

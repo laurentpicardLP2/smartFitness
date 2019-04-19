@@ -1,5 +1,7 @@
 package laurent.fitness.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -15,5 +17,8 @@ public interface FacilityCategoryRepository extends JpaRepository<FacilityCatego
 	@Query(value = "SELECT facility_category.* FROM facility_category INNER JOIN facility ON"
 			+ " facility_category.id_facility_category = facility.facility_category_id_facility_category WHERE id_facility = ?1", nativeQuery = true)
 	FacilityCategory findByIdFacilityCategoryAssociateToFacility(int idFacility);
+	
+	@Query("SELECT fc.nameFacilityCategory FROM FacilityCategory fc")
+	List<String> findByNameFacilityCategoriesList();
 
 }

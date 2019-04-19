@@ -15,7 +15,7 @@ export class WatchCategoryListingComponent implements OnInit {
   watchCategoryList: BehaviorSubject<WatchCategory[]>;
 
 MyDataSource: any;
-displayedColumns: string[] = ['Name', 'Price', 'Update', 'Delete'];
+displayedColumns: string[] = ['Name', 'Price', 'Update'];
 @ViewChild(MatPaginator) paginator: MatPaginator;
 @ViewChild(MatSort) sort: MatSort;
 

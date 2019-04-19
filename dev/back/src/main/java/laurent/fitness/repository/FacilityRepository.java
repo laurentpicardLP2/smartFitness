@@ -38,4 +38,7 @@ public interface FacilityRepository extends JpaRepository<Facility, Integer> {
 
 	@Query(value= "SELECT name_Facility, price_seance FROM facility ORDER BY name_facility ASC" , nativeQuery = true)
 	List<FacilityAdaptater> findAllFacilitiesByNameOrder();
+	
+	@Query("SELECT f.nameFacility FROM Facility f")
+	List<String> findByNameFacilitiesList();
 }

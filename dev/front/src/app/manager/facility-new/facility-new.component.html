@@ -18,13 +18,16 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div formGroupName="nameFacilityGroup">
-          <mat-form-field class="facility-full-width">
-              <input matInput required maxlength="15" placeholder="Nom de l'équipement" type="text" formControlName="nameFacility" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="nameFacility">
-              <mat-error>
-                  {{errors.nameFacility}}
-              </mat-error>
-          </mat-form-field>
+      <div>
+        <mat-form-field class="facility-full-width">
+          <input matInput placeholder="Nom de l'équipement" type="text" formControlName="nameFacility" [(ngModel)]="nameFacility">
+          <mat-error *ngIf="facilityForm.controls['nameFacility'].hasError('nameFacility') && facilityForm.value.nameFacility">
+            {{errors.nameFacilitySame}}
+        </mat-error>
+        <mat-error *ngIf="facilityForm.controls['nameFacility'].hasError('required')">
+            {{errors.nameFacility}}
+        </mat-error>
+        </mat-form-field>      
       </div>
       <div>
           <mat-form-field class="facility-full-width">

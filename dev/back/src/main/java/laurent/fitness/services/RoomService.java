@@ -18,5 +18,7 @@ public interface RoomService {
 	public Room findByIdRoom(int idRoom);
 	
 	public Room getRoomAssociateToFacility(int idFacility);
+	
+	public List<String> getListNameRooms();
 
 }

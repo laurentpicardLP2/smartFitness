@@ -1,3 +1,5 @@
+import { OffresService } from 'src/app/services/offres.service';
+import { ManagerService } from 'src/app/services/manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Command } from 'src/app/models/command.model';
 import { Router } from '@angular/router';
@@ -22,7 +24,8 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient,
               private commandService: CommandService,
-              private bookingService: BookingService,
+              private managerService: ManagerService,
+              private offresServices: OffresService,
               private router: Router,
               private token: TokenStorageService,
               private utilsService: UtilsService) { }
@@ -87,14 +90,20 @@ export class LoginService {
   }
 
 
-
-
   // Subject informant du rôle (authority) de l'utlisateur
   public authoritySubject: BehaviorSubject<Authority> = new BehaviorSubject(null);
   public setAuthoritySubject(value: Authority){
     if(value){
       this.authority = value.authority;
       this.authoritySubject.next(value);
+      
+       if(this.authority == "ROLE_ADMIN" || this.authority == "ROLE_MANAGER"){
+         this.managerService.publishNameRooms();
+         this.managerService.publishNameFacilityCategories();
+         this.managerService.publishNameFacilities();
+         this.offresServices.publishNameSubscriptions();
+         this.offresServices.publishNameWatches();
+       }
     } else {
       this.authority = "ROLE_ANONYMOUS";
       this.authoritySubject.next(null);

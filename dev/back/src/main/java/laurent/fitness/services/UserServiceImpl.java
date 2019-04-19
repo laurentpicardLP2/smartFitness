@@ -78,4 +78,10 @@ public class UserServiceImpl implements UserService {
 		return this.userRepo.findFullnameByUsername(username);
 	}
 
+	@Override
+	public List<String> getListUsername() {
+		// TODO Auto-generated method stub
+		return this.userRepo.findUsernameList();
+	}
+
 }
