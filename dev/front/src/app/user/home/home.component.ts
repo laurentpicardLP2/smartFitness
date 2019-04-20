@@ -1,3 +1,4 @@
+import { ReportingService } from 'src/app/services/reporting.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { QueryList, ViewChildren } from '@angular/core';
@@ -16,6 +17,7 @@ import {
 export class HomeComponent implements OnInit {
   isAuth: boolean;
   fullname: string;
+  authority: string;
   public slidesList = new Array<never>(5);
   public showContent = false;
 
@@ -40,7 +42,8 @@ export class HomeComponent implements OnInit {
   >;
   public darkMode = false;
   
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService,
+              private reportingService: ReportingService) { }
 
   ngOnInit() {
     this.loginService.isUserLoggedSubject.subscribe(res => {
@@ -50,6 +53,18 @@ export class HomeComponent implements OnInit {
     this.loginService.fullnameSubject.subscribe(res => {
       this.fullname = res;
     });
+
+    this.loginService.authoritySubject.subscribe(res => {
+      this.authority = res.authority;
+    })
+  }
+
+  public onReportingBooking(){
+    this.reportingService.publishDataSetBooking();
+  }
+
+  public onReportingRentability(){
+    this.reportingService.publishDataSetRentability();
   }
 
 }

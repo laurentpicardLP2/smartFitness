@@ -6,7 +6,7 @@ export class WatchValidator {
             let isValid = false;
             if (control.value) {
                 const checkNameWatch: string = control.value;
-                isValid = !(watches.find(nameWatch => nameWatch === checkNameWatch));
+                isValid = !(watches.find(nameWatch => nameWatch.toLowerCase() === checkNameWatch.toLowerCase()));
             }
             if (isValid) {
                 return null;
@@ -21,7 +21,7 @@ export class WatchValidator {
             let isValid = false;
             if (control.value) {
                 const checkNameWatch: string = control.value;
-                isValid = !(watches.find(nameWatch => (nameWatch === checkNameWatch) && (checkNameWatch !== nameWatchInit)));
+                isValid = !(watches.find(nameWatch => (nameWatch.toLowerCase() === checkNameWatch.toLowerCase()) && (checkNameWatch.toLowerCase() !== nameWatchInit.toLowerCase())));
             }
             if (isValid) {
                 return null;

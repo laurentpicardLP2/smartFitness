@@ -6,7 +6,7 @@ export class FacilityValidator {
             let isValid = false;
             if (control.value) {
                 const checkNameFacility: string = control.value;
-                isValid = !(facilities.find(nameFacility => nameFacility === checkNameFacility));
+                isValid = !(facilities.find(nameFacility => nameFacility.toLowerCase() === checkNameFacility.toLowerCase()));
             }
             if (isValid) {
                 return null;
@@ -21,7 +21,7 @@ export class FacilityValidator {
             let isValid = false;
             if (control.value) {
                 const checkNameFacility: string = control.value;
-                isValid = !(facilities.find(nameFacility => (nameFacility === checkNameFacility) && (checkNameFacility !== nameFacilityInit)));
+                isValid = !(facilities.find(nameFacility => (nameFacility.toLowerCase() === checkNameFacility.toLowerCase()) && (checkNameFacility.toLowerCase() !== nameFacilityInit.toLowerCase())));
             }
             if (isValid) {
                 return null;

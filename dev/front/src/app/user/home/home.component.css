@@ -1,6 +1,6 @@
 .pad {
-    margin: 50px;
-    padding: 50px;
+    margin: 30px;
+    padding: 30px;
   }
 
   .welcome {
@@ -15,10 +15,171 @@
     font-size: 15px;
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
-    color: brown;
+    color: rgb(146, 44, 44);
+    font-weight: 900;
+}
+
+.message-manager {
+    font-size: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    color: rgb(146, 44, 44);
     font-weight: 900;
 }
 
 
+ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  a {
+    color: rgb(146, 44, 44);
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+  }
 
+  /* unvisited link */
+a:link {
+    color: rgb(146, 44, 44);
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: rgb(146, 44, 44);
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: red;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  /* selected link */
+  a:active {
+    color: red;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+
+  a.manager-creation{
+    color: rgb(106, 13, 143);
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    font-variant: small-caps;
+  }
+
+  /* unvisited link */
+a.manager-creation:link {
+    color: rgb(106, 13, 143);
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    font-variant: small-caps;
+  }
+  
+  /* visited link */
+  a.manager-creation:visited {
+    color: rgb(106, 13, 143);
+    text-decoration: none;
+    font-family: 17px;
+    font-variant: small-caps;
+  }
+  
+  /* mouse over link */
+  a.manager-creation:hover {
+    color: red;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    *font-variant: small-caps;
+  }
+  
+  /* selected link */
+  a.manager-creation:active {
+    color: red;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    font-variant: small-caps;
+  }
+
+  a.manager-listing{
+    color: rgb(235, 110, 8);
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    font-variant: small-caps;
+  }
+
+  /* unvisited link */
+a.manager-listing:link {
+    color: rgb(235, 110, 8);
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    font-variant: small-caps;
+  }
+  
+  /* visited link */
+  a.manager-listing:visited {
+    color: rgb(235, 110, 8);
+    text-decoration: none;
+    font-family: 17px;
+    font-variant: small-caps;
+  }
+  
+  /* mouse over link */
+  a.manager-listing:hover {
+    color: red;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    *font-variant: small-caps;
+  }
+  
+  /* selected link */
+  a.manager-listing:active {
+    color: red;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    font-variant: small-caps;
+  }
+
+
+  .empty-character {
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .offset {
+    position: relative; 
+    top: -5px;
+  }
+
+  .green-icon {
+    color: green;
+}
+
+.item-manager {
+    font-weight: 900;
+    text-decoration: underline; 
+}
+
+.listing-word {
+    color: rgb(235, 110, 8);
+}
+
+.creation-word {
+    color: rgb(106, 13, 143);
+}
+
+/* color: rgb(17, 171, 231); */
 

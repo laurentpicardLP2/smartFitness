@@ -6,7 +6,7 @@ export class RoomValidator {
             let isValid = false;
             if (control.value) {
                 const checkNameRoom: string = control.value;
-                isValid = !(rooms.find(nameRoom => nameRoom === checkNameRoom));
+                isValid = !(rooms.find(nameRoom => nameRoom.toLowerCase() === checkNameRoom.toLowerCase()));
             }
             if (isValid) {
                 return null;
@@ -21,7 +21,7 @@ export class RoomValidator {
             let isValid = false;
             if (control.value) {
                 const checkNameRoom: string = control.value;
-                isValid = !(rooms.find(nameRoom => (nameRoom === checkNameRoom) && (checkNameRoom !== nameRoomInit)));
+                isValid = !(rooms.find(nameRoom => (nameRoom.toLowerCase() === checkNameRoom.toLowerCase()) && (checkNameRoom.toLowerCase() !== nameRoomInit.toLowerCase())));
             }
             if (isValid) {
                 return null;

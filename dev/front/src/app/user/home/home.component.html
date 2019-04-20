@@ -1,24 +1,87 @@
 
-  <div style="position: relative; text-align:center; height: 350px; vertical-align: bottom; background-image: url('assets/images/smartFitness.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.2;">
+  <div style="position: relative; text-align:center; height: 350px; vertical-align: bottom; background-image: url('assets/images/smartFitness.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.09;">
     
   </div>
 
   <div *ngIf="!isAuth" style="position: absolute; width:100%; top: 250px; text-align:center;"><span class="welcome">Bienvenue sur Smart Fitness</span></div>
-  <div *ngIf="isAuth" style="position: absolute; width:100%; top: 180px; text-align:center;">
+  <div *ngIf="isAuth && authority=='ROLE_CUSTOMER'" style="position: absolute; width:100%; top: 110px; text-align:center;">
     <span class="welcome">Bonjour {{fullname}},</span>
-    <br>
+    <br><br>
     <span class="message">
-      L'équipe de Smart Fitness vous souhaite la bienvenue dans votre espace personnel qui vous permet de :<br>
-      <ul>
-        <li>Vous constituer des séances à la carte (<a routerLink="/seance-booking" routerLinkActive="active" >Vos prestations > Ajouter une séance</a>).</li>
-        <li>Souscrire à un abonnement () pour bébéficier de pirx de séances à moitié prix </li>
-        <li>Gérer le suivi de vos commandes et séances via le menu vos prestations > vos suivis<br></li>
-      </ul>
-      <br>
+     Bienvenue dans votre espace personnel grâce auquel vous pouvez :<br>
+      <ul> 
+        <li><a routerLink="/seance-booking" routerLinkActive="active" ><span class="offset">Vous constituer des séances à la carte.</span><mat-icon class="green-icon">check</mat-icon></a><span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+        <li><a routerLink="/seance-listing" routerLinkActive="active" ><span class="offset">Visualiser les feuilles de route de vos séances.</span><mat-icon class="green-icon">check</mat-icon></a></li>
+        <li><a routerLink="/subscription-customer-proposition" routerLinkActive="active" ><span class="offset">Souscrire à un abonnement (séances à -50%).</span><mat-icon class="green-icon">check</mat-icon></a><span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+        <li><a routerLink="/watch-customer-proposition" routerLinkActive="active"><span class="offset">Acheter une montre connectée.</span><mat-icon class="green-icon">check</mat-icon></a><span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+        <li><a routerLink="/command-listing" routerLinkActive="active" ><span class="offset">Gérer le suivi de vos commandes.</span><mat-icon class="green-icon">check</mat-icon></a><span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+      </ul>  
+    <br>
       L'équipe Smart Fitness
   </span>
   </div>
-  <div class="demo-container mat-app-background">
+  <div *ngIf="isAuth && authority=='ROLE_MANAGER'" style="position: absolute; width:100%; top: 110px; text-align:center;">
+      <span class="welcome">Bonjour {{fullname}},</span>
+      <br><br>
+      <span class="message-manager">
+       Bienvenue dans votre espace de collaborateur vous permettant de : <br>
+            <ul> 
+              <li>
+                  <span class="item-manager">Gérer vos infrastructures :</span>
+                  <span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              </li>
+                <li> 
+                  <span class="listing-word">Listing : </span>
+                  <a class="manager-listing" routerLink="/room-listing" routerLinkActive="active" >salles </a> ,
+                  <a class="manager-listing" routerLink="/facility-listing" routerLinkActive="active" > équipements</a> , 
+                  <a class="manager-listing" routerLink="/facility-category-listing" routerLinkActive="active" >catégories d'équipement</a>
+                </li>
+                <li>
+                 <span class="creation-word">Création : </span>
+                    <a class="manager-creation" routerLink="/room-new" routerLinkActive="active" >salle </a> , 
+                    <a class="manager-creation" routerLink="/facility-new" routerLinkActive="active" >équipement</a> , 
+                    <a class="manager-creation" routerLink="/facility-category-new" routerLinkActive="active" >catégorie d'équipement</a>  
+                 <span class="empty-character">&nbsp;</span>
+                </li>
+              </ul>
+              <ul> 
+                <li>
+                    <span class="item-manager">Gérer vos offres :</span>
+                    <span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </li>
+                  <li> 
+                    <span class="listing-word">Listing : </span>
+                    <a class="manager-listing" routerLink="/subscription-category-listing" routerLinkActive="active" >types dabonnement </a> ,
+                    <a class="manager-listing" routerLink="/watch-category-listing" routerLinkActive="active" > modèles de montre</a>
+                    <span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                 </li>
+                  <li>
+                      <span class="creation-word">Création : </span>
+                      <a class="manager-creation" routerLink="/subscription-category-new" routerLinkActive="active" >type dabonnement </a>,  
+                      <a class="manager-creation" routerLink="/watch-category-new" routerLinkActive="active" >modèle de montre</a> 
+                    <span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  </li>
+                </ul>
+                <ul> 
+                  <li>
+                      <span class="item-manager">Piloter votre activité :</span>
+                      <span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  </li>
+                    <li> 
+                      <span class="listing-word">Graphique : </span>
+                      <a class="manager-listing" style="cursor: pointer;" (click)="onReportingBooking()" > Évolution du taux de réservation </a> ,
+                      <span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </li>
+                    <li>
+                        <span class="creation-word">Graphique : </span>
+                        <a class="manager-creation" style="cursor: pointer;" (click)="onReportingRentability()" > Rentabilité des équipements </a>
+                        <span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </li>
+                  </ul>
+    </span>
+    </div>
+  <div class="pad"></div>
+  <div class="mat-app-background">
     <mat-card>
       <mat-card-content>  
         <div class="demo-carousel">

@@ -6,7 +6,7 @@ export class SubscriptionValidator {
             let isValid = false;
             if (control.value) {
                 const checkNameSubscription: string = control.value;
-                isValid = !(subscriptions.find(nameSubscription => nameSubscription === checkNameSubscription));
+                isValid = !(subscriptions.find(nameSubscription => nameSubscription.toLowerCase() === checkNameSubscription.toLowerCase()));
             }
             if (isValid) {
                 return null;
@@ -21,7 +21,7 @@ export class SubscriptionValidator {
             let isValid = false;
             if (control.value) {
                 const checkNameSubscription: string = control.value;
-                isValid = !(subscriptions.find(nameSubscription => (nameSubscription === checkNameSubscription) && (checkNameSubscription !== nameSubscriptionInit)));
+                isValid = !(subscriptions.find(nameSubscription => (nameSubscription.toLowerCase() === checkNameSubscription.toLowerCase()) && (checkNameSubscription.toLowerCase() !== nameSubscriptionInit.toLowerCase())));
             }
             if (isValid) {
                 return null;

@@ -6,7 +6,7 @@ export class CustomValidator {
             let isValid = false;
             if (control.value) {
                 const checkUsername: string = control.value;
-                isValid = !(usernames.find(username => username === checkUsername));
+                isValid = !(usernames.find(username => username.toLowerCase() === checkUsername.toLowerCase()));
             }
             if (isValid) {
                 return null;
