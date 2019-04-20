@@ -9,6 +9,7 @@ import { Command } from 'src/app/models/command.model';
 import { Seance } from 'src/app/models/seance.model';
 import { LoginService } from 'src/app/services/login.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-seance-booking',
@@ -50,7 +51,8 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
     private commandService: CommandService,
     private loginService: LoginService,
     private httpClient: HttpClient,
-    private token: TokenStorageService) {
+    private token: TokenStorageService,
+    private snackBar: MatSnackBar) {
       this.createForm();
       this.initTimeBookingField();
       this.routingInit();
@@ -237,7 +239,10 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
     
     public onChangeDateTimeCheckedCommand(fieldType: string) {
     if(fieldType === 'd' && this.priceSeance.length > 0){
-      alert("Veuillez supprimer les éléments de la séance afin de pouvoir changer de date.");
+      this.snackBar.open("Veuillez supprimer les éléments de la séance pour changer la date.", "Ok", {
+        duration: 3500,
+      });
+      
       return;
     }
     

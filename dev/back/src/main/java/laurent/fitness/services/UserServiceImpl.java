@@ -1,20 +1,24 @@
 package laurent.fitness.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import laurent.fitness.model.Authority;
 import laurent.fitness.model.User;
+import laurent.fitness.repository.SubscriptionRepository;
 import laurent.fitness.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
 	
 	private UserRepository userRepo;
+	private SubscriptionRepository subscriptionRepo;
 	
-	public UserServiceImpl(UserRepository userRepo) {
+	public UserServiceImpl(UserRepository userRepo, SubscriptionRepository subscriptionRepo) {
 		this.userRepo = userRepo;
+		this.subscriptionRepo = subscriptionRepo;
 	}
 
 	@Override
@@ -82,6 +86,15 @@ public class UserServiceImpl implements UserService {
 	public List<String> getListUsername() {
 		// TODO Auto-generated method stub
 		return this.userRepo.findUsernameList();
+	}
+
+	@Override
+	public List<String> getUserInfos(String username) {
+		// TODO Auto-generated method stub
+		List<String> infos = new ArrayList<String>();
+		infos.add(Integer.toString(this.subscriptionRepo.findIsSubscridebByUsername(username)));
+		infos.add(this.userRepo.findFullnameByUsername(username));
+		return infos;
 	}
 
 }

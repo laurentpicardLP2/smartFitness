@@ -24,5 +24,7 @@ public interface UserService {
 	public String getFullnameByUsername(String username);
 	
 	public List<String> getListUsername();
+	
+	public List<String> getUserInfos(String username);
 
 }

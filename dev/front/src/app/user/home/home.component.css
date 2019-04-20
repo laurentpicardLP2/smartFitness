@@ -11,5 +11,14 @@
       font-weight: 900;
   }
 
+  .message {
+    font-size: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    color: brown;
+    font-weight: 900;
+}
+
+
 
 

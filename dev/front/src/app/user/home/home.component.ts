@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { QueryList, ViewChildren } from '@angular/core';
 import { ThemePalette } from '@angular/material';
@@ -13,6 +14,8 @@ import {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  isAuth: boolean;
+  fullname: string;
   public slidesList = new Array<never>(5);
   public showContent = false;
 
@@ -22,7 +25,7 @@ export class HomeComponent implements OnInit {
   public loop = true;
   public hideArrows = false;
   public hideIndicators = false;
-  public color: ThemePalette = 'accent';
+  public color: ThemePalette = 'primary';
   public maxWidth = 'auto';
   public proportion = 25;
   public slides = this.slidesList.length;
@@ -37,9 +40,16 @@ export class HomeComponent implements OnInit {
   >;
   public darkMode = false;
   
-  constructor() { }
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
+    this.loginService.isUserLoggedSubject.subscribe(res => {
+      this.isAuth = res;
+    });
+
+    this.loginService.fullnameSubject.subscribe(res => {
+      this.fullname = res;
+    });
   }
 
 }

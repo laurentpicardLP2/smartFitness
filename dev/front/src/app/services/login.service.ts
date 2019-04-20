@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { OffresService } from 'src/app/services/offres.service';
 import { ManagerService } from 'src/app/services/manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -29,7 +30,8 @@ export class LoginService {
               private offresServices: OffresService,
               private router: Router,
               private token: TokenStorageService,
-              private utilsService: UtilsService) { }
+              private utilsService: UtilsService,
+              private snackBar: MatSnackBar) { }
 
   // Subject permettant de savoir à tout instant si l'utlisateur est connecté
   public isUserLoggedSubject: BehaviorSubject<boolean> = new BehaviorSubject(null);
@@ -54,7 +56,7 @@ export class LoginService {
   }
    
 
-   // Subject permettant de connaître à tout instant le nom de l'utlisateur
+   // Subject permettant de connaître à tout instant l'identifiant de l'utlisateur
   public usernameSubject: BehaviorSubject<string> = new BehaviorSubject(null);
   public setUsernameSubject(value: string){
     if(value){
@@ -63,6 +65,16 @@ export class LoginService {
       this.usernameSubject.next(null);
     }
   }
+
+   // Subject permettant de connaître à tout instant le nom de l'utlisateur
+   public fullnameSubject: BehaviorSubject<string> = new BehaviorSubject(null);
+   public setFullnameSubject(value: string){
+     if(value){
+       this.fullnameSubject.next(value);
+     } else {
+       this.fullnameSubject.next(null);
+     }
+   }
 
   /**
    * l'existence de ce subject a pour but de rejouer une authentification automatique d'un upload
@@ -141,7 +153,10 @@ export class LoginService {
           //this.signInAfterCheckIsOnlySession(user, bReload); 
 
           if(detectedCommandZero == false){this.signInAfterCheckIsOnlySession(user, bReload); }
-          else{alert("Une session est déjà ouverte, veuillez la clôturer ou attendre 10 minutes");
+          else{
+                this.snackBar.open("Une session est déjà ouverte, veuillez la clôturer ou attendre 10 minutes", "Ok", {
+                  duration: 3000,
+                });
                 this.signOut();
                 this.router.navigate(['/login']);}
         },
@@ -195,15 +210,14 @@ export class LoginService {
           
         }
         else {            
-          this.checkUserIsSubscribed(user.username).subscribe(
-            (isSubscribed) => {
-              this.setIsUserSubscribedSubject(isSubscribed);
-              this.router.navigate(['']);
+          this.getUserInfos(user.username).subscribe(
+            (res) => {
+              console.log("getUserInfos : ", res);
+                this.setIsUserSubscribedSubject(parseInt(res[0], 10) == 1);
+                this.setFullnameSubject(res[1]);
+                this.router.navigate(['']);
             },
-            (error) => {
-              this.setIsUserSubscribedSubject(false);
-              this.router.navigate(['']);
-            }
+            (error) => { }
           );
         }
   }
@@ -223,6 +237,16 @@ export class LoginService {
   });
   }
 
+  getUserInfos(username: string): Observable<string []>{
+    return this.httpClient.get<string []>('http://localhost:8080/userctrl/getuserinfos/' + username, 
+    {
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+      }
+  });
+  }
+
   checkUserIsSubscribed(username: string): Observable<boolean>{
     return this.httpClient.get<boolean>('http://localhost:8080/offrectrl/getisusernamesubscribed/' + username, 
     {
@@ -232,6 +256,7 @@ export class LoginService {
       }
   });
   }
+
 
   public publishAuthority(user: User) {
     this.getAuthority(user.username).subscribe(

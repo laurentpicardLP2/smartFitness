@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { BookingService } from 'src/app/services/booking.service';
 import { TokenStorageService } from './token-storage.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class SeanceService {
               private httpClient: HttpClient,
               private bookingService: BookingService,
               private router: Router,
-              private token: TokenStorageService) { }
+              private token: TokenStorageService,
+              private snackBar: MatSnackBar) { }
 
   public listTimestampFacilities$: BehaviorSubject<TimestampFacility[]> = new BehaviorSubject(null);
 
@@ -139,7 +141,9 @@ export class SeanceService {
     this.router.navigate(['/seance-booking', {outlets: {'facility-router-outlet' : ['facility-booking']}}]);
         },
         (error) => { console.log("init timestamp pb : ", error); 
-                    alert('Oups! cet équipement vient d\'être réservé');
+                    this.snackBar.open("Oups! cet équipement vient d\'être réservé.", "Ok", {
+                      duration: 3000,
+                    });
                     this.bookingService.publishFacilityCategories(dateOfTimestamp);
                     this.router.navigate(['/seance-booking', {outlets: {'facility-category-router-outlet' : ['facility-category-booking']}}]);
                   }

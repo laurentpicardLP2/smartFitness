@@ -2,9 +2,22 @@
   <div style="position: relative; text-align:center; height: 350px; vertical-align: bottom; background-image: url('assets/images/smartFitness.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.2;">
     
   </div>
-  <div style="position: absolute; width:100%; top: 250px; text-align:center;"><span class="welcome">Bienvenue sur Smart Fitness</span></div>
 
-    
+  <div *ngIf="!isAuth" style="position: absolute; width:100%; top: 250px; text-align:center;"><span class="welcome">Bienvenue sur Smart Fitness</span></div>
+  <div *ngIf="isAuth" style="position: absolute; width:100%; top: 180px; text-align:center;">
+    <span class="welcome">Bonjour {{fullname}},</span>
+    <br>
+    <span class="message">
+      L'équipe de Smart Fitness vous souhaite la bienvenue dans votre espace personnel qui vous permet de :<br>
+      <ul>
+        <li>Vous constituer des séances à la carte (<a routerLink="/seance-booking" routerLinkActive="active" >Vos prestations > Ajouter une séance</a>).</li>
+        <li>Souscrire à un abonnement () pour bébéficier de pirx de séances à moitié prix </li>
+        <li>Gérer le suivi de vos commandes et séances via le menu vos prestations > vos suivis<br></li>
+      </ul>
+      <br>
+      L'équipe Smart Fitness
+  </span>
+  </div>
   <div class="demo-container mat-app-background">
     <mat-card>
       <mat-card-content>  

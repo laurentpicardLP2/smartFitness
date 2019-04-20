@@ -170,6 +170,16 @@ public class UserController {
 		return this.authorityService.getAllAuthorities();
 	}
 	
+	/**
+	 * retourne l'infos du fullname et du statut abonné ou non de l'utilisateur. 
+	 * 
+	 * @return
+	 */
+	@GetMapping("/getuserinfos/{username}")
+	public List<String> getUserInfos(@PathVariable String username) {
+		return this.userService.getUserInfos(username);
+	}
+	
 	
 	
 	

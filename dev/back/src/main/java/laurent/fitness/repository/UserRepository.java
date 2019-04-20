@@ -35,6 +35,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	@Query("SELECT u.username FROM User u")
 	public List<String> findUsernameList();
+
 }
 
 
