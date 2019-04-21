@@ -263,6 +263,8 @@ export class LoginService {
       authority => {
         this.setAuthoritySubject(authority);
         this.setUserSubject(user);
+        console.log("authority.authority : ", authority.authority);
+        console.log("this.isCommandInit : ", this.isCommandInit);
         if(authority.authority=="ROLE_CUSTOMER" && this.isCommandInit == false){
           this.isCommandInit = true;
           this.commandService.initCommand(user.username, true); 
@@ -279,7 +281,8 @@ export class LoginService {
 
 
   public signOut(){
-    
+    this.isCommandInit = false;
+    this.isCommandInit = false;
     this.setIsUserLoggedSubject(false);
     this.setAuthoritySubject(new Authority("","ROLE_ANONYMOUS"));
     this.token.signOut();

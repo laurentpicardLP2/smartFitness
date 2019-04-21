@@ -66,6 +66,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @HostListener('window:beforeunload', ['$event'])
     beforeunloadHandler(event) {
+      this.loginService.isCommandInit = false;
+      this.loginService.isCommandInit = false;
       this.utilsService.delCommand();
   }
 

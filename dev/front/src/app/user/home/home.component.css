@@ -169,8 +169,7 @@ a.manager-listing:link {
 }
 
 .item-manager {
-    font-weight: 900;
-    text-decoration: underline; 
+    font-size: 25px; 
 }
 
 .listing-word {
@@ -182,4 +181,13 @@ a.manager-listing:link {
 }
 
 /* color: rgb(17, 171, 231); */
+
+.div-photo {
+  position: relative; 
+  left : -105px;
+  top: 20px;
+  color: brown;
+  font-size: 20px;
+  font-weight: bolder;
+}
 

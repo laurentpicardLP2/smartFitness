@@ -1,6 +1,10 @@
 insert into room (capacity_room, name_room) values (15, "Salle A");
 insert into room (capacity_room, name_room) values (20, "Salle B");
 insert into room (capacity_room, name_room) values (10, "Salle C");
+insert into room (capacity_room, name_room) values (43, "SALLE SAPIN");
+insert into room (capacity_room, name_room) values (100, "SALLE 3ÈME ETOILE");
+insert into room (capacity_room, name_room) values (24, "SALLE CADEAU");
+
 insert into facility_category (name_facility_category, quantity_facility_category) values ("Elliptique", 3);
 insert into facility_category (name_facility_category, quantity_facility_category) values ("Tapis roulant", 2);
 insert into facility_category (name_facility_category, quantity_facility_category) values ("Vélo", 1);

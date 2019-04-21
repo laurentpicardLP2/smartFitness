@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/services/login.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { HttpClient } from '@angular/common/http';
 import { Command } from '../models/command.model';
@@ -55,6 +56,7 @@ export class UtilsService {
   }
 
   public delCommand(){
+    //this.loginService.isCommandInit = false;
     this.commandService.commandSubject.subscribe(res => {
       this.command = res;
       //console.log("this.command : ", this.command);
