@@ -67,8 +67,8 @@
       </mat-menu>
 
       <mat-menu  #parc="matMenu">
-          <button mat-menu-item [matMenuTriggerFor]="category"><mat-icon>directions_run</mat-icon>Categorie équipement</button>
-          <button mat-menu-item [matMenuTriggerFor]="facility">Equipement</button>
+          <button mat-menu-item [matMenuTriggerFor]="category"><mat-icon>web</mat-icon>Categorie équipement</button>
+          <button mat-menu-item [matMenuTriggerFor]="facility"><mat-icon>directions_bike</mat-icon>Equipement</button>
       </mat-menu>
 
       <mat-menu #category="matMenu">
@@ -98,7 +98,7 @@
         <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/watch-category-listing')"><mat-icon>list</mat-icon>Listing des modèles de montres</button>
       </mat-menu>
 
-       <button *ngIf="isAuth && authority.authority=='ROLE_ADMIN'"  mat-button [matMenuTriggerFor]="staff">Gestion staff</button>
+       <button *ngIf="isAuth && authority.authority=='ROLE_ADMIN'"  mat-button [matMenuTriggerFor]="staff"><mat-icon>supervisor_account</mat-icon> Gestion staff</button>
        <mat-menu  #staff="matMenu">
            <button mat-menu-item _ngcontent-cl="" tabindex="12" aria-disabled="false" (click)="onAction('/staff-new')"><mat-icon>add_to_photos</mat-icon>Ajout collaborateurs</button>
            <button mat-menu-item _ngcontent-cl="" tabindex="13" aria-disabled="false" (click)="onAction('/staff-listing')"><mat-icon>list</mat-icon>Listing des collaborateurs</button>

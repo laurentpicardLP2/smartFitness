@@ -182,7 +182,7 @@ export class LoginService {
   public autoclose(){
     this.timer +=1; 
     let diff = new Date().getTime() - this.lastAction.getTime();
-   // console.log("diff : ", diff);
+    //console.log("diff : ", diff);
     if(diff > 600000){
       this.utilsService.delCommand();
       this.signOut();
@@ -267,9 +267,10 @@ export class LoginService {
         console.log("this.isCommandInit : ", this.isCommandInit);
         if(authority.authority=="ROLE_CUSTOMER" && this.isCommandInit == false){
           this.isCommandInit = true;
-          this.commandService.initCommand(user.username, true); 
-          this.commandService.setListCommandItemsSubject(null);
-          this.lastAction = new Date();
+           this.commandService.initCommand(user.username, true); 
+           this.commandService.setListCommandItemsSubject(null);
+           this.lastAction = new Date();
+          
           if(this.timer === 0) {
             setTimeout(() => this.autoclose(), 2000);
           }

@@ -22,7 +22,7 @@ export class CommandService {
 
   public setCommandSubject(value: Command){
     if(value){
-      this.commandSubject.next(value);
+    this.commandSubject.next(value);
     } else {
       this.commandSubject.next(null);
     }
@@ -67,7 +67,7 @@ export class CommandService {
       }
   }).subscribe(
         (command) =>{ console.log("init command OK : ", command); 
-                      this.setCommandSubject(command); 
+                    this.setCommandSubject(command);
                       this.setTotalPriceCommandSubject(0);
                       if (isRouting) {
                         this.router.navigate(['']);

@@ -23,7 +23,7 @@ export class AuthGuardCustomerService  implements CanActivate {
     canActivate(
       route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      if(this.loginService.isAuth && this.loginService.authority == 'ROLE_CUSTOMER') {
+        if(this.loginService.isAuth && this.loginService.authority == 'ROLE_CUSTOMER') {
           this.commandService.commandSubject.subscribe(res => {
             this.command = res;
             if(! isNaN(this.command.idCommand)) {
@@ -57,6 +57,8 @@ export class AuthGuardCustomerService  implements CanActivate {
           this.router.navigate(['/login']);
       }
     }
+
+
   }
 
   

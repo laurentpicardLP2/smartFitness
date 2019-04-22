@@ -9,39 +9,30 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import laurent.fitness.model.FacilityCategory;
 import laurent.fitness.model.Room;
-import laurent.fitness.services.FacilityService;
-
-
-
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 //@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @AutoConfigureTestDatabase(replace=Replace.NONE)
-public class FacilityRepositoryTest {
+public class RoomRepositoryTest {
 	
 	@Autowired
-	private FacilityCategoryRepository facilityCategoryRepo;
-	
+	private RoomRepository roomRepo;
 
 	@Autowired
 	private TestEntityManager testEntityManager;
-	
 
 	@Test
 	@WithMockUser(roles={"ADMIN"})
-	public void testFindByFacilityName() {
-		FacilityCategory savedFacilityCategory = testEntityManager.persistFlushFind(new FacilityCategory("Musculature", 4));
-		FacilityCategory musculature = facilityCategoryRepo.findByFacilityCategoryName("Musculature");
-		assertThat(musculature.getNameFacilityCategory()).isEqualTo(savedFacilityCategory.getNameFacilityCategory());
-		assertThat(musculature.getQuantityFacilityCategory()).isEqualTo(savedFacilityCategory.getQuantityFacilityCategory());
+	public void testFindByNameRoom() {
+		Room savedRoom = testEntityManager.persistFlushFind(new Room("Room Repository Test", 50));
+		Room roomTest = roomRepo.findByRoomName("Room Repository Test");
+		assertThat(roomTest.getNameRoom()).isEqualTo(savedRoom.getNameRoom());
+		assertThat(roomTest.getCapacityRoom()).isEqualTo(savedRoom.getCapacityRoom());
 	}
-	
-
 }

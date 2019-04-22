@@ -61,6 +61,7 @@ public class CommandController {
 	public ResponseEntity<?> addCommand(@PathVariable String username) {
 		try {
 			Customer customer = this.customerService.findByUsername(username);
+			
 			return ResponseEntity.status(HttpStatus.OK).body(this.commandService.saveCommand(new Command(customer, new Date())));
 		
 		} catch(Exception e) {

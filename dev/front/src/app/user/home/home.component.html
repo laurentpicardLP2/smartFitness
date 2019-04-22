@@ -20,149 +20,102 @@
       L'équipe Smart Fitness
   </span>
   </div>
-  <div *ngIf="isAuth && authority=='ROLE_MANAGER'" style="position: absolute; width:100%; top: 110px; text-align:center;">
+  <div *ngIf="isAuth && (authority=='ROLE_MANAGER' || authority=='ROLE_ADMIN')" style="position: absolute; width:100%; top: 110px; text-align:center;">
       <span class="welcome">Bonjour {{fullname}},</span>
       <br><br>
       <span class="message-manager">
-       Bienvenue dans votre espace de collaborateur vous permettant de : <br>
-            <ul> 
-              <li>
-                  
-              </li>
-                <li> 
-                 <table style="width: 100%">
-                    <tr tyle="text-align: center; width: 100%;">
-                     <td colspan="3"><span class="item-manager">1. Gérer vos infrastructures</span></td>
-                   </tr>
-                   <tr tyle="text-align: center; width: 100%;">
-                     <td>
-                        <a class="manager-listing" routerLink="/room-listing" routerLinkActive="active" ><img src="assets/images/salle.jpg" width="95%"></a>                        
-                     </td>
-                     <td>
-                        <a class="manager-listing" routerLink="/facility-category-listing" routerLinkActive="active" ><img src="assets/images/categorie.jpg" width="90%"></a> 
-                     </td>
-                     <td>
-                        <a class="manager-listing" routerLink="/facility-listing" routerLinkActive="active" ><img src="assets/images/salle-musculation.jpg" width="95%"></a> 
-                     </td>
-                   </tr>
-                   <tr tyle="text-align: center; width: 100%;">
-                      <td>
-                         Salle                        
+        Bienvenue dans votre espace
+        <span *ngIf="authority=='ROLE_MANAGER'"> de collaborateur </span>
+        <span *ngIf="authority=='ROLE_ADMIN'"> d'adminnistrateur </span>
+        vous permettant de : <br><br>
+          <table style="width: 100%">
+            <tr tyle="text-align: center; width: 100%;">
+              <td colspan="3"><span class="item-manager">1. Gérer vos infrastructures</span></td>
+            </tr>
+            <tr tyle="text-align: center; width: 100%;">
+              <td>
+                <a class="manager-listing" routerLink="/room-listing" routerLinkActive="active" ><img src="assets/images/salle.jpg" width="95%"></a>                        
+              </td>
+              <td>
+                <a class="manager-listing" routerLink="/facility-category-listing" routerLinkActive="active" ><img src="assets/images/categorie.jpg" width="90%"></a> 
+              </td>
+              <td>
+                <a class="manager-listing" routerLink="/facility-listing" routerLinkActive="active" ><img src="assets/images/salle-musculation.jpg" width="95%"></a> 
+              </td>
+            </tr>
+            <tr tyle="text-align: center; width: 100%;">
+              <td>
+                <a class="manager-listing" routerLink="/room-listing" routerLinkActive="active" >Salle</a>                    
+              </td>
+              <td>
+                <a class="manager-listing" routerLink="/facility-category-listing" routerLinkActive="active" >Catégorie</a>
+              </td>
+              <td>
+                <a class="manager-listing" routerLink="/facility-listing" routerLinkActive="active" >Équipement</a>
+              </td>
+            </tr>
+          </table>
+          <br>
+          <table style="width: 100%">
+            <tr style="text-align: center; width: 100%;">
+                <td colspan="2"><span class="item-manager">2. Gérer vos offres</span></td>
+              </tr>
+              <tr tyle="text-align: center; width: 100%;">
+                  <td>
+                      <a class="manager-listing" routerLink="/subscription-category-listing" routerLinkActive="active" ><img src="assets/images/abonnement.jpg" width="90%"></a> 
+                    </td>
+                  <td>
+                    <a class="manager-listing" routerLink="/watch-category-listing" routerLinkActive="active" ><img src="assets/images/Montre-de-sport-connectee-Polar-M600-Noir.jpg" width="55%"></a>                        
+                </td>
+            </tr>
+              <tr style="text-align: center; width: 100%;">
+                  <td>
+                  <a class="manager-listing" routerLink="/subscription-category-listing" routerLinkActive="active" >Les abonnements</a>                   
+                  </td>
+                  <td>
+                  <a class="manager-listing" routerLink="/watch-category-listing" routerLinkActive="active" >Les modèles de montre</a>
+                  </td>
+                </tr>
+          </table>
+          <br>
+          <table style="width: 100%">
+              <tr style="text-align: center; width: 100%;">
+                  <td colspan="2"><span class="item-manager">3. Piloter votre activité</span></td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td style="text-align: center; padding-left:15px;">
+                        <a class="manager-listing" class="manager-listing" style="cursor: pointer;" (click)="onReportingBooking()"><img src="assets/images/img_rentability.jpg" width="90%"></a> 
                       </td>
-                      <td>
-                         Catégorie
+                    <td>
+                      <a class="manager-listing" (click)="onReportingRentability()"><img src="assets/images/img_rate.jpg" width="55%"></a>                        
+                  </td>
+              </tr>
+                <tr style="text-align: center; width: 100%;">
+                    <td>
+                    <a class="manager-listing" class="manager-listing" style="cursor: pointer;" (click)="onReportingBooking()">Évolution du taux de réservation</a>                   
+                    </td>
+                    <td>
+                    <a class="manager-listing" (click)="onReportingRentability()">Rentabilité des équipements</a>
+                    </td>
+                  </tr>
+            </table>
+            <br>
+            <table *ngIf="authority=='ROLE_ADMIN'" style="width: 100%">
+              <tr style="text-align: center; width: 100%;">
+                  <td ><span class="item-manager">4. Gérer les comptes de vos collaborateurs</span></td>
+                </tr>
+                <tr style="text-align: center; width: 100%;">
+                    <td style="text-align: center;  width: 100%; padding: 30px;">
+                      <a class="manager-listing" routerLink="/staff-listing" routerLinkActive="active" ><img src="assets/images/img_collaborateurs.jpg" width="80%"></a> 
                       </td>
-                      <td>
-                         Équipement 
-                      </td>
-                    </tr>
-                 </table>
-                 <table style="width: 100%">
-                    <tr style="text-align: center; width: 100%;">
-                        <td colspan="2"><span class="item-manager">2. Gérer vos offres</span></td>
-                      </tr>
-                      <tr tyle="text-align: center; width: 100%;">
-                          <td>
-                              <a class="manager-listing" routerLink="/facility-category-listing" routerLinkActive="active" ><img src="assets/images/abonnement.jpg" width="90%"></a> 
-                           </td>
-                          <td>
-                           <a class="manager-listing" routerLink="/watch-category-listing" routerLinkActive="active" ><img src="assets/images/Montre-de-sport-connectee-Polar-M600-Noir.jpg" width="55%"></a>                        
-                        </td>
-                    </tr>
-                      <tr style="text-align: center; width: 100%;">
-                        
-                         <td>
-                            Les abonnements                    
-                         </td>
-                         <td>
-                            Les modèles de montre 
-                         </td>
-                       </tr>
-                  </table>
-                  <table style="width: 100%">
-                      <tr style="text-align: center; width: 100%;">
-                          <td colspan="2"><span class="item-manager">3. Piloter votre activité</span></td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td style="text-align: center; padding-left:15px;">
-                                <a class="manager-listing" class="manager-listing" style="cursor: pointer;" (click)="onReportingBooking()"><img src="assets/images/img_rentability.jpg" width="90%"></a> 
-                             </td>
-                            <td>
-                             <a class="manager-listing" routerLink="/watch-category-listing" routerLinkActive="active" ><img src="assets/images/img_rate.jpg" width="55%"></a>                        
-                          </td>
-                      </tr>
-                        <tr style="text-align: center; width: 100%;">
-                           <td>
-                              Évolution du taux de réservation                    
-                           </td>
-                           <td>
-                              Rentabilité des équipements 
-                           </td>
-                         </tr>
-                    </table>
-
-
-                  
-     
-                    <!-- <span style="display: inline; padding-right: 5px;">
-                        <span class="div-photo">Salle</span>
-                      </span>   
-                    <span style="display: inline;">
-                        <a class="manager-listing" routerLink="/room-listing" routerLinkActive="active" ><img src="assets/images/categorie.jpg" width="25%"></a> 
-                        <span class="div-photo">Categorie</span>
-                      </span>
-                      <span style="display: inline;">
-                          <a class="manager-listing" routerLink="/room-listing" routerLinkActive="active" ><img src="assets/images/salle-musculation.jpg" width="25%"></a> 
-                          <span class="div-photo">Equipement</span>
-                        </span>    -->
-                     <br><br>
-                  ,
-                  <!-- <a class="manager-listing" routerLink="/facility-listing" routerLinkActive="active" > équipements</a> , 
-                  <a class="manager-listing" routerLink="/facility-category-listing" routerLinkActive="active" >catégories d'équipement</a> -->
-                </li>
-                <li>
-                 <span class="creation-word">Création : </span>
-                    <a class="manager-creation" routerLink="/room-new" routerLinkActive="active" >salle </a> , 
-                    <a class="manager-creation" routerLink="/facility-new" routerLinkActive="active" >équipement</a> , 
-                    <a class="manager-creation" routerLink="/facility-category-new" routerLinkActive="active" >catégorie d'équipement</a>  
-                 <span class="empty-character">&nbsp;</span>
-                </li>
-              </ul>
-              <ul> 
-                <li>
-                    <span class="item-manager">Gérer vos offres </span>
-                    <span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                </li>
-                  <li> 
-                    <span class="listing-word">Listing </span>
-                    <a class="manager-listing" routerLink="/subscription-category-listing" routerLinkActive="active" >types dabonnement </a> ,
-                    <a class="manager-listing" routerLink="/watch-category-listing" routerLinkActive="active" > modèles de montre</a>
-                    <span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                 </li>
-                  <li>
-                      <span class="creation-word">Création : </span>
-                      <a class="manager-creation" routerLink="/subscription-category-new" routerLinkActive="active" >type dabonnement </a>,  
-                      <a class="manager-creation" routerLink="/watch-category-new" routerLinkActive="active" >modèle de montre</a> 
-                    <span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                  </li>
-                </ul>
-                <ul> 
-                  <li>
-                      <span class="item-manager">Piloter votre activité :</span>
-                      <span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                  </li>
-                    <li> 
-                      <span class="listing-word">Graphique : </span>
-                      <a class="manager-listing" style="cursor: pointer;" (click)="onReportingBooking()" > Évolution du taux de réservation </a> ,
-                      <span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    </li>
-                    <li>
-                        <span class="creation-word">Graphique : </span>
-                        <a class="manager-creation" style="cursor: pointer;" (click)="onReportingRentability()" > Rentabilité des équipements </a>
-                        <span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    </li>
-                  </ul>
-    </span>
+              </tr>
+              <tr style="text-align: center; width: 100%;">
+                <td style="text-align: center;  width: 100%;">
+                  <a class="manager-listing" routerLink="/staff-listing" routerLinkActive="active" >Le staff</a>
+                </td>
+              </tr>
+            </table>                
+      </span>
     </div>
   <div *ngIf="authority!='ROLE_MANAGER' && authority!='ROLE_ADMIN'" class="pad"></div>
   <div *ngIf="authority!='ROLE_MANAGER' && authority!='ROLE_ADMIN'" class="mat-app-background">

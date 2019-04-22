@@ -20,19 +20,19 @@
           <div class="example-container mat-elevation-z8">
             <mat-table #Table [dataSource]="MyDataSource" multiTemplateDataRows matSort>
             <ng-container matColumnDef="Fullname">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Nom du collaborateur </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
             <mat-cell *matCellDef="let post"> {{post.fullname}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="Username">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Identifiant du collaborateur </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Identifiant </mat-header-cell>
             <mat-cell *matCellDef="let post"> {{post.username}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="Update">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Modification de la fiche du collaborateur </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Modification </mat-header-cell>
                 <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent"  id="updateUser" (click)="onUpdate(post.username)">Modifier</button></mat-cell>
             </ng-container>
             <ng-container matColumnDef="Delete">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Suppression de la fiche du collaborateur </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Suppression </mat-header-cell>
                 <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" id="delUser" (click)="onDelete(post.username)">Supprimer</button></mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
