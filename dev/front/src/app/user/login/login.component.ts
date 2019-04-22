@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string; 
   bReload: boolean;
-  isLogin: boolean=false;
+  isLogin: boolean=true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,7 +39,14 @@ export class LoginComponent implements OnInit {
     this.loginService.passwordSubject.subscribe(res => {
       this.password = res;
     });
-    console.log("this.username : ", this.username);
+    if(this.loginService.isCommandInit == true){
+      this.loginService.isCommandInit = false;
+      this.isLogin = true;
+      this.loginService.signIn(new User(this.username, this.password), false);
+    }
+    else {
+      this.isLogin = false;
+    }
     
     this.bReload = window.localStorage.getItem("username") == null ? false : true;
   }
