@@ -19,10 +19,6 @@ import java.util.List;
 public class Staff extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String dayWorking;
-
-	private String hourWorking;
-
 //	//bi-directional many-to-one association to SessionTraining
 //	@OneToMany(mappedBy="staff")
 //	@JsonIgnore
@@ -39,31 +35,11 @@ public class Staff extends User implements Serializable {
 			String email, 
 			String tel,
 			Date dateOfRegistration, 
-			byte enabled,
-			String dayWorking,
-			String hourWorking) {
+			byte enabled) {
 	super(idUser,username, fullname, password, email, tel, dateOfRegistration, enabled);
 	this.idUser = idUser;
-	this.dayWorking = dayWorking;
-	this.hourWorking = hourWorking;
 }
 
-
-	public String getDayWorking() {
-		return this.dayWorking;
-	}
-
-	public void setDayWorking(String dayWorking) {
-		this.dayWorking = dayWorking;
-	}
-
-	public String getHourWorking() {
-		return this.hourWorking;
-	}
-
-	public void setHourWorking(String hourWorking) {
-		this.hourWorking = hourWorking;
-	}
 
 //	public List<SessionTraining> getSessionTrainings() {
 //		return this.sessionTrainings;

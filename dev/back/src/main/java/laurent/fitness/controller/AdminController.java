@@ -72,7 +72,7 @@ public class AdminController {
 			
 		return ResponseEntity.status(HttpStatus.OK).body(this.staffService.saveStaff(new Staff(this.userService.findByUsernameIdMax(),
 				newStaff.getUsername(), newStaff.getFullname(), "{bcrypt}" + bcrypt.encode(newStaff.getPassword()), 
-				newStaff.getEmail(), newStaff.getTel(), new Date(), (byte)1, "", "")));
+				newStaff.getEmail(), newStaff.getTel(), new Date(), (byte)1)));
 		
 	} catch(Exception e) {
 		

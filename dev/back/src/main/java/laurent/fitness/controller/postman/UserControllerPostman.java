@@ -134,8 +134,7 @@ public class UserControllerPostman {
 			try {
 			this.authorityService.saveAuthority(new Authority(username, role));
 			staffService.saveStaff(new Staff(this.userService.findByUsernameIdMax(),
-					username, fullname, password, email, tel, new Date(), (byte)1,
-					dayWorking, hourWorking));
+					username, fullname, password, email, tel, new Date(), (byte)1));
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 			
 		} catch(Exception e) {

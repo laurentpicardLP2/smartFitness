@@ -72,23 +72,23 @@ public class Fitness implements CommandLineRunner {
 	public void run(String... args)
 			throws Exception,  MalformedURLException, IOException, ClassNotFoundException, SQLException {
 		
-		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
-		
-		this.authorityService.saveAuthority(new Authority("db_sam", "ROLE_ADMIN"));
-		int idUser = this.userService.findByUsernameIdMax();
-	
-		
-		this.staffService.saveStaff(new Staff(idUser,"db_sam", "db_sam", "{bcrypt}" + bcrypt.encode("simplon"), "", "", new Date(), (byte)(1),"", ""));
-		
-		
-		
-			
-		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_insert_data");
-	    storedProcedure.execute();
-	    
-	    //storedProcedureEnd permet de savoir quand est-ce que l'import est fini
-	    StoredProcedureQuery storedProcedureEnd = entityManager.createStoredProcedureQuery("proc_insert_end");
-	    storedProcedureEnd.execute();
+//		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+//		
+//		this.authorityService.saveAuthority(new Authority("db_sam", "ROLE_ADMIN"));
+//		int idUser = this.userService.findByUsernameIdMax();
+//	
+//		
+//		this.staffService.saveStaff(new Staff(idUser,"db_sam", "db_sam", "{bcrypt}" + bcrypt.encode("simplon"), "", "", new Date(), (byte)(1)));
+//		
+//		
+//		
+//			
+//		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_insert_data");
+//	    storedProcedure.execute();
+//	    
+//	    //storedProcedureEnd permet de savoir quand est-ce que l'import est fini
+//	    StoredProcedureQuery storedProcedureEnd = entityManager.createStoredProcedureQuery("proc_insert_end");
+//	    storedProcedureEnd.execute();
 				
 
 	}

@@ -3,6 +3,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { QueryList, ViewChildren } from '@angular/core';
 import { ThemePalette } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   MatCarouselSlideComponent,
   Orientation
@@ -20,6 +21,10 @@ export class HomeComponent implements OnInit {
   authority: string;
   public slidesList = new Array<never>(5);
   public showContent = false;
+  indexEvt: number = -1;
+
+  evenementArray: string [] = [];
+  evenementTitle: string = "";
 
   public timings = '250ms ease-in';
   public autoplay = true;
@@ -43,7 +48,8 @@ export class HomeComponent implements OnInit {
   public darkMode = false;
   
   constructor(private loginService: LoginService,
-              private reportingService: ReportingService) { }
+              private reportingService: ReportingService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.loginService.isUserLoggedSubject.subscribe(res => {
@@ -56,7 +62,15 @@ export class HomeComponent implements OnInit {
 
     this.loginService.authoritySubject.subscribe(res => {
       this.authority = res.authority;
-    })
+    });
+
+    this.evenementArray.push("Ouverture demain à 8h");
+    this.evenementArray.push("Session coaching samedi et dimanche de 9h à 12h");
+
+    if(this.evenementArray.length > 0){
+      this.showEvenementsLoop();
+    }
+    
   }
 
   public onReportingBooking(){
@@ -65,6 +79,22 @@ export class HomeComponent implements OnInit {
 
   public onReportingRentability(){
     this.reportingService.publishDataSetRentability();
+  }
+
+  public showEvenementsLoop(){
+    this.indexEvt = (this.indexEvt==this.evenementArray.length-1) ? 0 : this.indexEvt + 1;
+    this.evenementTitle = this.evenementArray[this.indexEvt];
+    setTimeout(() => this.showEvenementsLoop(), 3000);
+  }
+
+  public redirectTo(index: number){
+    console.log("index : ", index);
+  }
+
+  public showMustSignIn(){
+    this.snackBar.open("Veuillez vous connecter pour accéder à cette fonctionnalité", "Ok", {
+      duration: 3000,
+    });
   }
 
 }

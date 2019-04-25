@@ -3,7 +3,96 @@
     
   </div>
 
-  <div *ngIf="!isAuth" style="position: absolute; width:100%; top: 250px; text-align:center;"><span class="welcome">Bienvenue sur Smart Fitness</span></div>
+  <div *ngIf="!isAuth" style="position: absolute; width:100%; top: 70px; text-align:center;">
+    <span class="welcome-principal">Bienvenue sur Smart Fitness</span>
+    <br>
+    <span class="welcome-secondaire">Le site de réservation en ligne de seances de fitness</span>
+    <br><br>
+    <table style="width: 100%">
+      <tr tyle="text-align: center; width: 100%;">
+        <td>
+          <a class="anonymous-listing" (click)="showMustSignIn()"><img src="assets/images/FitnessResa.png" width="50%"></a>                        
+        </td>
+        <td>
+          <a class="anonymous-listing" (click)="showMustSignIn()"><img src="assets/images/FitnessRoutes.png" width="50%"></a> 
+        </td>
+      </tr>
+      <tr tyle="text-align: center; width: 100%;">
+        <td>
+          <a class="anonymous-listing" (click)="showMustSignIn()">Réservation</a>                    
+        </td>
+        <td>
+          <a class="anonymous-listing" (click)="showMustSignIn()">Vos séances</a>
+        </td>
+      </tr>
+    </table>
+    <table style="width: 100%">
+        <tr tyle="text-align: center; width: 100%;">
+          <td>
+            <a class="anonymous-listing" (click)="showMustSignIn()"><img src="assets/images/FitnessAbo.png" width="80%"></a>                        
+          </td>
+          <td>
+            <a class="anonymous-listing" (click)="showMustSignIn()"><img src="assets/images/FitnessAbo.png" width="80%"></a> 
+          </td>
+          <td>
+            <a class="anonymous-listing" (click)="showMustSignIn()"><img src="assets/images/FitnessCommandes.png" width="80%"></a> 
+          </td>
+        </tr>
+        <tr tyle="text-align: center; width: 100%;">
+          <td>
+            <a class="anonymous-listing" (click)="showMustSignIn()">Abonnement</a>                    
+          </td>
+          <td>
+            <a class="anonymous-listing" (click)="showMustSignIn()">Montres connectées</a>
+          </td>
+          <td>
+            <a class="anonymous-listing" (click)="showMustSignIn()">Vos commandes</a>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <div *ngIf="evement!=''" class="div-evt">
+        <a style="cursor: pointer;" (click)="redirectTo(indexEvt)">{{evenementTitle}} 
+          <br><span class="sub-title">(Veuillez cliquer pour plus de précisions)</span></a> 
+      </div>
+      <div *ngIf="authority!='ROLE_MANAGER' && authority!='ROLE_ADMIN'" class="pad"></div>
+       <table style="width: 100%">
+        <tr tyle="text-align: center; width: 100%;">
+          <mat-card>
+            <mat-card-content>  
+              <div class="demo-carousel">
+                <mat-carousel
+                  #matCarousel
+                  [timings]="timings"
+                  [autoplay]="autoplay"
+                  [interval]="interval"
+                  [loop]="loop"
+                  [hideArrows]="hideArrows"
+                  [hideIndicators]="hideIndicators"
+                  [color]="color"
+                  [maxWidth]="maxWidth"
+                  [proportion]="proportion"
+                  [useKeyboard]="useKeyboard"
+                  [useMouseWheel]="useMouseWheel"
+                  [orientation]="orientation"
+                  [slides]="slides"
+                >
+                  <mat-carousel-slide
+                    #matCarouselSlide
+                    *ngFor="let slide of slidesList; let i = index"
+                    image="assets/facility{{i}}.jpg"
+                    [overlayColor]="overlayColor"
+                    [hideOverlay]="hideOverlay"
+                  >
+                  </mat-carousel-slide>
+                </mat-carousel>
+              </div>
+        
+            </mat-card-content>
+          </mat-card>
+        </tr>
+      </table>
+  </div>
   <div *ngIf="isAuth && authority=='ROLE_CUSTOMER'" style="position: absolute; width:100%; top: 110px; text-align:center;">
     <span class="welcome">Bonjour {{fullname}},</span>
     <br><br>
@@ -117,38 +206,7 @@
             </table>                
       </span>
     </div>
-  <div *ngIf="authority!='ROLE_MANAGER' && authority!='ROLE_ADMIN'" class="pad"></div>
-  <div *ngIf="authority!='ROLE_MANAGER' && authority!='ROLE_ADMIN'" class="mat-app-background">
-    <mat-card>
-      <mat-card-content>  
-        <div class="demo-carousel">
-          <mat-carousel
-            #matCarousel
-            [timings]="timings"
-            [autoplay]="autoplay"
-            [interval]="interval"
-            [loop]="loop"
-            [hideArrows]="hideArrows"
-            [hideIndicators]="hideIndicators"
-            [color]="color"
-            [maxWidth]="maxWidth"
-            [proportion]="proportion"
-            [useKeyboard]="useKeyboard"
-            [useMouseWheel]="useMouseWheel"
-            [orientation]="orientation"
-            [slides]="slides"
-          >
-            <mat-carousel-slide
-              #matCarouselSlide
-              *ngFor="let slide of slidesList; let i = index"
-              image="assets/facility{{i}}.jpg"
-              [overlayColor]="overlayColor"
-              [hideOverlay]="hideOverlay"
-            >
-            </mat-carousel-slide>
-          </mat-carousel>
-        </div>
-  
-      </mat-card-content>
-    </mat-card>
-  </div>
+  <!-- <div *ngIf="authority!='ROLE_MANAGER' && authority!='ROLE_ADMIN'" class="pad"></div>
+  <div *ngIf="authority!='ROLE_MANAGER' && authority!='ROLE_ADMIN'" class="mat-app-background"> -->
+    
+  <!-- </div> -->
