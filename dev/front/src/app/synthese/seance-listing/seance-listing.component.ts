@@ -55,7 +55,7 @@ export class SeanceListingComponent implements OnInit {
       if(pDateOfSeance==null) {
         return "";
       } else {
-        return this.utilsService.convertIntoDateTimeSeanceListing(pDateOfSeance);
+        return this.utilsService.convertIntoDateTimeListing(pDateOfSeance);
       }
         
     }

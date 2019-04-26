@@ -34,7 +34,7 @@ export class FacilityCategoryDetailComponent implements OnInit {
 
   ngOnInit() {
     this.idFacilityCategory = +this.route.snapshot.params.idFacilityCategory;
-    this.managerService.publishFacilityCategories;
+    this.managerService.publishFacilityCategories();
     this.managerService.findFacilityCategory(this.idFacilityCategory).subscribe(facilityCategory => {
       this.idFacilityCategory = facilityCategory.idFacilityCategory;
       this.nameFacilityCategory = facilityCategory.nameFacilityCategory;

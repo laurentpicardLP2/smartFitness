@@ -72,6 +72,11 @@ import { BalanceByFacilityComponent } from './manager/balance-by-facility/balanc
 import { CartCompositionComponent } from './synthese/cart-composition/cart-composition.component';
 import { AcknowledgmentComponent } from './booking/acknowledgment/acknowledgment.component';
 import { SignupConfirmComponent } from './user/signup-confirm/signup-confirm.component';
+import { OurActivityComponent } from './user/our-activity/our-activity.component';
+import { OurLocalisationComponent } from './user/our-localisation/our-localisation.component';
+import { EvenementNewComponent } from './manager/evenement-new/evenement-new.component';
+import { EvenementListingComponent } from './manager/evenement-listing/evenement-listing.component';
+import { EvenementDetailComponent } from './manager/evenement-detail/evenement-detail.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +126,11 @@ import { SignupConfirmComponent } from './user/signup-confirm/signup-confirm.com
     CartCompositionComponent,
     AcknowledgmentComponent,
     SignupConfirmComponent,
+    OurActivityComponent,
+    OurLocalisationComponent,
+    EvenementNewComponent,
+    EvenementListingComponent,
+    EvenementDetailComponent,
 
   ],
   imports: [

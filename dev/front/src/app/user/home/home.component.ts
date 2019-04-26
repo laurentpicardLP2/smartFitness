@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ReportingService } from 'src/app/services/reporting.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Component, OnInit } from '@angular/core';
@@ -49,6 +50,7 @@ export class HomeComponent implements OnInit {
   
   constructor(private loginService: LoginService,
               private reportingService: ReportingService,
+              private router: Router,
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -62,14 +64,21 @@ export class HomeComponent implements OnInit {
 
     this.loginService.authoritySubject.subscribe(res => {
       this.authority = res.authority;
-    });
+      if(this.authority == 'ROLE_ANONYMOUS'){
+        this.evenementArray.push("Connectez-vous pour accéder aux fonctionnalités.");
+        this.evenementArray.push("Découvrez qui nous sommes et ce que nous proposons.");
+        this.evenementArray.push("Où sommes-nous et comment venir chez nous.");
+        this.showEvenementsLoop();
+      } else if(this.authority == 'ROLE_CUSTOMER'){
+        // get Evenements from DataBase into this.evenementArray
+        this.evenementArray = [];
+        this.evenementTitle = "";
+        if(this.evenementArray.length > 0){
+          this.showEvenementsLoop()
+        }
+      }
 
-    this.evenementArray.push("Ouverture demain à 8h");
-    this.evenementArray.push("Session coaching samedi et dimanche de 9h à 12h");
-
-    if(this.evenementArray.length > 0){
-      this.showEvenementsLoop();
-    }
+    });  
     
   }
 
@@ -87,7 +96,18 @@ export class HomeComponent implements OnInit {
     setTimeout(() => this.showEvenementsLoop(), 3000);
   }
 
-  public redirectTo(index: number){
+  public anonymousRedirectTo(index: number){
+    if(index == 0 ){
+      this.router.navigate(['login']);
+    } else if(index == 1) {
+      this.router.navigate(['our-activity']);
+    } else {
+      this.router.navigate(['our-localisation']);
+    }
+    
+  }
+
+  public customerRedirectTo(index: number){
     console.log("index : ", index);
   }
 

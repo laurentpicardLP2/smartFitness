@@ -53,9 +53,15 @@ export class CommandListingComponent implements OnInit {
       });
     }
 
-    public convertIntoDateTime(pDateOfSeance) {
-      return pDateOfSeance = (pDateOfSeance==null) ? "" : this.utilsService.convertIntoDateTimeSeanceListing(pDateOfSeance);
+    public convertIntoDateTime(pDateOfCommande) {
+      
+      if(pDateOfCommande==null) {
+        return "";
+      } else {
+        return this.utilsService.convertIntoDateTimeListing(pDateOfCommande);
+      } 
     }
+
 
     convertIntoMonetaryFormat(price: number){
       return this.utilsService.convertIntoMonetaryFormat(price);

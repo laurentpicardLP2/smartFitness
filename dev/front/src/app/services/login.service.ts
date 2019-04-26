@@ -203,9 +203,12 @@ export class LoginService {
           let fromForm = window.localStorage.getItem("fromForm") ;
           window.localStorage.clear();
           if(fromForm == "facilityForm") {
-            setTimeout(() => this.router.navigate(['/facility-listing']), 350);
-          } else {
-            setTimeout(() => this.router.navigate(['/watch-category-listing']), 350);
+            setTimeout(() => this.router.navigate(['/facility-listing']), 650);
+          } else if(fromForm == "evenementForm"){
+            setTimeout(() => this.router.navigate(['/evenement-listing']), 650);
+          }
+          else {
+            setTimeout(() => this.router.navigate(['/watch-category-listing']), 650);
           }
           
         }

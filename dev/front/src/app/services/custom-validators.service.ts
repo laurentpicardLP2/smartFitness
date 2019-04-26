@@ -75,5 +75,6 @@ export const errorMessages: { [key: string]: string } = {
     typeLast: 'La nature de la durée de l\'abonnement doit être renseigné.',
     nameWatchSame: 'Ce nom de modèle existe déjà, veuillez en choisir un autre.',
     nameWatch: 'Le nom de modèle doit être renseigné.',
-    priceWatch: 'Le prix du modèle doit être renseigné.'
+    priceWatch: 'Le prix du modèle doit être renseigné.',
+    titleWatch: 'Le titre de l\'événement doit être renseigné.'
 };

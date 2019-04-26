@@ -3,57 +3,86 @@
     
   </div>
 
-  <div *ngIf="!isAuth" style="position: absolute; width:100%; top: 70px; text-align:center;">
-    <span class="welcome-principal">Bienvenue sur Smart Fitness</span>
+  <div *ngIf="!isAuth || (isAuth && authority=='ROLE_CUSTOMER')" style="position: absolute; width:100%; top: 70px; text-align:center;">
+    <span *ngIf="!isAuth" class="welcome-principal">Bienvenue sur Smart Fitness</span>
+    <span *ngIf="isAuth && authority=='ROLE_CUSTOMER'" class="welcome-principal">Bonjour {{fullname}},</span>
     <br>
-    <span class="welcome-secondaire">Le site de réservation en ligne de seances de fitness</span>
+    <span *ngIf="!isAuth" class="welcome-secondaire">Le site de réservation en ligne de seances de fitness</span>
+    <span *ngIf="isAuth && authority=='ROLE_CUSTOMER'" class="welcome-secondaire"> Bienvenue dans votre espace personnel</span>
     <br><br>
-    <table style="width: 100%">
+    <table *ngIf="!isAuth" style="width: 100%">
       <tr tyle="text-align: center; width: 100%;">
         <td>
-          <a class="anonymous-listing" (click)="showMustSignIn()"><img src="assets/images/FitnessResa.png" width="50%"></a>                        
+          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/FitnessResa.png" width="50%"></a>                        
         </td>
         <td>
-          <a class="anonymous-listing" (click)="showMustSignIn()"><img src="assets/images/FitnessRoutes.png" width="50%"></a> 
-        </td>
-      </tr>
-      <tr tyle="text-align: center; width: 100%;">
-        <td>
-          <a class="anonymous-listing" (click)="showMustSignIn()">Réservation</a>                    
-        </td>
-        <td>
-          <a class="anonymous-listing" (click)="showMustSignIn()">Vos séances</a>
+          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/FitnessRoutes.png" width="50%"></a> 
         </td>
       </tr>
     </table>
-    <table style="width: 100%">
+    <table *ngIf="!isAuth" style="width: 100%">
         <tr tyle="text-align: center; width: 100%;">
           <td>
-            <a class="anonymous-listing" (click)="showMustSignIn()"><img src="assets/images/FitnessAbo.png" width="80%"></a>                        
+            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/FitnessAbo.png" width="80%"></a>                        
           </td>
           <td>
-            <a class="anonymous-listing" (click)="showMustSignIn()"><img src="assets/images/FitnessAbo.png" width="80%"></a> 
+            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/FitnessAbo.png" width="80%"></a> 
           </td>
           <td>
-            <a class="anonymous-listing" (click)="showMustSignIn()"><img src="assets/images/FitnessCommandes.png" width="80%"></a> 
-          </td>
-        </tr>
-        <tr tyle="text-align: center; width: 100%;">
-          <td>
-            <a class="anonymous-listing" (click)="showMustSignIn()">Abonnement</a>                    
-          </td>
-          <td>
-            <a class="anonymous-listing" (click)="showMustSignIn()">Montres connectées</a>
-          </td>
-          <td>
-            <a class="anonymous-listing" (click)="showMustSignIn()">Vos commandes</a>
+            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/FitnessCommandes.png" width="80%"></a> 
           </td>
         </tr>
       </table>
+      <table *ngIf="isAuth && authority=='ROLE_CUSTOMER'" style="width: 100%">
+        <tr tyle="text-align: center; width: 100%;">
+          <td>
+            <a class="anonymous-listing"  routerLink="/seance-booking" routerLinkActive="active"><img src="assets/images/FitnessResa.png" width="50%"></a>                        
+          </td>
+          <td>
+            <a class="anonymous-listing" routerLink="/seance-listing" routerLinkActive="active"><img src="assets/images/FitnessRoutes.png" width="50%"></a> 
+          </td>
+        </tr>
+        <tr tyle="text-align: center; width: 100%;">
+          <td>
+            <a class="anonymous-listing"  routerLink="/seance-booking" routerLinkActive="active">Réservation</a>                    
+          </td>
+          <td>
+            <a class="anonymous-listing" routerLink="/seance-listing" routerLinkActive="active">Vos séances</a>
+          </td>
+        </tr>
+      </table>
+      <table *ngIf="isAuth && authority=='ROLE_CUSTOMER'" style="width: 100%">
+          <tr tyle="text-align: center; width: 100%;">
+            <td>
+              <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active"><img src="assets/images/FitnessAbo.png" width="80%"></a>                        
+            </td>
+            <td>
+              <a class="anonymous-listing"  routerLink="/watch-customer-proposition" routerLinkActive="active"><img src="assets/images/FitnessAbo.png" width="80%"></a> 
+            </td>
+            <td>
+              <a class="anonymous-listing" routerLink="/command-listing" routerLinkActive="active"><img src="assets/images/FitnessCommandes.png" width="80%"></a> 
+            </td>
+          </tr>
+          <tr tyle="text-align: center; width: 100%;">
+            <td>
+              <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active">Abonnement</a>                    
+            </td>
+            <td>
+              <a class="anonymous-listing"  routerLink="/watch-customer-proposition" routerLinkActive="active">Nos produits</a>
+            </td>
+            <td>
+              <a class="anonymous-listing" routerLink="/command-listing" routerLinkActive="active">Vos commandes</a>
+            </td>
+          </tr>
+        </table>
       <br>
-      <div *ngIf="evement!=''" class="div-evt">
-        <a style="cursor: pointer;" (click)="redirectTo(indexEvt)">{{evenementTitle}} 
-          <br><span class="sub-title">(Veuillez cliquer pour plus de précisions)</span></a> 
+      <div *ngIf="evenementTitle!='' && !isAuth" class="div-evt">
+        <a style="cursor: pointer;" (click)="anonymousRedirectTo(indexEvt)">{{evenementTitle}} 
+          <br><span class="sub-title" *ngIf="evement!=''" >(Veuillez cliquer pour plus de précisions)</span></a> 
+      </div>
+      <div *ngIf="evenementTitle!='' && isAuth && authority=='ROLE_CUSTOMER'" class="div-evt">
+        <a style="cursor: pointer;" (click)="customerRedirectTo(indexEvt)">{{evenementTitle}} 
+          <br><span class="sub-title" *ngIf="evement!=''" >(Veuillez cliquer pour plus de précisions)</span></a> 
       </div>
       <div *ngIf="authority!='ROLE_MANAGER' && authority!='ROLE_ADMIN'" class="pad"></div>
        <table style="width: 100%">
@@ -93,26 +122,10 @@
         </tr>
       </table>
   </div>
-  <div *ngIf="isAuth && authority=='ROLE_CUSTOMER'" style="position: absolute; width:100%; top: 110px; text-align:center;">
-    <span class="welcome">Bonjour {{fullname}},</span>
-    <br><br>
-    <span class="message">
-     Bienvenue dans votre espace personnel grâce auquel vous pouvez :<br>
-      <ul> 
-        <li><a routerLink="/seance-booking" routerLinkActive="active" ><span class="offset">Vous constituer des séances à la carte.</span><mat-icon class="green-icon">check</mat-icon></a><span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
-        <li><a routerLink="/seance-listing" routerLinkActive="active" ><span class="offset">Visualiser les feuilles de route de vos séances.</span><mat-icon class="green-icon">check</mat-icon></a></li>
-        <li><a routerLink="/subscription-customer-proposition" routerLinkActive="active" ><span class="offset">Souscrire à un abonnement (séances à -50%).</span><mat-icon class="green-icon">check</mat-icon></a><span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
-        <li><a routerLink="/watch-customer-proposition" routerLinkActive="active"><span class="offset">Acheter une montre connectée.</span><mat-icon class="green-icon">check</mat-icon></a><span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
-        <li><a routerLink="/command-listing" routerLinkActive="active" ><span class="offset">Gérer le suivi de vos commandes.</span><mat-icon class="green-icon">check</mat-icon></a><span class="empty-character">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
-      </ul>  
-    <br>
-      L'équipe Smart Fitness
-  </span>
-  </div>
   <div *ngIf="isAuth && (authority=='ROLE_MANAGER' || authority=='ROLE_ADMIN')" style="position: absolute; width:100%; top: 110px; text-align:center;">
-      <span class="welcome">Bonjour {{fullname}},</span>
+      <span class="welcome-principal">Bonjour {{fullname}},</span>
       <br><br>
-      <span class="message-manager">
+      <span class="welcome-secondaire">
         Bienvenue dans votre espace
         <span *ngIf="authority=='ROLE_MANAGER'"> de collaborateur </span>
         <span *ngIf="authority=='ROLE_ADMIN'"> d'adminnistrateur </span>

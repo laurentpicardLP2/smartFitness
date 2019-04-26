@@ -46,6 +46,11 @@ import { BalanceByFacilityComponent } from './manager/balance-by-facility/balanc
 import { CartCompositionComponent } from './synthese/cart-composition/cart-composition.component';
 import { AcknowledgmentComponent } from './booking/acknowledgment/acknowledgment.component';
 import { SignupConfirmComponent } from './user/signup-confirm/signup-confirm.component';
+import { OurActivityComponent } from './user/our-activity/our-activity.component';
+import { OurLocalisationComponent } from './user/our-localisation/our-localisation.component';
+import { EvenementNewComponent } from './manager/evenement-new/evenement-new.component';
+import { EvenementListingComponent } from './manager/evenement-listing/evenement-listing.component';
+import { EvenementDetailComponent } from './manager/evenement-detail/evenement-detail.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -77,6 +82,9 @@ const routes: Routes = [
   { path: 'watch-category-listing', canActivate: [AuthGuardManagerService], component: WatchCategoryListingComponent},
   { path: 'watch-category-detail/:idWatchCategory', canActivate: [AuthGuardManagerService], component: WatchCategoryDetailComponent},
   { path: 'watch-detail/:idWatchCategory', canActivate: [AuthGuardCustomerService], component: WatchDetailComponent},
+  { path: 'evenement-new', canActivate: [AuthGuardManagerService], component: EvenementNewComponent},
+  { path: 'evenement-listing', canActivate: [AuthGuardManagerService], component: EvenementListingComponent},
+  { path: 'evenement-detail/:idEvt', canActivate: [AuthGuardManagerService], component: EvenementDetailComponent},
   { path: 'subscription-customer-new/:idSubscriptionCategory/:nbLastSubscription/:typeLastSubscription', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerNewComponent },
   { path: 'subscription-customer-proposition', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerPropositionComponent },
   { path: 'subscription-customer-historic', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerHistoricComponent },
@@ -88,6 +96,8 @@ const routes: Routes = [
   { path: 'paypal', canActivate: [AuthGuardCustomerService], component: PaypalComponent },
   { path: 'acknoledgment/:email/:idCommand/:totalPrice/:username/:fullname', canActivate: [AuthGuardCustomerService], component: AcknowledgmentComponent },
   
+  { path: 'our-activity',  component: OurActivityComponent },
+  { path: 'our-localisation',  component: OurLocalisationComponent },
   { path: 'chart',  component: TimestampFacilityComponent },
   { path: '', component: HomeComponent }, 
   

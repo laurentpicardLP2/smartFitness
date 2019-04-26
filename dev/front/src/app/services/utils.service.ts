@@ -124,7 +124,7 @@ export class UtilsService {
    *  ATTENTION : Il existe un décalage d'une heure (voir deux ? en GMT + 2) entre la date renvoyée par springboot
    * et celle reçue par Angular => gestion du décalage horaire par la fonction getTimezoneOffset
    */
-  public convertIntoDateTimeSeanceListing(pDateOfTimestamp: string): string{
+  public convertIntoDateTimeListing(pDateOfTimestamp: string): string{
     let splitDateOfTimestamp = pDateOfTimestamp.split("T");
     let datePart = splitDateOfTimestamp[0];
     let splitDatePart: string[] = datePart.split("-");

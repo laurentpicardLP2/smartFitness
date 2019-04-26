@@ -28,5 +28,4 @@ export class EmailService {
       (error) => {console.log("send email pb", error);}
     );
   }
-  
 }

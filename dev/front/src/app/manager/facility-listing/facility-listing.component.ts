@@ -3,7 +3,7 @@ import { Facility} from '../../models/facility.model';
 import { ManagerService } from '../../services/manager.service';
 import { BehaviorSubject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatPaginator, MatTableDataSource, PageEvent, MatSort } from '@angular/material'
+import { MatPaginator, MatTableDataSource, PageEvent, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-facility-listing',

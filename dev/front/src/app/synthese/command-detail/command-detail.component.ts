@@ -39,7 +39,7 @@ export class CommandDetailComponent implements OnInit {
   }
 
   public convertIntoDateTime(pDateOfSeance) {
-    return pDateOfSeance = (pDateOfSeance==null) ? "" : this.utilsService.convertIntoDateTimeSeanceListing(pDateOfSeance);
+    return pDateOfSeance = (pDateOfSeance==null) ? "" : this.utilsService.convertIntoDateTimeListing(pDateOfSeance);
   }
 
   convertIntoMonetaryFormat(price: number){

@@ -168,7 +168,7 @@ export class OffresService {
     );
   }
   //addwatchcategory/{nameWatch}/{priceWatch}/{descriptionWatch}/{imageWatch}
-  public addWatchCategory(nameWatch: string, priceWatch: number,  descriptionWatch: string, imageWatch: string){
+  public addWatchCategory(nameWatch: string, priceWatch: number,  descriptionWatch: string, imageWatch: string, isRouting: boolean){
     this.httpClient.post<WatchCategory>('http://localhost:8080/managerctrl/addwatchcategory/' + nameWatch + '/' + priceWatch + '/' + descriptionWatch + '/' + imageWatch  , null, 
         {
         headers: {
@@ -178,7 +178,9 @@ export class OffresService {
       }).subscribe(
         (newWatchCategory) =>{ 
           console.log("add WatchCategory ok : ", newWatchCategory);
-          setTimeout(() => this.router.navigate(['watch-category-listing']), 500);
+          if(isRouting){
+            this.router.navigate(['watch-category-listing']);
+          }
         },
         (error) => { 
           console.log("add WatchCategory pb : ", error); 
