@@ -20,7 +20,7 @@ export class EvenementService {
     listEvenements$: BehaviorSubject<Evenement[]> = new BehaviorSubject(null);
 
     public getEvenements(): Observable<Evenement[]> {
-        return this.httpClient.get<Evenement[]>('http://localhost:8080/evenementctrl/getallevenements', 
+        return this.httpClient.get<Evenement[]>('http://localhost:8080/evenementctrl/getevenementinprogress', 
           {
             headers: {
               "Content-Type": "application/json",
@@ -28,6 +28,16 @@ export class EvenementService {
             }
           });
       }
+
+    public getEvenementInSlotTime(): Observable<Evenement[]> {
+      return this.httpClient.get<Evenement[]>('http://localhost:8080/evenementctrl/getevenementinslottime', 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        });
+    }
     
     public getIdMaxEvt(): Observable<number> {
         return this.httpClient.get<number>('http://localhost:8080/evenementctrl/getidmaxevenement', 
@@ -38,6 +48,17 @@ export class EvenementService {
             }
         });
     }
+
+    public getEvenementById(idEvt: number): Observable<Evenement> {
+      return this.httpClient.get<Evenement>('http://localhost:8080/evenementctrl/getevenementbyid/' + idEvt, 
+      {
+          headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+          }
+      });
+  }
+
 
     public publishEvenements() {
         this.getEvenements().subscribe(
@@ -64,6 +85,30 @@ export class EvenementService {
         (error) => { console.log("init evt pb : ", error);  this.router.navigate(['error-page']);}
     );
     
+    }
+
+    public updateEvenement(evenement: Evenement, isRouting: boolean){
+      this.httpClient.put<Evenement>('http://localhost:8080/evenementctrl/updateevenement', evenement, 
+          {
+          headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+          }
+        }).subscribe(
+          (updatedEvenement) =>{
+            console.log("update Evenement OK : ", updatedEvenement);
+            let index = this.listEvenements.findIndex(evt => evt.idEvt === evenement.idEvt);
+            this.listEvenements[index] = updatedEvenement;
+            this.listEvenements$.next(this.listEvenements);
+            if(isRouting){
+              setTimeout(() => this.router.navigate(['evenement-listing']), 150);
+            }
+          },
+          (error) => { 
+            console.log("update evenement pb : ", error); 
+            this.router.navigate(['error-page']);
+          }
+      );
     }
 
     public deleteEvenement(idEvt: number){

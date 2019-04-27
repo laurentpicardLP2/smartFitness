@@ -2,6 +2,8 @@ package laurent.fitness.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+
 import java.util.Date;
 
 
@@ -30,7 +32,14 @@ public class Evenement implements Serializable {
 
 	private String titleEvt;
 
+	private String videoEvt;
+
+	
 	public Evenement() {
+	}
+	
+	public Evenement(String titleEvt) {
+		this.titleEvt = titleEvt;
 	}
 
 	public int getIdEvt() {
@@ -79,6 +88,14 @@ public class Evenement implements Serializable {
 
 	public void setTitleEvt(String titleEvt) {
 		this.titleEvt = titleEvt;
+	}
+
+	public String getVideoEvt() {
+		return this.videoEvt;
+	}
+
+	public void setVideoEvt(String videoEvt) {
+		this.videoEvt = videoEvt;
 	}
 
 }

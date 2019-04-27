@@ -30,7 +30,7 @@ export class WatchCategoryDetailComponent implements OnInit {
   nameWatchInit: string;
   priceWatch: number;
   descriptionWatch: string;
-  imageWatch: string;
+  imageWatch: string = '';
   watchCatregoryForm: FormGroup;
   listWatchCtegories: BehaviorSubject<WatchCategory[]>;
   errors = errorMessages;
@@ -128,11 +128,11 @@ export class WatchCategoryDetailComponent implements OnInit {
     if (this.file !== undefined){
       this.imageWatch = this.nameWatch + "_" + this.file.name;
       data.append('data', this.file, this.nameWatch + "_" + this.file.name);
-      this.offresService.updateWatchCategory(this.idWatchCategory, this.nameWatch, this.priceWatch,  this.descriptionWatch, this.imageWatch);
+      this.offresService.updateWatchCategory(this.idWatchCategory, this.nameWatch, this.priceWatch,  this.descriptionWatch, this.imageWatch, false);
       this.managerService.addImage(data, this.username, this.password, "watchCategoryForm");
     }
     else {
-      this.offresService.updateWatchCategory(this.idWatchCategory, this.nameWatch, this.priceWatch,  this.descriptionWatch, this.imageWatch);
+      this.offresService.updateWatchCategory(this.idWatchCategory, this.nameWatch, this.priceWatch,  this.descriptionWatch, this.imageWatch, true);
     }
      
   }

@@ -12,7 +12,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import { MatVideoModule } from 'mat-video';
+import { EmbedVideo } from 'ngx-embed-video';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -77,6 +78,7 @@ import { OurLocalisationComponent } from './user/our-localisation/our-localisati
 import { EvenementNewComponent } from './manager/evenement-new/evenement-new.component';
 import { EvenementListingComponent } from './manager/evenement-listing/evenement-listing.component';
 import { EvenementDetailComponent } from './manager/evenement-detail/evenement-detail.component';
+import { EvenementDetailUserComponent } from './user/evenement-detail-user/evenement-detail-user.component';
 
 @NgModule({
   declarations: [
@@ -131,10 +133,13 @@ import { EvenementDetailComponent } from './manager/evenement-detail/evenement-d
     EvenementNewComponent,
     EvenementListingComponent,
     EvenementDetailComponent,
+    EvenementDetailUserComponent,
 
   ],
   imports: [
     BrowserModule,
+    MatVideoModule,
+    EmbedVideo.forRoot(),
     MatCarouselModule,
     AppRoutingModule,
     HttpClientModule,

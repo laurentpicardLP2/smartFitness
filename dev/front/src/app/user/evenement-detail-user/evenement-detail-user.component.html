@@ -1,0 +1,41 @@
+<div fxFlex fxLayout fxLayoutAlign="center">
+  <div class="pad"></div>
+  <div class="pad"></div>
+    <table style="width:100%">
+      <tr style="width:100%; text-align:center;">
+        <td style="width:100%; text-align:center;">
+          <span class="title">{{titleEvt}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <div class="pad"></div>
+        </td>
+      </tr>
+      <tr style="width:100%; text-align:center;">
+        <td style="width:100%; text-align:center;">
+          {{descriptionEvt}}
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <div class="pad"></div>
+        </td>
+      </tr>
+      <tr *ngIf="imageEvt!=''&& imageEvt!='undefined'" style="width:100%; text-align:center;">
+        <td style="width:100%; text-align:center;">
+            <img  *ngIf="imageEvt!=''&& imageEvt!='undefined'" class="img-evt" src="assets/images/facilities/{{ imageEvt }}" />
+        </td>
+      </tr>
+      <tr>
+          <td>
+              <div class="pad"></div>
+          </td>
+        </tr>
+      <tr style="width:100%; text-align:center;">
+        <td style="width:100%; text-align:center;">
+            <div [innerHtml]="iframe_html"></div>
+        </td>
+      </tr>
+    </table>   
+</div>

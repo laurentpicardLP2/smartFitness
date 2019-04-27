@@ -33,7 +33,7 @@ export class FacilityDetailComponent implements OnInit {
   priceFacility: number;
   dateOfPurchase: Date;
   descriptionFacility: string;
-  imageFacility: string;
+  imageFacility: string = '';
   facilityForm: FormGroup;
   bChangeImage: boolean = false;
   facilityCategoryAssociateToFacility: FacilityCategory;
@@ -171,12 +171,12 @@ export class FacilityDetailComponent implements OnInit {
       
     if (this.file !== undefined){
       this.imageFacility = this.nameFacility + "_" + this.file.name;
-      this.managerService.updateFacility(this.idFacility, this.nameFacilityCategory, this.nameRoom, this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility, this.priceFacility);
+      this.managerService.updateFacility(this.idFacility, this.nameFacilityCategory, this.nameRoom, this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility, this.priceFacility, false);
       data.append('data', this.file, this.nameFacility + "_" + this.file.name);
       this.managerService.addImage(data, this.username, this.password, "facilityForm");
     }
     else {
-      this.managerService.updateFacility(this.idFacility, this.nameFacilityCategory, this.nameRoom, this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility, this.priceFacility);
+      this.managerService.updateFacility(this.idFacility, this.nameFacilityCategory, this.nameRoom, this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility, this.priceFacility, true);
     }
 
 

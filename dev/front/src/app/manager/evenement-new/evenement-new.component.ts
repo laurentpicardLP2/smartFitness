@@ -62,14 +62,10 @@ export class EvenementNewComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(private httpClient: HttpClient, 
-              private formBuilder: FormBuilder,
-              private offresService: OffresService,
+  constructor(private formBuilder: FormBuilder,
               private managerService: ManagerService,
               private loginService: LoginService,
               private evenementService: EvenementService,
-              private router: Router,
-              private token: TokenStorageService,
               private snackBar: MatSnackBar
               ) {
                 this.initDateField();
@@ -77,10 +73,7 @@ export class EvenementNewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.loginService.setIsUserLoggedSubject(true);
-    // TO DO reinit setUsername après upload image file
-
-    this.loginService.usernameSubject.subscribe(res => {
+     this.loginService.usernameSubject.subscribe(res => {
       this.username = res;
     });
 
@@ -94,7 +87,7 @@ export class EvenementNewComponent implements OnInit {
 
   createForm(){
     this.evenementForm = this.formBuilder.group({
-      titleEvt: ['Title 1', [
+      titleEvt: ['', [
         Validators.required,
         Validators.minLength(1)
       ]],

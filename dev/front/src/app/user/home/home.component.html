@@ -76,13 +76,13 @@
           </tr>
         </table>
       <br>
-      <div *ngIf="evenementTitle!='' && !isAuth" class="div-evt">
-        <a style="cursor: pointer;" (click)="anonymousRedirectTo(indexEvt)">{{evenementTitle}} 
-          <br><span class="sub-title" *ngIf="evement!=''" >(Veuillez cliquer pour plus de précisions)</span></a> 
+      <div *ngIf="stringTitle!='' && !isAuth" class="div-evt">
+        <a style="cursor: pointer;" (click)="anonymousRedirectTo(indexEvt)">{{stringTitle}} 
+          <br><span class="sub-title" *ngIf="stringTitle!=''" >(Veuillez cliquer pour plus de précisions)</span></a> 
       </div>
-      <div *ngIf="evenementTitle!='' && isAuth && authority=='ROLE_CUSTOMER'" class="div-evt">
-        <a style="cursor: pointer;" (click)="customerRedirectTo(indexEvt)">{{evenementTitle}} 
-          <br><span class="sub-title" *ngIf="evement!=''" >(Veuillez cliquer pour plus de précisions)</span></a> 
+      <div *ngIf="stringTitle!='' && isAuth && authority=='ROLE_CUSTOMER'" class="div-evt">
+        <a style="cursor: pointer;" (click)="customerRedirectTo(indexEvt)">{{stringTitle}} 
+          <br><span class="sub-title" *ngIf="stringTitle!=''" >(Veuillez cliquer pour plus de précisions)</span></a> 
       </div>
       <div *ngIf="authority!='ROLE_MANAGER' && authority!='ROLE_ADMIN'" class="pad"></div>
        <table style="width: 100%">

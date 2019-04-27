@@ -216,7 +216,7 @@ export class OffresService {
       );
     }
 
-    public updateWatchCategory(idWatchCategory: number, nameWatch: string, priceWatch: number,  descriptionWatch: string, imageWatch: string){
+    public updateWatchCategory(idWatchCategory: number, nameWatch: string, priceWatch: number,  descriptionWatch: string, imageWatch: string, isRouting: boolean){
       this.httpClient.put<WatchCategory>('http://localhost:8080/managerctrl/updatewatchcategory/' + idWatchCategory + '/' + nameWatch + '/' + priceWatch + '/' + descriptionWatch + '/' + imageWatch  , null, 
           {
           headers: {
@@ -233,7 +233,9 @@ export class OffresService {
               this.listNameWatches.push(this.listWatchCategories[i].nameWatch);
             }
             this.listNameWatches$.next(this.listNameWatches);
-            setTimeout(() => this.router.navigate(['watch-category-listing']), 500);
+            if(isRouting){
+              setTimeout(() => this.router.navigate(['watch-category-listing']), 150);
+            }
           },
           (error) => { 
             console.log("update watchCategory pb : ", error); 

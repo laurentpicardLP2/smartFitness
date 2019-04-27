@@ -131,11 +131,12 @@ export class UtilsService {
     let timePart = splitDateOfTimestamp[1];
     let timeZoneOffset = (new Date(parseInt(splitDatePart[0], 10),  parseInt(splitDatePart[1], 10) - 1, parseInt(splitDatePart[2], 10))).getTimezoneOffset();
     let splitTimePart = timePart.split(":");
-    let hh = parseInt(splitTimePart[0],10) - (timeZoneOffset/60);
     let date = new Date(parseInt(splitDatePart[0], 10),  parseInt(splitDatePart[1], 10) - 1, parseInt(splitDatePart[2], 10))
+    let readGetTime = new Date(parseInt(splitDatePart[0], 10),  parseInt(splitDatePart[1], 10) - 1, parseInt(splitDatePart[2], 10), parseInt(splitTimePart[0],10), parseInt(splitTimePart[1],10)).getTime();
+    let readDateTime = new Date(readGetTime - ((timeZoneOffset/60)*3600000 + (timeZoneOffset%60) * 60000));
     
-    return  this.dayName[date.getDay()] + " " + splitDatePart[2] + ' ' + this.monthName[date.getMonth()] + ' ' + splitDatePart[0] + " " 
-      + ((hh < 10) ? "0" + hh.toString() : hh.toString()) + ':' + splitTimePart[1];
+    return  this.dayName[readDateTime.getDay()] + " " + (readDateTime.getDate() < 10 ? "0" + readDateTime.getDate().toString() : readDateTime.getDate().toString()) + ' ' + this.monthName[readDateTime.getMonth()] + ' ' + readDateTime.getFullYear() + " " 
+      + ((readDateTime.getHours() < 10) ? "0" + readDateTime.getHours().toString() : readDateTime.getHours().toString()) + ':' + (readDateTime.getMinutes() < 10 ? "0" + readDateTime.getMinutes().toString() : readDateTime.getMinutes().toString());
     }
 
     public convertIntoFormatLastSubscription(nbLast: number, typeLast: string) {

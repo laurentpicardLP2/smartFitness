@@ -1,3 +1,4 @@
+import { Evenement } from 'src/app/models/evenement.model';
 import { Router } from '@angular/router';
 import { ReportingService } from 'src/app/services/reporting.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -9,6 +10,7 @@ import {
   MatCarouselSlideComponent,
   Orientation
 } from '@ngmodule/material-carousel';
+import { EvenementService } from 'src/app/services/evenement.service';
 
 
 @Component({
@@ -24,8 +26,9 @@ export class HomeComponent implements OnInit {
   public showContent = false;
   indexEvt: number = -1;
 
-  evenementArray: string [] = [];
-  evenementTitle: string = "";
+  arrayTitle: string [] = [];
+  evenementArray: Evenement [] = [];
+  stringTitle: string = "";
 
   public timings = '250ms ease-in';
   public autoplay = true;
@@ -50,6 +53,7 @@ export class HomeComponent implements OnInit {
   
   constructor(private loginService: LoginService,
               private reportingService: ReportingService,
+              private evenementservice: EvenementService,
               private router: Router,
               private snackBar: MatSnackBar) { }
 
@@ -65,17 +69,33 @@ export class HomeComponent implements OnInit {
     this.loginService.authoritySubject.subscribe(res => {
       this.authority = res.authority;
       if(this.authority == 'ROLE_ANONYMOUS'){
-        this.evenementArray.push("Connectez-vous pour accéder aux fonctionnalités.");
-        this.evenementArray.push("Découvrez qui nous sommes et ce que nous proposons.");
-        this.evenementArray.push("Où sommes-nous et comment venir chez nous.");
+        this.arrayTitle.push("Connectez-vous pour accéder aux fonctionnalités.");
+        this.arrayTitle.push("Découvrez qui nous sommes et ce que nous proposons.");
+        this.arrayTitle.push("Où sommes-nous et comment venir chez nous.");
         this.showEvenementsLoop();
       } else if(this.authority == 'ROLE_CUSTOMER'){
         // get Evenements from DataBase into this.evenementArray
-        this.evenementArray = [];
-        this.evenementTitle = "";
-        if(this.evenementArray.length > 0){
-          this.showEvenementsLoop()
-        }
+        this.arrayTitle = [];
+        this.stringTitle = "";
+        this.evenementservice.getEvenementInSlotTime().subscribe(
+          (res) => {
+            this.evenementArray = res;
+            for(let i = 0; i < res.length; i++){
+              this.arrayTitle.push(res[i].titleEvt);
+            }
+            if(res.length > 0){
+              this.showEvenementsLoop();
+            }
+          },
+          (error) => {
+            this.evenementArray = [];
+            this.arrayTitle = [];
+            this.stringTitle = "";
+          }
+        );
+        
+        
+        
       }
 
     });  
@@ -91,8 +111,8 @@ export class HomeComponent implements OnInit {
   }
 
   public showEvenementsLoop(){
-    this.indexEvt = (this.indexEvt==this.evenementArray.length-1) ? 0 : this.indexEvt + 1;
-    this.evenementTitle = this.evenementArray[this.indexEvt];
+    this.indexEvt = (this.indexEvt==this.arrayTitle.length-1) ? 0 : this.indexEvt + 1;
+    this.stringTitle = this.arrayTitle[this.indexEvt];
     setTimeout(() => this.showEvenementsLoop(), 3000);
   }
 
@@ -108,7 +128,7 @@ export class HomeComponent implements OnInit {
   }
 
   public customerRedirectTo(index: number){
-    console.log("index : ", index);
+    this.router.navigate(['evenement-detail-user/' + this.evenementArray[index].idEvt]);
   }
 
   public showMustSignIn(){

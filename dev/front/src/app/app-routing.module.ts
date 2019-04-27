@@ -51,6 +51,7 @@ import { OurLocalisationComponent } from './user/our-localisation/our-localisati
 import { EvenementNewComponent } from './manager/evenement-new/evenement-new.component';
 import { EvenementListingComponent } from './manager/evenement-listing/evenement-listing.component';
 import { EvenementDetailComponent } from './manager/evenement-detail/evenement-detail.component';
+import { EvenementDetailUserComponent } from './user/evenement-detail-user/evenement-detail-user.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -85,6 +86,7 @@ const routes: Routes = [
   { path: 'evenement-new', canActivate: [AuthGuardManagerService], component: EvenementNewComponent},
   { path: 'evenement-listing', canActivate: [AuthGuardManagerService], component: EvenementListingComponent},
   { path: 'evenement-detail/:idEvt', canActivate: [AuthGuardManagerService], component: EvenementDetailComponent},
+  { path: 'evenement-detail-user/:idEvt', canActivate: [AuthGuardCustomerService], component: EvenementDetailUserComponent},
   { path: 'subscription-customer-new/:idSubscriptionCategory/:nbLastSubscription/:typeLastSubscription', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerNewComponent },
   { path: 'subscription-customer-proposition', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerPropositionComponent },
   { path: 'subscription-customer-historic', canActivate: [AuthGuardCustomerService], component: SubscriptionCustomerHistoricComponent },

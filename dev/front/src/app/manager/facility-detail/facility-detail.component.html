@@ -50,7 +50,7 @@
       <div>
         <input type="file" id="userFile" (change)="onSelectFile($event)" #fileInput style="display: none">
         <mat-form-field class="facility-full-width">
-          <input matInput formControlName="imageFacility" placeholder="Image à uploader" readonly [(ngModel)]="imageFacility">
+          <input matInput formControlName="imageFacility" placeholder="Image à uploader" [(ngModel)]="imageFacility">
         </mat-form-field>
         <button mat-raised-button (click)="selectFile()">Selectionner</button>
       </div>

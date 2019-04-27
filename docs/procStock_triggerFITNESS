@@ -61,10 +61,11 @@ END$$
 DELIMITER ;
 
 
+use db_fitness;
 drop procedure IF EXISTS `proc_facility_adaptater`;
 DELIMITER $$
 CREATE PROCEDURE `proc_facility_adaptater` ()
-	COMMENT 'Procédure pour d\'un jeu de données sur deux années glissantes'
+	COMMENT 'Procédure pour obtenir la liste des faciliies'
 BEGIN
 delete from facility_adaptater;
 INSERT INTO facility_adaptater

@@ -37,19 +37,38 @@ public class EvenementServiceImpl implements EvenementService {
 		updatedEvenement.setEndDateTimeEvt(evt.getEndDateTimeEvt());
 		updatedEvenement.setStartDateTimeEvt(evt.getStartDateTimeEvt());
 		updatedEvenement.setImageEvt(evt.getImageEvt());
+		updatedEvenement.setVideoEvt(evt.getVideoEvt());
 		return this.evenementRepo.save(updatedEvenement);
 	}
 
 	@Override
-	public void deleteEvenement(Evenement evt) {
+	public void deleteEvenement(int idEvt) {
 		// TODO Auto-generated method stub
-		this.evenementRepo.delete(evt);
+		this.evenementRepo.delete(this.evenementRepo.findByIdEvenement(idEvt));
 	}
 
 	@Override
 	public Evenement findEvenementById(int idEvt) {
 		// TODO Auto-generated method stub
 		return this.evenementRepo.findByIdEvenement(idEvt);
+	}
+
+	@Override
+	public int getIdMaxEvenement() {
+		// TODO Auto-generated method stub
+		return this.evenementRepo.findByIdMaxEvenement();
+	}
+
+	@Override
+	public List<Evenement> getEvenementInProgress() {
+		// TODO Auto-generated method stub
+		return this.evenementRepo.findByEvenementInProgress();
+	}
+
+	@Override
+	public List<Evenement> getEvenementInSlotTime() {
+		// TODO Auto-generated method stub
+		return this.evenementRepo.findByEvenementInSlotTime();
 	}
 
 }

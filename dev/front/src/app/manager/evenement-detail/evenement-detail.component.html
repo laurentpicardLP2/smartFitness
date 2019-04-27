@@ -1,4 +1,67 @@
-<p>
-  evenement-detail works!
-</p>
-{{idEvt}}
+<div fxFlex fxLayout fxLayoutAlign="center">
+  <div class="pad">
+    <form [formGroup]="evenementForm" >        
+      <div>
+        <mat-form-field class="evenement-full-width">
+          <input matInput placeholder="Titre de l'événement" type="text" formControlName="titleEvt" [(ngModel)]="titleEvt">
+        <mat-error *ngIf="evenementForm.controls['titleEvt'].hasError('required')">
+            {{errors.titleEvt}}
+        </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="evenement-full-width">
+            <textarea matInput placeholder="Description de l'événement'" type="text" formControlName="descriptionEvt" [(ngModel)]="descriptionEvt"></textarea>
+        </mat-form-field>
+
+      </div>
+      <div>
+        <mat-form-field class="evenement-full-width">
+          <input matInput type="date" placeholder="Date de début de l'événement" formControlName="startDateEvt" [(ngModel)]="strStartDateEvt"><!--(keyup)="" (click)=""-->
+        </mat-form-field>
+        <mat-form-field class="evenement-full-width">
+          <input matInput type="time" placeholder="Heure de début de l'événement" formControlName="startTimeEvt" [(ngModel)]="strStartTimeEvt">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="evenement-full-width">
+          <input matInput type="date" placeholder="Date de fin de l'événement" formControlName="endDateEvt" [(ngModel)]="strEndDateEvt"><!--(keyup)="" (click)=""-->
+        </mat-form-field>
+        <mat-form-field class="evenement-full-width">
+          <input matInput type="time" placeholder="Heure de fin de l'événement" formControlName="endTimeEvt" [(ngModel)]="strEndTimeEvt">
+        </mat-form-field>
+      </div>
+      <div>
+        <input type="file" id="userFile" (change)="onSelectFile($event)" #fileInput style="display: none">
+        <mat-form-field class="evenement-full-width">
+          <input matInput formControlName="imageEvt" placeholder="Image à uploader" [(ngModel)]="imageEvt">
+        </mat-form-field>
+        <button mat-raised-button (click)="selectFile()">Selectionner</button>
+      </div>
+      <div>
+        <mat-form-field class="evenement-full-width">
+            <input matInput placeholder="Adresse du lien vidéo" placeholder="Adresse du lien vidéo" type="text" formControlName="videoEvt" [(ngModel)]="videoEvt">
+        </mat-form-field>
+
+      </div>
+
+      <button mat-raised-button [disabled]="evenementForm.invalid" (click)="onUpdate()">Modifier</button>
+      <div>
+          <br>
+        <img *ngIf="imageEvt!='' && imageEvt!='undefined' &&  !bChangeImage" class="img-evt" src="assets/images/facilities/{{ imageEvt }}" />
+      </div>
+      <div *ngIf="imageEvt!='' && imageEvt!='undefined' && bChangeImage">
+        <br>
+        Cliquez sur "modifier" pour procéder à l'upload de l'image.
+      </div>
+      <div [innerHtml]="iframe_html"></div>
+      
+      
+        <!-- <iframe width="320" height="240"
+          src="{{ youtubeId }}"
+          frameborder="0"
+          allowfullscreen
+        ></iframe> -->
+    </form>
+  </div> 
+</div>

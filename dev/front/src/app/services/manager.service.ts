@@ -404,7 +404,7 @@ export class ManagerService {
       );
     }
 
-    public updateFacility(idFacility:number, nameFacilityCategory: string, nameRoom: string,  nameFacility: string, priceSeance: number, descriptionFacility: string, imageFacility: string, priceFacility: number){
+    public updateFacility(idFacility:number, nameFacilityCategory: string, nameRoom: string,  nameFacility: string, priceSeance: number, descriptionFacility: string, imageFacility: string, priceFacility: number, isRouting: boolean){
       this.httpClient.put<Facility>('http://localhost:8080/managerctrl/updatefacility/' + idFacility + '/' + nameFacilityCategory + '/' + nameRoom + '/' + nameFacility + '/' + priceSeance+ '/' + descriptionFacility + '/' + imageFacility + '/' + priceFacility, null, 
           {
           headers: {
@@ -423,7 +423,9 @@ export class ManagerService {
             }
             this.listNameFacilities$.next(this.listNameFacilities);
 
-            setTimeout(() => this.router.navigate(['facility-listing']), 500);
+            if(isRouting){
+              setTimeout(() => this.router.navigate(['facility-listing']), 150);
+            }
           },
           (error) => { 
             console.log("update Facility pb : ", error); 
