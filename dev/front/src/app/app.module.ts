@@ -82,6 +82,9 @@ import { EvenementDetailUserComponent } from './user/evenement-detail-user/evene
 import { ProductCategoryNewComponent } from './manager/product-category-new/product-category-new.component';
 import { ProductCategoryListingComponent } from './manager/product-category-listing/product-category-listing.component';
 import { ProductCategoryDetailComponent } from './manager/product-category-detail/product-category-detail.component';
+import { ProductRefNewComponent } from './manager/product-ref-new/product-ref-new.component';
+import { ProductRefListingComponent } from './manager/product-ref-listing/product-ref-listing.component';
+import { ProductRefDetailComponent } from './manager/product-ref-detail/product-ref-detail.component';
 
 @NgModule({
   declarations: [
@@ -140,6 +143,9 @@ import { ProductCategoryDetailComponent } from './manager/product-category-detai
     ProductCategoryNewComponent,
     ProductCategoryListingComponent,
     ProductCategoryDetailComponent,
+    ProductRefNewComponent,
+    ProductRefListingComponent,
+    ProductRefDetailComponent,
 
   ],
   imports: [

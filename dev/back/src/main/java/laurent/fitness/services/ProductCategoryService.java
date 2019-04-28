@@ -23,4 +23,6 @@ public interface ProductCategoryService {
 	public ProductCategory findByNameProductCategory(String nameProductCategory);
 	
 	public List<String> getListNameProductCategories();
+	
+	public ProductCategory getProductCategoryAssociateToProductRef(int idProductRef);
 }

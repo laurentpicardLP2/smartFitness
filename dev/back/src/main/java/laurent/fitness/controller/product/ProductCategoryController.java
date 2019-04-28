@@ -1,4 +1,4 @@
-package laurent.fitness.controller;
+package laurent.fitness.controller.product;
 
 import java.util.List;
 

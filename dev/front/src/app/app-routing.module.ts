@@ -55,6 +55,9 @@ import { EvenementDetailUserComponent } from './user/evenement-detail-user/evene
 import { ProductCategoryNewComponent } from './manager/product-category-new/product-category-new.component';
 import { ProductCategoryListingComponent } from './manager/product-category-listing/product-category-listing.component';
 import { ProductCategoryDetailComponent } from './manager/product-category-detail/product-category-detail.component';
+import { ProductRefNewComponent } from './manager/product-ref-new/product-ref-new.component';
+import { ProductRefListingComponent } from './manager/product-ref-listing/product-ref-listing.component';
+import { ProductRefDetailComponent } from './manager/product-ref-detail/product-ref-detail.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -85,6 +88,9 @@ const routes: Routes = [
   { path: 'product-category-new', canActivate: [AuthGuardManagerService], component: ProductCategoryNewComponent},
   { path: 'product-category-listing', canActivate: [AuthGuardManagerService], component: ProductCategoryListingComponent},
   { path: 'product-category-detail/:idProductCategory', canActivate: [AuthGuardManagerService], component: ProductCategoryDetailComponent},
+  { path: 'product-ref-new', canActivate: [AuthGuardManagerService], component: ProductRefNewComponent},
+  { path: 'product-ref-listing', canActivate: [AuthGuardManagerService], component: ProductRefListingComponent},
+  { path: 'product-ref-detail/:idProductRef', canActivate: [AuthGuardManagerService], component: ProductRefDetailComponent},
   { path: 'watch-category-new', canActivate: [AuthGuardManagerService], component: WatchCategoryNewComponent},
   { path: 'watch-category-listing', canActivate: [AuthGuardManagerService], component: WatchCategoryListingComponent},
   { path: 'watch-category-detail/:idWatchCategory', canActivate: [AuthGuardManagerService], component: WatchCategoryDetailComponent},

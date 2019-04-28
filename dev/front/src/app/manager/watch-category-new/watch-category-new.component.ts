@@ -8,10 +8,8 @@ import { FileInformation } from '../file-information';
 import { OffresService } from 'src/app/services/offres.service';
 import { ManagerService } from 'src/app/services/manager.service';
 import { WatchCategory } from 'src/app/models/watch-category.model';
-import { Authority } from 'src/app/models/authority.model';
-import { User } from 'src/app/models/user.model';
 import { BehaviorSubject } from 'rxjs';
-import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
+import { ConfirmValidParentMatcher,  errorMessages} from '../../services/custom-validators.service';
 import { WatchValidator } from 'src/app/validators/watch.validator';
 
 @Component({

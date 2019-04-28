@@ -119,6 +119,8 @@ export class LoginService {
          this.offresServices.publishNameSubscriptions();
          this.offresServices.publishNameWatches();
          this.productService.publishNameProductCategories();
+         this.productService.publishNameProductRefs();
+         this.productService.publishProductCategories();
        }
     } else {
       this.authority = "ROLE_ANONYMOUS";
@@ -210,9 +212,12 @@ export class LoginService {
           } else if(fromForm == "evenementForm"){
             setTimeout(() => this.router.navigate(['/evenement-listing']), 650);
           }
-          else {
-            setTimeout(() => this.router.navigate(['/watch-category-listing']), 650);
+         else if(fromForm == "productRefForm"){
+          setTimeout(() => this.router.navigate(['/product-ref-listing']), 650);
           }
+          // else {
+          //   setTimeout(() => this.router.navigate(['/watch-category-listing']), 650);
+          // }
           
         }
         else {            

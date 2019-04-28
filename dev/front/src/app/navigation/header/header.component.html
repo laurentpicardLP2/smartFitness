@@ -95,7 +95,10 @@
 
       <mat-menu  #products="matMenu">
         <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/product-category-new')"><mat-icon>add_to_photos</mat-icon>Ajout une catégorie de produit</button>
-        <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/product-category-listing')"><mat-icon>list</mat-icon>Listing des catégories de produits</button>
+        <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/product-category-listing')"><mat-icon>list</mat-icon>Listing des catégories de produit</button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/product-ref-new')"><mat-icon>add_to_photos</mat-icon>Ajout une référence de produit</button>
+        <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/product-ref-listing')"><mat-icon>list</mat-icon>Listing des références de produit</button>
       </mat-menu>
 
        <button *ngIf="isAuth && authority.authority=='ROLE_ADMIN'"  mat-button [matMenuTriggerFor]="staff"><mat-icon>supervisor_account</mat-icon> Gestion staff</button>

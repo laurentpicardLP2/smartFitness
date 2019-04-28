@@ -2,6 +2,10 @@ package laurent.fitness.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 
@@ -22,6 +26,7 @@ public class ProductCategory implements Serializable {
 
 	//bi-directional many-to-one association to ProductRef
 	@OneToMany(mappedBy="productCategory")
+	@JsonManagedReference
 	private List<ProductRef> productRefs;
 
 	public ProductCategory() {

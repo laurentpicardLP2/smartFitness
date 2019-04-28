@@ -73,4 +73,10 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 		return this.productCategoryRepo.findByNameProductCategoriesList();
 	}
 
+	@Override
+	public ProductCategory getProductCategoryAssociateToProductRef(int idProductRef) {
+		// TODO Auto-generated method stub
+		return this.productCategoryRepo.findByIdProductCategoryAssociateToProductRef(idProductRef);
+	}
+
 }

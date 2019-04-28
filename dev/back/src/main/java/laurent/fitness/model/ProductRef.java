@@ -2,6 +2,11 @@ package laurent.fitness.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 
@@ -33,9 +38,26 @@ public class ProductRef implements Serializable {
 	//bi-directional many-to-one association to ProductCategory
 	@ManyToOne
 	@JoinColumn(name="ProductCategory_idProductCategory")
+	@JsonBackReference
 	private ProductCategory productCategory;
 
 	public ProductRef() {
+	}
+	
+	public ProductRef(String nameProductRef, float priceProductRef, String descriptionProductRef, String imageProductRef) {
+		this.nameProductRef = nameProductRef;
+		this.priceProductRef = priceProductRef;
+		this.descriptionProductRef = (descriptionProductRef.equals("undefined")) ? "" : descriptionProductRef;
+		this.imageProductRef = (imageProductRef.equals("undefined")) ? "" : imageProductRef;
+	}
+
+	
+	public ProductRef(String nameProductRef, float priceProductRef, String descriptionProductRef, String imageProductRef, ProductCategory productCategory) {
+		this.nameProductRef = nameProductRef;
+		this.priceProductRef = priceProductRef;
+		this.descriptionProductRef = (descriptionProductRef.equals("undefined")) ? "" : descriptionProductRef;
+		this.imageProductRef = (imageProductRef.equals("undefined")) ? "" : imageProductRef;
+		this.productCategory = productCategory;
 	}
 
 	public int getIdProductRef() {

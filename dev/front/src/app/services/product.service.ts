@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ProductCategory } from 'src/app/models/product-category.model';
+import { ProductRef } from 'src/app/models/product-ref.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -17,9 +18,15 @@ export class ProductService {
 
     public listProductCategories: ProductCategory [] = [] ;
     public listNameProductCategories: string [] = [] ;
+    public listProductRefs: ProductRef [] = [] ;
+    public listNameProductRefs: string [] = [] ;
+    public productCategoryAssociateToProductRef: ProductCategory = null;
 
     listProductCategories$: BehaviorSubject<ProductCategory[]> = new BehaviorSubject(null);
     listNameProductCategories$: BehaviorSubject<string[]> = new BehaviorSubject(null);
+    listProductRefs$: BehaviorSubject<ProductRef[]> = new BehaviorSubject(null);
+    listNameProductRefs$: BehaviorSubject<string[]> = new BehaviorSubject(null);
+    productCategoryAssociateToProductRef$ = new BehaviorSubject(null);
    
     public getProductCategories(): Observable<ProductCategory[]> {
       return this.httpClient.get<ProductCategory[]>('http://localhost:8080/productcategoryctrl/getproductcategories', 
@@ -33,6 +40,36 @@ export class ProductService {
 
     public getNameProductCategories(): Observable<string[]> {
       return this.httpClient.get<string[]>('http://localhost:8080/productcategoryctrl/getnameproductcategories', 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        });
+    }
+
+    public getProductRefs(): Observable<ProductRef[]> {
+      return this.httpClient.get<ProductRef[]>('http://localhost:8080/productrefctrl/getproductrefs', 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        });
+    }
+
+    public getNameProductRefs(): Observable<string[]> {
+      return this.httpClient.get<string[]>('http://localhost:8080/productrefctrl/getnameproductrefs', 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        });
+    }
+
+    public getProductCategoryAssociateToProductRef(idProductRef: number): Observable<ProductCategory> {
+      return this.httpClient.get<ProductCategory>('http://localhost:8080/productrefctrl/getproductcategoryassociatetoproductref/' + idProductRef, 
         {
           headers: {
             "Content-Type": "application/json",
@@ -57,6 +94,30 @@ export class ProductService {
         });
       }
 
+    public publishProductRefs() {
+      this.getProductRefs().subscribe(
+        productRefsList => {
+          this.listProductRefs = productRefsList;
+          this.listProductRefs$.next(this.listProductRefs);
+        });
+    }
+
+    public publishNameProductRefs() {
+      this.getNameProductRefs().subscribe(
+        productRefsList => {
+          this.listNameProductRefs = productRefsList;
+          this.listNameProductRefs$.next(this.listNameProductRefs);
+        });
+      }
+
+    public publishProductCategoryAssociateToProductRef(idProductRef: number) {
+      this.getProductCategoryAssociateToProductRef(idProductRef).subscribe(
+        productCategory => {
+          this.productCategoryAssociateToProductRef = productCategory;
+          this.productCategoryAssociateToProductRef$.next(this.productCategoryAssociateToProductRef);
+        });
+      }
+
   /**
    * Cette fonction permet de trouver une entité ProductCategory dans la liste des productCategories grâce à son ID.
    * @param idProductCategory l'id qu'il faut rechercher dans la liste. 
@@ -67,6 +128,19 @@ export class ProductService {
         return this.getProductCategories().pipe(map(productCategories => productCategories.find(productCategory => productCategory.idProductCategory === idProductCategory)));
       }
       return of(this.listProductCategories.find(productCategory => productCategory.idProductCategory === idProductCategory));
+    } 
+  }
+
+  /**
+   * Cette fonction permet de trouver une entité ProductRef dans la liste des productCategories grâce à son ID.
+   * @param idProductRef l'id qu'il faut rechercher dans la liste. 
+   */
+  public findProductRef(idProductRef: number): Observable<ProductRef> {
+    if (idProductRef) {
+      if (!this.listProductRefs) {
+        return this.getProductRefs().pipe(map(productRefs => productRefs.find(productRef => productRef.idProductRef === idProductRef)));
+      }
+      return of(this.listProductRefs.find(productRef => productRef.idProductRef === idProductRef));
     } 
   }
 
@@ -83,6 +157,26 @@ export class ProductService {
         },
         (error) => { 
           console.log("add ProductCategory pb : ", error); 
+          this.router.navigate(['error-page'])
+        }
+    );
+  }
+
+  public addProductRef(idProductCategory: number, productRef: ProductRef, isRouting: boolean){
+    this.httpClient.post<ProductRef>('http://localhost:8080/productrefctrl/addproductref/' + idProductCategory, productRef, 
+        {
+        headers: {
+        "Content-Type": "application/json",
+        "Authorization": this.token.getToken()
+        }
+      }).subscribe(
+        (addedProductRef) =>{ 
+          if(isRouting){
+            setTimeout(() => this.router.navigate(['product-ref-listing']), 150);
+          }
+        },
+        (error) => { 
+          console.log("add ProductRef pb : ", error); 
           this.router.navigate(['error-page'])
         }
     );
@@ -114,4 +208,50 @@ export class ProductService {
         }
     );
   }
+
+  public updateProductRef(productRef: ProductRef, idProductCategory: number, isRouting: boolean){
+    this.httpClient.put<ProductRef>('http://localhost:8080/productrefctrl/updateproductref/' + idProductCategory, productRef, 
+        {
+        headers: {
+        "Content-Type": "application/json",
+        "Authorization": this.token.getToken()
+        }
+      }).subscribe(
+        (updatedProductRef) =>{ 
+          console.log("update ProductRef OK : ", updatedProductRef);
+          let index = this.listProductRefs.findIndex(pr => pr.idProductRef === productRef.idProductRef);
+          this.listProductRefs[index].nameProductRef = productRef.nameProductRef;
+          this.listProductRefs$.next(this.listProductRefs);
+          this.listNameProductRefs = [];
+          for(let i = 0; i< this.listProductRefs.length; i++){
+            this.listNameProductRefs.push(this.listProductRefs[i].nameProductRef);
+          }
+          this.listNameProductRefs$.next(this.listNameProductRefs);
+          if(isRouting){
+            setTimeout(() => this.router.navigate(['product-ref-listing']), 150);
+          }
+         },
+        (error) => { 
+          console.log("update ProductRef pb : ", error); 
+          this.router.navigate(['error-page']);
+        }
+    );
+  }
+
+  public deleteProductRef(idProductRef: number){
+      
+    this.httpClient.delete('http://localhost:8080/productrefctrl/deleteproductref/' + idProductRef,
+    {
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+      }
+  }).subscribe(
+        () =>{ console.log("suppression idProductRef OK : ",idProductRef);
+            },
+        (error) => console.log("suppression idProductRef pb : ", error) 
+    );
+  }
+
+
 }
