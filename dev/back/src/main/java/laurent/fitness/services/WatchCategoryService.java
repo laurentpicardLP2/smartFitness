@@ -5,7 +5,7 @@ import java.util.List;
 import laurent.fitness.model.WatchCategory;
 
 public interface WatchCategoryService {
-public List<WatchCategory> getAllWatchCategories();
+	public List<WatchCategory> getAllWatchCategories();
 	
 	public WatchCategory saveWatchCategory(WatchCategory watchCategory);
 	

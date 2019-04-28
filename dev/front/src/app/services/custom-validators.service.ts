@@ -67,6 +67,8 @@ export const errorMessages: { [key: string]: string } = {
     nameRoom: 'Le nom de la salle doit être renseigné.',
     nameFacilityCategorySame: 'Ce nom de catégorie d\'équipement existe déjà, veuillez en choisir un autre.',
     nameFacilityCategory: 'Le nom de la catégorie d\'équipement doit être renseigné.',
+    nameProductCategorySame: 'Ce nom de catégorie de produit existe déjà, veuillez en choisir un autre.',
+    nameProductCategory: 'Le nom de la catégorie du produit doit être renseigné.',
     nameFacilitySame: 'Ce nom d\'équipement existe déjà, veuillez en choisir un autre.',
     nameFacility: 'Le nom de l\'équipement doit être renseigné.',
     nameSubscriptionSame: 'Ce type d\'abonnement existe déjà, veuillez en choisir un autre.',

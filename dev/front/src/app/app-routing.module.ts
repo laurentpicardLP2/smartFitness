@@ -52,6 +52,9 @@ import { EvenementNewComponent } from './manager/evenement-new/evenement-new.com
 import { EvenementListingComponent } from './manager/evenement-listing/evenement-listing.component';
 import { EvenementDetailComponent } from './manager/evenement-detail/evenement-detail.component';
 import { EvenementDetailUserComponent } from './user/evenement-detail-user/evenement-detail-user.component';
+import { ProductCategoryNewComponent } from './manager/product-category-new/product-category-new.component';
+import { ProductCategoryListingComponent } from './manager/product-category-listing/product-category-listing.component';
+import { ProductCategoryDetailComponent } from './manager/product-category-detail/product-category-detail.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -79,6 +82,9 @@ const routes: Routes = [
   { path: 'subscription-category-new', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryNewComponent},
   { path: 'subscription-category-listing', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryListingComponent},
   { path: 'subscription-category-detail/:idSubscriptionCategory', canActivate: [AuthGuardManagerService], component: SubscriptionCategoryDetailComponent},
+  { path: 'product-category-new', canActivate: [AuthGuardManagerService], component: ProductCategoryNewComponent},
+  { path: 'product-category-listing', canActivate: [AuthGuardManagerService], component: ProductCategoryListingComponent},
+  { path: 'product-category-detail/:idProductCategory', canActivate: [AuthGuardManagerService], component: ProductCategoryDetailComponent},
   { path: 'watch-category-new', canActivate: [AuthGuardManagerService], component: WatchCategoryNewComponent},
   { path: 'watch-category-listing', canActivate: [AuthGuardManagerService], component: WatchCategoryListingComponent},
   { path: 'watch-category-detail/:idWatchCategory', canActivate: [AuthGuardManagerService], component: WatchCategoryDetailComponent},

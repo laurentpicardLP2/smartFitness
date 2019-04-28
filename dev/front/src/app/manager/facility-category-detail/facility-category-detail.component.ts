@@ -1,12 +1,10 @@
 import { ManagerService } from 'src/app/services/manager.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { FacilityCategory } from 'src/app/models/facility-category.model';
 import { BehaviorSubject } from 'rxjs';
-import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
+import { ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
 import { FacilityCategoryValidator } from 'src/app/validators/facility-category.validator';
 
 

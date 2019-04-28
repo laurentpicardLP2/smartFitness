@@ -1,4 +1,3 @@
-
 <mat-sidenav-container class="container">
   <mat-sidenav-content>
       <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
@@ -10,7 +9,7 @@
     </mat-sidenav>
 
     <div class="alert alert-info">
-        <strong>Liste des catégories.</strong>
+        <strong>Liste des catégories de produits.</strong>
     </div>
     <div class="pad">>
         <mat-form-field>
@@ -19,15 +18,15 @@
         <div class="example-container mat-elevation-z8">
           <mat-table #Table [dataSource]="MyDataSource" multiTemplateDataRows matSort>
           <ng-container matColumnDef="Name">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Nom </mat-header-cell>
-          <mat-cell *matCellDef="let post"> {{post.nameFacilityCategory}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
+          <mat-cell *matCellDef="let post"> {{post.nameProductCategory}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="Update">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Modification</mat-header-cell>
-              <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" (click)="onUpdate(post.idFacilityCategory)">Modifier</button></mat-cell>
+              <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" (click)="onUpdate(post.idProductCategory)">Modifier</button></mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onShow(row.idFacilityCategory)"></mat-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onShow(row.idProductCategory)"></mat-row>
           </mat-table>
           <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
           </mat-paginator>
@@ -35,4 +34,3 @@
     </div>
   </mat-sidenav-content> 
 </mat-sidenav-container>
-

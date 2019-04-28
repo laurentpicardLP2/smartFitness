@@ -21,7 +21,7 @@ export class FacilityCategoryValidator {
             let isValid = false;
             if (control.value) {
                 const checkNameFacilityCategory: string = control.value;
-                isValid = !(facilityCategories.find(nameFacilityCategory => (nameFacilityCategory === checkNameFacilityCategory.toLowerCase()) && (checkNameFacilityCategory.toLowerCase() !== nameFacilityCategoryInit.toLowerCase())));
+                isValid = !(facilityCategories.find(nameFacilityCategory => (nameFacilityCategory.toLowerCase() === checkNameFacilityCategory.toLowerCase()) && (checkNameFacilityCategory.toLowerCase() !== nameFacilityCategoryInit.toLowerCase())));
             }
             if (isValid) {
                 return null;

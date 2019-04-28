@@ -83,19 +83,19 @@
 
        <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="offres"><mat-icon>all_inclusive</mat-icon> Gestion offres</button>
        <mat-menu  #offres="matMenu">
-          <button mat-menu-item [matMenuTriggerFor]="abonnement"><mat-icon>subscriptions</mat-icon> Gestion abonnements</button>
-          <button mat-menu-item [matMenuTriggerFor]="watch"><mat-icon>watch</mat-icon>Gestion montres</button>
+          <button mat-menu-item [matMenuTriggerFor]="subscriptions"><mat-icon>subscriptions</mat-icon> Gestion abonnements</button>
+          <button mat-menu-item [matMenuTriggerFor]="products"><mat-icon>library_books</mat-icon>Gestion produits</button>
 
        </mat-menu>
 
-      <mat-menu  #abonnement="matMenu">
+      <mat-menu  #subscriptions="matMenu">
         <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/subscription-category-new')"><mat-icon>add_to_photos</mat-icon>Ajout d'un type d'abonnement</button>
         <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/subscription-category-listing')"><mat-icon>list</mat-icon>Listing des types d'abonnement</button>
       </mat-menu>
 
-      <mat-menu  #watch="matMenu">
-        <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/watch-category-new')"><mat-icon>add_to_photos</mat-icon>Ajout d'un modèle de montre</button>
-        <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/watch-category-listing')"><mat-icon>list</mat-icon>Listing des modèles de montres</button>
+      <mat-menu  #products="matMenu">
+        <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/product-category-new')"><mat-icon>add_to_photos</mat-icon>Ajout une catégorie de produit</button>
+        <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/product-category-listing')"><mat-icon>list</mat-icon>Listing des catégories de produits</button>
       </mat-menu>
 
        <button *ngIf="isAuth && authority.authority=='ROLE_ADMIN'"  mat-button [matMenuTriggerFor]="staff"><mat-icon>supervisor_account</mat-icon> Gestion staff</button>

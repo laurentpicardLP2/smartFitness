@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommandService} from './command.service';
 import { TokenStorageService } from './token-storage.service';
 import { Authority } from 'src/app/models/authority.model';
+import { ProductService } from './product.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,7 @@ export class LoginService {
               private commandService: CommandService,
               private managerService: ManagerService,
               private offresServices: OffresService,
+              private productService: ProductService,
               private router: Router,
               private token: TokenStorageService,
               private utilsService: UtilsService,
@@ -116,6 +118,7 @@ export class LoginService {
          this.managerService.publishNameFacilities();
          this.offresServices.publishNameSubscriptions();
          this.offresServices.publishNameWatches();
+         this.productService.publishNameProductCategories();
        }
     } else {
       this.authority = "ROLE_ANONYMOUS";

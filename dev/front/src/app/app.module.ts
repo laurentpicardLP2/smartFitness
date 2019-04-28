@@ -79,6 +79,9 @@ import { EvenementNewComponent } from './manager/evenement-new/evenement-new.com
 import { EvenementListingComponent } from './manager/evenement-listing/evenement-listing.component';
 import { EvenementDetailComponent } from './manager/evenement-detail/evenement-detail.component';
 import { EvenementDetailUserComponent } from './user/evenement-detail-user/evenement-detail-user.component';
+import { ProductCategoryNewComponent } from './manager/product-category-new/product-category-new.component';
+import { ProductCategoryListingComponent } from './manager/product-category-listing/product-category-listing.component';
+import { ProductCategoryDetailComponent } from './manager/product-category-detail/product-category-detail.component';
 
 @NgModule({
   declarations: [
@@ -134,6 +137,9 @@ import { EvenementDetailUserComponent } from './user/evenement-detail-user/evene
     EvenementListingComponent,
     EvenementDetailComponent,
     EvenementDetailUserComponent,
+    ProductCategoryNewComponent,
+    ProductCategoryListingComponent,
+    ProductCategoryDetailComponent,
 
   ],
   imports: [

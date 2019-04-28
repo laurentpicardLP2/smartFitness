@@ -1,0 +1,20 @@
+<div fxFlex fxLayout fxLayoutAlign="center">
+  <div class="pad">
+    <form [formGroup]="productCategoryForm" >
+      <div>
+          <mat-form-field class="product-category-full-width">
+            <input matInput placeholder="Nom de la catégorie du produit" type="text" formControlName="nameProductCategory" [(ngModel)]="nameProductCategory">
+            <mat-error *ngIf="productCategoryForm.controls['nameProductCategory'].hasError('nameProductCategory') && productCategoryForm.value.nameProductCategory">
+              {{errors.nameProductCategorySame}}
+          </mat-error>
+          <mat-error *ngIf="productCategoryForm.controls['nameProductCategory'].hasError('required')">
+              {{errors.nameProductCategory}}
+          </mat-error>
+          </mat-form-field>      
+      </div>
+      <div>
+        <button mat-raised-button [disabled]="productCategoryForm.invalid" (click)="onValidate()">Valider</button>
+      </div>
+   </form>
+  </div> 
+</div>

@@ -1,19 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FacilityCategory} from '../../models/facility-category.model';
-import { ManagerService } from '../../services/manager.service';
+import { ProductCategory} from '../../models/product-category.model';
+import { ProductService } from '../../services/product.service';
 import { BehaviorSubject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatPaginator, MatTableDataSource, PageEvent, MatSort } from '@angular/material'
 
-
 @Component({
-  selector: 'app-facility-category-listing',
-  templateUrl: './facility-category-listing.component.html',
-  styleUrls: ['./facility-category-listing.component.css']
+  selector: 'app-product-category-listing',
+  templateUrl: './product-category-listing.component.html',
+  styleUrls: ['./product-category-listing.component.css']
 })
-export class FacilityCategoryListingComponent implements OnInit {
-  nameFacilityCategory: string;
-  FacilityCategoriesList: BehaviorSubject<FacilityCategory[]>;
+export class ProductCategoryListingComponent implements OnInit {
+  nameProductCategory: string;
+  ProductCategoriesList: BehaviorSubject<ProductCategory[]>;
 
 MyDataSource: any;
 displayedColumns: string[] = ['Name', 'Update'];
@@ -22,17 +21,17 @@ displayedColumns: string[] = ['Name', 'Update'];
 
 
   constructor(private route: ActivatedRoute,
-              private managerService: ManagerService,
+              private productService: ProductService,
               private router: Router) { }
 
   ngOnInit() {
-  this.managerService.publishFacilityCategories();
-  this.FacilityCategoriesList  = this.managerService.listFacilityCategories$;
+  this.productService.publishProductCategories();
+  this.ProductCategoriesList  = this.productService.listProductCategories$;
   this.RenderDataTable();
   }
 
   RenderDataTable() {
-    this.managerService.getFacilityCategories().subscribe(
+    this.productService.getProductCategories().subscribe(
       res => {
       this.MyDataSource = new MatTableDataSource();
       this.MyDataSource.data = res;
@@ -45,18 +44,15 @@ displayedColumns: string[] = ['Name', 'Update'];
       });
     }
 
-    onShow(idFacilityCategory: number) {
-      //this.router.navigate(['facility-category-detail/' + idFacilityCategory]);
+    onUpdate(idProductCategory: number){
+      this.router.navigate(['product-category-detail/' + idProductCategory]);
     }
 
-    onUpdate(idFacilityCategory: number){
-      this.router.navigate(['facility-category-detail/' + idFacilityCategory]);
+    onShow(idProductCategory: number) {
+      //this.router.navigate(['product-category-detail/' + idProductCategory]);
     }
 
     applyFilter(filterValue: string) {
       this.MyDataSource.filter = filterValue.trim().toLowerCase();
     }
-    
-
 }
-
