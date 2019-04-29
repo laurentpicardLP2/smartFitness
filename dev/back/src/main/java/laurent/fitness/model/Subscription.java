@@ -45,10 +45,23 @@ public class Subscription extends Item implements Serializable {
 		super(commands);
 	}
 	
+	public Subscription(List<Command> commands, int quantityItem) {
+		super(commands, quantityItem);
+	}
+	
 	
 	public Subscription (List<Command> commands, String typeItem, Customer customer, float price,
 			SubscriptionCategory subscriptionCategory, Date dateStartOfSubscription, Date dateEndOfSubscription) {
 		super(commands, typeItem, price);
+		this.customer = customer;
+		this.subscriptionCategory = subscriptionCategory;
+		this.dateStartOfSubscription = dateStartOfSubscription;
+		this.dateEndOfSubscription = dateEndOfSubscription;
+	}
+	
+	public Subscription (List<Command> commands, String typeItem, Customer customer, float price,
+			SubscriptionCategory subscriptionCategory, Date dateStartOfSubscription, Date dateEndOfSubscription , int quantityItem) {
+		super(commands, typeItem, price, quantityItem);
 		this.customer = customer;
 		this.subscriptionCategory = subscriptionCategory;
 		this.dateStartOfSubscription = dateStartOfSubscription;

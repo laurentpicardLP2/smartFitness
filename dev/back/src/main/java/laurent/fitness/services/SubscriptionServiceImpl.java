@@ -42,7 +42,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		commands.add(command);
 		SubscriptionCategory subscriptionCategory = this.subscriptionCategoryRepo.findByIdSubscriptionCategory(idSubscriptionCategory);
 		return this.subscriptionRepo.save(new Subscription(commands, subscriptionCategory.getNameSubscription() + ":subscription", customer, subscriptionCategory.getPriceSubscription(), 
-				subscriptionCategory, dateStartOfSubscription, dateEndOfSubscription));
+				subscriptionCategory, dateStartOfSubscription, dateEndOfSubscription, 1));
 	}
 
 	@Override

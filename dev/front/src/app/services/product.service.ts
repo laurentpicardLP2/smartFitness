@@ -1,9 +1,12 @@
+import { Command } from 'src/app/models/command.model';
+import { CommandService } from 'src/app/services/command.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ProductCategory } from 'src/app/models/product-category.model';
 import { ProductRef } from 'src/app/models/product-ref.model';
+import { Product } from 'src/app/models/product.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -14,7 +17,8 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient,
     private router: Router,
-    private token: TokenStorageService) { }
+    private token: TokenStorageService,
+    private commandService: CommandService) { }
 
     public listProductCategories: ProductCategory [] = [] ;
     public listNameProductCategories: string [] = [] ;
@@ -29,6 +33,8 @@ export class ProductService {
     listFavoriteProductRefs$: BehaviorSubject<ProductRef[]> = new BehaviorSubject(null);
     listNameProductRefs$: BehaviorSubject<string[]> = new BehaviorSubject(null);
     productCategoryAssociateToProductRef$ = new BehaviorSubject(null);
+
+    command: Command;
    
     public getProductCategories(): Observable<ProductCategory[]> {
       return this.httpClient.get<ProductCategory[]>('http://localhost:8080/productcategoryctrl/getproductcategories', 
@@ -293,5 +299,37 @@ export class ProductService {
         (error) => console.log("suppression idProductRef pb : ", error) 
     );
   }
+
+
+  public addProductToCommand(command: Command,  idProductRef: number, username: string, nbItems: string, totalPriceCommand: number, quantityItem: number){
+    this.httpClient.post<Product>('http://localhost:8080/productctrl/addproduct/' + command.idCommand + '/' + idProductRef + '/' + username + '/' + quantityItem , null, 
+      {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+        }
+      }).subscribe(
+        (product) =>{ 
+          command.items.push(product); 
+          this.commandService.setCommandSubject(command); 
+          if(nbItems==null || nbItems==undefined || nbItems=="") {
+            nbItems = "0"; 
+          }
+          this.commandService.setNbItemsSubject((parseInt(nbItems, 10) + 1).toString());
+          totalPriceCommand += product.price;
+          //command.items[command.items.findIndex((item)=> item.idItem == watch.idItem)].price += watch.price;
+          this.commandService.setTotalPriceCommandSubject(totalPriceCommand);
+          this.commandService.setCommandSubject(command);
+          this.commandService.setUpdateStatusAndPriceToCommand(command, totalPriceCommand);
+          this.commandService.setListCommandItemsSubject(command.items);
+          this.router.navigate(['']);
+        },
+        (error) => { 
+          console.log("add watch pb : ", error);
+          this.router.navigate(['error-page']);
+        }
+    );
+  }
+
 
 }

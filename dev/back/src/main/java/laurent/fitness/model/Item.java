@@ -24,6 +24,8 @@ public class Item implements Serializable {
 	protected int idItem;
 	
 	protected String typeItem;
+	
+	protected int quantityItem;
 
 	protected float price;
 
@@ -48,9 +50,20 @@ public class Item implements Serializable {
 		this.commands = commands;
 	}
 	
+	public Item(List<Command> commands, int quantityItem) {
+		this.commands = commands;
+		this.quantityItem = quantityItem;
+	}
+	
 	public Item(List<Command> commands, float price) {
 		this.commands = commands;
 		this.price = price;
+	}
+	
+	public Item(List<Command> commands, float price, int quantityItem) {
+		this.commands = commands;
+		this.price = price;
+		this.quantityItem = quantityItem;
 	}
 	
 	public Item(List<Command> commands, String typeItem) {
@@ -58,10 +71,23 @@ public class Item implements Serializable {
 		this.typeItem = typeItem;
 	}
 	
+	public Item(List<Command> commands, String typeItem, int quantityItem) {
+		this.commands = commands;
+		this.typeItem = typeItem;
+		this.quantityItem = quantityItem;
+	}
+	
 	public Item(List<Command> commands, String typeItem, float price) {
 		this.commands = commands;
 		this.typeItem = typeItem;
 		this.price = price;
+	}
+	
+	public Item(List<Command> commands, String typeItem, float price, int quantityItem) {
+		this.commands = commands;
+		this.typeItem = typeItem;
+		this.price = price;
+		this.quantityItem = quantityItem;
 	}
 
 	public int getIdItem() {
@@ -78,6 +104,14 @@ public class Item implements Serializable {
 
 	public void setTypeItem(String typeItem) {
 		this.typeItem = typeItem;
+	}
+	
+	public int getQuantityItem() {
+		return this.quantityItem;
+	}
+
+	public void setQuantityItem(int quantityItem) {
+		this.quantityItem = quantityItem;
 	}
 
 	public float getPrice() {

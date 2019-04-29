@@ -14,8 +14,6 @@ import java.util.List;
 public class Product extends Item implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private int quantityProduct;
-
 //	//bi-directional many-to-one association to ProductRef
 	@ManyToOne
 	@JoinColumn(name="ProductRef_idProductRef")
@@ -28,8 +26,16 @@ public class Product extends Item implements Serializable {
 		super(commands);
 	}
 	
+	public Product(List<Command> commands, int quantityItem) {
+		super(commands, quantityItem);
+	}
+	
 	public Product(List<Command> commands, String typeItem) {
 		super(commands, typeItem);
+	}
+	
+	public Product(List<Command> commands, String typeItem, int quantityItem) {
+		super(commands, typeItem, quantityItem);
 	}
 	
 	public Product(List<Command> commands, String typeItem, float price, ProductRef productRef) {
@@ -37,20 +43,12 @@ public class Product extends Item implements Serializable {
 		this.productRef = productRef;
 	}
 	
-	public Product(List<Command> commands, String typeItem, float price, int quantityProduct, ProductRef productRef) {
-		super(commands, typeItem, price);
-		this.quantityProduct = quantityProduct;
+	public Product(List<Command> commands, String typeItem, float price, ProductRef productRef, int quantityItem) {
+		super(commands, typeItem, price, quantityItem);
 		this.productRef = productRef;
 	}
-
-	public int getQuantityProduct() {
-		return this.quantityProduct;
-	}
-
-	public void setQuantityProduct(int quantityProduct) {
-		this.quantityProduct = quantityProduct;
-	}
-
+	
+	
 	public ProductRef getProductRef() {
 		return this.productRef;
 	}

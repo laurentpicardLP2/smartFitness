@@ -9,6 +9,7 @@ import { Subscription } from 'src/app/models/subscription.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Command } from 'src/app/models/command.model';
+import { Watch } from '../models/watch.model';
 
 @Injectable({
   providedIn: 'root'
@@ -283,6 +284,7 @@ export class OffresService {
           }
         }).subscribe(
           (subscription) =>{ 
+            console.log("subscription : ", subscription);
             command.items.push(subscription); 
             this.commandService.setCommandSubject(command); 
             if(nbItems==null || nbItems==undefined || nbItems=="") {
@@ -304,7 +306,7 @@ export class OffresService {
       );
     }
     public addWatchToCommand(command: Command,  idWatchCategory: number, username: string, nbItems: string, totalPriceCommand: number){
-      this.httpClient.post<Subscription>('http://localhost:8080/offrectrl/addwatch/' + command.idCommand + '/' + idWatchCategory + '/' + username , null, 
+      this.httpClient.post<Watch>('http://localhost:8080/offrectrl/addwatch/' + command.idCommand + '/' + idWatchCategory + '/' + username , null, 
         {
           headers: {
               "Content-Type": "application/json",

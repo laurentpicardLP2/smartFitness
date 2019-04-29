@@ -69,7 +69,7 @@ export class PaypalComponent implements OnInit {
 
         item1 = new ItemPaypal();
         item1.name = this.command.items[i].typeItem.split(":")[0];
-        item1.quantity = '1';
+        item1.quantity = this.command.items[i].quantityItem.toString();
         item1.category =  'DIGITAL_GOODS',
         item1.unit_amount = unit_amount;
         itemsPaypal.push(item1);
