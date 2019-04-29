@@ -25,7 +25,7 @@ public class ProductCategory implements Serializable {
 	private String nameProductCategory;
 
 	//bi-directional many-to-one association to ProductRef
-	@OneToMany(mappedBy="productCategory")
+	@OneToMany(mappedBy="productCategory", cascade=CascadeType.REMOVE)
 	@JsonManagedReference
 	private List<ProductRef> productRefs;
 

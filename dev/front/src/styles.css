@@ -1,6 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
+@font-face{
+    font-family: Agency FB;
+  
+    src: url("/assets/agency-fb-bold.ttf");
+  
+    font-style:normal;
+  }
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 

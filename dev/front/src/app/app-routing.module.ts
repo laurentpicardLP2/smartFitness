@@ -58,6 +58,9 @@ import { ProductCategoryDetailComponent } from './manager/product-category-detai
 import { ProductRefNewComponent } from './manager/product-ref-new/product-ref-new.component';
 import { ProductRefListingComponent } from './manager/product-ref-listing/product-ref-listing.component';
 import { ProductRefDetailComponent } from './manager/product-ref-detail/product-ref-detail.component';
+import { FavoriteProductComponent } from './booking/favorite-product/favorite-product.component';
+import { ProductListingComponent } from './booking/product-listing/product-listing.component';
+import { ProductDetailComponent } from './booking/product-detail/product-detail.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -109,7 +112,10 @@ const routes: Routes = [
   { path: 'balance-by-facility', canActivate: [AuthGuardManagerService], component: BalanceByFacilityComponent},
   { path: 'paypal', canActivate: [AuthGuardCustomerService], component: PaypalComponent },
   { path: 'acknoledgment/:email/:idCommand/:totalPrice/:username/:fullname', canActivate: [AuthGuardCustomerService], component: AcknowledgmentComponent },
-  
+  { path: 'favorite-product', canActivate: [AuthGuardCustomerService], component: FavoriteProductComponent},
+  { path: 'product-listing', canActivate: [AuthGuardCustomerService], component: ProductListingComponent},
+  { path: 'product-detail/:idProductRef', canActivate: [AuthGuardCustomerService], component: ProductDetailComponent},
+
   { path: 'our-activity',  component: OurActivityComponent },
   { path: 'our-localisation',  component: OurLocalisationComponent },
   { path: 'chart',  component: TimestampFacilityComponent },

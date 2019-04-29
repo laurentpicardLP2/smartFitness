@@ -84,7 +84,7 @@ public class ProductCategoryController {
 	 * @param idWatchCategory
 	 * @return
 	 */
-	@DeleteMapping("/deletewatchcategory/{idWatchCategory}")
+	@DeleteMapping("/deleteproductcategory/{idProductCategory}")
 	public ResponseEntity<?> deleteProductCategory(@PathVariable Integer idProductCategory){
 		try {
 			this.productCategoryService.deleteProductCategory(this.productCategoryService.findByIdProductCategory(idProductCategory));

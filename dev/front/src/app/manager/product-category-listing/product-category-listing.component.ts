@@ -48,6 +48,13 @@ displayedColumns: string[] = ['Name', 'Update'];
       this.router.navigate(['product-category-detail/' + idProductCategory]);
     }
 
+    onDelete(idProductCategory: number, nameProductCategory: string){
+      if(confirm("Confirme-vous la suppression de la catégorie " + nameProductCategory + "?")){
+        this.productService.deleteProductCategory(idProductCategory, nameProductCategory);
+        setTimeout(() => this.RenderDataTable(), 350);
+      }
+    }
+
     onShow(idProductCategory: number) {
       //this.router.navigate(['product-category-detail/' + idProductCategory]);
     }

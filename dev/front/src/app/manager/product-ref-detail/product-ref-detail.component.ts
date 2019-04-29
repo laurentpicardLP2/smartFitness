@@ -23,7 +23,7 @@ export class ProductRefDetailComponent implements OnInit {
   file: File;
   fileInformation: FileInformation;
   listProductRefs: BehaviorSubject<ProductRef[]>;
-  idProductCategory: number;
+  nameProductCategory: string;
   idProductRef: number;
   nameProductRef: string;
   nameProductRefInit: string;
@@ -34,7 +34,6 @@ export class ProductRefDetailComponent implements OnInit {
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
   listProductCategories: BehaviorSubject<ProductCategory[]>;
   productCategoryAssociateToProductRef: ProductCategory;
-  nameProductCategory: string = "";
 
   @ViewChild('fileInput')
   fileInput: ElementRef;
@@ -121,8 +120,8 @@ export class ProductRefDetailComponent implements OnInit {
   }
 
   public onUpdate() {
-    this.descriptionProductRef = (this.descriptionProductRef == "") ? "undefined" : this.descriptionProductRef;
-    this.imageProductRef = (this.imageProductRef == "") ? "undefined" : this.imageProductRef;
+    this.descriptionProductRef = (this.descriptionProductRef == "") ? "" : this.descriptionProductRef;
+    this.imageProductRef = (this.imageProductRef == "") ? "" : this.imageProductRef;
     let productRef = new ProductRef(this.nameProductRef, this.priceProductRef,this.descriptionProductRef, this.imageProductRef);
     productRef.idProductRef = this.idProductRef;
     
@@ -132,12 +131,12 @@ export class ProductRefDetailComponent implements OnInit {
       this.imageProductRef = this.nameProductRef + "_" + this.file.name;
       data.append('data', this.file, this.nameProductRef + "_" + this.file.name);
       productRef.imageProductRef = this.imageProductRef;
-      this.productService.updateProductRef(productRef, this.idProductCategory, false);
+      this.productService.updateProductRef(productRef, this.nameProductCategory, false);
       this.managerService.addImage(data, this.username, this.password, "productRefForm");
     }
     else {
-      this.productService.updateProductRef(productRef, this.idProductCategory, true);
+      this.productService.updateProductRef(productRef, this.nameProductCategory, true);
     }
-     
   }
+
 }

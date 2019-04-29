@@ -1,3 +1,4 @@
+import { UtilsService } from 'src/app/services/utils.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductRef} from '../../models/product-ref.model';
 import { ProductService } from '../../services/product.service';
@@ -23,6 +24,7 @@ displayedColumns: string[] = ['Name', 'Price', 'Update'];
 
   constructor(private route: ActivatedRoute,
               private productService: ProductService,
+              private utilsService: UtilsService,
               private router: Router) { }
 
   ngOnInit() {
@@ -54,16 +56,18 @@ displayedColumns: string[] = ['Name', 'Price', 'Update'];
     }
 
     onDelete(idProductRef: number, nameProductRef: string){
-      
       if(confirm("Confirme-vous la suppression de la référence " + nameProductRef + "?")){
-        this.productService.deleteProductRef(idProductRef);
+        this.productService.deleteProductRef(idProductRef, nameProductRef);
         setTimeout(() => this.RenderDataTable(), 350);
       }
-
     }
   
     applyFilter(filterValue: string) {
       this.MyDataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+    public convertIntoMonetaryFormat(price: number){
+      return this.utilsService.convertIntoMonetaryFormat(price);
     }
 
 }

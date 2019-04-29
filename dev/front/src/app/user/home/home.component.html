@@ -7,39 +7,39 @@
     <span *ngIf="!isAuth" class="welcome-principal">Bienvenue sur Smart Fitness</span>
     <span *ngIf="isAuth && authority=='ROLE_CUSTOMER'" class="welcome-principal">Bonjour {{fullname}},</span>
     <br>
-    <span *ngIf="!isAuth" class="welcome-secondaire">Le site de réservation en ligne de seances de fitness</span>
+    <span *ngIf="!isAuth" class="welcome-secondaire">Le site de réservation en ligne de séances de fitness</span>
     <span *ngIf="isAuth && authority=='ROLE_CUSTOMER'" class="welcome-secondaire"> Bienvenue dans votre espace personnel</span>
     <br><br>
     <table *ngIf="!isAuth" style="width: 100%">
       <tr tyle="text-align: center; width: 100%;">
         <td>
-          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/FitnessResa.png" width="50%"></a>                        
+          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/resa.png" width="80%"></a>                        
         </td>
         <td>
-          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/FitnessRoutes.png" width="50%"></a> 
+          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/seances.png" width="80%"></a> 
         </td>
       </tr>
     </table>
     <table *ngIf="!isAuth" style="width: 100%">
         <tr tyle="text-align: center; width: 100%;">
           <td>
-            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/FitnessAbo.png" width="80%"></a>                        
+            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/abo.png" width="80%"></a>                        
           </td>
           <td>
-            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/FitnessAbo.png" width="80%"></a> 
+            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/produits.png" width="80%"></a> 
           </td>
-          <td>
+          <!-- <td>
             <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/FitnessCommandes.png" width="80%"></a> 
-          </td>
+          </td> -->
         </tr>
       </table>
       <table *ngIf="isAuth && authority=='ROLE_CUSTOMER'" style="width: 100%">
         <tr tyle="text-align: center; width: 100%;">
           <td>
-            <a class="anonymous-listing"  routerLink="/seance-booking" routerLinkActive="active"><img src="assets/images/FitnessResa.png" width="50%"></a>                        
+            <a class="anonymous-listing"  routerLink="/seance-booking" routerLinkActive="active"><img src="assets/images/resa.png" width="80%"></a>                        
           </td>
           <td>
-            <a class="anonymous-listing" routerLink="/seance-listing" routerLinkActive="active"><img src="assets/images/FitnessRoutes.png" width="50%"></a> 
+            <a class="anonymous-listing" routerLink="/seance-listing" routerLinkActive="active"><img src="assets/images/seances.png" width="80%"></a> 
           </td>
         </tr>
         <tr tyle="text-align: center; width: 100%;">
@@ -54,13 +54,10 @@
       <table *ngIf="isAuth && authority=='ROLE_CUSTOMER'" style="width: 100%">
           <tr tyle="text-align: center; width: 100%;">
             <td>
-              <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active"><img src="assets/images/FitnessAbo.png" width="80%"></a>                        
+              <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active"><img src="assets/images/abo.png" width="80%"></a>                        
             </td>
             <td>
-              <a class="anonymous-listing"  routerLink="/watch-customer-proposition" routerLinkActive="active"><img src="assets/images/FitnessAbo.png" width="80%"></a> 
-            </td>
-            <td>
-              <a class="anonymous-listing" routerLink="/command-listing" routerLinkActive="active"><img src="assets/images/FitnessCommandes.png" width="80%"></a> 
+              <a class="anonymous-listing"  routerLink="/product-listing" routerLinkActive="active"><img src="assets/images/produits.png" width="80%"></a> 
             </td>
           </tr>
           <tr tyle="text-align: center; width: 100%;">
@@ -68,10 +65,7 @@
               <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active">Abonnement</a>                    
             </td>
             <td>
-              <a class="anonymous-listing"  routerLink="/watch-customer-proposition" routerLinkActive="active">Nos produits</a>
-            </td>
-            <td>
-              <a class="anonymous-listing" routerLink="/command-listing" routerLinkActive="active">Vos commandes</a>
+              <a class="anonymous-listing"  routerLink="/product-listing" routerLinkActive="active">Nos produits</a>
             </td>
           </tr>
         </table>

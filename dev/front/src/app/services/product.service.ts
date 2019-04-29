@@ -19,12 +19,14 @@ export class ProductService {
     public listProductCategories: ProductCategory [] = [] ;
     public listNameProductCategories: string [] = [] ;
     public listProductRefs: ProductRef [] = [] ;
+    public listFavoriteProductRefs: ProductRef [] = [] ;
     public listNameProductRefs: string [] = [] ;
     public productCategoryAssociateToProductRef: ProductCategory = null;
 
     listProductCategories$: BehaviorSubject<ProductCategory[]> = new BehaviorSubject(null);
     listNameProductCategories$: BehaviorSubject<string[]> = new BehaviorSubject(null);
     listProductRefs$: BehaviorSubject<ProductRef[]> = new BehaviorSubject(null);
+    listFavoriteProductRefs$: BehaviorSubject<ProductRef[]> = new BehaviorSubject(null);
     listNameProductRefs$: BehaviorSubject<string[]> = new BehaviorSubject(null);
     productCategoryAssociateToProductRef$ = new BehaviorSubject(null);
    
@@ -50,6 +52,16 @@ export class ProductService {
 
     public getProductRefs(): Observable<ProductRef[]> {
       return this.httpClient.get<ProductRef[]>('http://localhost:8080/productrefctrl/getproductrefs', 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        });
+    }
+
+    public getFavoriteProductRefs(): Observable<ProductRef[]> {
+      return this.httpClient.get<ProductRef[]>('http://localhost:8080/productrefctrl/getfavoriteproductrefs', 
         {
           headers: {
             "Content-Type": "application/json",
@@ -99,6 +111,14 @@ export class ProductService {
         productRefsList => {
           this.listProductRefs = productRefsList;
           this.listProductRefs$.next(this.listProductRefs);
+        });
+    }
+
+    public publishFavoriteProductRefs() {
+      this.getFavoriteProductRefs().subscribe(
+        favoriteProductRefsList => {
+          this.listFavoriteProductRefs = favoriteProductRefsList;
+          this.listFavoriteProductRefs$.next(this.listFavoriteProductRefs);
         });
     }
 
@@ -209,8 +229,8 @@ export class ProductService {
     );
   }
 
-  public updateProductRef(productRef: ProductRef, idProductCategory: number, isRouting: boolean){
-    this.httpClient.put<ProductRef>('http://localhost:8080/productrefctrl/updateproductref/' + idProductCategory, productRef, 
+  public updateProductRef(productRef: ProductRef, nameProductCategory: string, isRouting: boolean){
+    this.httpClient.put<ProductRef>('http://localhost:8080/productrefctrl/updateproductref/' + nameProductCategory, productRef, 
         {
         headers: {
         "Content-Type": "application/json",
@@ -238,7 +258,26 @@ export class ProductService {
     );
   }
 
-  public deleteProductRef(idProductRef: number){
+  public deleteProductCategory(idProductCategory: number, nameProductCategory: string){
+      
+    this.httpClient.delete('http://localhost:8080/productcategoryctrl/deleteproductcategory/' + idProductCategory,
+    {
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+      }
+  }).subscribe(
+        () =>{ console.log("suppression idProductCategory OK : ",idProductCategory);
+          this.listProductCategories.slice(this.listProductCategories.findIndex(productCategory => productCategory.idProductCategory === idProductCategory), 1);
+          this.listNameProductCategories.slice(this.listNameProductCategories.findIndex(name => name === nameProductCategory), 1);
+          this.publishNameProductRefs();
+          this.publishProductRefs();
+     },
+        (error) => console.log("suppression idProductCategory pb : ", error) 
+    );
+  }
+
+  public deleteProductRef(idProductRef: number, nameProductRef: string){
       
     this.httpClient.delete('http://localhost:8080/productrefctrl/deleteproductref/' + idProductRef,
     {
@@ -248,10 +287,11 @@ export class ProductService {
       }
   }).subscribe(
         () =>{ console.log("suppression idProductRef OK : ",idProductRef);
-            },
+          this.listProductRefs.slice(this.listProductRefs.findIndex(productRef => productRef.idProductRef === idProductRef), 1);
+          this.listNameProductRefs.slice(this.listNameProductRefs.findIndex(name => name === nameProductRef), 1);
+     },
         (error) => console.log("suppression idProductRef pb : ", error) 
     );
   }
-
 
 }

@@ -1,0 +1,73 @@
+.pad {
+    margin: 15px;
+    padding: 15px;
+  }
+
+  a {
+    color: rgb(235, 110, 8);
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    font-variant: small-caps;
+    cursor: pointer;
+  }
+
+  a:link {
+    color: rgb(235, 110, 8);
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    font-variant: small-caps;
+    cursor: pointer;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: rgb(235, 110, 8);
+    text-decoration: none;
+    font-family: 17px;
+    font-variant: small-caps;
+    cursor: pointer;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: red;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    *font-variant: small-caps;
+    cursor: pointer;
+  }
+  
+  /* selected link */
+  a:active {
+    color: red;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+    font-variant: small-caps;
+    cursor: pointer;
+  }
+
+  .span-info {
+    font-size: 20px;
+      font-family: 'Agency FB';
+      font-style: italic;
+      color: #b21a73;
+      font-weight: 900;
+}
+
+
+  /* table {
+      border-collapse: collapse;
+  }
+
+  table, th, td {
+      border: 1px solid black;
+  } 
+
+  .product-ref-full-width {
+    min-width:10px;
+    max-width: 10px;
+  }*/

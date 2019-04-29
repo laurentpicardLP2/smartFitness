@@ -12,7 +12,7 @@
     </mat-sidenav>
 
     <div class="alert alert-info">
-        <strong>Liste des références de produit.</strong>
+        <strong>Liste des références de produits.</strong>
     </div>
     <div class="pad">>
         <mat-form-field>
@@ -26,7 +26,7 @@
           </ng-container>
           <ng-container matColumnDef="Price">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Prix </mat-header-cell>
-            <mat-cell *matCellDef="let post"> {{post.priceProductRef}} </mat-cell>
+            <mat-cell *matCellDef="let post"> {{convertIntoMonetaryFormat(post.priceProductRef)}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="Update">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Mise à jour </mat-header-cell>

@@ -1,22 +1,33 @@
+
+
+
+/* @font-face{
+  font-family: Agency FB;
+
+  src: url("/assets/agency-fb-bold.ttf");
+
+  font-style:normal;
+} */
+
 .pad {
     margin: 10px;
     padding: 10px;
   }
 
   .welcome-principal {
-      font-size: 35px;
-      font-family: 'Times New Roman', Times, serif;
+      font-size: 45px;
+      font-family: 'Agency FB';
       font-style: italic;
-      color: brown;
+      color: #0c249c;
       font-weight: 900;
   }
 
   .welcome-secondaire {
-    font-size: 15px;
-    font-family: 'Times New Roman', Times, serif;
-    font-style: italic;
-    color: brown;
-    font-weight: 900;
+    font-size: 25px;
+      font-family: 'Agency FB';
+      font-style: italic;
+      color: #b21a73;
+      font-weight: 900;
 }
 
   .message {

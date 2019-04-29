@@ -122,7 +122,7 @@ export class FacilityBookingComponent implements OnInit, OnDestroy {
     this.commandService.setTotalPriceCommandSubject(this.totalPriceCommand);
     this.commandService.setCommandSubject(this.command);
     this.commandService.validateCommand(this.command,false);
-    this.router.navigate(['']);
+    this.router.navigate(['favorite-product']);
   }
 
   ngOnDestroy(){

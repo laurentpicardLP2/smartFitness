@@ -52,6 +52,15 @@ public class ProductRefController {
 	}
 	
 	/**
+	 * Retourne la liste des cinq premières références de produit
+	 * @return
+	 */
+	@GetMapping("/getfavoriteproductrefs")
+	public List<ProductRef> getFavoriteProductRefs() {
+		return this.productRefService.getFavoriteProductRefs();
+	}
+	
+	/**
 	 * Fonction retournant la catégorie associée à une référence de produit
 	 * @param idProductRef
 	 * @return
@@ -90,10 +99,10 @@ public class ProductRefController {
 	 * @param idProductCategory
 	 * @return
 	 */
-	@PutMapping("/updateproductref/{idProductCategory}")
-	public ResponseEntity<?> updateWatchCategory(@RequestBody ProductRef productRef, @PathVariable Integer idProductCategory) {
+	@PutMapping("/updateproductref/{nameProductCategory}")
+	public ResponseEntity<?> updateWatchCategory(@RequestBody ProductRef productRef, @PathVariable String nameProductCategory) {
 		try {	
-			return ResponseEntity.status(HttpStatus.OK).body(this.productRefService.updateProductRef(productRef, idProductCategory));
+			return ResponseEntity.status(HttpStatus.OK).body(this.productRefService.updateProductRef(productRef, nameProductCategory));
 		
 		} catch(Exception e) {
 			

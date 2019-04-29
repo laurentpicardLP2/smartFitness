@@ -85,6 +85,9 @@ import { ProductCategoryDetailComponent } from './manager/product-category-detai
 import { ProductRefNewComponent } from './manager/product-ref-new/product-ref-new.component';
 import { ProductRefListingComponent } from './manager/product-ref-listing/product-ref-listing.component';
 import { ProductRefDetailComponent } from './manager/product-ref-detail/product-ref-detail.component';
+import { FavoriteProductComponent } from './booking/favorite-product/favorite-product.component';
+import { ProductListingComponent } from './booking/product-listing/product-listing.component';
+import { ProductDetailComponent } from './booking/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -146,6 +149,9 @@ import { ProductRefDetailComponent } from './manager/product-ref-detail/product-
     ProductRefNewComponent,
     ProductRefListingComponent,
     ProductRefDetailComponent,
+    FavoriteProductComponent,
+    ProductListingComponent,
+    ProductDetailComponent,
 
   ],
   imports: [

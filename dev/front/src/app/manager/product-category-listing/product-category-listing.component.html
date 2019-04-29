@@ -23,7 +23,11 @@
           </ng-container>
           <ng-container matColumnDef="Update">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Modification</mat-header-cell>
-              <mat-cell  *matCellDef="let post"> <button mat-raised-button color="accent" (click)="onUpdate(post.idProductCategory)">Modifier</button></mat-cell>
+              <mat-cell  *matCellDef="let post"> 
+                <button mat-raised-button color="accent" (click)="onUpdate(post.idProductCategory)">Modifier</button>
+                &nbsp;&nbsp;
+                <button mat-raised-button color="accent" (click)="onDelete(post.idProductCategory, post.nameProductCategory)">Supprimer</button>
+              </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onShow(row.idProductCategory)"></mat-row>

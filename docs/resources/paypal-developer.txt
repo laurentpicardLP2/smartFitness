@@ -28,3 +28,6 @@ access_token$sandbox$76vbzvqrbdx74brm$c3ee38047078ea460277a4e43821fafe
 
 ExpiryDate
 11 Apr 2029
+
+(install site fitness)
+lien paypal en prod : https://github.com/Enngage/ngx-paypal

@@ -1,0 +1,38 @@
+.product-new-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .product-new-container > * {
+    width: 100%;
+  }
+
+  .product-form {
+    min-width: 150px;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .product-full-width {
+    min-width:400px;
+    max-width: 800px;
+  }
+
+  .product-quantity-width {
+    min-width: 70px;
+    max-width: 90px;
+  }
+
+  .product-border {
+    border-style: solid;
+  }
+
+  .pad {
+    margin: 15px;
+    padding: 15px;
+  }
+
+  .img-watch {
+      width: 100px;
+      height: 120px;
+  }

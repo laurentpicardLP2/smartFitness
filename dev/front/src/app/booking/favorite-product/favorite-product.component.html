@@ -1,0 +1,35 @@
+<div fxFlex fxLayout fxLayoutAlign="center">
+  <div>
+    <table>
+        <tbody>
+          <tr>
+            <td colspan="5" style="text-align: center;">
+              <div class="pad"></div>
+                <span class="span-info">Votre séance a été ajoutée à votre panier. <br>Les personnes qui ont réservé des séances ont aussi aimé : </span>
+              <div class="pad"></div>
+              </td>
+          </tr>
+            <tr>
+              <td style="text-align: center;" *ngFor="let productRef of listFavoriteProductRefs | async">
+                  <a (click)="redirectToProductDetail(productRef.idProductRef)"><img width="100px" height="120px" src="assets/images/facilities/{{productRef.imageProductRef}}"></a>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align: center;" *ngFor="let productRef of listFavoriteProductRefs | async"><a (click)="redirectToProductDetail(productRef.idProductRef)">{{productRef.nameProductRef}}</a></td>
+            </tr>
+            <tr>
+              <td colspan="5" style="text-align: center;">
+                <div class="pad"></div>
+                
+                  <button mat-raised-button color="accent" (click)="onValidateCart()">Valider le panier</button>
+                  &nbsp;&nbsp;
+                  <button mat-raised-button color="accent" (click)="onContinuePurchase()">Poursuivre les achats</button>
+                <div class="pad"></div>
+                </td>
+              </tr>
+           </tbody>
+      </table>
+    </div>
+</div>
+
+<!-- public idProductRef: number; -->
