@@ -20,5 +20,5 @@ public interface ProductRefRepository extends JpaRepository<ProductRef, Integer>
 	
 	@Query(value = "SELECT * FROM db_fitness.product_ref limit 5", nativeQuery = true)
 	List<ProductRef> findByFavoriteProductRef();
-	
+
 }

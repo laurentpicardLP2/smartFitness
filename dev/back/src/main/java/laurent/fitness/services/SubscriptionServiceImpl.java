@@ -33,7 +33,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 
 	@Override
-	public Subscription createSubscription(int idCommand, String username, int idSubscriptionCategory,
+	public Subscription addSubscription(int idCommand, String username, int idSubscriptionCategory,
 			Date dateStartOfSubscription, Date dateEndOfSubscription) {
 		// TODO Auto-generated method stub
 		List<Command> commands = new ArrayList<Command>();

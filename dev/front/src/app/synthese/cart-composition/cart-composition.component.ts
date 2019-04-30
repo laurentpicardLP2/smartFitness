@@ -31,7 +31,7 @@ export class CartCompositionComponent implements OnInit {
       this.isHasItems = this.command.items.length > 0;
       this.totalPrice = 0;
       for(let i=0; i< this.command.items.length; i++){
-        this.totalPrice += this.command.items[i].price;
+        this.totalPrice += (this.command.items[i].price * this.command.items[i].quantityItem);
       }
     });
 

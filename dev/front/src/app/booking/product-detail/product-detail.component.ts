@@ -9,7 +9,6 @@ import { ProductRef } from 'src/app/models/product-ref.model';
 import { BehaviorSubject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
-import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -39,24 +38,19 @@ export class ProductDetailComponent implements OnInit {
               private productService: ProductService,
               private utilsService: UtilsService,
               private commandService: CommandService,
-              private loginService: LoginService,
               private router: Router) { }
 
   ngOnInit() {
 
     this.idProductRef = +this.route.snapshot.params.idProductRef;
-    this.productService.publishProductRefs();
-    this.productService.findProductRef(this.idProductRef).subscribe(productRef => {
+    this.productService.publishProducts();
+    this.productService.findProduct(this.idProductRef).subscribe(productRef => {
       this.nameProductRef = productRef.nameProductRef;
       this.nameProductRefInit = productRef.nameProductRef;
       this.descriptionProductRef = productRef.descriptionProductRef;
       this.priceProductRef = productRef.priceProductRef;
       this.priceProductFormatted = this.utilsService.convertIntoMonetaryFormat(this.priceProductRef);
       this.imageProductRef = productRef.imageProductRef;
-    });
-
-    this.loginService.usernameSubject.subscribe(res => {
-      this.username = res;
     });
 
     this.commandService.commandSubject.subscribe(res => {
@@ -72,9 +66,6 @@ export class ProductDetailComponent implements OnInit {
     });
  
 
-
-
-    this.productService.publishProductRefs();
     
     this.createForm();
   }
@@ -102,8 +93,8 @@ export class ProductDetailComponent implements OnInit {
     this.priceProductFormatted = this.utilsService.convertIntoMonetaryFormat(this.priceProductRef * this.quantityProductRef);
   }
 
-  onOrder(idWatchCategory: number){
-    this.productService.addProductToCommand(this.command,  idWatchCategory, this.username, this.nbItems, this.totalPriceCommand, this.quantityProductRef);
+  onOrder(){
+    this.productService.addProductToCommand(this.command, this.idProductRef, this.nbItems, this.totalPriceCommand, this.quantityProductRef);
   }
 
 }

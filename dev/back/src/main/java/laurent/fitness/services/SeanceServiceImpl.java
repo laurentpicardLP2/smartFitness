@@ -35,7 +35,7 @@ public class SeanceServiceImpl implements SeanceService {
 	}
 
 	@Override
-	public Seance createSeance(int idCommand, String username, float price) {
+	public Seance addSeance(int idCommand, String username, float price) {
 		// TODO Auto-generated method stub
 		List<Command> commands = new ArrayList<Command>();
 		Customer customer = this.customerRepo.findByUsername(username);

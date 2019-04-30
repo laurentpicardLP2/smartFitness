@@ -26,11 +26,11 @@ import laurent.fitness.services.ProductRefService;
 public class ProductRefController {
 	
 	private ProductRefService productRefService;
-	private ProductCategoryService productCategoryservice;
+	private ProductCategoryService productCategoryService;
 	
-	public ProductRefController(ProductRefService productRefService, ProductCategoryService productCategoryservice) {
+	public ProductRefController(ProductRefService productRefService, ProductCategoryService productCategoryService) {
 		this.productRefService = productRefService;
-		this.productCategoryservice = productCategoryservice;
+		this.productCategoryService = productCategoryService;
 	}
 	
 	/**
@@ -52,22 +52,13 @@ public class ProductRefController {
 	}
 	
 	/**
-	 * Retourne la liste des cinq premières références de produit
-	 * @return
-	 */
-	@GetMapping("/getfavoriteproductrefs")
-	public List<ProductRef> getFavoriteProductRefs() {
-		return this.productRefService.getFavoriteProductRefs();
-	}
-	
-	/**
 	 * Fonction retournant la catégorie associée à une référence de produit
 	 * @param idProductRef
 	 * @return
 	 */
 	@GetMapping("/getproductcategoryassociatetoproductref/{idProductRef}")
 	public ProductCategory getProductCategoryAssociateToProductRef(@PathVariable Integer idProductRef) {
-		return this.productCategoryservice.getProductCategoryAssociateToProductRef(idProductRef);			
+		return this.productCategoryService.getProductCategoryAssociateToProductRef(idProductRef);			
 	}
 	
 	/**

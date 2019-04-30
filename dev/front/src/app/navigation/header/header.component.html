@@ -32,28 +32,20 @@
         <div class="mat-button-focus-overlay"></div>
       </a> 
 
-      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="offrescustomer"><mat-icon>edit</mat-icon>Vos offres</button>
+      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="offrescustomer"><mat-icon>edit</mat-icon>Nos offres</button>
       <mat-menu  #offrescustomer="matMenu">
-        <button mat-menu-item [matMenuTriggerFor]="subscription"><mat-icon>card_membership</mat-icon>Vos abonnements</button>
-        <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/watch-customer-proposition')"><mat-icon>watch</mat-icon>Acheter une montre connectée</button>
-     </mat-menu>
-
-     <mat-menu  #subscription="matMenu">
-        <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/subscription-customer-proposition')"><mat-icon>book</mat-icon>Souscrire à un abonnement</button>
-        <button mat-menu-item _ngcontent-cl="" tabindex="5" aria-disabled="false" (click)="onAction('/subscription-customer-historic')"><mat-icon>format_list_bulleted</mat-icon>Votre suivi</button>
-     </mat-menu>
-
-      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="prestations"><mat-icon>playlist_add</mat-icon>Vos prestations</button>
-      <mat-menu  #prestations="matMenu">
         <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/seance-booking')"><mat-icon>fitness_center</mat-icon>Constituer une séance</button>
-        <button mat-menu-item [matMenuTriggerFor]="suivis" _ngcontent-cl="" tabindex="1" aria-disabled="false"><mat-icon>format_list_bulleted</mat-icon>Vos suivis</button>
-      </mat-menu>
+        <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/subscription-customer-proposition')"><mat-icon>book</mat-icon>Souscrire à un abonnement</button>
+        <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/product-listing')"><mat-icon>library_books</mat-icon>Notre catalogue</button>
+     </mat-menu>
 
-      <mat-menu #suivis="matMenu">
-          <button mat-menu-item _ngcontent-cl="" tabindex="2" aria-disabled="false" (click)="onAction('/command-listing')"><mat-icon>business_center</mat-icon>Vos commandes</button>
-          <button mat-menu-item _ngcontent-cl="" tabindex="3" aria-disabled="false" (click)="onAction('/seance-listing')"><mat-icon>event_note</mat-icon>Vos séances</button>
-      </mat-menu>
-      
+     <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="reportings"><mat-icon>list</mat-icon>Vos suivis</button>
+     <mat-menu #reportings="matMenu">
+      <button mat-menu-item _ngcontent-cl="" tabindex="2" aria-disabled="false" (click)="onAction('/command-listing')"><mat-icon>business_center</mat-icon>Vos commandes</button>
+      <button mat-menu-item _ngcontent-cl="" tabindex="3" aria-disabled="false" (click)="onAction('/seance-listing')"><mat-icon>event_note</mat-icon>Vos séances</button>
+      <button mat-menu-item _ngcontent-cl="" tabindex="5" aria-disabled="false" (click)="onAction('/subscription-customer-historic')"><mat-icon>format_list_bulleted</mat-icon>Votre abonnements</button>
+    </mat-menu>
+ 
       <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="centre"><mat-icon>domain</mat-icon> 
         Gestion centre</button>
       <mat-menu  #centre="matMenu">
@@ -89,16 +81,16 @@
        </mat-menu>
 
       <mat-menu  #subscriptions="matMenu">
-        <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/subscription-category-new')"><mat-icon>add_to_photos</mat-icon>Ajout d'un type d'abonnement</button>
+        <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/subscription-category-new')"><mat-icon>add_to_photos</mat-icon>Ajouter un type d'abonnement</button>
         <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/subscription-category-listing')"><mat-icon>list</mat-icon>Listing des types d'abonnement</button>
       </mat-menu>
 
       <mat-menu  #products="matMenu">
-        <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/product-category-new')"><mat-icon>add_to_photos</mat-icon>Ajout une catégorie de produit</button>
+        <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/product-category-new')"><mat-icon>add_to_photos</mat-icon>Ajouter une catégorie de produit</button>
         <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/product-category-listing')"><mat-icon>list</mat-icon>Listing des catégories de produit</button>
         <mat-divider></mat-divider>
-        <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/product-ref-new')"><mat-icon>add_to_photos</mat-icon>Ajout une référence de produit</button>
-        <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/product-ref-listing')"><mat-icon>list</mat-icon>Listing des références de produit</button>
+        <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/product-ref-new')"><mat-icon>add_to_photos</mat-icon>Ajouter un produit</button>
+        <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/product-ref-listing')"><mat-icon>list</mat-icon>Listing des produits</button>
       </mat-menu>
 
        <button *ngIf="isAuth && authority.authority=='ROLE_ADMIN'"  mat-button [matMenuTriggerFor]="staff"><mat-icon>supervisor_account</mat-icon> Gestion staff</button>

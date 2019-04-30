@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./favorite-product.component.css']
 })
 export class FavoriteProductComponent implements OnInit {
-  listFavoriteProductRefs: BehaviorSubject<ProductRef[]>;
+  listFavoriteProducts: BehaviorSubject<ProductRef[]>;
   command: Command;
   nbItems: string;
   totalPrice: number;
@@ -24,8 +24,8 @@ export class FavoriteProductComponent implements OnInit {
               private commandService: CommandService) { }
 
   ngOnInit() {
-    this.productService.getFavoriteProductRefs().subscribe(res => {
-      this.listFavoriteProductRefs = this.productService.listFavoriteProductRefs$;
+    this.productService.getFavoriteProducts().subscribe(res => {
+      this.listFavoriteProducts = this.productService.listFavoriteProducts$;
     });
 
     this.commandService.commandSubject.subscribe(res => {

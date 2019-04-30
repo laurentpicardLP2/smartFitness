@@ -81,5 +81,12 @@ insert into item (id_item, price, type_item, quantity_item) values (4, 500, "Abo
 insert into command_has_item (item_id_item, command_id_command) values (4, 4);
 insert into subscription (id_item, customer_users_username, subscription_category_id_subscription_category, date_start_of_subscription, date_end_of_subscription) values (4, "db_abonne", 6, "2020-03-01", "2020-09-30");
 
+insert into product_category(name_product_category) values ("Montre");
+insert into product_category(name_product_category) values ("Boisson");
+insert into product_category(name_product_category) values ("Alimentation");
 
-
+insert into product_ref (product_category_id_product_category, name_product_ref, price_product_ref, image_product_ref, description_product_ref) values (2, "Powerade", 5.5, "Powerade_powerade.jpg", "");
+insert into product_ref (product_category_id_product_category, name_product_ref, price_product_ref, image_product_ref, description_product_ref) values (2, "Gatorade", 6, "Gatorade_gatorade.jpg", "");
+insert into product_ref (product_category_id_product_category, name_product_ref, price_product_ref, image_product_ref, description_product_ref) values (2, "Monster", 7.55, "Monster_monster.jpg", "");
+insert into product_ref (product_category_id_product_category, name_product_ref, price_product_ref, image_product_ref, description_product_ref) values (3, "Barre céréale", 3.5, "Barre céréale_barre.jpg", "");
+insert into product_ref (product_category_id_product_category, name_product_ref, price_product_ref, image_product_ref, description_product_ref) values (2, "Ovotamine", 5, "Ovotamine_ovotamine.jpg", "");

@@ -32,7 +32,7 @@ public class WatchServiceImpl implements WatchService {
 	}
 	
 	@Override
-	public Watch createWatch(int idCommand, int idWatchCategory, String username) {
+	public Watch addWatch(int idCommand, int idWatchCategory, String username) {
 		// TODO Auto-generated method stub
 		List<Command> commands = new ArrayList<Command>();
 		Command command = this.commandRepo.findByIdCommand(idCommand);

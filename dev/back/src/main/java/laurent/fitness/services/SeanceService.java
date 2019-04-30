@@ -7,7 +7,7 @@ import laurent.fitness.model.Seance;
 
 public interface SeanceService {
 	public List<Seance> getAllSeances();
-	public Seance createSeance(int idCommand, String username, float price);
+	public Seance addSeance(int idCommand, String username, float price);
 	public Seance updateSeance(int idItem);
 	public void deleteSeance(int idItem);
 	public Seance findSeanceById(int idItem);

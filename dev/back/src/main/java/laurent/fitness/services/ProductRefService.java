@@ -26,4 +26,5 @@ public interface ProductRefService {
 	public List<String> getListNameProductRef();
 	
 	public List<ProductRef> getFavoriteProductRefs();
+	
 }

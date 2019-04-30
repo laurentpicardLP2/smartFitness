@@ -114,7 +114,7 @@ export class HeaderComponent implements OnInit {
     this.utilsService.isInit = true;
     this.utilsService.delCommand();
     this.loginService.signOut();
-    this.router.navigate(['']);
+    this.router.navigate(['login']);
   }
 
   public onReportingBooking(){

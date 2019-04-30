@@ -84,11 +84,12 @@ public class ProductRefServiceImpl implements ProductRefService {
 		productRef.setProductCategory(productCategory);
 		return this.productRefRepo.save(productRef);
 	}
-
+	
 	@Override
 	public List<ProductRef> getFavoriteProductRefs() {
 		// TODO Auto-generated method stub
 		return this.productRefRepo.findByFavoriteProductRef();
 	}
+
 
 }

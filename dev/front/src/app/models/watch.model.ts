@@ -5,7 +5,8 @@ export class Watch extends Item {
     
     constructor(public idItem: number,
                 public typeItem: string,
-                public price : number) { 
-                    super(idItem,typeItem, price)
+                public price : number,
+                public quantityItem: number) { 
+                    super(idItem,typeItem, price, quantityItem)
                 }
 }

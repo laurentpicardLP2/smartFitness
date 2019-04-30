@@ -41,7 +41,7 @@ public class OffreController {
 			@PathVariable Date dateEndOfSubscription) {
 
 		try {
-			Subscription newSubscription = this.subscriptionService.createSubscription(idCommand, username, idSubscriptionCategory, dateStartOfSubscription, dateEndOfSubscription);
+			Subscription newSubscription = this.subscriptionService.addSubscription(idCommand, username, idSubscriptionCategory, dateStartOfSubscription, dateEndOfSubscription);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(newSubscription);
 		
@@ -81,7 +81,7 @@ public class OffreController {
 	public ResponseEntity<?> addWatch(@PathVariable int idCommand, @PathVariable Integer idWatchCategory, @PathVariable String username) {
 
 		try { 
-			return ResponseEntity.status(HttpStatus.OK).body(this.watchService.createWatch(idCommand, idWatchCategory, username));
+			return ResponseEntity.status(HttpStatus.OK).body(this.watchService.addWatch(idCommand, idWatchCategory, username));
 		} catch(Exception e) {
 			
 			System.out.println(e);

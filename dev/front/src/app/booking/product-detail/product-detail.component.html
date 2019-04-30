@@ -6,12 +6,12 @@
             <input readonly matInput placeholder="Nom du produit" type="text" formControlName="nameProductRef" [(ngModel)]="nameProductRef">
           </mat-form-field>
         </div>
-        <div>
+        <div  *ngIf="descriptionProductRef !== ''">
             <mat-form-field class="product-full-width">
                 <textarea readonly matInput placeholder="Description du produit" type="text" formControlName="descriptionProductRef" [(ngModel)]="descriptionProductRef"></textarea>
             </mat-form-field>    
           </div> 
-          <div>
+          <div *ngIf="imageProductRef !== ''">
             <br>
             <img *ngIf="imageProductRef!=''" class="img-watch" src="assets/images/facilities/{{ imageProductRef }}" />
           </div> 
@@ -25,7 +25,7 @@
             </mat-form-field>
           </div>
             <div class="pad"></div>
-        <button mat-raised-button [disabled]="productRefForm.invalid" (click)="onAddCart()">Ajouter au panier</button>
+        <button mat-raised-button [disabled]="productRefForm.invalid" (click)="onOrder()">Ajouter au panier</button>
      </form>
     </div> 
   </div>

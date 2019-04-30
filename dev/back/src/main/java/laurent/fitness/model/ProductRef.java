@@ -33,6 +33,7 @@ public class ProductRef implements Serializable {
 
 	//bi-directional many-to-one association to Product
 	@OneToMany(mappedBy="productRef")
+	@JsonBackReference
 	private List<Product> products;
 
 	//bi-directional many-to-one association to ProductCategory

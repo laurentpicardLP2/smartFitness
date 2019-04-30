@@ -6,7 +6,7 @@ import java.util.List;
 import laurent.fitness.model.Subscription;
 
 public interface SubscriptionService {
-	public Subscription createSubscription(int idCommand, String username, int idSubscriptionCategory, Date dateStartOfSubscription, Date dateEndOfSubscription);
+	public Subscription addSubscription(int idCommand, String username, int idSubscriptionCategory, Date dateStartOfSubscription, Date dateEndOfSubscription);
 	public List<Subscription> findHistoricSubscriptionsByUsername(String username);
 	public List<Subscription> findActiveSubscriptionsByUsername(String username);
 	public List<Subscription> findNextSubscriptionsByUsername(String username);

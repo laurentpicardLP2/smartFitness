@@ -20,6 +20,7 @@ import { EvenementService } from 'src/app/services/evenement.service';
 })
 export class HomeComponent implements OnInit {
   isAuth: boolean;
+  bEvt: boolean = false;
   fullname: string;
   authority: string;
   public slidesList = new Array<never>(5);
@@ -72,6 +73,7 @@ export class HomeComponent implements OnInit {
         this.arrayTitle.push("Connectez-vous pour accéder aux fonctionnalités.");
         this.arrayTitle.push("Découvrez qui nous sommes et ce que nous proposons.");
         this.arrayTitle.push("Où sommes-nous et comment venir chez nous.");
+        this.bEvt = true;
         this.showEvenementsLoop();
       } else if(this.authority == 'ROLE_CUSTOMER'){
         // get Evenements from DataBase into this.evenementArray
@@ -79,12 +81,16 @@ export class HomeComponent implements OnInit {
         this.stringTitle = "";
         this.evenementservice.getEvenementInSlotTime().subscribe(
           (res) => {
+            
             this.evenementArray = res;
             for(let i = 0; i < res.length; i++){
               this.arrayTitle.push(res[i].titleEvt);
             }
             if(res.length > 0){
               this.showEvenementsLoop();
+              this.bEvt = true;
+            } else {
+              this.bEvt = false;
             }
           },
           (error) => {
@@ -111,6 +117,9 @@ export class HomeComponent implements OnInit {
   }
 
   public showEvenementsLoop(){
+    if (this.bEvt === false) {
+      return ;
+    }
     this.indexEvt = (this.indexEvt==this.arrayTitle.length-1) ? 0 : this.indexEvt + 1;
     this.stringTitle = this.arrayTitle[this.indexEvt];
     setTimeout(() => this.showEvenementsLoop(), 3000);
@@ -132,9 +141,7 @@ export class HomeComponent implements OnInit {
   }
 
   public showMustSignIn(){
-    this.snackBar.open("Veuillez vous connecter pour accéder à cette fonctionnalité", "Ok", {
-      duration: 3000,
-    });
+    this.snackBar.open("Veuillez vous connecter pour accéder à cette fonctionnalité", "Ok");
   }
 
 }

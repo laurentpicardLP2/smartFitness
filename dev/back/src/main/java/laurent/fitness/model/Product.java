@@ -2,6 +2,9 @@ package laurent.fitness.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 
@@ -17,6 +20,7 @@ public class Product extends Item implements Serializable {
 //	//bi-directional many-to-one association to ProductRef
 	@ManyToOne
 	@JoinColumn(name="ProductRef_idProductRef")
+	@JsonManagedReference
 	private ProductRef productRef;
 
 	public Product() {
@@ -41,6 +45,10 @@ public class Product extends Item implements Serializable {
 	public Product(List<Command> commands, String typeItem, float price, ProductRef productRef) {
 		super(commands, typeItem, price);
 		this.productRef = productRef;
+	}
+	
+	public Product(List<Command> commands, String typeItem, float price, int quantityItem) {
+		super(commands, typeItem, price, quantityItem);
 	}
 	
 	public Product(List<Command> commands, String typeItem, float price, ProductRef productRef, int quantityItem) {

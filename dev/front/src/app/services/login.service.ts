@@ -124,8 +124,8 @@ export class LoginService {
          this.productService.publishProductRefs();
        }
        if(this.authority == "ROLE_CUSTOMER"){
-          this.productService.publishFavoriteProductRefs();
-          this.productService.publishProductRefs();
+          this.productService.publishFavoriteProducts();
+          this.productService.publishProducts();
        }
     } else {
       this.authority = "ROLE_ANONYMOUS";

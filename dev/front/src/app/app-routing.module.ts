@@ -61,6 +61,7 @@ import { ProductRefDetailComponent } from './manager/product-ref-detail/product-
 import { FavoriteProductComponent } from './booking/favorite-product/favorite-product.component';
 import { ProductListingComponent } from './booking/product-listing/product-listing.component';
 import { ProductDetailComponent } from './booking/product-detail/product-detail.component';
+import { ProductCustomerHistoricComponent } from './synthese/product-customer-historic/product-customer-historic.component';
 
 const routes: Routes = [
   { path: 'error-page', component: ErrorPageComponent },
@@ -94,6 +95,7 @@ const routes: Routes = [
   { path: 'product-ref-new', canActivate: [AuthGuardManagerService], component: ProductRefNewComponent},
   { path: 'product-ref-listing', canActivate: [AuthGuardManagerService], component: ProductRefListingComponent},
   { path: 'product-ref-detail/:idProductRef', canActivate: [AuthGuardManagerService], component: ProductRefDetailComponent},
+  { path: 'subscription-customer-historic', canActivate: [AuthGuardCustomerService], component: ProductCustomerHistoricComponent },
   { path: 'watch-category-new', canActivate: [AuthGuardManagerService], component: WatchCategoryNewComponent},
   { path: 'watch-category-listing', canActivate: [AuthGuardManagerService], component: WatchCategoryListingComponent},
   { path: 'watch-category-detail/:idWatchCategory', canActivate: [AuthGuardManagerService], component: WatchCategoryDetailComponent},

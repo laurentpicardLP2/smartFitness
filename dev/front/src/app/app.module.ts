@@ -88,6 +88,7 @@ import { ProductRefDetailComponent } from './manager/product-ref-detail/product-
 import { FavoriteProductComponent } from './booking/favorite-product/favorite-product.component';
 import { ProductListingComponent } from './booking/product-listing/product-listing.component';
 import { ProductDetailComponent } from './booking/product-detail/product-detail.component';
+import { ProductCustomerHistoricComponent } from './synthese/product-customer-historic/product-customer-historic.component';
 
 @NgModule({
   declarations: [
@@ -152,6 +153,7 @@ import { ProductDetailComponent } from './booking/product-detail/product-detail.
     FavoriteProductComponent,
     ProductListingComponent,
     ProductDetailComponent,
+    ProductCustomerHistoricComponent,
 
   ],
   imports: [

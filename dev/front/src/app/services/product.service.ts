@@ -23,14 +23,16 @@ export class ProductService {
     public listProductCategories: ProductCategory [] = [] ;
     public listNameProductCategories: string [] = [] ;
     public listProductRefs: ProductRef [] = [] ;
-    public listFavoriteProductRefs: ProductRef [] = [] ;
+    public listProducts: ProductRef [] = [] ;
+    public listFavoriteProducts: ProductRef [] = [] ;
     public listNameProductRefs: string [] = [] ;
     public productCategoryAssociateToProductRef: ProductCategory = null;
 
     listProductCategories$: BehaviorSubject<ProductCategory[]> = new BehaviorSubject(null);
     listNameProductCategories$: BehaviorSubject<string[]> = new BehaviorSubject(null);
     listProductRefs$: BehaviorSubject<ProductRef[]> = new BehaviorSubject(null);
-    listFavoriteProductRefs$: BehaviorSubject<ProductRef[]> = new BehaviorSubject(null);
+    listProducts$: BehaviorSubject<ProductRef[]> = new BehaviorSubject(null);
+    listFavoriteProducts$: BehaviorSubject<ProductRef[]> = new BehaviorSubject(null);
     listNameProductRefs$: BehaviorSubject<string[]> = new BehaviorSubject(null);
     productCategoryAssociateToProductRef$ = new BehaviorSubject(null);
 
@@ -66,8 +68,18 @@ export class ProductService {
         });
     }
 
-    public getFavoriteProductRefs(): Observable<ProductRef[]> {
-      return this.httpClient.get<ProductRef[]>('http://localhost:8080/productrefctrl/getfavoriteproductrefs', 
+    public getProducts(): Observable<ProductRef[]> {
+      return this.httpClient.get<ProductRef[]>('http://localhost:8080/productctrl/getproducts', 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        });
+    }
+
+    public getFavoriteProducts(): Observable<ProductRef[]> {
+      return this.httpClient.get<ProductRef[]>('http://localhost:8080/productctrl/getfavoriteproducts', 
         {
           headers: {
             "Content-Type": "application/json",
@@ -120,11 +132,19 @@ export class ProductService {
         });
     }
 
-    public publishFavoriteProductRefs() {
-      this.getFavoriteProductRefs().subscribe(
-        favoriteProductRefsList => {
-          this.listFavoriteProductRefs = favoriteProductRefsList;
-          this.listFavoriteProductRefs$.next(this.listFavoriteProductRefs);
+    public publishProducts() {
+      this.getProducts().subscribe(
+        productsList => {
+          this.listProducts = productsList;
+          this.listProducts$.next(this.listProducts);
+        });
+    }
+
+    public publishFavoriteProducts() {
+      this.getFavoriteProducts().subscribe(
+        favoriteProductsList => {
+          this.listFavoriteProducts = favoriteProductsList;
+          this.listFavoriteProducts$.next(this.listFavoriteProducts);
         });
     }
 
@@ -158,7 +178,7 @@ export class ProductService {
   }
 
   /**
-   * Cette fonction permet de trouver une entité ProductRef dans la liste des productCategories grâce à son ID.
+   * Cette fonction permet de trouver une entité ProductRef dans la liste des productRefs grâce à son ID.
    * @param idProductRef l'id qu'il faut rechercher dans la liste. 
    */
   public findProductRef(idProductRef: number): Observable<ProductRef> {
@@ -167,6 +187,19 @@ export class ProductService {
         return this.getProductRefs().pipe(map(productRefs => productRefs.find(productRef => productRef.idProductRef === idProductRef)));
       }
       return of(this.listProductRefs.find(productRef => productRef.idProductRef === idProductRef));
+    } 
+  }
+
+  /**
+   * Cette fonction permet de trouver une entité Product dans la liste des product grâce à son ID.
+   * @param idProductRef l'id qu'il faut rechercher dans la liste. 
+   */
+  public findProduct(idProductRef: number): Observable<ProductRef> {
+    if (idProductRef) {
+      if (!this.listProducts) {
+        return this.getProducts().pipe(map(products => products.find(product => product.idProductRef === idProductRef)));
+      }
+      return of(this.listProducts.find(product => product.idProductRef === idProductRef));
     } 
   }
 
@@ -301,8 +334,8 @@ export class ProductService {
   }
 
 
-  public addProductToCommand(command: Command,  idProductRef: number, username: string, nbItems: string, totalPriceCommand: number, quantityItem: number){
-    this.httpClient.post<Product>('http://localhost:8080/productctrl/addproduct/' + command.idCommand + '/' + idProductRef + '/' + username + '/' + quantityItem , null, 
+  public addProductToCommand(command: Command,  idProductRef: number, nbItems: string, totalPriceCommand: number, quantityItem: number){
+    this.httpClient.post<Product>('http://localhost:8080/productctrl/addproduct/' + command.idCommand + '/' + idProductRef + '/' + quantityItem , null, 
       {
         headers: {
             "Content-Type": "application/json",
@@ -311,12 +344,15 @@ export class ProductService {
       }).subscribe(
         (product) =>{ 
           command.items.push(product); 
+          console.log("product : ", product);
           this.commandService.setCommandSubject(command); 
           if(nbItems==null || nbItems==undefined || nbItems=="") {
             nbItems = "0"; 
           }
           this.commandService.setNbItemsSubject((parseInt(nbItems, 10) + 1).toString());
-          totalPriceCommand += product.price;
+
+          totalPriceCommand += product.price * quantityItem;
+          console.log("product.price * quantityItem : ", product.price * quantityItem);
           //command.items[command.items.findIndex((item)=> item.idItem == watch.idItem)].price += watch.price;
           this.commandService.setTotalPriceCommandSubject(totalPriceCommand);
           this.commandService.setCommandSubject(command);
@@ -330,6 +366,5 @@ export class ProductService {
         }
     );
   }
-
 
 }

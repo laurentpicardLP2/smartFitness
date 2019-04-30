@@ -14,7 +14,7 @@ import { MatPaginator, MatTableDataSource, PageEvent, MatSort } from '@angular/m
 })
 export class ProductListingComponent implements OnInit {
 
-  productRefList: BehaviorSubject<ProductRef[]>;
+  productList: BehaviorSubject<ProductRef[]>;
 
   MyDataSource: any;
   displayedColumns: string[] = ['Name', 'Price', 'Image', 'See'];
@@ -28,13 +28,13 @@ export class ProductListingComponent implements OnInit {
                 private router: Router) { }
   
     ngOnInit() {
-    this.productService.publishProductRefs();
-    this.productRefList  = this.productService.listProductRefs$;
+    this.productService.publishProducts();
+    this.productList  = this.productService.listProducts$;
     this.RenderDataTable();
     }
   
     RenderDataTable() {
-      this.productService.getProductRefs().subscribe(
+      this.productService.getProducts().subscribe(
         res => {
         this.MyDataSource = new MatTableDataSource();
         this.MyDataSource.data = res;
