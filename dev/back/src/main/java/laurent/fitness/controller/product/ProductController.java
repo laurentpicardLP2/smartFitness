@@ -47,6 +47,15 @@ public class ProductController {
 	}
 	
 	/**
+	 * Retourne le produit de référence associé à l'article idItem
+	 * @return
+	 */
+	@GetMapping("/getproductrefassociatetoiditem/{idItem}")
+	public ProductRef getProductRef(@PathVariable Integer idItem) {
+		return this.productService.getProductRefByIdItem(idItem);
+	}
+	
+	/**
 	 * Ajoute un produit dans la commande du username
 	 * @param idCommand
 	 * @param idWatchCategory
@@ -64,5 +73,7 @@ public class ProductController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
 	}
+	
+	
 	
 }

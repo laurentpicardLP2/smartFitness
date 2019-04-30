@@ -47,4 +47,10 @@ public class ProductServiceImpl implements ProductService {
 		return this.productRefRepo.findAll();
 	}
 
+	@Override
+	public ProductRef getProductRefByIdItem(int idItem) {
+		// TODO Auto-generated method stub
+		return this.productRefRepo.findByIdProductRef(this.productRepo.findByIdItem(idItem).getProductRef().getIdProductRef());
+	}
+
 }

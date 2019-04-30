@@ -8,4 +8,5 @@ import laurent.fitness.model.ProductRef;
 public interface ProductService {
 	public List<ProductRef> getAllProductRef();
 	public Product addProduct(int idCommand, int idProductRef, int quantityItem);
+	public ProductRef getProductRefByIdItem(int idItem);
 }

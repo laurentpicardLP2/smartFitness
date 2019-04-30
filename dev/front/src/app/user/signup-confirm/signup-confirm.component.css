@@ -3,10 +3,19 @@
     padding: 50px;
   }
 
-  .receipt {
-      font-size: 15px;
+  .span-mail {
+      font-size: 25px;
       font-family: 'Times New Roman', Times, serif;
       font-style: italic;
-      color: brown;
+      color: #0c249c;
       font-weight: 900;
+  }
+
+
+  .receipt {
+    font-size: 25px;
+    font-family: 'Agency FB';
+    font-style: italic;
+    color: brown;
+    font-weight: 900;
   }

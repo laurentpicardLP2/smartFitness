@@ -255,7 +255,7 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
       return;
     }
     else {
-      this.seanceService.setIsShowableFacilitiesSubject(true);
+      setTimeout(() => this.seanceService.setIsShowableFacilitiesSubject(true), 150);
     }
 
     this.bookingService.setTimestampSubject(selectedTimestamp);

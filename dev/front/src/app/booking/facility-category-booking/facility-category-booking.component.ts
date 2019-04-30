@@ -29,7 +29,7 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
   isBookedTimestamp: boolean;
   isAvailableFacilites: boolean;
   isNotAvailableFacilities: boolean;
-  isShowableFacilities: boolean;
+  isShowableFacilities: boolean = false;
   priceSeance: number[]=[];
   isSubscribed: boolean;
 
@@ -48,8 +48,12 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
       }
 
   ngOnInit() {
+
+    this.isShowableFacilities = false
+
     //this.timestamp = this.route.snapshot.params['timestamp']; // contient la tranche horaire sélectionnée
     // => remplacé par un BehaviourSubject
+    
     this.bookingService.timestampSubject.subscribe(res => {
       this.dateOfTimestamp = res;
       this.bookingService.publishFacilityCategories(this.dateOfTimestamp);
@@ -66,16 +70,20 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
 
     this.seanceService.isBookedTimestampSubject.subscribe(res => {
       this.isBookedTimestamp = res;
+
+      this.bookingService.isNotAvailableFacilitiesSubject.subscribe(res => {
+        this.isNotAvailableFacilities = res;
+  
+        setTimeout(() => this.seanceService.isShowableFacilitiesSubject.subscribe(res => {
+          this.isShowableFacilities = res }) , 200);
+          
+        
+      });
+  
     });
 
-    this.seanceService.isShowableFacilitiesSubject.subscribe(res => {
-      this.isShowableFacilities = res;
-    });
 
-    this.bookingService.isNotAvailableFacilitiesSubject.subscribe(res => {
-      this.isNotAvailableFacilities = res;
-    });
-
+    
     this.seanceService.priceSeanceSubject.subscribe(res => {
       this.priceSeance = res;
       console.log("this.priceSeance : ", this.priceSeance);

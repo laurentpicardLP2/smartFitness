@@ -27,6 +27,7 @@ export class ProductService {
     public listFavoriteProducts: ProductRef [] = [] ;
     public listNameProductRefs: string [] = [] ;
     public productCategoryAssociateToProductRef: ProductCategory = null;
+    public productRefAssociateToIdItem: ProductRef = null;
 
     listProductCategories$: BehaviorSubject<ProductCategory[]> = new BehaviorSubject(null);
     listNameProductCategories$: BehaviorSubject<string[]> = new BehaviorSubject(null);
@@ -35,6 +36,7 @@ export class ProductService {
     listFavoriteProducts$: BehaviorSubject<ProductRef[]> = new BehaviorSubject(null);
     listNameProductRefs$: BehaviorSubject<string[]> = new BehaviorSubject(null);
     productCategoryAssociateToProductRef$ = new BehaviorSubject(null);
+    productRefAssociateToIdItem$ = new BehaviorSubject(null);
 
     command: Command;
    
@@ -108,6 +110,17 @@ export class ProductService {
         });
     }
 
+
+    public getProductRefAssociateToIdItem(idItem: number): Observable<ProductRef> {
+      return this.httpClient.get<ProductRef>('http://localhost:8080/productctrl/getproductrefassociatetoiditem/' + idItem, 
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token.getToken()
+          }
+        });
+    }
+
     public publishProductCategories() {
       this.getProductCategories().subscribe(
         productCategoriesList => {
@@ -163,6 +176,16 @@ export class ProductService {
           this.productCategoryAssociateToProductRef$.next(this.productCategoryAssociateToProductRef);
         });
       }
+
+
+    public publishProductRefAssociateToIdItem(idItem: number) {
+      this.getProductRefAssociateToIdItem(idItem).subscribe(
+        productRef => {
+          this.productRefAssociateToIdItem = productRef;
+          this.productRefAssociateToIdItem$.next(this.productRefAssociateToIdItem);
+        });
+      }
+  
 
   /**
    * Cette fonction permet de trouver une entité ProductCategory dans la liste des productCategories grâce à son ID.
@@ -344,7 +367,6 @@ export class ProductService {
       }).subscribe(
         (product) =>{ 
           command.items.push(product); 
-          console.log("product : ", product);
           this.commandService.setCommandSubject(command); 
           if(nbItems==null || nbItems==undefined || nbItems=="") {
             nbItems = "0"; 
@@ -352,7 +374,6 @@ export class ProductService {
           this.commandService.setNbItemsSubject((parseInt(nbItems, 10) + 1).toString());
 
           totalPriceCommand += product.price * quantityItem;
-          console.log("product.price * quantityItem : ", product.price * quantityItem);
           //command.items[command.items.findIndex((item)=> item.idItem == watch.idItem)].price += watch.price;
           this.commandService.setTotalPriceCommandSubject(totalPriceCommand);
           this.commandService.setCommandSubject(command);

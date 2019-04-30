@@ -42,10 +42,10 @@ public class WatchServiceImpl implements WatchService {
 		return this.watchRepo.save(new Watch(commands, watchCategory.getNameWatch() + ":watch" + ":" + idWatchCategory, watchCategory.getPriceWatch(), customer, watchCategory));
 	}
 
-	@Override
-	public Watch findWatchByIdItem(int idItem) {
-		// TODO Auto-generated method stub
-		return this.watchRepo.findByIdItem(idItem);
-	}
+//	@Override
+//	public Watch findWatchByIdItem(int idItem) {
+//		// TODO Auto-generated method stub
+//		return this.watchRepo.findByIdItem(idItem);
+//	}
 
 }

@@ -21,7 +21,7 @@ public interface SeanceRepository extends JpaRepository<Seance, Integer> {
 			+ " WHERE id_item = ?1 ", nativeQuery = true)
 	int findNbTimestampBySeance(int idItem);
 	
-	@Query(value = "SELECT seance.*, item.price, item.type_item FROM seance INNER JOIN item on seance.id_item = item.id_item WHERE item.price>0 AND customer_users_username like ?1 ORDER BY date_of_seance DESC ", nativeQuery = true)
+	@Query(value = "SELECT seance.*, item.price, item.type_item, quantity_item FROM seance INNER JOIN item on seance.id_item = item.id_item WHERE item.price>0 AND customer_users_username like ?1 ORDER BY date_of_seance DESC ", nativeQuery = true)
 	List<Seance> findSeancesByUsername(String username);
 
 	@Query(value = "SELECT count(*) FROM db_fitness.timestamp_facility INNER JOIN db_fitness.seance ON seance_id_seance = id_item"

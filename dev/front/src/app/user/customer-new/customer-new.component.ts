@@ -153,7 +153,7 @@ export class CustomerNewComponent implements OnInit {
                 this.deliveryAddress,
                 this.deliveryCp,
                 this.deliveryCity,
-                this.deliveryCountry,
+                this.deliveryCountry
                 );
 
     this.customerService.register(this.newCustomer);
