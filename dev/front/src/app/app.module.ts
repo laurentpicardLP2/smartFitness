@@ -15,6 +15,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatVideoModule } from 'mat-video';
 import { EmbedVideo } from 'ngx-embed-video';
 
+import { AgmCoreModule } from '@agm/core';
+import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
+import {} from 'googlemaps';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -160,6 +164,10 @@ import { ProductCustomerHistoricComponent } from './synthese/product-customer-hi
     BrowserModule,
     MatVideoModule,
     EmbedVideo.forRoot(),
+    MatGoogleMapsAutocompleteModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAPOsreRHHdYcdZ4pX7YNXBujTndpGJF9k'
+    }),
     MatCarouselModule,
     AppRoutingModule,
     HttpClientModule,
