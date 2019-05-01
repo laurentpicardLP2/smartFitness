@@ -49,7 +49,7 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.isShowableFacilities = false
+    this.isShowableFacilities = false;
 
     //this.timestamp = this.route.snapshot.params['timestamp']; // contient la tranche horaire sélectionnée
     // => remplacé par un BehaviourSubject
@@ -75,7 +75,9 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
         this.isNotAvailableFacilities = res;
   
         setTimeout(() => this.seanceService.isShowableFacilitiesSubject.subscribe(res => {
-          this.isShowableFacilities = res }) , 200);
+          this.isShowableFacilities = res;}) , 200);
+        
+        
           
         
       });

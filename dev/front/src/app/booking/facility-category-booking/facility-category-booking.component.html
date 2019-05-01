@@ -1,19 +1,17 @@
       
-<div *ngIf="isBookedTimestamp">
+<div *ngIf="!isNotAvailableFacilities && !isBookedTimestamp" style="position: relative; text-align:center; height: 550px; vertical-align: bottom; background-image: url('assets/images/smartFitness.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.09;">
     
-  <div style="position: relative; width:100%; top: 90px; text-align:center;"><span class="info-reserve">Votre équipement est réservé <br>pour cette tranche horaire.</span>
-    <div style="position: relative; text-align:left; top: -160px; height: 270px; vertical-align: bottom; background-image: url('assets/images/infoReservation.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.2;">
-    </div>
-  </div>
-
 </div>
 
-<div *ngIf="isNotAvailableFacilities && !isBookedTimestamp">
-  <div style="position: relative; width:100%; top: 150px; text-align:center;"><span class="warning-reserve">Tous les équipements sont réservés.</span>
-    <div style="position: relative; text-align:left; top: -195px; height: 250px; vertical-align: bottom; background-image: url('assets/images/warningReservation.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.2;">
-    </div>
-  </div>
+<div *ngIf="isBookedTimestamp" style="position: relative; text-align:center; height: 550px; vertical-align: bottom; background-image: url('assets/images/infosReservation.jpg'); background-repeat: no-repeat; background-position: center bottom;">
+    
 </div>
+
+<div *ngIf="isNotAvailableFacilities && !isBookedTimestamp" style="position: relative; text-align:center; height: 550px; vertical-align: bottom; background-image: url('assets/images/warningReservation.jpg'); background-repeat: no-repeat; background-position: center bottom;">
+    
+</div>
+
+<div style="position: absolute; width:100%; top: 170px; text-align:center;">
 
 <mat-accordion *ngIf="!isBookedTimestamp && isShowableFacilities">
       <mat-expansion-panel *ngFor="let facilityCategory of listFacilityCategories | async"  >
@@ -83,6 +81,6 @@
         
     </mat-expansion-panel>
   </mat-accordion>
-
+</div>
   
   

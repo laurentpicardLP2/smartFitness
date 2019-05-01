@@ -13,63 +13,40 @@
     <table *ngIf="!isAuth" style="width: 100%">
       <tr tyle="text-align: center; width: 100%;">
         <td>
-          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/resa.png" width="40%"></a>                        
+          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/resa.png" width="51%"></a>                        
         </td>
         <td>
-          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/seances.png" width="40%"></a> 
+          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/abo.png" width="51%"></a>                        
         </td>
-      </tr>
+        <td>
+          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/produits.png" width="51%"></a> 
+        </td>
+    </tr>
     </table>
-    <table *ngIf="!isAuth" style="width: 100%">
-        <tr tyle="text-align: center; width: 100%;">
-          <td>
-            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/abo.png" width="40%"></a>                        
-          </td>
-          <td>
-            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/produits.png" width="40%"></a> 
-          </td>
-          <!-- <td>
-            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/FitnessCommandes.png" width="80%"></a> 
-          </td> -->
-        </tr>
-      </table>
       <table *ngIf="isAuth && authority=='ROLE_CUSTOMER'" style="width: 100%">
         <tr tyle="text-align: center; width: 100%;">
           <td>
             <a class="anonymous-listing"  routerLink="/seance-booking" routerLinkActive="active"><img src="assets/images/resa.png" width="40%"></a>                        
           </td>
           <td>
-            <a class="anonymous-listing" routerLink="/seance-listing" routerLinkActive="active"><img src="assets/images/seances.png" width="40%"></a> 
+            <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active"><img src="assets/images/abo.png" width="40%"></a>                        
           </td>
+          <td>
+            <a class="anonymous-listing"  routerLink="/product-listing" routerLinkActive="active"><img src="assets/images/produits.png" width="40%"></a> 
         </tr>
         <tr tyle="text-align: center; width: 100%;">
           <td>
             <a class="anonymous-listing"  routerLink="/seance-booking" routerLinkActive="active">Réserver des séances</a>                    
           </td>
           <td>
-            <a class="anonymous-listing" routerLink="/seance-listing" routerLinkActive="active">Vos séances</a>
+            <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active">Nos Abonnements</a>                    
           </td>
-        </tr>
+          <td>
+            <a class="anonymous-listing"  routerLink="/product-listing" routerLinkActive="active">Nos produits</a>
+          </td>
+      </tr>
       </table>
-      <table *ngIf="isAuth && authority=='ROLE_CUSTOMER'" style="width: 100%">
-          <tr tyle="text-align: center; width: 100%;">
-            <td>
-              <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active"><img src="assets/images/abo.png" width="40%"></a>                        
-            </td>
-            <td>
-              <a class="anonymous-listing"  routerLink="/product-listing" routerLinkActive="active"><img src="assets/images/produits.png" width="40%"></a> 
-            </td>
-          </tr>
-          <tr tyle="text-align: center; width: 100%;">
-            <td>
-              <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active">Nos Abonnements</a>                    
-            </td>
-            <td>
-              <a class="anonymous-listing"  routerLink="/product-listing" routerLinkActive="active">Nos produits</a>
-            </td>
-          </tr>
-        </table>
-      <br>
+    
       <div *ngIf="bEvt && !isAuth" class="div-evt">
         <a style="cursor: pointer;" (click)="anonymousRedirectTo(indexEvt)">{{stringTitle}} 
           <br><span class="sub-title">(Veuillez cliquer pour plus de précisions)</span></a> 

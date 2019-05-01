@@ -119,7 +119,6 @@ const routes: Routes = [
   { path: 'product-detail/:idProductRef', canActivate: [AuthGuardCustomerService], component: ProductDetailComponent},
 
   { path: 'our-activity',  component: OurActivityComponent },
-  { path: 'our-localisation',  component: OurLocalisationComponent },
   { path: 'chart',  component: TimestampFacilityComponent },
   { path: '', component: HomeComponent }, 
   

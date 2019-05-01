@@ -91,8 +91,12 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
     this.seanceService.priceSeanceSubject.subscribe(res => {
       this.priceSeance = res;
       this.bOpenedSeance = (this.priceSeance.length == 0);
+      
     });
 
+    setTimeout(() => this.onChangeDateTimeCheckedCommand(''), 300);
+
+    
     // this.seanceService.checkAnotherSeanceIsOpen(this.username).subscribe(
     //   (res) => { 
     //     if(res == true) {
@@ -239,9 +243,7 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
     
     public onChangeDateTimeCheckedCommand(fieldType: string) {
     if(fieldType === 'd' && this.priceSeance.length > 0){
-      this.snackBar.open("Veuillez supprimer les éléments de la séance pour changer la date.", "Ok", {
-        duration: 3500,
-      });
+      this.snackBar.open("Veuillez supprimer les éléments de la séance pour changer la date.", "Ok");
       
       return;
     }
@@ -252,7 +254,6 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
       this.seanceService.setIsShowableFacilitiesSubject(false);
       this.seanceService.setIsBookedTimestampSubject(false);
       this.bookingService.setIsNotAvailableFacilitiesSubject(false);
-      return;
     }
     else {
       setTimeout(() => this.seanceService.setIsShowableFacilitiesSubject(true), 150);

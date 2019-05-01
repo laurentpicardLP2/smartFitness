@@ -71,8 +71,7 @@ export class HomeComponent implements OnInit {
       this.authority = res.authority;
       if(this.authority == 'ROLE_ANONYMOUS'){
         this.arrayTitle.push("Connectez-vous pour accéder aux fonctionnalités.");
-        this.arrayTitle.push("Découvrez qui nous sommes et ce que nous proposons.");
-        this.arrayTitle.push("Où sommes-nous et comment venir chez nous.");
+        this.arrayTitle.push("Découvrez notre activité et comment venir chez nous.");
         this.bEvt = true;
         this.showEvenementsLoop();
       } else if(this.authority == 'ROLE_CUSTOMER'){
@@ -130,8 +129,6 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['login']);
     } else if(index == 1) {
       this.router.navigate(['our-activity']);
-    } else {
-      this.router.navigate(['our-localisation']);
     }
     
   }

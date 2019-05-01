@@ -49,6 +49,7 @@ export class FacilityMaintenanceComponent implements OnInit {
   strRevenue: string;
   strBalanceWidth: string;
   balanceRes: number;
+  nbRowsHistoric: number;
 
   constructor(private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -75,6 +76,7 @@ export class FacilityMaintenanceComponent implements OnInit {
       this.managerService.publishFacilityCategoryAssociateToFacility(this.idFacility);
       this.nameFacility = facility.nameFacility;
       this.maintenanceOperations = facility.maintenanceOperations;
+      this.nbRowsHistoric = this.maintenanceOperations.length;
       
       this.managerService.getFacilityCategoryAssociateToFacility(this.idFacility).subscribe(res => {
         this.facilityCategoryAssociateToFacility = res;

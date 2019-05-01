@@ -65,6 +65,7 @@ export class SeanceService {
     }
   }
 
+
   public seanceSubject: BehaviorSubject<Seance> = new BehaviorSubject(null);
 
   public setSeanceSubject(value: Seance){

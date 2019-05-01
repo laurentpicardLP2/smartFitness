@@ -20,7 +20,7 @@
       </div>
       <div>
         <mat-form-field class="facility-full-width">
-          <input matInput placeholder="Nom de l'équipement" type="text" formControlName="nameFacility" [(ngModel)]="nameFacility">
+          <input matInput placeholder="Nom de l'équipement" maxlength="20"  type="text" formControlName="nameFacility" [(ngModel)]="nameFacility">
           <mat-error *ngIf="facilityForm.controls['nameFacility'].hasError('nameFacility') && facilityForm.value.nameFacility">
             {{errors.nameFacilitySame}}
         </mat-error>

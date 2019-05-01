@@ -1,0 +1,41 @@
+agm-map {
+    height: 300px;
+  }
+
+.welcome-principal {
+    font-size: 45px;
+    font-family: 'Agency FB';
+    font-style: italic;
+    color: #0c249c;
+    font-weight: 900;
+}
+
+.welcome-secondaire {
+  font-size: 25px;
+    font-family: 'Agency FB';
+    font-style: italic;
+    color: #b21a73;
+    font-weight: 900;
+}
+
+.div-introduction {
+    font-size: 25px;
+      font-family:'Times New Roman', Times, serif;
+      font-style: normal;
+      color: #970c5d;
+  }
+
+  .icon {
+    position: relative;
+    /* Adjust these values accordingly */
+    top: 7px;
+    
+  }
+
+  .welcome-final {
+    font-size: 35px;
+    font-family: 'Agency FB';
+    font-style: italic;
+    color: #b21a73;
+    font-weight: 900;
+}

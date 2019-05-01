@@ -1,19 +1,26 @@
-<div *ngIf="bReload == false && isLogin==false">
-    <div fxFlex fxLayout fxLayoutAlign="center">
-        <div class="pad">
-            <form [formGroup]="userLoginForm" class="customer-form">
+<div style="position: relative; text-align:center; height: 550px; vertical-align: bottom; background-image: url('assets/images/smartFitness.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.15;">
+    
+</div>
 
-                <mat-form-field class="customer-full-width">
-                    <input matInput placeholder="Username" type="text" formControlName="username"  [(ngModel)]="username">
-                </mat-form-field>
-                
-                <mat-form-field class="customer-full-width">
-                    <input matInput placeholder="Password" type="password" formControlName="password" [(ngModel)]="password">
-                </mat-form-field>
+<div style="position: absolute; width:100%; top: 70px; text-align:center;">
 
-                <button mat-raised-button [disabled]="userLoginForm.invalid" (click)="onSignIn()">SignIn</button>
-            </form>
+    <div *ngIf="bReload == false && isLogin==false">
+        <div fxFlex fxLayout fxLayoutAlign="center">
+            <div class="pad">
+                <form [formGroup]="userLoginForm" class="customer-form">
 
+                    <mat-form-field class="customer-full-width">
+                        <input matInput placeholder="Username" type="text" formControlName="username"  [(ngModel)]="username">
+                    </mat-form-field>
+                    
+                    <mat-form-field class="customer-full-width">
+                        <input matInput placeholder="Password" type="password" formControlName="password" [(ngModel)]="password">
+                    </mat-form-field>
+
+                    <button mat-raised-button [disabled]="userLoginForm.invalid" (click)="onSignIn()">SignIn</button>
+                </form>
+
+            </div>
         </div>
     </div>
 </div>

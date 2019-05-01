@@ -17,7 +17,6 @@ import { EmbedVideo } from 'ngx-embed-video';
 
 import { AgmCoreModule } from '@agm/core';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
-import {} from 'googlemaps';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

@@ -13,7 +13,7 @@
       <input matInput type="time" min="06:00" max="21:00" step="600" placeholder="time of Booking" formControlName="timeOfBooking" [(ngModel)]="strTimeOfBooking" (keyup)="onChangeDateTime('t')" (click)="onChangeDateTime('t')">
       <!-- <button mat-button [routerLink]="['/seance-booking', {outlets: {'booking-router-outlet': ['facility-category-booking']}}]">Show categories!</button> -->
     </mat-form-field>
-      <button mat-button (click)="onChangeDateTime()">Consulter</button>
+      <button mat-button (click)="onChangeDateTime('')">Consulter</button>
     </form>
   </div>
 

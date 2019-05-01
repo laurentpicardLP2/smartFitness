@@ -64,7 +64,6 @@ export class WatchCustomerPropositionComponent implements OnInit {
    
    onOrder(idWatchCategory: number){
      this.offresService.addWatchToCommand(this.command,  idWatchCategory, this.username, this.nbItems, this.totalPriceCommand);
-    
    }
  
    public convertIntoMonetaryFormat(priceWatch: number){
