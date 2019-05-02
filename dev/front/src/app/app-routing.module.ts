@@ -95,7 +95,7 @@ const routes: Routes = [
   { path: 'product-ref-new', canActivate: [AuthGuardManagerService], component: ProductRefNewComponent},
   { path: 'product-ref-listing', canActivate: [AuthGuardManagerService], component: ProductRefListingComponent},
   { path: 'product-ref-detail/:idProductRef', canActivate: [AuthGuardManagerService], component: ProductRefDetailComponent},
-  { path: 'product-customer-historic/:idItem', canActivate: [AuthGuardCustomerService], component: ProductCustomerHistoricComponent },
+  { path: 'product-customer-historic/:idItem/:quantityItem/:idCommand', canActivate: [AuthGuardCustomerService], component: ProductCustomerHistoricComponent },
   { path: 'watch-category-new', canActivate: [AuthGuardManagerService], component: WatchCategoryNewComponent},
   { path: 'watch-category-listing', canActivate: [AuthGuardManagerService], component: WatchCategoryListingComponent},
   { path: 'watch-category-detail/:idWatchCategory', canActivate: [AuthGuardManagerService], component: WatchCategoryDetailComponent},

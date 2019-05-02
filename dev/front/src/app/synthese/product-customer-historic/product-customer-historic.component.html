@@ -17,15 +17,19 @@
         </div> 
         <div>
           <mat-form-field class="product-full-width">
-              <input readonly matInput placeholder="Prix" type="text" formControlName="priceProductRef" [(ngModel)]="priceProductFormatted">
+              <input readonly matInput placeholder="Prix unitaire" type="text" formControlName="priceProductRef" [(ngModel)]="priceProductFormatted">
            </mat-form-field>
            <span>&nbsp;&nbsp;</span>
            <mat-form-field class="product-quantity-width">
-            <input matInput required placeholder="Quantité" type="number" min="1" max="15" formControlName="quantityProductRef" (click)="calculatePrice()" [(ngModel)]="quantityProductRef">
+            <input matInput readonly required placeholder="Quantité" type="number" min="1" max="15" formControlName="quantityProductRef" [(ngModel)]="quantityItem">
           </mat-form-field>
+          <span>&nbsp;&nbsp;</span>
+          <mat-form-field class="product-full-width">
+            <input readonly matInput placeholder="Prix ligne de commande" type="text" formControlName="priceTotal" [(ngModel)]="priceTotalFormatted">
+         </mat-form-field>
         </div>
           <div class="pad"></div>
-      <button mat-raised-button [disabled]="productRefForm.invalid" (click)="onOrder()">Ajouter au panier</button>
+      <button mat-raised-button [disabled]="productRefForm.invalid" (click)="onBackCommand()">Retour commande</button>
    </form>
   </div> 
 </div>

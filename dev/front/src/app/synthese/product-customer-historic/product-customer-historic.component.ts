@@ -20,9 +20,10 @@ export class ProductCustomerHistoricComponent implements OnInit {
   productRefForm: FormGroup;
   listProductRefs: BehaviorSubject<ProductRef[]>;
   idItem: number;
+  quantityItem: number;
 
   idProductRef: number;
-
+  idCommand: number;
   nameProductRef: string;
   nameProductRefInit: string;
   priceProductRef: number;
@@ -34,6 +35,9 @@ export class ProductCustomerHistoricComponent implements OnInit {
   nbItems: string;
   totalPriceCommand: number;
   username: string;
+  priceTotalFormatted: string;
+  priceTotal: number;
+
 
 
   constructor(private route: ActivatedRoute,
@@ -46,6 +50,8 @@ export class ProductCustomerHistoricComponent implements OnInit {
   ngOnInit() {
 
     this.idItem = +this.route.snapshot.params.idItem;
+    this.quantityItem = +this.route.snapshot.params.quantityItem;
+    this.idCommand = +this.route.snapshot.params.idCommand;
 
     this.productService.getProductRefAssociateToIdItem(this.idItem).subscribe(
       productRef => {
@@ -54,6 +60,7 @@ export class ProductCustomerHistoricComponent implements OnInit {
         this.descriptionProductRef = productRef.descriptionProductRef;
         this.priceProductRef = productRef.priceProductRef;
         this.priceProductFormatted = this.utilsService.convertIntoMonetaryFormat(this.priceProductRef);
+        this.priceTotalFormatted = this.utilsService.convertIntoMonetaryFormat(this.priceProductRef * this.quantityItem);
         this.imageProductRef = productRef.imageProductRef;
       });
 
@@ -80,6 +87,9 @@ export class ProductCustomerHistoricComponent implements OnInit {
       ]],
       priceProductRef: ['', [
       ]],
+      priceTotal: ['', [
+
+      ]],
       descriptionProductRef: '',
       imageProductRef: '',
       nameProductCategory: ['', [
@@ -97,8 +107,8 @@ export class ProductCustomerHistoricComponent implements OnInit {
     this.priceProductFormatted = this.utilsService.convertIntoMonetaryFormat(this.priceProductRef * this.quantityProductRef);
   }
 
-  onOrder(){
-    this.productService.addProductToCommand(this.command, this.idProductRef, this.nbItems, this.totalPriceCommand, this.quantityProductRef);
+  onBackCommand(){
+    this.router.navigate(['command-detail/' + this.idCommand]);
   }
 
 }

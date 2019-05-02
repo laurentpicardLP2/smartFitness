@@ -16,7 +16,7 @@
            <td>
              <a *ngIf="getTypeItem(commandDetail.typeItem)=='seance'" routerLink="/seance-detail/{{ commandDetail.idItem }}" routerlinkactive="active" 
             ng-reflect-router-link-active="active" >{{ getTopicName(commandDetail.typeItem) }}</a> <span *ngIf="getTypeItem(commandDetail.typeItem)=='seance'" class="date-seance">  ({{ convertIntoDateTime(commandDetail.dateOfSeance) }})</span>
-            <a *ngIf="getTypeItem(commandDetail.typeItem)=='product'" routerLink="/product-customer-historic/{{ commandDetail.idItem }}" routerlinkactive="active" ng-reflect-router-link-active="active" >{{ getTopicName(commandDetail.typeItem) }}</a>
+            <a *ngIf="getTypeItem(commandDetail.typeItem)=='product'" routerLink="/product-customer-historic/{{ commandDetail.idItem }}/{{ commandDetail.quantityItem }}/{{ idCommand }}" routerlinkactive="active" ng-reflect-router-link-active="active" >{{ getTopicName(commandDetail.typeItem) }}</a>
             <span *ngIf="getTypeItem(commandDetail.typeItem)=='subscription'">{{ getTopicName(commandDetail.typeItem) }}</span>
             <a *ngIf="getTypeItem(commandDetail.typeItem)=='subscription'" routerLink="/subscription-customer-historic" routerlinkactive="active" 
             ng-reflect-router-link-active="active" >(mes abonnements)</a>
@@ -26,5 +26,7 @@
        </tr>
      </tbody>
   </table>
+<br>
+Le montant de votre commande s'élève à : <span  class="total-price" >{{ convertIntoMonetaryFormat(command.totalPrice) }}.</span>
   
  
