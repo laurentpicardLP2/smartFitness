@@ -1,3 +1,4 @@
+import { UtilsService } from 'src/app/services/utils.service';
 import { AdminService } from '../../services/admin.service';
 import { Staff } from '../../models/staff.model';
 import { Component, OnInit } from '@angular/core';
@@ -6,6 +7,7 @@ import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} f
 import { HttpClient } from '@angular/common/http';
 import { CustomerService } from 'src/app/services/customer.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { StaffValidator } from 'src/app/validators/staff.validator';
 
 @Component({
   selector: 'app-staff-detail',
@@ -14,7 +16,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class StaffDetailComponent implements OnInit {
 
-  newStaff: Staff;
+  updateStaff: Staff;
   staffRegistrationForm: FormGroup;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
   errors = errorMessages;
@@ -33,9 +35,10 @@ export class StaffDetailComponent implements OnInit {
     private formBuilder: FormBuilder,
     private adminService: AdminService,
     private customerService: CustomerService,
+    private utilsService: UtilsService,
     private httpClient: HttpClient
 ) {
-    this.createForm();
+    
 }
 
 
@@ -54,7 +57,9 @@ export class StaffDetailComponent implements OnInit {
     this.customerService.findUsername(this.username).subscribe(authority => {
       this.role = authority.authority;
       console.log("this.role : ", this.role);
-    })
+    });
+
+    this.createForm();
   }
 
   createForm() {
@@ -64,13 +69,12 @@ export class StaffDetailComponent implements OnInit {
               Validators.minLength(1),
               Validators.maxLength(128)
           ]],
-          usernameGroup: this.formBuilder.group({
           username: ['', [
             Validators.required,
             Validators.minLength(1),
-          ]]
-        }, {validator: this.checkUsername.bind(this)}),
-        role: ['ROLE_MANAGER', [
+            StaffValidator.usernameDetailValidator(this.utilsService.availableUsernames, this.username)
+          ]],
+        role: ['', [
             Validators.required
         ]],
         emailGroup: this.formBuilder.group({
@@ -85,7 +89,7 @@ export class StaffDetailComponent implements OnInit {
                 Validators.required,
                 Validators.pattern(regExps.password)
             ]],
-            confirmPassword: ['', Validators.required]
+            confirmPassword: ['jjjjjjjjjjjj', Validators.required]
         }, { validator: CustomValidators.childrenEqual}),
         tel: ['', [
             Validators.required
@@ -95,7 +99,7 @@ export class StaffDetailComponent implements OnInit {
 
 
   onUpdate(): void {
-      this.newStaff = new Staff(
+      this.updateStaff = new Staff(
                 this.username,  
                 this.fullname,
                 this.password,
@@ -105,7 +109,7 @@ export class StaffDetailComponent implements OnInit {
                 ""
                 );
 
-    this.adminService.register(this.newStaff, this.role);
+    this.adminService.update(this.updateStaff, this.role);
  }
 
   checkUsername(group: FormGroup){

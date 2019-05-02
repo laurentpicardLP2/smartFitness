@@ -1,3 +1,4 @@
+import { UtilsService } from 'src/app/services/utils.service';
 import { AdminService } from '../../services/admin.service';
 import { Staff } from '../../models/staff.model';
 import { Component, OnInit } from '@angular/core';
@@ -5,7 +6,7 @@ import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators, FormBuil
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
 import { HttpClient } from '@angular/common/http';
 import { CustomerService } from 'src/app/services/customer.service';
-
+import { StaffValidator } from 'src/app/validators/staff.validator';
 
 @Component({
   selector: 'app-staff-new',
@@ -32,6 +33,7 @@ export class StaffNewComponent implements OnInit {
     private formBuilder: FormBuilder,
     private adminService: AdminService,
     private customerService: CustomerService,
+    private utilsService: UtilsService,
     private httpClient: HttpClient
 ) {
     this.createForm();
@@ -49,13 +51,12 @@ export class StaffNewComponent implements OnInit {
               Validators.minLength(1),
               Validators.maxLength(128)
           ]],
-          usernameGroup: this.formBuilder.group({
           username: ['', [
             Validators.required,
             Validators.minLength(1),
-          ]]
-        }, {validator: this.checkUsername.bind(this)}),
-        role: ['ROLE_MANAGER', [
+            StaffValidator.usernameValidator(this.utilsService.availableUsernames)
+          ]],
+        role: ['', [
             Validators.required
         ]],
         emailGroup: this.formBuilder.group({

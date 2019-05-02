@@ -19,7 +19,7 @@
           <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/abo.png" width="51%"></a>                        
         </td>
         <td>
-          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/produits.png" width="51%"></a> 
+          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/catalogue.png" width="51%"></a> 
         </td>
     </tr>
     </table>
@@ -32,7 +32,7 @@
             <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active"><img src="assets/images/abo.png" width="40%"></a>                        
           </td>
           <td>
-            <a class="anonymous-listing"  routerLink="/product-listing" routerLinkActive="active"><img src="assets/images/produits.png" width="40%"></a> 
+            <a class="anonymous-listing"  routerLink="/product-listing" routerLinkActive="active"><img src="assets/images/catalogue.png" width="40%"></a> 
         </tr>
         <tr tyle="text-align: center; width: 100%;">
           <td>
@@ -42,16 +42,16 @@
             <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active">Nos Abonnements</a>                    
           </td>
           <td>
-            <a class="anonymous-listing"  routerLink="/product-listing" routerLinkActive="active">Nos produits</a>
+            <a class="anonymous-listing"  routerLink="/product-listing" routerLinkActive="active">Notre catalogue</a>
           </td>
       </tr>
       </table>
     
-      <div *ngIf="bEvt && !isAuth" class="div-evt">
+      <div *ngIf="!isAuth" class="div-evt">
         <a style="cursor: pointer;" (click)="anonymousRedirectTo(indexEvt)">{{stringTitle}} 
           <br><span class="sub-title">(Veuillez cliquer pour plus de précisions)</span></a> 
       </div>
-      <div *ngIf="bEvt && isAuth && authority=='ROLE_CUSTOMER'" class="div-evt">
+      <div *ngIf="isAuth && authority=='ROLE_CUSTOMER' && nbEvt > 0" class="div-evt">
         <a style="cursor: pointer;" (click)="customerRedirectTo(indexEvt)">{{stringTitle}} 
           <br><span class="sub-title">(Veuillez cliquer pour plus de précisions)</span></a> 
       </div>

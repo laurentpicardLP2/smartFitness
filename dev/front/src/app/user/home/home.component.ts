@@ -2,7 +2,7 @@ import { Evenement } from 'src/app/models/evenement.model';
 import { Router } from '@angular/router';
 import { ReportingService } from 'src/app/services/reporting.service';
 import { LoginService } from 'src/app/services/login.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { QueryList, ViewChildren } from '@angular/core';
 import { ThemePalette } from '@angular/material';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,7 +18,7 @@ import { EvenementService } from 'src/app/services/evenement.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   isAuth: boolean;
   bEvt: boolean = false;
   fullname: string;
@@ -30,6 +30,9 @@ export class HomeComponent implements OnInit {
   arrayTitle: string [] = [];
   evenementArray: Evenement [] = [];
   stringTitle: string = "";
+  subTimeout;
+  nbEvt: number;
+  timeouts: number[] = [];
 
   public timings = '250ms ease-in';
   public autoplay = true;
@@ -66,6 +69,7 @@ export class HomeComponent implements OnInit {
     this.loginService.fullnameSubject.subscribe(res => {
       this.fullname = res;
     });
+    
 
     this.loginService.authoritySubject.subscribe(res => {
       this.authority = res.authority;
@@ -73,23 +77,23 @@ export class HomeComponent implements OnInit {
         this.arrayTitle.push("Connectez-vous pour accéder aux fonctionnalités.");
         this.arrayTitle.push("Découvrez notre activité et comment venir chez nous.");
         this.bEvt = true;
-        this.showEvenementsLoop();
+        this.showEvenementsLoopAnonymous();
       } else if(this.authority == 'ROLE_CUSTOMER'){
         // get Evenements from DataBase into this.evenementArray
         this.arrayTitle = [];
         this.stringTitle = "";
+        this.evenementArray = [];
         this.evenementservice.getEvenementInSlotTime().subscribe(
           (res) => {
             
             this.evenementArray = res;
+            this.nbEvt = this.evenementArray.length;
             for(let i = 0; i < res.length; i++){
               this.arrayTitle.push(res[i].titleEvt);
             }
+            
             if(res.length > 0){
-              this.showEvenementsLoop();
-              this.bEvt = true;
-            } else {
-              this.bEvt = false;
+              setTimeout(() => this.showEvenementsLoopCustomer(), 100);
             }
           },
           (error) => {
@@ -115,13 +119,30 @@ export class HomeComponent implements OnInit {
     this.reportingService.publishDataSetRentability();
   }
 
-  public showEvenementsLoop(){
-    if (this.bEvt === false) {
+  public showEvenementsLoopAnonymous(){
+    if (this.isAuth === true) {
+      clearTimeout(this.subTimeout);
       return ;
     }
     this.indexEvt = (this.indexEvt==this.arrayTitle.length-1) ? 0 : this.indexEvt + 1;
     this.stringTitle = this.arrayTitle[this.indexEvt];
-    setTimeout(() => this.showEvenementsLoop(), 3000);
+    this.subTimeout = setTimeout(() => this.showEvenementsLoopAnonymous(), 3000);
+  }
+
+  public showEvenementsLoopCustomer(){
+    
+    
+    if (this.isAuth === null || this.isAuth === false) {
+
+      clearTimeout(this.subTimeout);
+      
+    }
+    
+    this.indexEvt = (this.indexEvt==this.arrayTitle.length-1) ? 0 : this.indexEvt + 1;
+    this.stringTitle = this.arrayTitle[this.indexEvt];
+    
+    this.subTimeout = setTimeout(() => this.showEvenementsLoopCustomer(), 3000);
+    
   }
 
   public anonymousRedirectTo(index: number){
@@ -140,5 +161,13 @@ export class HomeComponent implements OnInit {
   public showMustSignIn(){
     this.snackBar.open("Veuillez vous connecter pour accéder à cette fonctionnalité", "Ok");
   }
+
+  ngOnDestroy(){
+  //   console.log("this.timeouts.length : ", this.timeouts.length);
+  //     let id=window.setTimeout(null,0);
+  //     while (id--){
+  //       window.clearTimeout(id);
+  //     }
+   }
 
 }

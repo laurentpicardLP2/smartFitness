@@ -1,3 +1,4 @@
+import { UtilsService } from 'src/app/services/utils.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { LoginService } from './login.service';
 import { Staff } from 'src/app/models/staff.model';
@@ -17,7 +18,8 @@ export class AdminService {
 
   constructor(private httpClient: HttpClient,
               private router: Router,
-              private token: TokenStorageService) {}
+              private token: TokenStorageService,
+              private utilsService: UtilsService) {}
 
   public listStaff: Staff [] = [] ;
 
@@ -67,13 +69,33 @@ export class AdminService {
           "Authorization": this.token.getToken()
       }
   }).subscribe(
-        (staff) =>{ console.log("création staff OK : ",staff); this.router.navigate(['/staff-listing']);},
+        (staff) =>{ console.log("création staff OK : ",staff); this.router.navigate(['/staff-listing']);
+                    this.utilsService.availableUsernames.push(newStaff.username);
+                    this.utilsService.availableUsernames$.next(this.utilsService.availableUsernames);
+                  },
+        (error) => console.log("création staff pb : ", error) 
+    );
+  }
+
+  public update(updateStaff: Staff, role: string){
+    this.httpClient.put<Staff>('http://localhost:8080/adminctrl/updatestaff/' + role, updateStaff, 
+    {
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+      }
+  }).subscribe(
+        (staff) =>{ console.log("création staff OK : ",staff); 
+                    let index = this.listStaff.findIndex(staff => staff.username === updateStaff.username);
+                    this.listStaff[index] = updateStaff;
+                    this.listStaff$.next(this.listStaff);                  
+                    this.router.navigate(['/staff-listing']);},
         (error) => console.log("création staff pb : ", error) 
     );
   }
 
   public delete(username: string){
-    this.httpClient.delete('http://localhost:8080/adminctrl/delstaff/' + username, 
+    this.httpClient.delete('http://localhost:8080/adminctrl/deletestaff/' + username, 
     {
       headers: {
           "Content-Type": "application/json",
@@ -81,6 +103,14 @@ export class AdminService {
       }
   }).subscribe(
         () =>{ console.log("suppression staff OK : ",username);
+                this.listStaff.slice(this.listStaff.findIndex(staff => staff.username === username), 1);
+                this.listStaff$.next(this.listStaff);
+
+                // let index_delete = this.utilsService.availableUsernames.findIndex(name => name === username);
+                // console.log("index_delete : ", index_delete);
+                // this.utilsService.availableUsernames.slice(this.utilsService.availableUsernames.findIndex(name => name === username), 1);
+                // this.utilsService.availableUsernames$.next(this.utilsService.availableUsernames);
+                this.utilsService.publishUsernames();
             },
         (error) => console.log("suppression staff pb : ", error) 
     );

@@ -8,14 +8,15 @@
                     {{errors.fullname}}
                 </mat-error>
             </mat-form-field>
-            <div formGroupName="usernameGroup">
             <mat-form-field class="staff-full-width">
-                <input required matInput placeholder="Username" type="text" formControlName="username" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="username">
-                <mat-error>
+                <input matInput required placeholder="Identifiant" type="text" formControlName="username" [(ngModel)]="username">
+                <mat-error *ngIf="staffRegistrationForm.controls['username'].hasError('username') && staffRegistrationForm.value.username">
+                    {{errors.usernameSame}}
+                </mat-error>
+                <mat-error *ngIf="staffRegistrationForm.controls['username'].hasError('required')">
                     {{errors.username}}
                 </mat-error>
             </mat-form-field>
-            </div>
             <div>
                 <mat-form-field class="staff-full-width">
                     <mat-label>Rôle du collaborateur</mat-label>

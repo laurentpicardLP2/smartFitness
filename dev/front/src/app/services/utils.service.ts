@@ -23,6 +23,7 @@ export class UtilsService {
               private router: Router,
               private token: TokenStorageService) { }
 
+  
   //la liste des Usernames de l'application
   public availableUsernames: string[] = [];
 
