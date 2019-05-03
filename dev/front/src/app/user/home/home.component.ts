@@ -134,7 +134,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     
     if (this.isAuth === null || this.isAuth === false) {
 
-      clearTimeout(this.subTimeout);
+     return;
       
     }
     
@@ -168,6 +168,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   //     while (id--){
   //       window.clearTimeout(id);
   //     }
+    clearTimeout(this.subTimeout);
    }
 
 }

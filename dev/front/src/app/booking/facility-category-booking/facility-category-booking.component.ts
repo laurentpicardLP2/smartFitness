@@ -88,7 +88,7 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
     
     this.seanceService.priceSeanceSubject.subscribe(res => {
       this.priceSeance = res;
-      console.log("this.priceSeance : ", this.priceSeance);
+      //console.log("this.priceSeance : ", this.priceSeance);
     });
 
 
