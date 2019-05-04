@@ -164,7 +164,9 @@ export class LoginService {
 
           if(detectedCommandZero == false){this.signInAfterCheckIsOnlySession(user, bReload); }
           else{
-                this.snackBar.open("Une session est déjà ouverte, veuillez la clôturer ou attendre 10 minutes", "Ok");
+                this.snackBar.open("Une session est déjà ouverte, veuillez la clôturer ou attendre 10 minutes", "Ok", {
+                  duration: 10000
+                });
                 this.signOut();
                 this.router.navigate(['/login']);}
         },
@@ -177,7 +179,9 @@ export class LoginService {
         
       },
       (error) => { console.log("login user pb : ", error); 
-      this.snackBar.open("L'identifiant ou le mot de passe sont incorrects", "Ok");
+      this.snackBar.open("L'identifiant ou le mot de passe sont incorrects", "Ok", {
+        duration: 10000
+      });
         this.setIsUserLoggedSubject(false);
         this.setAuthoritySubject(new Authority("","ROLE_ANONYMOUS"));
       }

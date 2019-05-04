@@ -46,6 +46,8 @@ export const regExps: { [key: string]: RegExp } = {
  * Collection of reusable error messages
  */
 export const errorMessages: { [key: string]: string } = {
+    loginUsername: 'L\'identifiant doir être renseigné',
+    loginPassword: 'Le mot de passe doit être renseigné',
     fullname: 'Votre nom complet doit comporter entre 1 et 128 caractères.',
     usernameSame: 'Ce username existe déjà, veuillez en choisir un autre.',
     username: 'L\'identifiant doit être renseigné.',

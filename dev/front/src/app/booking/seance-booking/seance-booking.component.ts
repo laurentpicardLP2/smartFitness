@@ -243,7 +243,9 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
     
     public onChangeDateTimeCheckedCommand(fieldType: string) {
     if(fieldType === 'd' && this.priceSeance.length > 0){
-      this.snackBar.open("Veuillez supprimer les éléments de la séance pour changer la date.", "Ok");
+      this.snackBar.open("Veuillez supprimer les éléments de la séance pour changer la date.", "Ok", {
+        duration: 10000
+      });
       
       return;
     }

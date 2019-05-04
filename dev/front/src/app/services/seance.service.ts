@@ -142,7 +142,9 @@ export class SeanceService {
     this.router.navigate(['/seance-booking', {outlets: {'facility-router-outlet' : ['facility-booking']}}]);
         },
         (error) => { console.log("init timestamp pb : ", error); 
-                    this.snackBar.open("Oups! cet équipement vient d\'être réservé.", "Ok");
+                    this.snackBar.open("Oups! cet équipement vient d\'être réservé.", "Ok", {
+                      duration: 10000
+                    });
                     this.bookingService.publishFacilityCategories(dateOfTimestamp);
                     this.router.navigate(['/seance-booking', {outlets: {'facility-category-router-outlet' : ['facility-category-booking']}}]);
                   }

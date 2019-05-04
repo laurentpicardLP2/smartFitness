@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user.model';
 import { LoginService } from 'src/app/services/login.service';
 import {TokenStorageService} from 'src/app/services/token-storage.service';
-
+import  { errorMessages } from '../../services/custom-validators.service';
 
 
 @Component({
@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   password: string; 
   bReload: boolean;
   isLogin: boolean=true;
+  errors = errorMessages;
 
   constructor(
     private formBuilder: FormBuilder,

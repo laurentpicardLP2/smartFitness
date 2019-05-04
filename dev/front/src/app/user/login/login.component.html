@@ -11,10 +11,16 @@
 
                     <mat-form-field class="customer-full-width">
                         <input matInput placeholder="Username" type="text" formControlName="username"  [(ngModel)]="username">
+                        <mat-error *ngIf="userLoginForm.controls['username'].hasError('required')">
+                            {{errors.loginUsername}}
+                        </mat-error>
                     </mat-form-field>
                     
                     <mat-form-field class="customer-full-width">
                         <input matInput placeholder="Password" type="password" formControlName="password" [(ngModel)]="password">
+                        <mat-error *ngIf="userLoginForm.controls['password'].hasError('required')">
+                            {{errors.loginPassword}}
+                        </mat-error>
                     </mat-form-field>
 
                     <button mat-raised-button [disabled]="userLoginForm.invalid" (click)="onSignIn()">SignIn</button>
