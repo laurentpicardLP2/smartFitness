@@ -55,6 +55,7 @@ export class CustomerNewComponent implements OnInit {
         this.router.navigate(['']);
     }
     this.checkedAdrCopy = false;
+
   }
 
   createForm() {
@@ -114,7 +115,8 @@ export class CustomerNewComponent implements OnInit {
             Validators.required
         ]],
         tel: ['', [
-            Validators.required
+            Validators.required,
+            Validators.pattern('(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}')
         ]],
         dateOfBirthday: ['', [
             Validators.required
@@ -156,15 +158,8 @@ export class CustomerNewComponent implements OnInit {
                 this.deliveryCountry
                 );
 
-    this.customerService.register(this.newCustomer);
+    this.customerService.createCustomer(this.newCustomer);
  }
 
-//   checkUsername(group: FormGroup){
-//     let username : string;
-    
-//     username = group.get("username").value;
-//     const isValid = !(this.customerService.availableAuthorities.find(authoritary => authoritary.username === username))
-//     return isValid ? null : { checkUsername: true };
-//  }
 }
 

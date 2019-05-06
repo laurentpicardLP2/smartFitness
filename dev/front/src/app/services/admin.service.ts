@@ -105,11 +105,6 @@ export class AdminService {
         () =>{ console.log("suppression staff OK : ",username);
                 this.listStaff.slice(this.listStaff.findIndex(staff => staff.username === username), 1);
                 this.listStaff$.next(this.listStaff);
-
-                // let index_delete = this.utilsService.availableUsernames.findIndex(name => name === username);
-                // console.log("index_delete : ", index_delete);
-                // this.utilsService.availableUsernames.slice(this.utilsService.availableUsernames.findIndex(name => name === username), 1);
-                // this.utilsService.availableUsernames$.next(this.utilsService.availableUsernames);
                 this.utilsService.publishUsernames();
             },
         (error) => console.log("suppression staff pb : ", error) 

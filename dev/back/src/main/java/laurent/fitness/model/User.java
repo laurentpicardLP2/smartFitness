@@ -49,7 +49,6 @@ public class User implements Serializable, UserDetails {
 	protected Date dateOfRegistration;
 	
 	protected byte enabled;
-	
 
 	//bi-directional one-to-one association to Authority
 	@OneToOne(optional=true, cascade=CascadeType.REMOVE)

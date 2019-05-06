@@ -18,9 +18,10 @@
     width: 100%;
   }
 
-  .customer-border {
+  .customer-border-solid {
     border-style: solid;
   }
+
 
   .pad {
     margin: 5px;

@@ -1,3 +1,4 @@
+import { UtilsService } from 'src/app/services/utils.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Customer } from 'src/app/models/customer.model';
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 export class CustomerService {
   
   constructor(private httpClient: HttpClient,
+              private utilsService: UtilsService,
               private router: Router) { 
 
   }
@@ -47,22 +49,12 @@ export class CustomerService {
   findUsername (username: string): Observable<Authority> {
     return this.getAuthorities().pipe(map( authorities=> authorities.find(authority => authority.username === username)));
   }
-  
-   /**
-   * Fonction de création d'un nouveau customer.
-   * Elle met à jour notre liste des customers et notre liste observable.
-   * @param newCustomer le nouveau customer à créer
-   */
-  public createCustomer(newCustomer: Customer) {
-    this.httpClient.post<Customer>('http://localhost:8080/userctrl/addcustomer', newCustomer).subscribe(
-      ()=> console.log("ok"), 
-      (error) => console.log("ko")
-    );
-  }
 
-  public register(newCustomer: Customer){
+  public createCustomer(newCustomer: Customer){
     this.httpClient.post<Customer>('http://localhost:8080/userctrl/newcustomer', newCustomer).subscribe(
         (customer) =>{ console.log("création user OK : ",customer);
+                    this.utilsService.availableUsernames.push(newCustomer.username);
+                    this.utilsService.availableUsernames$.next(this.utilsService.availableUsernames);
                     this.httpClient.post('http://localhost:8080/emailctrl/signupconfirm/' + customer.username, null).subscribe(
                     ()=> {
                       this.router.navigate(['signup-confirm/' + customer.email + '/' + customer.fullname]);

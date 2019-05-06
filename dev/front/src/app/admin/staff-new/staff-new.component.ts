@@ -94,12 +94,4 @@ export class StaffNewComponent implements OnInit {
     this.adminService.register(this.newStaff, this.role);
  }
 
-  checkUsername(group: FormGroup){
-    let username : string;
-    
-    username = group.get("username").value;
-    const isValid = !(this.customerService.availableAuthorities.find(authoritary => authoritary.username === username))
-    return isValid ? null : { checkUsername: true };
-  }
-
 }

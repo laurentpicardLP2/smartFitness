@@ -91,16 +91,13 @@ public class UserController {
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
 				
 		try {
-			
-			
-			System.out.println("ewCustomer.getUsername()" + newCustomer.getUsername());
+			this.authorityService.saveAuthority(new Authority(newCustomer.getUsername(), "ROLE_CUSTOMER"));
 			Customer customer = new Customer(this.userService.findByUsernameIdMax(),
 					newCustomer.getUsername(), newCustomer.getFullname(), "{bcrypt}" + bcrypt.encode(newCustomer.getPassword()), 
 					newCustomer.getEmail(), newCustomer.getTel(), new Date(), (byte)1, newCustomer.getDateOfBirthday(),
 					newCustomer.getDomesticAddress(), newCustomer.getDomesticCp(), newCustomer.getDeliveryCity(), newCustomer.getDomesticCountry(),
 					newCustomer.getDeliveryAddress(), newCustomer.getDeliveryCp(), newCustomer.getDeliveryCity(), newCustomer.getDeliveryCountry());
 			this.customerService.saveCustomer(customer);
-			this.authorityService.saveAuthority(new Authority("db_laurent", "ROLE_CUSTOMER"));
 			return ResponseEntity.status(HttpStatus.OK).body(customer);
 		
 	} catch(Exception e) {

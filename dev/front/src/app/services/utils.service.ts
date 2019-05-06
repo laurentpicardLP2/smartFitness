@@ -28,7 +28,7 @@ export class UtilsService {
   public availableUsernames: string[] = [];
 
   // La liste observable que l'on rend visible partout dans l'application
-  availableUsernames$: BehaviorSubject<string[]> = new BehaviorSubject(this.availableUsernames);
+  public availableUsernames$: BehaviorSubject<string[]> = new BehaviorSubject(this.availableUsernames);
   
   /**
    * La fonction getUsernames() est privée car elle n'a besoin d'être appellée que dans le service.
