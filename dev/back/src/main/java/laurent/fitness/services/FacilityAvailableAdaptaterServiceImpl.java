@@ -1,9 +1,6 @@
 package laurent.fitness.services;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -45,8 +42,6 @@ public class FacilityAvailableAdaptaterServiceImpl implements FacilityAvailableA
 		for (int i=0; i<facilityCategories.size(); i++) {
 			nameFacilityCategory = facilityCategories.get(i).getNameFacilityCategory();
 			availableFacilities = this.timestampFacilityRepo.findByFacilityCategoryCount(nameFacilityCategory, timestampToString);
-System.out.println("timestampToString : "  + timestampToString);
-System.out.println("availableFacilities : "  + availableFacilities);
 			facilities = this.facilityRepo.findByFacilityAvailable(nameFacilityCategory, timestampToString);
 			facilitiesAvailableAdaptater.add(new FacilityAvailableAdaptater(nameFacilityCategory, availableFacilities, facilities));
 		}

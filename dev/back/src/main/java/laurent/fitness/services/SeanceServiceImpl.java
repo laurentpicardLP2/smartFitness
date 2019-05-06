@@ -10,11 +10,9 @@ import org.springframework.stereotype.Service;
 import laurent.fitness.model.Command;
 import laurent.fitness.model.Customer;
 import laurent.fitness.model.Seance;
-import laurent.fitness.model.User;
 import laurent.fitness.repository.CommandRepository;
 import laurent.fitness.repository.CustomerRepository;
 import laurent.fitness.repository.SeanceRepository;
-import laurent.fitness.repository.UserRepository;
 
 @Service
 public class SeanceServiceImpl implements SeanceService {

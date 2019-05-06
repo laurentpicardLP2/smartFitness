@@ -2,7 +2,12 @@ package laurent.fitness.upload.exception;
 
 public class UploadFileException extends Exception {
 
-	  public UploadFileException() {
+	  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public UploadFileException() {
 	    super("Erreur d'upload de fichier");
 	  }
 	}

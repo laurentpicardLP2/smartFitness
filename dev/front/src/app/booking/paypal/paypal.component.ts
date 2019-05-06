@@ -7,6 +7,7 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal'
 import { EmailService } from 'src/app/services/email.service';
 import { ItemPaypal } from 'src/app/models/item-paypal.model';
 import { UnitAmount } from 'src/app/models/unit-amount.model';
+import { Router } from '@angular/router';
 
 declare var hljs: any;
 
@@ -19,11 +20,13 @@ export class PaypalComponent implements OnInit {
   command: Command;
   totalPrice: number;
   username: string;
+  fullname: string;
+  email: string;
 
   constructor(private commandService: CommandService,
     private emailService: EmailService,
     private loginService: LoginService,
-    private utilsService: UtilsService) {
+    private router: Router) {
   }
     
     public payPalConfig ? : IPayPalConfig;
@@ -37,15 +40,30 @@ export class PaypalComponent implements OnInit {
     ngOnInit() {
       this.commandService.commandSubject.subscribe(res => {
         this.command = res;
-        console.log("res : ", res);
         this.totalPrice = this.command.totalPrice;
-        // this.commandService.getItemsPaypalAdaptater(this.command.idCommand).subscribe()
+
+console.log("init paypal")
+
+        this.loginService.usernameSubject.subscribe(
+          (res) => {
+            this.username = res ;
+                        this.loginService.getUserInfos(this.username).subscribe(
+              (res) => {
+                this.fullname = res[1];
+                this.email = res[2];
+              },
+              (error) => { }
+            );
+
+            
+          },
+        )
+
+        
         this.initConfig();
       });
 
-      this.loginService.usernameSubject.subscribe(
-        (res) => this.username = res
-      )
+      
       
     }
   
@@ -74,18 +92,6 @@ export class PaypalComponent implements OnInit {
         item1.unit_amount = unit_amount;
         itemsPaypal.push(item1);
       }
-
-      // unit_amount = new UnitAmount();
-      // unit_amount.currency_code = 'EUR';
-      // unit_amount.value = this.totalPrice.toString();
-
-      // item1 = new ItemPaypal();
-      // item1.name = 'Seance'
-      // item1.quantity = '1';
-      // item1.category =  'DIGITAL_GOODS',
-      // item1.unit_amount = unit_amount;
-      
-      // itemsPaypal.push(item1);
       
       this.payPalConfig = {
         currency: 'EUR',
@@ -127,6 +133,7 @@ export class PaypalComponent implements OnInit {
           this.showSuccess = true;
           this.commandService.setNbItemsSubject("");
           this.emailService.sendEmailAfterPaypal(this.command.idCommand, this.command.totalPrice, this.username);
+          this.router.navigate(['acknoledgment/' + this.email + '/' + this.command.idCommand + '/' + this.command.totalPrice + '/' + this.username + '/' + this.fullname]);
         },
         onCancel: (data, actions) => {
           console.log('OnCancel', data, actions);

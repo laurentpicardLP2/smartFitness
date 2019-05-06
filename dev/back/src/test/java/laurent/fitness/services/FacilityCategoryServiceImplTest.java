@@ -1,7 +1,6 @@
 package laurent.fitness.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
 
 import org.junit.Before;

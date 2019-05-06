@@ -91,10 +91,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<String> getUserInfos(String username) {
 		// TODO Auto-generated method stub
+		User user = this.userRepo.findByUsername(username);
 		List<String> infos = new ArrayList<String>();
 		infos.add(Integer.toString(this.subscriptionRepo.findIsSubscridebByUsername(username)));
-		infos.add(this.userRepo.findFullnameByUsername(username));
+		infos.add(user.getFullname());
+		infos.add(user.getEmail());
 		return infos;
 	}
-
 }

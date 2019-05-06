@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import laurent.fitness.model.Command;
 import laurent.fitness.model.Customer;
-import laurent.fitness.model.Seance;
 import laurent.fitness.model.Subscription;
 import laurent.fitness.model.SubscriptionCategory;
 import laurent.fitness.repository.CommandRepository;

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import laurent.fitness.model.Command;
 import laurent.fitness.model.Customer;
-import laurent.fitness.model.Subscription;
 import laurent.fitness.model.Watch;
 import laurent.fitness.model.WatchCategory;
 import laurent.fitness.repository.CommandRepository;
@@ -42,10 +41,5 @@ public class WatchServiceImpl implements WatchService {
 		return this.watchRepo.save(new Watch(commands, watchCategory.getNameWatch() + ":watch" + ":" + idWatchCategory, watchCategory.getPriceWatch(), customer, watchCategory));
 	}
 
-//	@Override
-//	public Watch findWatchByIdItem(int idItem) {
-//		// TODO Auto-generated method stub
-//		return this.watchRepo.findByIdItem(idItem);
-//	}
 
 }

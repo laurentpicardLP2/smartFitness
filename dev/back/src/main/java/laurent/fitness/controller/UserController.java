@@ -1,22 +1,19 @@
 package laurent.fitness.controller;
 
 
-import static laurent.fitness.security.SecurityConstants.SECRET_KEY;
-import static laurent.fitness.security.SecurityConstants.TOKEN_EXPIRATION_TIME;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,31 +23,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import laurent.fitness.model.AuthToken;
-import laurent.fitness.model.User;
-import laurent.fitness.repository.UserRepository;
-import laurent.fitness.security.JwtTokenProvider;
-import laurent.fitness.services.MapValidationErrorService;
-
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.validation.BindingResult;
-
-import laurent.fitness.services.AuthorityService;
-import laurent.fitness.services.CustomerService;
-import laurent.fitness.services.StaffService;
-import laurent.fitness.services.UserService;
 import laurent.fitness.model.Authority;
 import laurent.fitness.model.Customer;
-import laurent.fitness.model.Staff;
 import laurent.fitness.model.User;
-import laurent.fitness.repository.UserRepository;
+import laurent.fitness.security.JwtTokenProvider;
+import laurent.fitness.services.AuthorityService;
+import laurent.fitness.services.CustomerService;
+import laurent.fitness.services.MapValidationErrorService;
+import laurent.fitness.services.UserService;
 
 @RestController
 @RequestMapping("/userctrl")

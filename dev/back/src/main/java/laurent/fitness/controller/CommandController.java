@@ -3,17 +3,13 @@ package laurent.fitness.controller;
 import java.util.Date;
 import java.util.List;
 
-import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,14 +24,11 @@ import laurent.fitness.model.Command;
 import laurent.fitness.model.Customer;
 import laurent.fitness.model.Item;
 import laurent.fitness.model.Seance;
-import laurent.fitness.model.User;
 import laurent.fitness.model.adaptater.ItemPaypalAdaptater;
 import laurent.fitness.services.CommandService;
 import laurent.fitness.services.CustomerService;
 import laurent.fitness.services.ItemPaypalAdaptaterService;
-import laurent.fitness.services.ItemService;
 import laurent.fitness.services.SeanceService;
-import laurent.fitness.services.UserService;
 
 @RestController
 @RequestMapping("/commandctrl")
@@ -146,11 +139,7 @@ public class CommandController {
 			}
 			this.commandService.saveCommand(command);
 			return ResponseEntity.status(HttpStatus.OK).body(command); 
-			
-			
-			// Toutes les instructions suivantes doivent être exécuter dans une autre fonction du controller après la validation du paiment
-			//Customer customer = this.customerService.findByUsername(username);
-			//return ResponseEntity.status(HttpStatus.OK).body(this.commandService.saveCommand(new Command(customer, new Date())));
+					
 		} catch(Exception e) {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	

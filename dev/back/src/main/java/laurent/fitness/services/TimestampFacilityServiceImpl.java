@@ -1,7 +1,5 @@
 package laurent.fitness.services;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +9,6 @@ import laurent.fitness.model.Facility;
 import laurent.fitness.model.FacilityCategory;
 import laurent.fitness.model.Seance;
 import laurent.fitness.model.TimestampFacility;
-import laurent.fitness.model.adaptater.TimestampFacilityAdaptater;
 import laurent.fitness.repository.FacilityCategoryRepository;
 import laurent.fitness.repository.FacilityRepository;
 import laurent.fitness.repository.SeanceRepository;

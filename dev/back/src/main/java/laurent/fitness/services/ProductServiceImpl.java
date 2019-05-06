@@ -6,14 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import laurent.fitness.model.Command;
-import laurent.fitness.model.Customer;
 import laurent.fitness.model.Product;
 import laurent.fitness.model.ProductRef;
-import laurent.fitness.model.Subscription;
-import laurent.fitness.model.Watch;
-import laurent.fitness.model.WatchCategory;
 import laurent.fitness.repository.CommandRepository;
-import laurent.fitness.repository.CustomerRepository;
 import laurent.fitness.repository.ProductRefRepository;
 import laurent.fitness.repository.ProductRepository;
 

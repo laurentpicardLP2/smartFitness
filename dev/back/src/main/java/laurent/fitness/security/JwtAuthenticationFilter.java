@@ -38,24 +38,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
 
-    	
-    	System.out.println("Avt ------------ JwtAuthenticationFilter --------- authenticationToken " );
         try{
-        	String auth = httpServletRequest.getHeader("Authorization");
-        	System.out.println("Avt auth------------ JwtAuthenticationFilter --------- authenticationToken " + auth );
-        	
-            String jwt = getJWTFromRequest(httpServletRequest);
-            System.out.println("Avt jwt------------ JwtAuthenticationFilter --------- authenticationToken " + jwt );
+        	String jwt = getJWTFromRequest(httpServletRequest);
             if(StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
                 int userId = tokenProvider.getUserIdFromJWT(jwt);
                 
-                
                 User user = customUserDetailsService.loadUserById(userId);
-                System.out.println("JwtAuthenticationFilter ---------Long userId " + userId);
-                
-                String username = tokenProvider.getUsernameFromJWT(jwt);
-                System.out.println("JwtAuthenticationFilter ---------username " + username);
-                
+                               
                 Object typeRole = new Object();
                 
                 List<?> role = tokenProvider.getAuthoritariesFroJWT(jwt);
@@ -72,9 +61,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 
                 typeRole = typeRole.toString().split("=")[1];
                 typeRole = typeRole.toString().substring(0, typeRole.toString().length() - 1);
-                
-                System.out.println("typeRole : " + typeRole);
-                		
+                                		
                 SimpleGrantedAuthority authority = new SimpleGrantedAuthority(typeRole.toString());
                 List<SimpleGrantedAuthority> updatedAuthorities = new ArrayList<SimpleGrantedAuthority>();
                 updatedAuthorities.add(authority);
@@ -85,14 +72,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                 SecurityContextHolder.getContext().getAuthentication().getPrincipal(),
                                 SecurityContextHolder.getContext().getAuthentication().getCredentials(),
                                 updatedAuthorities)
-                );
-    	        
-                System.out.println("JwtAuthenticationFilter --------- authenticationToken " + authenticationToken.getName());
-                System.out.println("JwtAuthenticationFilter --------- getCredentials " + authenticationToken.getCredentials());
-                System.out.println("JwtAuthenticationFilter --------- getAuthorities " + authenticationToken.getAuthorities());
-                System.out.println("JwtAuthenticationFilter --------- getPrincipal " + authenticationToken.getPrincipal());
-                System.out.println("JwtAuthenticationFilter --------- getDetails " + authenticationToken.getDetails());
-                System.out.println("JwtAuthenticationFilter --------- getName " + authenticationToken.getName());
+                );    	        
             }
         } catch (Exception ex) {
             logger.error("Could not set user authentication in security context", ex);

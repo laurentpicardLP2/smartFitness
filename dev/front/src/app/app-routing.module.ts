@@ -18,6 +18,7 @@ import { TimestampFacilityComponent } from './booking/timestamp-facility/timesta
 import { HomeComponent } from './user/home/home.component';
 import { RoomNewComponent } from './manager/room-new/room-new.component';
 import { AuthGuardCustomerService } from './services/auth-guard-customer.service';
+import { AuthGuardPaypalService } from './services/auth-guard-paypal.service';
 import { AuthGuardManagerService } from './services/auth-guard-manager.service';
 import { AuthGuardAdminService } from './services/auth-guard-admin.service';
 import { RoomListingComponent } from './manager/room-listing/room-listing.component';
@@ -112,7 +113,7 @@ const routes: Routes = [
   { path: 'monthly-rate-booking', canActivate: [AuthGuardManagerService], component: MonthlyRateBookingComponent},
   { path: 'facility-maintenance/:idFacility', canActivate: [AuthGuardManagerService], component: FacilityMaintenanceComponent},
   { path: 'balance-by-facility', canActivate: [AuthGuardManagerService], component: BalanceByFacilityComponent},
-  { path: 'paypal', canActivate: [AuthGuardCustomerService], component: PaypalComponent },
+  { path: 'paypal', canActivate: [AuthGuardPaypalService], component: PaypalComponent },
   { path: 'acknoledgment/:email/:idCommand/:totalPrice/:username/:fullname', canActivate: [AuthGuardCustomerService], component: AcknowledgmentComponent },
   { path: 'favorite-product', canActivate: [AuthGuardCustomerService], component: FavoriteProductComponent},
   { path: 'product-listing', canActivate: [AuthGuardCustomerService], component: ProductListingComponent},

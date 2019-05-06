@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import laurent.fitness.model.FacilityCategory;
 import laurent.fitness.model.SubscriptionCategory;
 import laurent.fitness.repository.SubscriptionCategoryRepository;
 

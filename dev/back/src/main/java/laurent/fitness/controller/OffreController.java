@@ -12,13 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import laurent.fitness.model.Seance;
 import laurent.fitness.model.Subscription;
-import laurent.fitness.model.SubscriptionCategory;
-import laurent.fitness.model.Watch;
-import laurent.fitness.model.adaptater.FacilityAvailableAdaptater;
-import laurent.fitness.services.ItemService;
-import laurent.fitness.services.SeanceService;
 import laurent.fitness.services.SubscriptionService;
 import laurent.fitness.services.WatchService;
 

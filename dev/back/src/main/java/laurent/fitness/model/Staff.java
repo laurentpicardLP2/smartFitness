@@ -1,13 +1,10 @@
 package laurent.fitness.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import java.util.Date;
-import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 
 
 /**
@@ -18,11 +15,6 @@ import java.util.List;
 @NamedQuery(name="Staff.findAll", query="SELECT s FROM Staff s")
 public class Staff extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-//	//bi-directional many-to-one association to SessionTraining
-//	@OneToMany(mappedBy="staff")
-//	@JsonIgnore
-//	private List<SessionTraining> sessionTrainings;
 
 
 	public Staff() {
@@ -39,28 +31,5 @@ public class Staff extends User implements Serializable {
 	super(idUser,username, fullname, password, email, tel, dateOfRegistration, enabled);
 	this.idUser = idUser;
 }
-
-
-//	public List<SessionTraining> getSessionTrainings() {
-//		return this.sessionTrainings;
-//	}
-//
-//	public void setSessionTrainings(List<SessionTraining> sessionTrainings) {
-//		this.sessionTrainings = sessionTrainings;
-//	}
-//
-//	public SessionTraining addSessionTraining(SessionTraining sessionTraining) {
-//		getSessionTrainings().add(sessionTraining);
-//		sessionTraining.setStaff(this);
-//
-//		return sessionTraining;
-//	}
-//
-//	public SessionTraining removeSessionTraining(SessionTraining sessionTraining) {
-//		getSessionTrainings().remove(sessionTraining);
-//		sessionTraining.setStaff(null);
-//
-//		return sessionTraining;
-//	}
 
 }

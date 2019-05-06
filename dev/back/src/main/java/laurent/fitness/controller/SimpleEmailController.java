@@ -1,8 +1,5 @@
 package laurent.fitness.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,15 +36,12 @@ public class SimpleEmailController {
     @PostMapping("/payedcommand/{idCommand}/{amountFormatted}/{username}")
     public ResponseEntity<?> sendEmailAfterPaypal(@PathVariable Integer idCommand, @PathVariable String amountFormatted, @PathVariable String username) {
         try {
-        	List<String> infosUsers = new ArrayList<String>();
             
             sendEmailPaypal(idCommand, amountFormatted, this.userService.getFullnameByUsername(username), this.userService.getEmailByUsername(username));
             Command command = this.commandService.findByIdCommand(idCommand);
             command.setStatusCommand(3);
             this.commandService.saveCommand(command);
-            infosUsers.add(this.userService.getEmailByUsername(username));
-            infosUsers.add(this.userService.getFullnameByUsername(username));
-            return ResponseEntity.status(HttpStatus.OK).body(infosUsers);
+            return ResponseEntity.status(HttpStatus.OK).body(null);
         }catch(Exception ex) {
         	System.out.println(ex);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

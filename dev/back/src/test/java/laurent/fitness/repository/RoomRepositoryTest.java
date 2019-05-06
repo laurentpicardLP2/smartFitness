@@ -12,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import laurent.fitness.model.FacilityCategory;
 import laurent.fitness.model.Room;
 
 @RunWith(SpringRunner.class)

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import laurent.fitness.model.ProductCategory;
 import laurent.fitness.model.ProductRef;
-import laurent.fitness.model.Room;
 import laurent.fitness.services.ProductCategoryService;
 import laurent.fitness.services.ProductRefService;
 

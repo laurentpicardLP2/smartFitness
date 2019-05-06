@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import laurent.fitness.model.Facility;
-import laurent.fitness.model.FacilityCategory;
 import laurent.fitness.services.FacilityService;
-import laurent.fitness.services.RoomService;
 
 @RestController
 @RequestMapping("/postman/facilityctrl")

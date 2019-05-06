@@ -11,9 +11,6 @@ import org.springframework.stereotype.Service;
 
 import laurent.fitness.model.TimestampFacility;
 import laurent.fitness.model.adaptater.TimestampFacilityAdaptater;
-import laurent.fitness.repository.FacilityCategoryRepository;
-import laurent.fitness.repository.FacilityRepository;
-import laurent.fitness.repository.SeanceRepository;
 import laurent.fitness.repository.TimestampFacilityRepository;
 
 @Service
@@ -28,8 +25,8 @@ public class TimestampFacilityAdaptaterServiceImpl implements TimestampFacilityA
 	@Override
 	public List<TimestampFacilityAdaptater> getTimestampFacilitiesForASeance(int idItem) {
 		// TODO Auto-generated method stub
-		Map daysName = new HashMap<Integer, String>();
-		Map monthsName = new HashMap<Integer, String>();
+		Map<Integer, String> daysName = new HashMap<Integer, String>();
+		Map<Integer, String> monthsName = new HashMap<Integer, String>();
 		Date dateOfTimestampStart;
 		Date dateOfTimestampEnd;
 		String dayName;
@@ -69,7 +66,6 @@ public class TimestampFacilityAdaptaterServiceImpl implements TimestampFacilityA
 		List<TimestampFacility> timestampFacilities = this.timestampFacilityRepo.findTimestampByIdSeance(idItem);
 		for (TimestampFacility timestampFacility : timestampFacilities) {
 			dateOfTimestampStart = timestampFacility.getDateOfTimestamp();
-			//dateOfTimestampStart = new Date(dateOfTimestampStart.getTime() + 3600000);
 			dateOfTimestampEnd = new Date(dateOfTimestampStart.getTime() + 600000);
 			
 			

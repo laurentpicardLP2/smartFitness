@@ -2,11 +2,6 @@ package laurent.fitness.controller;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.ParameterMode;
-import javax.persistence.StoredProcedureQuery;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,11 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import laurent.fitness.model.Command;
 import laurent.fitness.model.Seance;
-import laurent.fitness.model.adaptater.FacilityAdaptater;
-import laurent.fitness.model.adaptater.ItemPaypalAdaptater;
 import laurent.fitness.model.adaptater.TimestampFacilityAdaptater;
 import laurent.fitness.services.CommandService;
-import laurent.fitness.services.ItemPaypalAdaptaterService;
 import laurent.fitness.services.ItemService;
 import laurent.fitness.services.SeanceService;
 import laurent.fitness.services.TimestampFacilityAdaptaterService;

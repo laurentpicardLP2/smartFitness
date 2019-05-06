@@ -23,8 +23,8 @@ export class EmailService {
         "Authorization": this.token.getToken()
       }
     }).subscribe(
-      (res) => {console.log("send email ok", res[0]);
-        this.router.navigate(['acknoledgment/' + res[0] + '/' + idCommand + '/' +totalPrice + '/' + username + '/' + res[1]]);},
+      (res) => {console.log("send email ok");
+       },
       (error) => {console.log("send email pb", error);}
     );
   }

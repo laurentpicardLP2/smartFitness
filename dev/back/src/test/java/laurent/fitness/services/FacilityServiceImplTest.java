@@ -1,7 +1,6 @@
 package laurent.fitness.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
 
 import java.util.ArrayList;
@@ -12,9 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import laurent.fitness.model.Facility;
 import laurent.fitness.repository.FacilityCategoryRepository;

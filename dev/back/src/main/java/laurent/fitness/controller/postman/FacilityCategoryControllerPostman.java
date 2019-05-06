@@ -1,6 +1,7 @@
 package laurent.fitness.controller.postman;
 
 import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -15,20 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import laurent.fitness.model.FacilityCategory;
 import laurent.fitness.model.adaptater.FacilityAvailableAdaptater;
-import laurent.fitness.services.FacilityAvailableAdaptaterService;
 import laurent.fitness.services.FacilityCategoryService;
 
 @RestController
 @RequestMapping("/postman/facilitycategoryctrl")
 public class FacilityCategoryControllerPostman {
 	private FacilityCategoryService facilityCategoryService;
-	private FacilityAvailableAdaptaterService facilityAvailableAdaptaterService;
+	//private FacilityAvailableAdaptaterService facilityAvailableAdaptaterService;
 	
 	public FacilityCategoryControllerPostman(
-			FacilityCategoryService facilityCategoryService,
-			FacilityAvailableAdaptaterService facilityAvailableAdaptaterService) {
-		this.facilityCategoryService = facilityCategoryService;
-		this.facilityAvailableAdaptaterService = facilityAvailableAdaptaterService;
+			FacilityCategoryService facilityCategoryServic
+			/*FacilityAvailableAdaptaterService facilityAvailableAdaptaterService*/) {
+		//this.facilityCategoryService = facilityCategoryService;
+		//this.facilityAvailableAdaptaterService = facilityAvailableAdaptaterService;
 	}
 	
 	//Return the list if categories facilities available for a timestamp

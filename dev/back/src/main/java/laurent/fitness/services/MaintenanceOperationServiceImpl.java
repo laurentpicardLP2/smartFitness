@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import laurent.fitness.model.MaintenanceOperation;
 import laurent.fitness.repository.MaintenanceOperationRepository;
-import laurent.fitness.repository.RoomRepository;
 
 @Service
 public class MaintenanceOperationServiceImpl implements MaintenanceOperationService {

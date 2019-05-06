@@ -2,50 +2,32 @@ package laurent.fitness.controller;
 
 import java.util.Date;
 import java.util.List;
-import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import laurent.fitness.model.FacilityCategory;
-import laurent.fitness.model.Room;
 import laurent.fitness.model.adaptater.FacilityAvailableAdaptater;
 import laurent.fitness.services.ConvertTimeToStringService;
 import laurent.fitness.services.FacilityAvailableAdaptaterService;
-import laurent.fitness.services.FacilityCategoryService;
-import laurent.fitness.services.RoomService;
-import laurent.fitness.services.TimestampFacilityService;
 
 @RestController
 @RequestMapping("/facilitycategoryctrl")
 @CrossOrigin("http://localhost:4200")
 public class FacilityCategoryController {
-	private FacilityCategoryService facilityCategoryService;
-	private TimestampFacilityService timestampFacilityService;
 	private FacilityAvailableAdaptaterService facilityAvailableAdaptaterService;
 	private ConvertTimeToStringService convertTimeToStringService;
-	private RoomService roomService;
 	
 	public FacilityCategoryController(
-			FacilityCategoryService facilityCategoryService,
-			TimestampFacilityService timestampFacilityService,
 			FacilityAvailableAdaptaterService facilityAvailableAdaptaterService,
-			ConvertTimeToStringService convertTimeToStringService,
-			RoomService roomService
+			ConvertTimeToStringService convertTimeToStringService
 			) {
-		this.facilityCategoryService = facilityCategoryService;
-		this.timestampFacilityService = timestampFacilityService;
 		this.facilityAvailableAdaptaterService = facilityAvailableAdaptaterService;
 		this.convertTimeToStringService = convertTimeToStringService;
-		this.roomService = roomService;
 	}
 	
 	

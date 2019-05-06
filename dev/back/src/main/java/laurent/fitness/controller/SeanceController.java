@@ -1,10 +1,6 @@
 package laurent.fitness.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import laurent.fitness.model.Command;
 import laurent.fitness.model.Seance;
-import laurent.fitness.services.CommandService;
 import laurent.fitness.services.ConvertTimeToStringService;
 import laurent.fitness.services.ItemService;
 import laurent.fitness.services.SeanceService;
@@ -83,7 +76,6 @@ public class SeanceController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
 	}
-	
 
 	//Indique si un customer a déjà réservé cette tranche horaire au cours d'une précédente réservation
 	@GetMapping("/getisusernamebooked/{dateOfTimestamp}/{username}")

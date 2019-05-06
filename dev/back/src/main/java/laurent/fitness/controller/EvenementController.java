@@ -2,14 +2,8 @@ package laurent.fitness.controller;
 
 import java.util.List;
 
-import javax.persistence.ParameterMode;
-import javax.persistence.StoredProcedureQuery;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import laurent.fitness.model.Evenement;
-import laurent.fitness.model.Room;
-import laurent.fitness.model.User;
-import laurent.fitness.model.adaptater.ItemPaypalAdaptater;
 import laurent.fitness.services.EvenementService;
 
 @RestController

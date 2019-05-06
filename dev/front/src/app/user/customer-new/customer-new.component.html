@@ -3,7 +3,7 @@
         <form [formGroup]="userRegistrationForm" class="customer-form">
             <p>
             <mat-form-field class="customer-full-width">
-                <input matInput required placeholder="Prénom et nom" type="text" formControlName="fullname" [(ngModel)]="fullname">
+                <input matInput maxlength="60" required placeholder="Prénom et nom" type="text" formControlName="fullname" [(ngModel)]="fullname">
                 <mat-error>
                     {{errors.fullname}}
                 </mat-error>
@@ -12,7 +12,7 @@
            <br>
            <p>
             <mat-form-field class="customer-full-width">
-                <input matInput required placeholder="Identifiant" type="text" formControlName="username" [(ngModel)]="username">
+                <input matInput maxlength="40" required placeholder="Identifiant" type="text" formControlName="username" [(ngModel)]="username">
                 <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('username') && userRegistrationForm.value.username">
                     {{errors.usernameSame}}
                 </mat-error>
@@ -42,14 +42,14 @@
             <div formGroupName="passwordGroup">
                 <p>
                 <mat-form-field class="customer-full-width">
-                    <input matInput required placeholder="Password" type="password" formControlName="password" [(ngModel)]="password">
+                    <input matInput maxlength="128" required placeholder="Password" type="password" formControlName="password" [(ngModel)]="password">
                     <mat-error>
                         {{errors.password}}
                     </mat-error>
                 </mat-form-field>
                 </p>
                 <mat-form-field class="customer-full-width">
-                    <input matInput required placeholder="Confirm password" type="password" formControlName="confirmPassword" [errorStateMatcher]="confirmValidParentMatcher">
+                    <input matInput maxlength="128" required placeholder="Confirm password" type="password" formControlName="confirmPassword" [errorStateMatcher]="confirmValidParentMatcher">
                     <mat-error>
                         {{errors.confirmPassword}}
                     </mat-error>
@@ -59,7 +59,7 @@
             <div class="customer-border-solid">
                 <p>
                 <mat-form-field class="customer-full-width">
-                        <input matInput required placeholder="Adresse postale" type="text" formControlName="domesticAddress" [(ngModel)]="domesticAddress"> 
+                        <input maxlength="255" matInput required placeholder="Adresse postale" type="text" formControlName="domesticAddress" [(ngModel)]="domesticAddress"> 
                         <mat-error>
                                 {{errors.adresse}}
                         </mat-error>         
@@ -68,19 +68,19 @@
             
                 <table class="customer-full-width" cellspacing="0"><tr>
                 <td><mat-form-field class="customer-full-width">
-                    <input matInput required #postalCode maxlength="5" placeholder="Code postal" formControlName="domesticCp" [(ngModel)]="domesticCp">
+                    <input maxlength="5" matInput required #postalCode maxlength="5" placeholder="Code postal" formControlName="domesticCp" [(ngModel)]="domesticCp">
                     <mat-error>
                             {{errors.cp}}
                     </mat-error>
                     </mat-form-field></td>
                 <td><mat-form-field class="customer-full-width">
-                    <input matInput required placeholder="Ville" formControlName="domesticCity" [(ngModel)]="domesticCity">
+                    <input maxlength="45" matInput required placeholder="Ville" formControlName="domesticCity" [(ngModel)]="domesticCity">
                     <mat-error>
                             {{errors.city}}
                     </mat-error>
                 </mat-form-field></td>
                 <td><mat-form-field class="customer-full-width">
-                    <input matInput required placeholder="Pays" formControlName="domesticCountry" [(ngModel)]="domesticCountry">
+                    <input maxlength="45" matInput required placeholder="Pays" formControlName="domesticCountry" [(ngModel)]="domesticCountry">
                     <mat-error>
                             {{errors.country}}
                     </mat-error>
@@ -92,7 +92,7 @@
             <div class="customer-border-solid">
                 <p>
                     <mat-form-field class="customer-full-width">
-                    <input matInput required placeholder="Adresse de livraison" type="text" formControlName="deliveryAddress" [(ngModel)]="deliveryAddress">
+                    <input maxlength="255" matInput required placeholder="Adresse de livraison" type="text" formControlName="deliveryAddress" [(ngModel)]="deliveryAddress">
                     <mat-error>
                             {{errors.adresse}}
                     </mat-error>
@@ -106,13 +106,13 @@
                         </mat-error>
                     </mat-form-field></td>
                     <td><mat-form-field class="customer-full-width">
-                        <input matInput required placeholder="Ville" formControlName="deliveryCity"  [(ngModel)]="deliveryCity">
+                        <input  maxlength="45" matInput required placeholder="Ville" formControlName="deliveryCity"  [(ngModel)]="deliveryCity">
                         <mat-error>
                                 {{errors.city}}
                         </mat-error>
                         </mat-form-field></td>
                         <td><mat-form-field class="customer-full-width">
-                    <input matInput required placeholder="Pays" formControlName="deliveryCountry"  [(ngModel)]="deliveryCountry">
+                    <input  maxlength="45" matInput required placeholder="Pays" formControlName="deliveryCountry"  [(ngModel)]="deliveryCountry">
                     <mat-error>
                             {{errors.country}}
                     </mat-error>

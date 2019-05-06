@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import laurent.fitness.model.FacilityCategory;
 import laurent.fitness.repository.FacilityCategoryRepository;
-import laurent.fitness.repository.TimestampFacilityRepository;
 
 @Service
 public class FacilityCategoryServiceImpl implements FacilityCategoryService {

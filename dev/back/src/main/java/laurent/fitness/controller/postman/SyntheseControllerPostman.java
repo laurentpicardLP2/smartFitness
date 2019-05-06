@@ -9,18 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import laurent.fitness.model.Command;
-import laurent.fitness.services.CommandService;
-import laurent.fitness.services.CustomerService;
 
 @RestController
 @RequestMapping("/postman/synthesectrl")
 public class SyntheseControllerPostman {
-	private CommandService commandService;
-	private CustomerService customerService;
+//	private CommandService commandService;
+//	private CustomerService customerService;
 	
-	public SyntheseControllerPostman(CommandService commandService, CustomerService customerService) {
-		this.commandService = commandService;
-		this.customerService = customerService;
+	public SyntheseControllerPostman(/*CommandService commandService, CustomerService customerService*/) {
+		//this.commandService = commandService;
+		//this.customerService = customerService;
 	}
 
 	

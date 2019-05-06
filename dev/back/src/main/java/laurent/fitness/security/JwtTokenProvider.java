@@ -1,22 +1,27 @@
 package laurent.fitness.security;
 
-import io.jsonwebtoken.*;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
-
-import laurent.fitness.model.AuthToken;
-import laurent.fitness.model.User;
-import laurent.fitness.repository.UserRepository;
-import laurent.fitness.services.UserService;
+import static laurent.fitness.security.SecurityConstants.SECRET_KEY;
+import static laurent.fitness.security.SecurityConstants.TOKEN_EXPIRATION_TIME;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static laurent.fitness.security.SecurityConstants.TOKEN_EXPIRATION_TIME;
-import static laurent.fitness.security.SecurityConstants.SECRET_KEY;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
+import laurent.fitness.model.AuthToken;
+import laurent.fitness.model.User;
+import laurent.fitness.services.UserService;
 
 @Component
 public class JwtTokenProvider {

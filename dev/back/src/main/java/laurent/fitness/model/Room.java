@@ -1,12 +1,17 @@
 package laurent.fitness.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 /**
@@ -31,11 +36,6 @@ public class Room implements Serializable {
 	@OneToMany(mappedBy="room")
 	@JsonManagedReference
 	private List<Facility> facilities;
-
-//	//bi-directional many-to-one association to SessionTraining
-//	@OneToMany(mappedBy="room")
-//	@JsonManagedReference
-//	private List<SessionTraining> sessionTrainings;
 
 	public Room() {
 	}
@@ -90,27 +90,5 @@ public class Room implements Serializable {
 
 		return facility;
 	}
-
-//	public List<SessionTraining> getSessionTrainings() {
-//		return this.sessionTrainings;
-//	}
-//
-//	public void setSessionTrainings(List<SessionTraining> sessionTrainings) {
-//		this.sessionTrainings = sessionTrainings;
-//	}
-//
-//	public SessionTraining addSessionTraining(SessionTraining sessionTraining) {
-//		getSessionTrainings().add(sessionTraining);
-//		sessionTraining.setRoom(this);
-//
-//		return sessionTraining;
-//	}
-//
-//	public SessionTraining removeSessionTraining(SessionTraining sessionTraining) {
-//		getSessionTrainings().remove(sessionTraining);
-//		sessionTraining.setRoom(null);
-//
-//		return sessionTraining;
-//	}
 
 }

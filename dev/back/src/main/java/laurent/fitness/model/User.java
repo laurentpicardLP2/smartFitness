@@ -1,20 +1,25 @@
 package laurent.fitness.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 /**
@@ -51,7 +56,7 @@ public class User implements Serializable, UserDetails {
 	protected byte enabled;
 
 	//bi-directional one-to-one association to Authority
-	@OneToOne(optional=true, cascade=CascadeType.REMOVE)
+	@OneToOne(cascade=CascadeType.REMOVE)
 	@JoinColumn(name="username")
 	protected Authority authority;
 

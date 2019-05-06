@@ -142,7 +142,14 @@ export class LoginService {
    * @param user 
    */
   public signIn(user: User, bReload: boolean){
-
+    if(this.isAuth){
+      if(this.authority == "ROLE_CUSTOMER"){
+        this.utilsService.delCommand();
+      }
+      this.signOut();
+      this.router.navigate(['']);
+      return;
+    }
     this.attemptAuth(user.username, user.password).subscribe(
       data => {
        

@@ -6,57 +6,27 @@ package laurent.fitness;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 
-import javax.persistence.EntityManager;
-import javax.persistence.ParameterMode;
-import javax.persistence.StoredProcedureQuery;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import laurent.fitness.model.Authority;
-import laurent.fitness.model.Customer;
-import laurent.fitness.model.Facility;
-import laurent.fitness.model.FacilityCategory;
-import laurent.fitness.model.Room;
-import laurent.fitness.model.Staff;
-import laurent.fitness.model.User;
-import laurent.fitness.repository.AuthorityRepository;
-import laurent.fitness.repository.CustomerRepository;
-import laurent.fitness.repository.FacilityCategoryRepository;
-import laurent.fitness.repository.FacilityRepository;
-import laurent.fitness.repository.RoomRepository;
-import laurent.fitness.repository.StaffRepository;
-import laurent.fitness.repository.UserRepository;
-import laurent.fitness.services.AuthorityService;
-import laurent.fitness.services.CustomerService;
-import laurent.fitness.services.StaffService;
-import laurent.fitness.services.UserService;
 
 
 
 @SpringBootApplication
 public class Fitness implements CommandLineRunner {
 	
-	@Autowired
-	private EntityManager entityManager;
-	
-	@Autowired
-	private AuthorityService authorityService;
-	
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private StaffService staffService;
+//	@Autowired
+//	private EntityManager entityManager;
+//	
+//	@Autowired
+//	private AuthorityService authorityService;
+//	
+//	@Autowired
+//	private UserService userService;
+//	
+//	@Autowired
+//	private StaffService staffService;
 	
    public boolean someLibraryMethod() {
         return true;
