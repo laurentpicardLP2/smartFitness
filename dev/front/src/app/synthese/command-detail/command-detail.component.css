@@ -258,4 +258,11 @@ a:link {
   .date-seance {
     font-size: 12px;
   }
+
+  .back-button{
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+  }
     

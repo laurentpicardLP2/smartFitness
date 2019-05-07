@@ -87,3 +87,10 @@
     font-weight: bold;
     vertical-align: baseline;
   }
+
+  .back-button{
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+  }

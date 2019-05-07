@@ -17,6 +17,7 @@ import { EmbedVideo } from 'ngx-embed-video';
 
 import { AgmCoreModule } from '@agm/core';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -167,6 +168,7 @@ import { ProductCustomerHistoricComponent } from './synthese/product-customer-hi
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAPOsreRHHdYcdZ4pX7YNXBujTndpGJF9k'
     }),
+    MatPasswordStrengthModule,
     MatCarouselModule,
     AppRoutingModule,
     HttpClientModule,

@@ -7,18 +7,28 @@ import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} f
 import { HttpClient } from '@angular/common/http';
 import { CustomValidator } from 'src/app/validators/custom.validator';
 import { Router } from '@angular/router';
-
+import { runInThisContext } from 'vm';
+import {MatPasswordStrengthComponent} from '@angular-material-extensions/password-strength';
+import {ChangeDetectionStrategy, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 
 
 @Component({
   selector: 'app-customer-new',
-  templateUrl: './customer-new.component.html',
-  styleUrls: ['./customer-new.component.css']
+  templateUrl: './customer-new.component.html', 
+  styleUrls: ['./customer-new.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 
 
 export class CustomerNewComponent implements OnInit {
+    @ViewChild('passwordComponentWithConfirmation')
+  passwordComponentWithConfirmation: MatPasswordStrengthComponent;
+
+type="password";
+
   newCustomer: Customer;
   userRegistrationForm: FormGroup;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
@@ -38,7 +48,8 @@ export class CustomerNewComponent implements OnInit {
   deliveryCity: string;
   deliveryCountry: string;
   tel: string;
- 
+  hide: boolean;
+  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,6 +66,7 @@ export class CustomerNewComponent implements OnInit {
         this.router.navigate(['']);
     }
     this.checkedAdrCopy = false;
+    this.hide = true;
 
   }
 
@@ -65,7 +77,6 @@ export class CustomerNewComponent implements OnInit {
               Validators.minLength(1),
               Validators.maxLength(128)
           ]],
-          
           username: ['', [
             Validators.required,
             Validators.minLength(1),
@@ -138,6 +149,11 @@ export class CustomerNewComponent implements OnInit {
         this.deliveryCountry = "";
       }
       
+  }
+
+
+  onStrengthChanged(strength: number) {
+    // console.log('password strength = ', strength);
   }
 
   onRegister(): void {

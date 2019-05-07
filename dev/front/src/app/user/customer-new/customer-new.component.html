@@ -12,7 +12,7 @@
            <br>
            <p>
             <mat-form-field class="customer-full-width">
-                <input matInput maxlength="40" required placeholder="Identifiant" type="text" formControlName="username" [(ngModel)]="username">
+                <input matInput maxlength="40" required placeholder="Votre identifiant" type="text" formControlName="username" [(ngModel)]="username">
                 <mat-error *ngIf="userRegistrationForm.controls['username'].hasError('username') && userRegistrationForm.value.username">
                     {{errors.usernameSame}}
                 </mat-error>
@@ -25,34 +25,81 @@
             <div formGroupName="emailGroup">
                 <p>
                 <mat-form-field class="customer-full-width">
-                    <input matInput required placeholder="Adresse email" type="email" formControlName="email" [(ngModel)]="email">
+                    <input matInput required placeholder="Votre adresse email" type="email" formControlName="email" [(ngModel)]="email">
                     <mat-error>
                         {{errors.email}}
                     </mat-error>
                 </mat-form-field>
                 </p>
                 <mat-form-field class="customer-full-width">    
-                    <input matInput required placeholder="Confirm adresse email" type="email" formControlName="confirmEmail" [errorStateMatcher]="confirmValidParentMatcher">
+                    <input matInput required placeholder="Confirmer l'adresse email" type="email" formControlName="confirmEmail" [errorStateMatcher]="confirmValidParentMatcher">
                     <mat-error>
                         {{errors.confirmEmail}}
                     </mat-error>
                 </mat-form-field>
             </div>
             <br>
+            <div>
+
+<!--                     
+                    <mat-form-field appearance="standard" style="width: 100%" [color]="passwordComponentWithValidation.color">
+                            <mat-label>Password</mat-label>
+                            <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+                            <input matInput #password
+                            [type]="toggle.type"
+                            required
+                            [formControl]="passwordComponentWithValidation.passwordFormControl"
+                                placeholder="Password" >
+                                <mat-hint align="end" aria-live="polite">
+                                {{password.value}}
+                                </mat-hint> 
+                                       
+                                <mat-error *ngIf="passwordComponentWithValidation.passwordFormControl.hasError('required')">
+                                    Le mot de passe doit être renseigné
+                                </mat-error>
+                                <mat-error *ngIf="passwordComponentWithValidation.passwordFormControl.hasError('pattern')">
+                                    Password is not valid
+                                </mat-error>
+                        </mat-form-field>
+            
+                   
+                    <mat-password-strength #passwordComponentWithValidation
+                                            (onStrengthChanged)="onStrengthChanged($event)"
+                                            [password]="password">
+                    </mat-password-strength> -->
+            
+
+         </div>
             <div formGroupName="passwordGroup">
                 <p>
-                <mat-form-field class="customer-full-width">
-                    <input matInput maxlength="128" required placeholder="Password" type="password" formControlName="password" [(ngModel)]="password">
+                <!-- <mat-form-field class="customer-full-width">
+                    <input matInput maxlength="128" required placeholder="Password" [type]="isVisiblePassword ? 'text' : 'password'" formControlName="password" [(ngModel)]="password">
                     <mat-error>
                         {{errors.password}}
                     </mat-error>
-                </mat-form-field>
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onShowPassword()">
+                            <mat-icon>visibility</mat-icon>
+                    </button>
+                   
+                    
+                </mat-form-field> -->
+                <mat-form-field class="customer-full-width">
+                    <input matInput maxlength="128" required placeholder="Votre mot de passe" [type]="hide ? 'password' : 'text'" formControlName="password" [(ngModel)]="password">
+                    
+                    <mat-error>
+                        {{errors.password}}
+                    </mat-error>
+
+                    <mat-icon matSuffix (click)="hide = !hide" style="cursor:pointer;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </mat-form-field>            
+
                 </p>
                 <mat-form-field class="customer-full-width">
-                    <input matInput maxlength="128" required placeholder="Confirm password" type="password" formControlName="confirmPassword" [errorStateMatcher]="confirmValidParentMatcher">
+                        <input matInput maxlength="128" required placeholder="Confirmer votre mot de passe" [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" [errorStateMatcher]="confirmValidParentMatcher">
                     <mat-error>
                         {{errors.confirmPassword}}
                     </mat-error>
+                    <mat-icon matSuffix (click)="hide = !hide" style="cursor:pointer;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </mat-form-field>
             </div>
             <br>

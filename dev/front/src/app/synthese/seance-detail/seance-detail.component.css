@@ -231,4 +231,12 @@ tbody tr:nth-child(even) {
   vertical-align: baseline;
   padding-top: 20px;
 }
+
+
+.back-button{
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+}
   
