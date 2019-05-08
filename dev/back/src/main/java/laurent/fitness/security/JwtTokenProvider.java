@@ -78,7 +78,7 @@ public class JwtTokenProvider {
     }
 
     /**
-     * Récupération l'id du user depuis apartir du token
+     * Récupération l'id du user depuis et à partir du token
      * @param token
      * @return
      */

@@ -100,7 +100,7 @@ public class UserController {
 	
 	
 	/**
-	 * Fonction exécutée à connexion d'un utilisateur. Retourne un token valable pour une session stateless
+	 * Fonction exécutée à la connexion d'un utilisateur. Retourne un token valable pour une session stateless
 	 * @param user
 	 * @param result
 	 * @return
@@ -108,6 +108,7 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<?> authenticateUser(@RequestBody User user, BindingResult result){
         
+		//Gestion de la validité des requêtes REST
 		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationService(result);
         if(errorMap != null)
             return  errorMap;
@@ -157,24 +158,5 @@ public class UserController {
 		return this.userService.getUserInfos(username);
 	}
 	
-	
-	
-	
-	//temporary login process 
-		//@PostMapping("/login")
-//		public ResponseEntity<?> userLogin(@RequestBody User pUser) {			
-//			System.out.println("/login");
-//			try {
-//				User user = this.userService.findByUsername(pUser.getUsername());
-//				System.out.println("username : " + user.getUsername());
-//			return ResponseEntity.status(HttpStatus.OK).body(user);
-//				
-//			} catch(Exception e) {
-//				
-//				System.out.println(e);
-//				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
-//			}			
-//		}
-		
 
 }
