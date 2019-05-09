@@ -6,27 +6,38 @@ package laurent.fitness;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
+import java.util.Date;
 
+import javax.persistence.EntityManager;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import laurent.fitness.model.Authority;
+import laurent.fitness.model.Staff;
+import laurent.fitness.services.AuthorityService;
+import laurent.fitness.services.StaffService;
+import laurent.fitness.services.UserService;
 
 
 
 @SpringBootApplication
 public class Fitness implements CommandLineRunner {
 	
-//	@Autowired
-//	private EntityManager entityManager;
-//	
-//	@Autowired
-//	private AuthorityService authorityService;
-//	
-//	@Autowired
-//	private UserService userService;
-//	
-//	@Autowired
-//	private StaffService staffService;
+	@Autowired
+	private EntityManager entityManager;
+	
+	@Autowired
+	private AuthorityService authorityService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private StaffService staffService;
 	
    public boolean someLibraryMethod() {
         return true;
@@ -42,14 +53,14 @@ public class Fitness implements CommandLineRunner {
 	public void run(String... args)
 			throws Exception,  MalformedURLException, IOException, ClassNotFoundException, SQLException {
 		
-//		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
-//		
-//		this.authorityService.saveAuthority(new Authority("db_sam", "ROLE_ADMIN"));
-//		int idUser = this.userService.findByUsernameIdMax();
-//	
-//		
-//		this.staffService.saveStaff(new Staff(idUser,"db_sam", "db_sam", "{bcrypt}" + bcrypt.encode("simplon"), "", "", new Date(), (byte)(1)));
-//		
+		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+		
+		this.authorityService.saveAuthority(new Authority("db_sam", "ROLE_ADMIN"));
+		int idUser = this.userService.findByUsernameIdMax();
+	
+		
+		this.staffService.saveStaff(new Staff(idUser,"db_sam", "db_sam", "{bcrypt}" + bcrypt.encode("simplon"), "", "", new Date(), (byte)(1)));
+		
 //		
 //		
 //			
