@@ -49,8 +49,11 @@ export class CartCompositionComponent implements OnInit {
     return typeItem.split(":")[0];
   }
 
-  public onDeleteItem(idItem: number){
-    this.syntheseService.deleteItemFromCart(this.command, idItem, this.nbItems);
+  public onDeleteItem(idItem: number, priceItem: number){
+    this.totalPrice -= Math.round((priceItem)*100)/100;
+    
+    this.commandService.setTotalPriceCommandSubject(this.totalPrice);
+    this.syntheseService.deleteItemFromCart(this.command, idItem, this.nbItems, this.totalPrice);
   }
 
   public convertIntoMonetaryFormat(priceItem: number){
@@ -60,7 +63,7 @@ export class CartCompositionComponent implements OnInit {
   public onValidateCart(){
    this.command.totalPrice = this.totalPrice;
     this.command.statusCommand = 2;
-    this.commandService.validateCommand(this.command, true);
+    this.commandService.validateCommand(this.command, true, this.totalPrice);
     
   }
 

@@ -146,6 +146,20 @@ public class CommandController {
 		}
 	}
 	
+	// Met à jour la commande suite à la suppresion d'articles dans le panier
+		@PutMapping("/updatecommand")
+	public ResponseEntity<?> updateCommand(@RequestBody Command command){
+	
+		try {
+			this.commandService.saveCommand(command);
+			return ResponseEntity.status(HttpStatus.OK).body(command); 
+					
+		} catch(Exception e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+		}
+	}
+	
 	//Retourne la liste des items pour une commande d'un client
 	@GetMapping("/getitemsbycommand/{idCommand}")
 	public List<ItemPaypalAdaptater> getItemsPaypalAdaptaterForACommand(@PathVariable Integer idCommand) {

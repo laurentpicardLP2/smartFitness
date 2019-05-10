@@ -30,12 +30,6 @@ export class FavoriteProductComponent implements OnInit {
 
     this.commandService.commandSubject.subscribe(res => {
       this.command = res;
-      console.log("this.command : ", this.command);
-      this.isHasItems = this.command.items.length > 0;
-      this.totalPrice = 0;
-      for(let i=0; i< this.command.items.length; i++){
-        this.totalPrice += this.command.items[i].price;
-      }
     });
   }
 
@@ -44,9 +38,8 @@ export class FavoriteProductComponent implements OnInit {
   }
 
   public onValidateCart(){
-    this.command.totalPrice = this.totalPrice;
      this.command.statusCommand = 2;
-     this.commandService.validateCommand(this.command, true);
+     this.commandService.validateCommand(this.command, true, this.command.totalPrice);
      
    }
  

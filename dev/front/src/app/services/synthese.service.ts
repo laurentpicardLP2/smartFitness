@@ -182,7 +182,7 @@ export class SyntheseService {
  * Fonction supprimant un article du panier 
  * @param idItem : identifiant de l'article à supprimer
  */
-  public deleteItemFromCart(command: Command, idItem: number, nbItems: string){
+  public deleteItemFromCart(command: Command, idItem: number, nbItems: string, totalPrice: number){
     this.httpClient.delete('http://localhost:8080/synthesectrl/delitemfromcart/' + idItem, 
     {
       headers: {
@@ -197,8 +197,10 @@ export class SyntheseService {
           this.commandService.setNbItemsSubject((parseInt(nbItems, 10) - 1).toString());
         }
         command.items.splice(command.items.findIndex((item)=> item.idItem === idItem), 1); 
+        command.totalPrice = totalPrice;
         this.commandService.setCommandSubject(command);
-
+        this.commandService.updateCommand(command);
+        this.commandService.setTotalPriceCommandSubject(totalPrice);
       this.router.navigate(['cart-composition']);
     },
     (error) => {console.log("error delete item from cart");}

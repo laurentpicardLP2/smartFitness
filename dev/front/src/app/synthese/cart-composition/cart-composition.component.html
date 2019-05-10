@@ -13,7 +13,7 @@
          <td>{{formatNameItem(cart.typeItem) }}</td>
          <td *ngIf="cart.quantityItem === 1">{{ convertIntoMonetaryFormat(cart.price) }}</td>
          <td *ngIf="cart.quantityItem > 1"> {{ cart.quantityItem }} * {{ convertIntoMonetaryFormat(cart.price) }} = {{ convertIntoMonetaryFormat(cart.price * cart.quantityItem) }}</td>
-         <td><button mat-raised-button color="primary" (click)="onDeleteItem(cart.idItem)">Supprimer</button></td>
+         <td><button mat-raised-button color="primary" (click)="onDeleteItem(cart.idItem, cart.quantityItem * cart.price)">Supprimer</button></td>
      </tr>
    </tbody>
 </table>

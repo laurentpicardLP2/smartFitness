@@ -90,13 +90,17 @@ export class CommandService {
           console.log("reset command OK : ",resetedCommand.idCommand);
           this.setCommandSubject(resetedCommand); 
           this.setNbItemsSubject("");
+          this.setTotalPriceCommandSubject(0);
+          this.setListCommandItemsSubject(null);
           this.router.navigate(['']);
         },
         (error) => { console.log("reset command pb : ", error); }
     );
   }
 
-  public validateCommand(command: Command, finalStep: boolean){
+  public validateCommand(command: Command, finalStep: boolean, totalPrice: number){
+    command.totalPrice = totalPrice;
+    this.setCommandSubject(command);
     this.httpClient.put<Command>('http://localhost:8080/commandctrl/validatecommand', command, 
     {
       headers: {
@@ -105,7 +109,6 @@ export class CommandService {
       }
   }).subscribe(
     (validatedCommand) =>{ 
-        console.log("validate command OK : ", validatedCommand);
         if(finalStep){
           this.setCommandSubject(validatedCommand);
           this.router.navigate(['paypal']);
@@ -117,6 +120,25 @@ export class CommandService {
     );
       
   }
+
+  public updateCommand(command: Command){
+    this.httpClient.put<Command>('http://localhost:8080/commandctrl/updatecommand', command, 
+    {
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": this.token.getToken()
+      }
+  }).subscribe(
+    (updatedCommand) =>{ 
+        console.log("validate command OK : ", updatedCommand);
+      },
+      (error) => { console.log("validate command pb : ", error); 
+                    this.router.navigate(['error-page']);
+                  }
+    );
+      
+  }
+
 
   public getItemsPaypalAdaptater(idCommand: number): Observable<ItemPaypalAdaptater[]> {
     return this.httpClient.get<ItemPaypalAdaptater[]>('http://localhost:8080/commandctrl/getitemsbycommand/' + idCommand, 

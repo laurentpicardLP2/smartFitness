@@ -70,31 +70,16 @@ export class HeaderComponent implements OnInit {
     this.sidenavToggle.emit();
   }
 
-  public onMouseleave(){
-    // if(!this.isAlreadyLeftCartZone) {
-    //   var popup = document.getElementById("cartText");
-    //   popup.classList.toggle("show");
-    // }
-    // this.isAlreadyLeftCartZone = false;
-    console.log("onMouseleave()");
-  }
-
   public onToggleCart(){
     var popup = document.getElementById("cartText");
     popup.classList.toggle("show");
   }
 
   public onResetCart(){
-    // this.isAlreadyLeftCartZone=true;
-    // var popup = document.getElementById("cartText");
-    // popup.classList.toggle("show");
-    this.commandService.resetCommand(this.command, this.username);
+      this.commandService.resetCommand(this.command, this.username);
   }
 
   public onSeeCart(){
-    // this.isAlreadyLeftCartZone=true;
-    // var popup = document.getElementById("cartText");
-    // popup.classList.toggle("show");
     this.router.navigate(['cart-composition']);
   }
 

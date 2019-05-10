@@ -88,19 +88,12 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
     
     this.seanceService.priceSeanceSubject.subscribe(res => {
       this.priceSeance = res;
-      //console.log("this.priceSeance : ", this.priceSeance);
     });
 
 
     this.loginService.isUserSubscribedSubject.subscribe(res => {
       this.isSubscribed = res;
     });
-
-    // @HostListener('window:resize', ['$event'])
-    //   getScreenSize(event?) {
-    //     this.screenWidth = window.innerWidth;
-    //   }
-
 
   }
 
@@ -136,8 +129,6 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(){
-    //this.bookingService.isNotAvailableFacilitiesSubject.unsubscribe();
-    //this.seanceService.priceSeanceSubject.unsubscribe();
   }
   
 }

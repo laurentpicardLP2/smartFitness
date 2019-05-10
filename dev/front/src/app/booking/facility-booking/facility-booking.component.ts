@@ -42,9 +42,6 @@ export class FacilityBookingComponent implements OnInit, OnDestroy {
 
     this.seanceService.seanceSubject.subscribe(res => {
       this.seance = res;
-      //console.log(" this.timestampFacilities : ",  this.timestampFacilities);
-      //console.log(" this.timestampFacilities.dateOfTimestamp : ",  this.timestampFacilities[0] );
-      //console.log(" this.timestampFacilities[@].dateOfTimestamp : ",  this.timestampFacilities[0].dateOfTimestamp );
       this.isEmptySeance = (this.timestampFacilities.length === 0);
     });
 
@@ -71,7 +68,7 @@ export class FacilityBookingComponent implements OnInit, OnDestroy {
     this.seanceService.priceSeanceSubject.subscribe(res => {
       this.priceSeance = res;
       if(this.priceSeance.length>0) {
-        this.totalPriceSeance = this.priceSeance.reduce((n1, n2) => n1 + n2);
+        this.totalPriceSeance = this.priceSeance.reduce((n1, n2) => Math.round((n1)*100)/100 + Math.round((n2)*100)/100);
       } else {
         this.totalPriceSeance = 0;
       }
@@ -79,12 +76,9 @@ export class FacilityBookingComponent implements OnInit, OnDestroy {
   }
 
   public onDeleteTimestamp(index, idTimestampFacility) {
-    // console.log("onDeleteTimestamp(), id :", idTimestampFacility);
-    // console.log("index :", index);
     this.seanceService.removeTimestampFacilityFromSeance(this.seance, idTimestampFacility, this.dateOfTimestamp);
     this.priceSeance.splice(index, 1);
 
-    // implémenter un promise
     this.seanceService.setPriceSeanceSubject(this.priceSeance);
   }
 
@@ -110,23 +104,22 @@ export class FacilityBookingComponent implements OnInit, OnDestroy {
     this.seanceService.addDateAndNbTimestamp(this.seance, this.command);
     this.commandService.setNbItemsSubject((parseInt(this.nbItems, 10) + 1).toString());
     
-    this.command.items[this.command.items.findIndex((item)=> item.idItem == this.seance.idItem)].price += this.totalPriceSeance;
+    this.command.items[this.command.items.findIndex((item)=> item.idItem == this.seance.idItem)].price += Math.round((this.totalPriceSeance)*100)/100;
     
-
+    
     this.totalPriceCommand += this.totalPriceSeance;
-    this.command.totalPrice += this.totalPriceCommand;
     this.command.statusCommand = 1;
     this.commandService.setListCommandItemsSubject(this.command.items);
     this.seanceService.setIsValidateSeanceSubject(true);
     this.seanceService.setPriceSeanceSubject([]);
     this.commandService.setTotalPriceCommandSubject(this.totalPriceCommand);
+    this.command.totalPrice = this.totalPriceCommand;
     this.commandService.setCommandSubject(this.command);
-    this.commandService.validateCommand(this.command,false);
+    this.commandService.validateCommand(this.command,false, this.totalPriceCommand);
     this.router.navigate(['favorite-product']);
   }
 
   ngOnDestroy(){
-    //this.seanceService.priceSeanceSubject.unsubscribe();
   }
 
 }
