@@ -22,6 +22,10 @@ export class LoginComponent implements OnInit {
   bReload: boolean;
   isLogin: boolean=true;
   errors = errorMessages;
+  hide: boolean;
+
+
+type="password";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,7 +37,7 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
-    
+    this.hide = true;
     this.loginService.usernameSubject.subscribe(res => {
       this.username = res;
     });
