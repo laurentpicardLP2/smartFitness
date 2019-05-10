@@ -91,6 +91,13 @@ insert into product_ref (product_category_id_product_category, name_product_ref,
 insert into product_ref (product_category_id_product_category, name_product_ref, price_product_ref, image_product_ref, description_product_ref) values (3, "Barre céréale", 3.5, "Barre céréale_barre.jpg", "")^;
 insert into product_ref (product_category_id_product_category, name_product_ref, price_product_ref, image_product_ref, description_product_ref) values (2, "Ovotamine", 5, "Ovotamine_ovotamine.jpg", "")^;
 
+DROP FUNCTION IF EXISTS func_count_timestamp^;
+CREATE FUNCTION func_count_timestamp(dateTimeOfSeance DATETIME, idFacility INT) RETURNS int
+BEGIN
+    DECLARE nb INT;
+    SELECT COUNT(*) INTO nb FROM db_fitness.timestamp_facility WHERE date_of_timestamp=dateTimeOfSeance AND facility_id_facility=idFacility;
+    RETURN nb;
+END^;
 
 CREATE TRIGGER triggerTimestamp BEFORE INSERT ON timestamp_facility
     FOR EACH ROW
