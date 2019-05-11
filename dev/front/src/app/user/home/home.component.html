@@ -11,28 +11,88 @@
     <span *ngIf="isAuth && authority=='ROLE_CUSTOMER'" class="welcome-secondaire"> Bienvenue dans votre espace personnel</span>
     <br><br>
     <table *ngIf="!isAuth" style="width: 100%">
-      <tr tyle="text-align: center; width: 100%;">
-        <td>
-          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/resa.png" width="51%"></a>                        
-        </td>
-        <td>
-          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/abo.png" width="51%"></a>                        
-        </td>
-        <td>
-          <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/catalogue.png" width="51%"></a> 
-        </td>
-    </tr>
+     <div class="div-large">
+        <tr style="text-align: center; width: 100%;">
+          <td>
+            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/resa.png"></a>                        
+          </td>
+          <td>
+            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/abo.png"></a>                        
+          </td>
+          <td>
+            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/catalogue.png"></a> 
+          </td>
+        </tr>
+     </div>
+     <div class="div-small">
+        <tr style="text-align: center; width: 100%;">
+          <td>
+            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/resa.png"></a>  
+            <p></p>                      
+          </td>
+        </tr>
+        <tr style="text-align: center; width: 100%;">
+          <td>
+            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/abo.png"></a> 
+            <p></p>                      
+          </td>
+        </tr>
+        <tr style="text-align: center; width: 100%;">
+          <td>
+            <a class="anonymous-listing" (click)="showMustSignIn()"><img style="opacity: 0.5" src="assets/images/catalogue.png"></a> 
+            <p></p>
+          </td>
+        </tr>
+     </div>
     </table>
+    <div class="div-small">
+      <table *ngIf="isAuth && authority=='ROLE_CUSTOMER'" style="width: 100%">
+        <tr style="text-align: center; width: 100%;">
+          <td>
+            <a class="anonymous-listing"  routerLink="/seance-booking" routerLinkActive="active"><img src="assets/images/resa.png"></a>                        
+          </td>
+        </tr>
+        <tr style="text-align: center; width: 100%;">
+          <td>
+            <a class="anonymous-listing"  routerLink="/seance-booking" routerLinkActive="active">Réserver des Séances</a>  
+            <p></p>                  
+          </td>
+        </tr>
+        <tr style="text-align: center; width: 100%;">
+          <td>
+            <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active"><img src="assets/images/abo.png"></a>                        
+          </td>
+        </tr>
+        <tr style="text-align: center; width: 100%;">
+          <td>
+            <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active">Nos Abonnements</a>  
+            <p></p>                 
+          </td>
+        </tr>
+        <tr style="text-align: center; width: 100%;">
+          <td>
+            <a class="anonymous-listing"  routerLink="/product-listing" routerLinkActive="active"><img src="assets/images/catalogue.png"></a>
+          </td>
+        </tr> 
+        <tr style="text-align: center; width: 100%;"> 
+          <td>
+            <a class="anonymous-listing"  routerLink="/product-listing" routerLinkActive="active">Notre Catalogue</a>
+            <p></p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="div-large">
       <table *ngIf="isAuth && authority=='ROLE_CUSTOMER'" style="width: 100%">
         <tr tyle="text-align: center; width: 100%;">
           <td>
-            <a class="anonymous-listing"  routerLink="/seance-booking" routerLinkActive="active"><img src="assets/images/resa.png" width="40%"></a>                        
+            <a class="anonymous-listing"  routerLink="/seance-booking" routerLinkActive="active"><img src="assets/images/resa.png"></a>                        
           </td>
           <td>
-            <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active"><img src="assets/images/abo.png" width="40%"></a>                        
+            <a class="anonymous-listing" routerLink="/subscription-customer-proposition" routerLinkActive="active"><img src="assets/images/abo.png"></a>                        
           </td>
           <td>
-            <a class="anonymous-listing"  routerLink="/product-listing" routerLinkActive="active"><img src="assets/images/catalogue.png" width="40%"></a> 
+            <a class="anonymous-listing"  routerLink="/product-listing" routerLinkActive="active"><img src="assets/images/catalogue.png"></a> 
         </tr>
         <tr tyle="text-align: center; width: 100%;">
           <td>
@@ -46,7 +106,7 @@
           </td>
       </tr>
       </table>
-    
+    </div>
       <div *ngIf="!isAuth" class="div-evt">
         <a style="cursor: pointer;" (click)="anonymousRedirectTo(indexEvt)">{{stringTitle}} 
           <br><span class="sub-title">(Veuillez cliquer pour plus de précisions)</span></a> 

@@ -260,5 +260,34 @@ a.manager-listing:link {
   font-style: italic;
 }
 
+@media screen and (min-width:651px) {
+  img {
+    width: 55%;
+  }
+
+  .div-small{
+    display: none;
+  }
+
+  .div-large{
+    display: visible;
+  }
+}
+
+@media screen and (max-width:650px) {
+  img {
+    width: 35%;
+  }
+
+  .div-small{
+    display: visible;
+  }
+
+  .div-large{
+    display: none;
+  }
+  
+}
+
 
 

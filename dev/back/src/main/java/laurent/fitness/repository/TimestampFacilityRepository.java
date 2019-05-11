@@ -24,7 +24,7 @@ public interface TimestampFacilityRepository extends JpaRepository <TimestampFac
 			+ " timestamp_facility.facility_category_id_facility_category = facility_category.id_facility_category "
 			+ "  WHERE facility_category.name_facility_category like ?1 AND timestamp_facility.date_of_timestamp like ?2 ) "
 			+ " FROM facility_category WHERE facility_category.name_facility_category like ?1", nativeQuery = true)
-	int findByFacilityCategoryCount(String nameFacility, String timestamp);
+	int findByFacilityCategoryCount(String nameFacilityCategory, String timestamp);
 	
 	@Query(value = "SELECT * FROM db_fitness.timestamp_facility WHERE seance_id_seance = ?1 ORDER BY date_of_timestamp ASC", nativeQuery = true)
 	List<TimestampFacility> findTimestampByIdSeance(int idItem);
