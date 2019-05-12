@@ -156,7 +156,7 @@ SET char_annee = CONCAT("", i_annee,"-");
 WHILE i < 705 DO
 	insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (i, current_timestamp(), 0, 72, "db_user1");
 	insert into command_has_item (item_id_item, command_id_command) values (i, i);
-    insert into item (id_item, price, type_item) values (i, 72, "Seance:seance");
+    insert into item (id_item, price, type_item, quantity_item) values (i, 72, "Seance:seance", 1);
 
 	IF i_jour > 9 THEN
 		SET char_jour = CONCAT("", i_jour, " ");
@@ -225,7 +225,7 @@ SET char_annee = CONCAT("", i_annee,"-");
 WHILE i < 1405 DO
 	insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (i, current_timestamp(), 0, 72, "db_user2");
 	insert into command_has_item (item_id_item, command_id_command) values (i, i);
-    insert into item (id_item, price, type_item) values (i, 72, "Seance:seance");
+    insert into item (id_item, price, type_item, quantity_item) values (i, 72, "Seance:seance", 1);
     
 	IF i_jour > 9 THEN
 		SET char_jour = CONCAT("", i_jour, " ");
@@ -294,7 +294,7 @@ SET char_annee = CONCAT("", i_annee,"-");
 WHILE i < 1740 DO
 	insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (i, current_timestamp(), 0, 72, "db_user3");
 	insert into command_has_item (item_id_item, command_id_command) values (i, i);
-    insert into item (id_item, price, type_item) values (i, 72, "Seance:seance");
+    insert into item (id_item, price, type_item, quantity_item) values (i, 72, "Seance:seance", 1);
     
 	IF i_jour > 9 THEN
 		SET char_jour = CONCAT("", i_jour, " ");

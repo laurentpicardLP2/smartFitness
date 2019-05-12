@@ -1,44 +1,3 @@
-use db_fitness;
-DROP FUNCTION IF EXISTS `func_count_timestamp`;
-DELIMITER $$
-CREATE FUNCTION `func_count_timestamp`(`dateTimeOfSeance` DATETIME, `idFacility` INT) RETURNS int
-BEGIN
-    DECLARE nb INT;
-    SELECT COUNT(*) INTO nb FROM db_fitness.timestamp_facility WHERE date_of_timestamp=dateTimeOfSeance AND facility_id_facility=idFacility;
-    RETURN nb;
-END$$
-DELIMITER ;
-
-
-USE db_fitness;
-DROP TRIGGER IF EXISTS triggerTimestamp;
-DELIMITER $$
-CREATE TRIGGER triggerTimestamp BEFORE INSERT ON timestamp_facility
-    FOR EACH ROW
-    BEGIN
-		IF `func_count_timestamp`(NEW.date_of_timestamp, NEW.facility_id_facility) > 0 THEN
-			signal sqlstate '45000';
-		END IF;
-    END$$
-DELIMITER ;
-
-
-============================ItemPaypal==============================================
-use db_fitness;
-drop procedure IF EXISTS `proc_item_paypal`;
-DELIMITER $$
-CREATE PROCEDURE `proc_item_paypal` (IN `id_command` INT)
-	COMMENT 'Procédure pour les items d\'une commande par type d\'item'
-BEGIN
-DECLARE i INT;
-delete from item_paypal_adaptater;
-INSERT INTO item_paypal_adaptater
-SELECT type_item, count(*), sum(price) FROM db_fitness.item INNER JOIN command_has_item
-ON id_item = item_id_item WHERE command_id_command = `id_command` group by type_item;
-END$$
-DELIMITER ;
-=====================================================================================
-
 
 use db_fitness;
 drop procedure IF EXISTS `proc_expenditure`;
@@ -197,7 +156,7 @@ SET char_annee = CONCAT("", i_annee,"-");
 WHILE i < 705 DO
 	insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (i, current_timestamp(), 0, 72, "db_user1");
 	insert into command_has_item (item_id_item, command_id_command) values (i, i);
-    insert into item (id_item, price, type_item) values (i, 72, "Seance:seance");
+    insert into item (id_item, price, type_item, quantity_item) values (i, 72, "Seance:seance", 1);
 
 	IF i_jour > 9 THEN
 		SET char_jour = CONCAT("", i_jour, " ");
@@ -266,7 +225,7 @@ SET char_annee = CONCAT("", i_annee,"-");
 WHILE i < 1405 DO
 	insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (i, current_timestamp(), 0, 72, "db_user2");
 	insert into command_has_item (item_id_item, command_id_command) values (i, i);
-    insert into item (id_item, price, type_item) values (i, 72, "Seance:seance");
+    insert into item (id_item, price, type_item, quantity_item) values (i, 72, "Seance:seance", 1);
     
 	IF i_jour > 9 THEN
 		SET char_jour = CONCAT("", i_jour, " ");
@@ -335,7 +294,7 @@ SET char_annee = CONCAT("", i_annee,"-");
 WHILE i < 1740 DO
 	insert into command (id_command, date_of_command, status_command, total_price, customer_users_username) values (i, current_timestamp(), 0, 72, "db_user3");
 	insert into command_has_item (item_id_item, command_id_command) values (i, i);
-    insert into item (id_item, price, type_item) values (i, 72, "Seance:seance");
+    insert into item (id_item, price, type_item, quantity_item) values (i, 72, "Seance:seance", 1);
     
 	IF i_jour > 9 THEN
 		SET char_jour = CONCAT("", i_jour, " ");
@@ -409,34 +368,5 @@ SET A = 1;
     
 END$$
 DELIMITER ;
-
-
-
-
-
-SELECT count(*) * price_seance FROM db_fitness.timestamp_facility INNER JOIN db_fitness.seance ON seance_id_seance = id_item
-INNER JOIN db_fitness.facility ON id_facility = facility_id_facility
-WHERE facility_id_facility = 1;
-
-USE db_fitness;
-SELECT price_facility + sum(cost_of_intervention) FROM facility_has_maintenance_operation INNER JOIN db_fitness.maintenance_operation 
-ON id_maintenance_operation = maintenance_operation_id_maintenance_operation
-INNER JOIN facility ON facility_id_facility = id_facility WHERE id_facility = 1;
-
-
-SELECT (count(*) * price_seance) - (SELECT price_facility + sum(cost_of_intervention) FROM facility_has_maintenance_operation INNER JOIN db_fitness.maintenance_operation 
-ON id_maintenance_operation = maintenance_operation_id_maintenance_operation
-INNER JOIN facility ON facility_id_facility = id_facility WHERE id_facility = 1) FROM db_fitness.timestamp_facility INNER JOIN db_fitness.seance ON seance_id_seance = id_item
-INNER JOIN db_fitness.facility ON id_facility = facility_id_facility
-WHERE facility_id_facility = 1;
-
-
-
-USE db_fitness;
-SELECT (count(*) * price_seance) - (SELECT price_facility + sum(cost_of_intervention) FROM facility_has_maintenance_operation INNER JOIN db_fitness.maintenance_operation 
-ON id_maintenance_operation = maintenance_operation_id_maintenance_operation INNER JOIN facility ON facility_id_facility = id_facility WHERE id_facility = 1) 
-FROM db_fitness.timestamp_facility INNER JOIN db_fitness.seance ON seance_id_seance = id_item
-INNER JOIN db_fitness.facility ON id_facility = facility_id_facility
-WHERE facility_id_facility = 1;
 
 
