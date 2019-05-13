@@ -39,15 +39,6 @@ export class ReportingService {
       });
   }
 
-  // public getDataSetRentability(): Observable<Array<any>> {
-  //   return this.httpClient.get<Array<any>>('http://localhost:8080/reportingctrl/getdatasetrentability', 
-  //     {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Authorization": this.token.getToken()
-  //       }
-  //     });
-  // }
 
   public publishDataSetBooking() {
     this.getDataSetBooking(0).subscribe(
@@ -70,29 +61,6 @@ export class ReportingService {
         this.router.navigate(['error-page']);
       });
   }
-
-  // public publishDataSetRentability() {
-   
-  //   this.managerService.getFacilities().subscribe(
-  //     (res) => {
-  //       this.facilities = res; 
-  //       for(let i=0; i< this.facilities.length; i++){
-  //         this.managerService.getBalanceSheet(this.facilities[i].idFacility).subscribe(
-  //           (res) => {
-  //             this.listLabelSetRentability.push(this.facilities[i].nameFacility);
-  //             this..push(res[0] - res [1]);
-  //             if(i==this.facilities.length-1) {
-  //               setTimeout(() => this.router.navigate(['balance-by-facility']), 750);
-  //             }
-  //           },
-  //           (error) => console.log("publishDataSetRentability error part 2")
-  //         )
-  //       }
-  //     },
-  //     (error) => console.log("publishDataSetRentability error part 1")
-
-  //   )
-  // }
 
   public publishDataSetRentability() {
    

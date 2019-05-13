@@ -28,13 +28,11 @@ public class SeanceServiceImpl implements SeanceService {
 
 	@Override
 	public List<Seance> getAllSeances() {
-		// TODO Auto-generated method stub
 		return this.seanceRepo.findAll();
 	}
 
 	@Override
 	public Seance addSeance(int idCommand, String username, float price) {
-		// TODO Auto-generated method stub
 		List<Command> commands = new ArrayList<Command>();
 		Customer customer = this.customerRepo.findByUsername(username);
 		Command command = this.commandRepo.findByIdCommand(idCommand);
@@ -45,7 +43,6 @@ public class SeanceServiceImpl implements SeanceService {
 	
 	@Override
 	public Seance updateSeance(int idItem) {
-		// TODO Auto-generated method stub
 		Seance updatedSeance = this.findSeanceById(idItem);
 		updatedSeance.setStatusSeance(1);
 		updatedSeance.setTypeItem("Séance " + getStringOfDateOfSeance(this.findByDateOfTimestamp(idItem)) + " :seance");
@@ -58,43 +55,36 @@ public class SeanceServiceImpl implements SeanceService {
 
 	@Override
 	public void deleteSeance(int idItem) {
-		// TODO Auto-generated method stub
 		this.seanceRepo.delete(this.seanceRepo.findByIdItem(idItem));
 	}
 
 	@Override
 	public Seance findSeanceById(int idItem) {
-		// TODO Auto-generated method stub
 		return this.seanceRepo.findByIdItem(idItem);
 	}
 
 	@Override
 	public Date findByDateOfTimestamp(int idItem) {
-		// TODO Auto-generated method stub
 		return this.seanceRepo.findByDateOfTimestamp(idItem);
 	}
 
 	@Override
 	public int findNbTimestampBySeance(int idItem) {
-		// TODO Auto-generated method stub
 		return this.seanceRepo.findNbTimestampBySeance(idItem);
 	}
 
 	@Override
 	public List<Seance> findSeancesByUsername(String username) {
-		// TODO Auto-generated method stub
 		return this.seanceRepo.findSeancesByUsername(username);
 	}
 
 	@Override
 	public boolean checkTimestampIsTaken(String timestampToString, String username) {
-		// TODO Auto-generated method stub
 		return (this.seanceRepo.findTimestampIsTakenByUsername(timestampToString, username) > 0 ? true : false);
 	}
 
 	@Override
 	public boolean checkAnotherSeanceIsOpen(String username) {
-		// TODO Auto-generated method stub
 		return (this.seanceRepo.findAnotherSeanceIsOpenByUsername(username) > 0 ? true : false);
 	}
 	

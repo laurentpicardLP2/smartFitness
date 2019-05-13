@@ -25,19 +25,16 @@ public class StaffServiceImpl implements StaffService {
 
 	@Override
 	public List<Staff> getAllStaff() {
-		// TODO Auto-generated method stub
 		return this.staffRepo.findAllStaff();
 	}
 
 	@Override
 	public Staff saveStaff(Staff staff) {
-		// TODO Auto-generated method stub
 		return this.staffRepo.save(staff);
 	}
 
 	@Override
 	public Staff updateStaff(Staff staff, String role) {
-		// TODO Auto-generated method stub
 		Authority updatedAuthority = this.authorityRepo.findByUsername(staff.getUsername());
 		updatedAuthority.setAuthority(role);
 		this.authorityRepo.save(updatedAuthority);

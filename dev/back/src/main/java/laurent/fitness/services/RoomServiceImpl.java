@@ -18,38 +18,32 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public List<Room> getAllRooms() {
-		// TODO Auto-generated method stub
 		return this.roomRepo.findAll();
 	}
 
 	@Override
 	public Room saveRoom(Room room) {
-		// TODO Auto-generated method stub
 		return this.roomRepo.save(room);
 	}
 
 	@Override
 	public void deleteRoom(Room room) {
-		// TODO Auto-generated method stub
 		this.roomRepo.delete(room);
 		
 	}
 
 	@Override
 	public Room findByRoomName(String roomName) {
-		// TODO Auto-generated method stub
 		return this.roomRepo.findByRoomName(roomName);
 	}
 
 	@Override
 	public Room findByIdRoom(int idRoom) {
-		// TODO Auto-generated method stub
 		return this.roomRepo.findByIdRoom(idRoom);
 	}
 
 	@Override
 	public Room updateRoom(int idRoom, String nameRoom, int capacityRoom) {
-		// TODO Auto-generated method stub
 		Room room = this.roomRepo.findByIdRoom(idRoom);
 		room.setNameRoom(nameRoom);
 		room.setCapacityRoom(capacityRoom);
@@ -58,13 +52,11 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public Room getRoomAssociateToFacility(int idFacility) {
-		// TODO Auto-generated method stub
 		return this.roomRepo.findByIdRoomAssociateToFacility(idFacility);
 	}
 
 	@Override
 	public List<String> getListNameRooms() {
-		// TODO Auto-generated method stub
 		return this.roomRepo.findNameRoomsList();
 	}
 

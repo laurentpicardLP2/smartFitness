@@ -18,27 +18,23 @@ private WatchCategoryRepository watchCategoryRepo;
 
 	@Override
 	public List<WatchCategory> getAllWatchCategories() {
-		// TODO Auto-generated method stub
 		return this.watchCategoryRepo.findAll();
 	}
 
 	@Override
 	public WatchCategory saveWatchCategory(WatchCategory watchCategory) {
-		// TODO Auto-generated method stub
 		return this.watchCategoryRepo.save(watchCategory);
 	}
 	
 	@Override
 	public WatchCategory saveWatchCategory(String nameWatch, float priceWatch, String descriptionWatch,
 			String imageWatch) {
-		// TODO Auto-generated method stub
 		return this.watchCategoryRepo.save(new WatchCategory(nameWatch, priceWatch, descriptionWatch, imageWatch));
 	}
 
 	@Override
 	public WatchCategory updateWatchCategory(int idWatchCategory, String nameWatch, float priceWatch, String descriptionWatch,
 			String imageWatch) {
-		// TODO Auto-generated method stub
 		WatchCategory watchCategory = this.watchCategoryRepo.findByIdWatchCategory(idWatchCategory);
 		descriptionWatch = (descriptionWatch.equals("undefined")) ? "" : descriptionWatch;
 		imageWatch = (imageWatch.equals("undefined")) ? "" : imageWatch;
@@ -52,7 +48,6 @@ private WatchCategoryRepository watchCategoryRepo;
 	@Override
 	public WatchCategory updateWatchCategory(String nameWatch, float priceWatch, String descriptionWatch,
 			String imageWatch) {
-		// TODO Auto-generated method stub
 		WatchCategory watchCategory = this.watchCategoryRepo.findByNameWatch(nameWatch);
 		watchCategory.setPriceWatch(priceWatch);
 		watchCategory.setDescriptionWatch(descriptionWatch);
@@ -62,32 +57,27 @@ private WatchCategoryRepository watchCategoryRepo;
 
 	@Override
 	public void deleteWatchCategory(WatchCategory watchCategory) {
-		// TODO Auto-generated method stub
 		this.watchCategoryRepo.delete(watchCategory);
 	}
 	
 	@Override
 	public void deleteWatchCategory(int idWatchCategory) {
-		// TODO Auto-generated method stub
 		this.watchCategoryRepo.delete(this.watchCategoryRepo.findByIdWatchCategory(idWatchCategory));
 	}
 
 
 	@Override
 	public WatchCategory findByIdWatchCategory(int idWatchCategory) {
-		// TODO Auto-generated method stub
 		return this.watchCategoryRepo.findByIdWatchCategory(idWatchCategory);
 	}
 
 	@Override
 	public WatchCategory findByNameWatch(String nameWatch) {
-		// TODO Auto-generated method stub
 		return this.findByNameWatch(nameWatch);
 	}
 
 	@Override
 	public List<String> getListNameWatches() {
-		// TODO Auto-generated method stub
 		return this.watchCategoryRepo.findByNameWatchesList();
 	}
 

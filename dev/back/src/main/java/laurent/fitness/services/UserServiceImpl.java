@@ -23,21 +23,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getAllUsers() {
-		// TODO Auto-generated method stub
 		return this.userRepo.findAll();
 	}
 
 	@Override
 	public User saveUser(User user) {
-		// TODO Auto-generated method stub
-		
 		return this.saveUser(user);
 	}
 
 	@Override
 	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
-		
 		try {
 			this.userRepo.delete(user);
 		}catch (Exception e) {
@@ -47,7 +42,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int findByUsernameIdMax() {
-		// TODO Auto-generated method stub
 		int idUserMax = Integer.valueOf(0); // la gestion de l'auto-increment du champ idUser est manuelle car ce n'est pas une clé primaire
 		try {
 			idUserMax = this.userRepo.findByUsernameIdMax().getIdUser() + 1; 
@@ -59,38 +53,32 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findByUsername(String username) {
-		// TODO Auto-generated method stub
 		return this.userRepo.findByUsername(username);
 	}
 
 	@Override
 	public Authority getAuthorityForAnUser(String username) {
-		// TODO Auto-generated method stub
 		User user = this.userRepo.findByUsername(username);
 		return user.getAuthority();
 	}
 
 	@Override
 	public String getEmailByUsername(String username) {
-		// TODO Auto-generated method stub
 		return this.userRepo.findEmailByUsername(username);
 	}
 
 	@Override
 	public String getFullnameByUsername(String username) {
-		// TODO Auto-generated method stub
 		return this.userRepo.findFullnameByUsername(username);
 	}
 
 	@Override
 	public List<String> getListUsername() {
-		// TODO Auto-generated method stub
 		return this.userRepo.findUsernameList();
 	}
 
 	@Override
 	public List<String> getUserInfos(String username) {
-		// TODO Auto-generated method stub
 		User user = this.userRepo.findByUsername(username);
 		List<String> infos = new ArrayList<String>();
 		infos.add(Integer.toString(this.subscriptionRepo.findIsSubscridebByUsername(username)));

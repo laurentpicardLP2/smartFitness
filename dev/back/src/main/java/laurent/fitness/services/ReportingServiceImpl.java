@@ -19,7 +19,6 @@ public class ReportingServiceImpl implements ReportingService {
 
 	@Override
 	public ArrayList<Integer> getDataSetBooking(int period) {
-		// TODO Auto-generated method stub
 		ArrayList<Integer> data = new ArrayList<Integer>();
 		Calendar calendar = Calendar.getInstance();
 		

@@ -35,14 +35,11 @@ public class TimestampFacilityServiceImpl implements TimestampFacilityService {
 
 	@Override
 	public List<TimestampFacility> getAllTimestampFacilities() {
-		// TODO Auto-generated method stub
 		return this.timestampFacilityRepo.findAll();
 	}
 
 	@Override
 	public TimestampFacility saveNewTimestampFacility(int idItem, Date dateOfTimestamp, String facilityName, String facilityCategoryName) {
-		// TODO Auto-generated method stub
-		//dateOfTimestamp = new Date(dateOfTimestamp.getTime() + 3600000);
 		System.out.println("TimestampFacility saveNewTimestampFacility : " );
 		Seance seance = this.seanceRepo.findByIdItem(idItem);
 		Facility facility = this.facilityRepo.findByFacilityName(facilityName);
@@ -55,36 +52,17 @@ public class TimestampFacilityServiceImpl implements TimestampFacilityService {
 
 	@Override
 	public void deleteTimestampFacility(int idTimestampFacillity) {
-		// TODO Auto-generated method stub
 		TimestampFacility timestampFacility = this.timestampFacilityRepo.findById(idTimestampFacillity).get();
 		this.timestampFacilityRepo.delete(timestampFacility);
 	}
 
 	@Override
 	public TimestampFacility saveTimestampFacility(TimestampFacility timestampFacility) {
-		// TODO Auto-generated method stub
 		return this.timestampFacilityRepo.save(timestampFacility);
 	}
 
 	@Override
 	public int findByFacilityCategoryCount(String facilityCategoryName, String timestampToString) {
-		// TODO Auto-generated method stub
 		return this.timestampFacilityRepo.findByFacilityCategoryCount(facilityCategoryName, timestampToString);
 	}
-	
-	
-	
-	
-//	public Date getDateOfRefTimestamp(String refTimestamp){
-//		Calendar calendar = Calendar.getInstance();
-//		
-//	    String[] splitRefTimestamp = refTimestamp.split("_");
-//	    int year = Integer.parseInt(splitRefTimestamp[0]);
-//	    int month = Integer.parseInt(splitRefTimestamp[1])-1;
-//	    int day = Integer.parseInt(splitRefTimestamp[2]);
-//	    int hour = Integer.parseInt(splitRefTimestamp[3]);
-//	    int minute = Integer.parseInt(splitRefTimestamp[4]);
-//	    calendar.set(year, month, day, hour, minute, 0);
-//	    return calendar.getTime();
-//	  }
 }

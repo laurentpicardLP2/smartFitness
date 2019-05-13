@@ -24,7 +24,6 @@ public class TimestampFacilityAdaptaterServiceImpl implements TimestampFacilityA
 
 	@Override
 	public List<TimestampFacilityAdaptater> getTimestampFacilitiesForASeance(int idItem) {
-		// TODO Auto-generated method stub
 		Map<Integer, String> daysName = new HashMap<Integer, String>();
 		Map<Integer, String> monthsName = new HashMap<Integer, String>();
 		Date dateOfTimestampStart;

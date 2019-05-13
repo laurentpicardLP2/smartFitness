@@ -18,25 +18,21 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public List<Item> getAllItems() {
-		// TODO Auto-generated method stub
 		return this.itemRepo.findAll();
 	}
 
 	@Override
 	public Item saveItem(Item item) {
-		// TODO Auto-generated method stub
 		return this.itemRepo.save(item);
 	}
 
 	@Override
 	public void deleteItem(int idItem) {
-		// TODO Auto-generated method stub
 		this.itemRepo.delete(this.itemRepo.findById(idItem).get());
 	}
 
 	@Override
 	public Item findItemById(int idItem) {
-		// TODO Auto-generated method stub
 		return this.findItemById(idItem);
 	}
 

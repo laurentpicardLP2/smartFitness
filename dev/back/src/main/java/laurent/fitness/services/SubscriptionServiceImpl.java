@@ -34,7 +34,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	@Override
 	public Subscription addSubscription(int idCommand, String username, int idSubscriptionCategory,
 			Date dateStartOfSubscription, Date dateEndOfSubscription) {
-		// TODO Auto-generated method stub
 		List<Command> commands = new ArrayList<Command>();
 		Customer customer = this.customerRepo.findByUsername(username);
 		Command command = this.commandRepo.findByIdCommand(idCommand);
@@ -46,32 +45,27 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public List<Subscription> findHistoricSubscriptionsByUsername(String username) {
-		// TODO Auto-generated method stub
 		return this.subscriptionRepo.findHistoricSubscriptionsByUsername(username);
 	}
 
 	@Override
 	public List<Subscription> findActiveSubscriptionsByUsername(String username) {
-		// TODO Auto-generated method stub
 		return this.subscriptionRepo.findActiveSubscriptionsByUsername(username);
 	}
 
 	@Override
 	public Subscription findSubscriptionById(int idItem) {
-		// TODO Auto-generated method stub
 		return this.subscriptionRepo.findByIdItem(idItem);
 	}
 
 	@Override
 	public boolean findIsSubscribedByUsername(String username) {
-		// TODO Auto-generated method stub
 		return this.subscriptionRepo.findIsSubscridebByUsername(username) > 0;
 	}
 
 
 	@Override
 	public List<Subscription> findNextSubscriptionsByUsername(String username) {
-		// TODO Auto-generated method stub
 		return this.subscriptionRepo.findNextSubscriptionsByUsername(username);
 	}
 

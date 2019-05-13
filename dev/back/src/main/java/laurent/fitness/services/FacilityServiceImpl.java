@@ -34,13 +34,11 @@ public class FacilityServiceImpl implements FacilityService {
 
 	@Override
 	public List<Facility> getAllFacilities() {
-		// TODO Auto-generated method stub
 		return this.facilityRepo.findAll();
 	}
 
 	@Override
 	public Facility saveNewFacility(String facilityName, String roomName, String facilityCategoryName) {
-		// TODO Auto-generated method stub
 		Room room = this.roomRepo.findByRoomName(roomName);
 		FacilityCategory facilityCategory = this.facilityCategoryRepo.findByFacilityCategoryName(facilityCategoryName);
 		Facility facility = new Facility(facilityName, room, facilityCategory);
@@ -49,25 +47,21 @@ public class FacilityServiceImpl implements FacilityService {
 
 	@Override
 	public void deleteFacility(Facility facility) {
-		// TODO Auto-generated method stub
 		this.facilityRepo.delete(facility);
 	}
 
 	@Override
 	public Facility findByFacilityName(String facilityName) {
-		// TODO Auto-generated method stub
 		return this.facilityRepo.findByFacilityName(facilityName);
 	}
 
 	@Override
 	public Facility saveFacility(Facility facility) {
-		// TODO Auto-generated method stub
 		return this.facilityRepo.save(facility);
 	}
 
 	@Override
 	public Facility updateFacility(String facilityName, String roomName) {
-		// TODO Auto-generated method stub
 		Facility facilityToUpdate = this.facilityRepo.findByFacilityName(facilityName);
 		Room room = this.roomRepo.findByRoomName(roomName);
 		facilityToUpdate.setRoom(room);
@@ -76,7 +70,6 @@ public class FacilityServiceImpl implements FacilityService {
 
 	@Override
 	public Facility addFacility(int idFacilityCategory, int idRoom, String nameFacility, String descriptionFacility, String imageFacility, float priceSeance, float priceFacility, Date dateOfPurchase) {
-		// TODO Auto-generated method stub
 		FacilityCategory facilityCategory = this.facilityCategoryRepo.findByIdFacilityCategory(idFacilityCategory);
 		Room facilityRoom = this.roomRepo.findByIdRoom(idRoom);
 		descriptionFacility = (descriptionFacility.equals("undefined")) ? "" : descriptionFacility;
@@ -94,7 +87,6 @@ public class FacilityServiceImpl implements FacilityService {
 
 	@Override
 	public Facility updateFacility(int idFacility, String nameFacilityCategory, String nameRoom, String nameFacility, float priceSeance, String descriptionFacility, String imageFacility, float priceFacility) {
-		// TODO Auto-generated method stub
 		Facility facility = this.facilityRepo.findByIdFacility(idFacility);
 		FacilityCategory facilityCategory = this.facilityCategoryRepo.findByFacilityCategoryName(nameFacilityCategory);
 		Room room = this.roomRepo.findByRoomName(nameRoom);
@@ -112,7 +104,6 @@ public class FacilityServiceImpl implements FacilityService {
 
 	@Override
 	public Facility addMaintenanceOperationToFacility(int idFacility, MaintenanceOperation operation) {
-		// TODO Auto-generated method stub
 		Facility facility = this.facilityRepo.findByIdFacility(idFacility);
 		this.maintenanceOperationRepo.save(operation);
 		List<MaintenanceOperation> maintenanceOperations = facility.getMaintenanceOperations();
@@ -128,19 +119,16 @@ public class FacilityServiceImpl implements FacilityService {
 		facility.getMaintenanceOperations().remove(maintenanceOperation);
 		this.maintenanceOperationRepo.delete(maintenanceOperation);
 		this.facilityRepo.save(facility);
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public float getRevenueForAFacility(int idFacility) {
-		// TODO Auto-generated method stub
+	public float getRevenueForAFacility(int idFacility) {		// TODO Auto-generated method stub
 		return this.facilityRepo.findRevenueByFacility(idFacility);		
 	}
 
 	@Override
 	public List<String> getListNameFacilities() {
-		// TODO Auto-generated method stub
 		return this.facilityRepo.findByNameFacilitiesList();
 	}
 

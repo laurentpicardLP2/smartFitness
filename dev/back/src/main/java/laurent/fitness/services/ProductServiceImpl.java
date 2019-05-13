@@ -27,7 +27,6 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product addProduct(int idCommand, int idProductRef, int quantityItem) {
-		// TODO Auto-generated method stub
 		List<Command> commands = new ArrayList<Command>();
 		Command command = this.commandRepo.findByIdCommand(idCommand);
 		commands.add(command);
@@ -38,13 +37,11 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<ProductRef> getAllProductRef() {
-		// TODO Auto-generated method stub
 		return this.productRefRepo.findAll();
 	}
 
 	@Override
 	public ProductRef getProductRefByIdItem(int idItem) {
-		// TODO Auto-generated method stub
 		return this.productRefRepo.findByIdProductRef(this.productRepo.findByIdItem(idItem).getProductRef().getIdProductRef());
 	}
 

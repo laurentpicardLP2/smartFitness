@@ -18,19 +18,16 @@ public class MaintenanceOperationServiceImpl implements MaintenanceOperationServ
 
 	@Override
 	public List<MaintenanceOperation> getAllMaintenanceOperations() {
-		// TODO Auto-generated method stub
 		return this.maintenanceOperationRepo.findAll();
 	}
 
 	@Override
 	public MaintenanceOperation saveMaintenanceOperation(MaintenanceOperation maintenanceOperation) {
-		// TODO Auto-generated method stub
 		return this.maintenanceOperationRepo.save(maintenanceOperation);
 	}
 
 	@Override
 	public MaintenanceOperation findItemById(int idMaintenanceOperation) {
-		// TODO Auto-generated method stub
 		return maintenanceOperationRepo.findByIdMaintenanceOperation(idMaintenanceOperation);
 	}
 

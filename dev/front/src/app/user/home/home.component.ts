@@ -163,11 +163,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-  //   console.log("this.timeouts.length : ", this.timeouts.length);
-  //     let id=window.setTimeout(null,0);
-  //     while (id--){
-  //       window.clearTimeout(id);
-  //     }
     clearTimeout(this.subTimeout);
    }
 

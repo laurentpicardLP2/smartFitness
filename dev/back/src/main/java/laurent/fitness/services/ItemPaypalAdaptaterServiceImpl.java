@@ -18,7 +18,6 @@ public class ItemPaypalAdaptaterServiceImpl implements ItemPaypalAdaptaterServic
 
 	@Override
 	public List<ItemPaypalAdaptater> findAllItemsPaypalAdaptater() {
-		// TODO Auto-generated method stub
 		return this.itemPaypalAdaptaterRepo.findAll();
 	}
 
