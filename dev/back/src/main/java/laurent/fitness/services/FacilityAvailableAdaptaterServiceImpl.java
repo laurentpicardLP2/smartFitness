@@ -30,7 +30,6 @@ public class FacilityAvailableAdaptaterServiceImpl implements FacilityAvailableA
 	
 	@Override
 	public List<FacilityAvailableAdaptater> getFacilitiesAvailable(String timestampToString) {
-		// TODO Auto-generated method stub
 		
 		int availableFacilities = 0;
 		String nameFacilityCategory = "";

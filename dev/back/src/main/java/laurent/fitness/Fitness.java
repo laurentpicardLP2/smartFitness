@@ -27,10 +27,10 @@ public class Fitness implements CommandLineRunner {
 //	
 //	@Autowired
 //	private StaffService staffService;
-//	
-//   public boolean someLibraryMethod() {
-//        return true;
-//    }
+	
+   public boolean someLibraryMethod() {
+        return true;
+    }
 
 
 

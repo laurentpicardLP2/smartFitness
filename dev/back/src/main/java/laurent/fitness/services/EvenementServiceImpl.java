@@ -18,19 +18,16 @@ public class EvenementServiceImpl implements EvenementService {
 
 	@Override
 	public List<Evenement> findAllEvenement() {
-		// TODO Auto-generated method stub
 		return this.evenementRepo.findAll();
 	}
 
 	@Override
 	public Evenement saveEvenement(Evenement evt) {
-		// TODO Auto-generated method stub
 		return this.evenementRepo.save(evt);
 	}
 
 	@Override
 	public Evenement updateEvenement(Evenement evt) {
-		// TODO Auto-generated method stub
 		Evenement updatedEvenement = this.evenementRepo.findByIdEvenement(evt.getIdEvt());
 		updatedEvenement.setTitleEvt(evt.getTitleEvt());
 		updatedEvenement.setDescriptionEvt(evt.getDescriptionEvt());
@@ -43,31 +40,26 @@ public class EvenementServiceImpl implements EvenementService {
 
 	@Override
 	public void deleteEvenement(int idEvt) {
-		// TODO Auto-generated method stub
 		this.evenementRepo.delete(this.evenementRepo.findByIdEvenement(idEvt));
 	}
 
 	@Override
 	public Evenement findEvenementById(int idEvt) {
-		// TODO Auto-generated method stub
 		return this.evenementRepo.findByIdEvenement(idEvt);
 	}
 
 	@Override
 	public int getIdMaxEvenement() {
-		// TODO Auto-generated method stub
 		return this.evenementRepo.findByIdMaxEvenement();
 	}
 
 	@Override
 	public List<Evenement> getEvenementInProgress() {
-		// TODO Auto-generated method stub
 		return this.evenementRepo.findByEvenementInProgress();
 	}
 
 	@Override
 	public List<Evenement> getEvenementInSlotTime() {
-		// TODO Auto-generated method stub
 		return this.evenementRepo.findByEvenementInSlotTime();
 	}
 

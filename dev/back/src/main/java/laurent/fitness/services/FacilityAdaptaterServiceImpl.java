@@ -17,7 +17,6 @@ public class FacilityAdaptaterServiceImpl implements FacilityAdaptaterService {
 
 	@Override
 	public List<FacilityAdaptater> findAllFacilitiesAdapter() {
-		// TODO Auto-generated method stub
 		return this.facilityAdaptaterRepo.findAll();
 	}
 
