@@ -110,6 +110,7 @@ public class CommandController {
 		return this.commandService.isDetectCommandZeroByUsername(username);
 	}
 	
+	
 	// Reset a command resetcommand
 	@PutMapping("/resetcommand/{idCommand}/{username}")
 	public ResponseEntity<?> resetCommand(@PathVariable int idCommand, @PathVariable String username){

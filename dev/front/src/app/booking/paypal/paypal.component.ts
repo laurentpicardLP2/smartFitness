@@ -34,16 +34,19 @@ export class PaypalComponent implements OnInit {
     public showSuccess: boolean = false;
     public showCancel: boolean = false;
     public showError: boolean = false;
+    public isHidden: boolean;
     
   
   
     ngOnInit() {
+      this.isHidden = true;
       this.commandService.commandSubject.subscribe(res => {
         this.command = res;
         this.totalPrice = this.command.totalPrice;
 
-console.log("init paypal")
+        setTimeout(() => this.isHidden = false, 4000);
 
+console.log("init paypal")
         this.loginService.usernameSubject.subscribe(
           (res) => {
             this.username = res ;

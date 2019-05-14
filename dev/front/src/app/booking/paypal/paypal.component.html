@@ -1,5 +1,11 @@
 <!-- <div fxFlex fxLayout="column" fxLayoutAlign="space-around center"> -->
   <div class="paypal-container">
     <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+    <br>
+    <span *ngIf="isHidden">
+      <mat-progress-spinner mode="indeterminate" style="margin:0 auto;" ></mat-progress-spinner>
+    </span>
   </div>
+  
+  
 <!-- </div> -->

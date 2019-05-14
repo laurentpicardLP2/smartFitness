@@ -42,6 +42,7 @@ public class EvenementServiceImpl implements EvenementService {
 	public void deleteEvenement(int idEvt) {
 		this.evenementRepo.delete(this.evenementRepo.findByIdEvenement(idEvt));
 	}
+	
 
 	@Override
 	public Evenement findEvenementById(int idEvt) {

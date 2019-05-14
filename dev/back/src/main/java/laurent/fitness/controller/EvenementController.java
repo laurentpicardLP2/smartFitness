@@ -51,10 +51,10 @@ public class EvenementController {
 	}
 	
 	//Retourne la liste de tous les événements en cours
-		@GetMapping("/getevenementinslottime")
-		public List<Evenement> getEvenementInSlotTime() {
-		    return this.evenementService.getEvenementInSlotTime();	
-		}
+	@GetMapping("/getevenementinslottime")
+	public List<Evenement> getEvenementInSlotTime() {
+	    return this.evenementService.getEvenementInSlotTime();	
+	}
 	
 	@PostMapping("/addevenement")
 	public ResponseEntity<?> addEvenement(@RequestBody Evenement evenement){

@@ -142,14 +142,10 @@ export class LoginService {
    * @param user 
    */
   public signIn(user: User, bReload: boolean){
-    if(this.isAuth){
+    console.log("(this.isAuth : ", this.isAuth);
       if(this.authority == "ROLE_CUSTOMER"){
         this.utilsService.delCommand();
       }
-      this.signOut();
-      this.router.navigate(['']);
-      return;
-    }
     this.attemptAuth(user.username, user.password).subscribe(
       data => {
        
@@ -229,11 +225,7 @@ export class LoginService {
           }
          else if(fromForm == "productRefForm"){
           setTimeout(() => this.router.navigate(['/product-ref-listing']), 650);
-          }
-          // else {
-          //   setTimeout(() => this.router.navigate(['/watch-category-listing']), 650);
-          // }
-          
+          }          
         }
         else {            
           this.getUserInfos(user.username).subscribe(
@@ -309,7 +301,7 @@ export class LoginService {
 
   public signOut(){
     this.isCommandInit = false;
-    this.isCommandInit = false;
+    console.log("signout")
     this.setIsUserLoggedSubject(false);
     this.setAuthoritySubject(new Authority("","ROLE_ANONYMOUS"));
     this.token.signOut();
