@@ -8,6 +8,8 @@
 6. Lancer les serveurs springboot et node.js.
 
 # Test de l'application : Rôle Customer
+Test n°1
+--------
 1. Créer un compte via le module inscription en haut à droite (indiquer une adresse mail permettant de lire les messages)
 2. Se connecter avec le compte nouvellement créé.
 3. Aller dans le module de réservation (clic sur l'image réservation ou aller dans le menu Nos offres >  Constituer une séance)
@@ -25,9 +27,11 @@
   - Numéro de carte: 4111 1111 1111 1111
   - Date d'expiration : 02/20
   - Crypto visuel : 123
-  - Renseigner les blocs **Adresse de facturation** et **Coordonnées**, choisir l'option *Non, merci* pour l'ouverture d'un compte paypal, puis cliquer *Payer*
-  14
-14. Avec les comptes db_admin (mot de passe : simplon) ou db_manager(mot de passe : simplon), on peut ajouter et modifier des salles, des catégories d'équipement et des équipements. Il s'agit donc de créer des équipements, appartenant à une catégorie et localisée dans une salle,  pour que les utilisateurs puissent bénéficier d'un choix élargi d'appareils lorsqu'ils sont sur une séquence de réservation.
-15. Toujours avec les comptes db_admin ou db_manager, on peut créer et gérer des abonnements et des modèles de montres connectées en tant que services pour les clients.
-16. Le compte db_admin permet de créer et gérer des comptes utilisateurs de profil 'ROLE_MANAGER' ou 'ROLE_ADMIN'
+  - Renseigner les blocs **Adresse de facturation** et **Coordonnées**, choisir l'option *Non, merci* pour l'ouverture d'un compte paypal, puis cliquer *Payer*.
+14. Attendre que la page d'accusé réception s'affiche.
+15. S'assurer que l'on ne peut pas revenir sur la page de paiement en cliquant sur le bouton *back* du navigateur.
+16. S'assurer qu'un mail a bien été envoyé.
+Test n°2
+--------
+lll
 17. Il est possible, pour tout utilisateur lambda de se créer un compte utilsateur 'smartFitness'.
