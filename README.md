@@ -148,4 +148,43 @@ Test n°5
 
 Test n°6
 --------
+1. Aller dans le menu *Pilotage > Lister les événements*. Constater que l'événement 3 n'appartient pas à l'intervalle temporelle du moment.
+2. Ouvrir un autre onglet et se connecter avec le compte créé lors du premier test. S'assurer que *Evt 1* et *Evt 4* defilent tour à tour sur la bandeau jaune toutes les 3 jaunes. Cliquer sur l'un des deux événements.
+3. Activer l'onglet correspondant à la session *db_manager*. Cliquer sur le bouton *modifier* de la ligne correspondant à *Evt 3*.
+4. (On se trouve dans la page de détail de *Evt 3*) Changer la date de début de l'événement een choisissant le 10 mai 2019, puis cliquer sur *Modifier*
+5. Activer de nouveau l'onglet correspondant à la session du customer. (On se trouve sur la page de l'événement précédemment sélectionné). Cliquer sur l'icône *home* en haut à gauche. S'assurer que les trois événements *Evt 1*, *Evt 3* et *Evt 4* défilent tour à tour. Cliquer sur l'un d'entre eux.
+6. Activer de nouveau l'onglet correspondant à la session *db_manager*. (On se trouve dans la page de listing des événements) Cliquer sur le bouton *supprimer* correspondant à *Evt 3*.
+7. Aller dans le menu *Pilotage > Ajouter un événement"
+8. (On se trouve dans le formulaire permettant d'ajouter un événement). Saisir les informations suivantes
+  - Titre de l'événement : Une séance de fitness en ligne.
+  - Date de fin de l'événement : 15/09/2019.
+  - Adresse du lien vidéo : https://www.youtube.com/watch?v=O8ElQBIenN0
+  Puis cliquer sur *Enregistrer*
+9. Activer de nouveau l'onglet correspondant à la session du customer. (On se trouve sur la page de l'événement précédemment sélectionné). Cliquer sur l'icône *home* en haut à gauche. S'assurer que les trois événements *Evt 1*, *Evt 3* et *Une séance de fitness en ligne* défilent tour à tour. Cliquer sur l'événement *Une séance de fitness en ligne*.
+10. Visualiser la video.
+11. Déconnecter les deux sessions.
 
+# Test de l'application : Rôle Admin
+Test n°7
+--------
+1. Se connecter en tant que *db_admin* / *simplon*
+2. Aller dans le menu *Gestion staff > Listing des collaborateurs*. S'assurer qu'il y a les deux comptes suivants : *sysadmin* et *sysmanager*
+3. Aller dans le menu *Gestion staff > Ajout collaborateur*. Saisir les informations suivantes : 
+- Full name : syscollaborateur
+- Identifiant : db_collaborateur
+- Rôle du collaborateur : ROLE_MANAGER
+- Email : syscollaborateur@laposte.fr
+- Mot de passe : Azerty12!
+- 0614667324
+Puis cliquer sur *Enregistrer*
+4. On se retrouve sur la page du listing des collaborateurs.
+5. Ouvrir sur un autre onglet une session avec le compte *db_collaborateur* / *Azerty12!*
+6. S'assurer que *db_collaborateur* visualise le menu correspondant au *ROLE_MANAGER*, c'est-à-dire Gestion Centre, Gestion offres et Pilotage.
+7. Se déconnecter
+8. Activer l'onglet correspondant à la session *db_admin* (on se trouve dans la page du listing des collaborateurs) Cliquer sur le bouton *Modifier* correspondant à *db_collaborateur*
+9. On se trouve dans la page de détail relative à *db_collaborateur*
+10. Changer le *Rôle du collaborateur* en choisissant *ROLE_ADMIN*, ressaisir les mail et mot de passe puis cliquer sur le bouton *Enregistrer les modifications*.
+11. Sur l'autre onglet, ouvrir de nouveau une session avec le compte *db_collaborateur* / *Azerty12!*
+12. S'assurer que *db_collaborateur* visualise le menu correspondant au *ROLE_ADMIN*, c'est-à-dire Gestion Centre, Gestion offres, Gestion staff et Pilotage.
+13. Se déconnecter
+14. Activer l'onglet correspondant à la session *db_admin* (on se trouve dans la page du listing des collaborateurs) Cliquer sur le bouton *Supprimer* correspondant à *db_collaborateur*. Confirmer que vous supprimer le compte du collaborateur.
