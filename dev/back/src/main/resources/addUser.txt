@@ -1,0 +1,7 @@
+//		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+//		
+//		this.authorityService.saveAuthority(new Authority("db_sam", "ROLE_ADMIN"));
+//		int idUser = this.userService.findByUsernameIdMax();
+//	
+//		
+//		this.staffService.saveStaff(new Staff(idUser,"db_sam", "db_sam", "{bcrypt}" + bcrypt.encode("simplon"), "", "", new Date(), (byte)(1)));

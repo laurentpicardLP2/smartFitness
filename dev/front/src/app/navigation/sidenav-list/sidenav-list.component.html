@@ -90,7 +90,7 @@
   <div>
       <button *ngIf="isAuth && authority.authority=='ROLE_ADMIN'"  mat-button [matMenuTriggerFor]="staff"><mat-icon>supervisor_account</mat-icon> Gestion staff</button>
       <mat-menu  #staff="matMenu">
-          <button mat-menu-item _ngcontent-cl="" tabindex="12" aria-disabled="false" (click)="onAction('/staff-new')"><mat-icon>group_add</mat-icon>Ajout collaborateurs</button>
+          <button mat-menu-item _ngcontent-cl="" tabindex="12" aria-disabled="false" (click)="onAction('/staff-new')"><mat-icon>group_add</mat-icon>Ajout collaborateur</button>
           <button mat-menu-item _ngcontent-cl="" tabindex="13" aria-disabled="false" (click)="onAction('/staff-listing')"><mat-icon>list</mat-icon>Listing des collaborateurs</button>
        </mat-menu>
   </div>

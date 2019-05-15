@@ -82,7 +82,6 @@ export class HeaderComponent implements OnInit {
   public onSeeCart(){
     this.router.navigate(['cart-composition']);
   }
-
   
 
   public onContinue(){
