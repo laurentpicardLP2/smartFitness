@@ -14,11 +14,11 @@ Test n°1
 
 1. Créer un compte via le module inscription en haut à droite (indiquer une adresse mail permettant de lire les messages)
 2. Se connecter avec le compte nouvellement créé.
-3. Aller dans le module de réservation (clic sur l'image réservation ou aller dans le menu Nos offres >  Constituer une séance)
+3. Aller dans le module de réservation (clic sur l'image réservation ou aller dans le menu *Nos offres >  Constituer une séance*)
 4. Réserver trois tranches horaires : deux tranches avec *Elliptique 1* et une tranche avec *Tapis_roulant 2*.
 5. Valider la séance -> une page avec une liste de produits favoris s'affiche : séléctionner powerade
 6. Choisir la quantité 3, puis cliquer sur *ajouter au panier*.
-7. (On se retrouve sur la page *home*) Aller dans le module d'abonnement (clic sur l'image abonnement ou aller dans le menu Nos offres > Souscrire à un abonnement.
+7. (On se retrouve sur la page *home*) Aller dans le module d'abonnement (clic sur l'image abonnement ou aller dans le menu *Nos offres > Souscrire à un abonnement*.
 8. Choisir l'abonnement annuel. Sur la page suivante, cliquer sur *ajouter au panier*
 9. (On se retrouve de nouveau sur la page *home*) Cliquer sur l'icône du panier en haut droite, puis choisir l'option *Voir le panier*.
 10. Cliquer sur le bouton *Valider le panier*
@@ -47,18 +47,18 @@ Test n°2
 8. Cliquer sur la première ligne (commande en cours d'acquisition)
 9. (On se retrouve sur le détail de la commande ) Cliquer sur [Séance](https://localhost:4200) de la première ligne du tableau.
 10. On visualise alors la feuille de route de la séance. S'assurer que les éléments sont affichés dans l'ordre chronologique.
-11. Aller dans le menu Nos offres > Notre catalogue
+11. Aller dans le menu *Nos offres > Notre catalogue*
 12. Séléctionner *Ovotamine* en cliquant sur le bouton *consulter* correspondant.
 13. Cliquer sur le bouton *Ajouter au panier*
 14. (On se trouve sur la page *home*) : Aller dans le module de réservation
 15. Choisir de nouveau deux équipements, puis valider.
 16.  (On se retrouve sur la page des produits favoris). Cliquer sur l'icône du panier en haut droite, puis choisir l'option *Voir le panier*.
 17. Supprimer la seconde séance.
-18. Cliquer en haut à droite sur Vos suivis > Vos commandes
+18. Cliquer en haut à droite sur *Vos suivis > Vos commandes*
 19. (On se retrouve sur la page de la liste des commandes): Cliquer sur la ligne de la commande en cours d'acquisition.
 20. S'assurer que le détail de la commande est à jour.
 21. Cliquer sur l'icône du panier et choisir l'option *Vider le panier
-22. (On se trouve sur la page *home*) : Cliquer en haut à droite sur Vos suivis > Vos commandes
+22. (On se trouve sur la page *home*) : Cliquer en haut à droite sur *Vos suivis > Vos commandes*
 23. S'assurer qu'il n'y a plus de commandes en cours d'acquisition.
 24. Aller dans le module de réservation.
 25. Réserver deux équipements.
@@ -95,5 +95,21 @@ Test n°3
 # Test de l'application : Rôle Manager
 Test n°1
 --------
+Préambule : important, s'assurer que dans le fichier application.properties, la propriété *file.upload-dir* a comme propriété le chemin **absolu** vers le dossiers *assets* et que ce dernier contient la sous-arborescente */images/facilities*
 1. Se connecter en tant que *db_manager* / *simplon*
-2. 
+2. Aller dans le menu *Gestion centre > Gestion des salles > Lister les salles*
+3. S'assurer que la *Salle A* existe.
+4. Aller dans le menu *Gestion centre > Gestion des salles > Ajouter une salle*
+5. (On se retrouve dans le module pour ajouter une nouvelle salle) Saisir *Salle A*, puis faire taper sur la touche de tabulation.
+6. S'assurer que le message *Ce nom de salle existe déjà, veuillez en choisir un autre.*
+7. Saisir comme nom de salle *Salle D* et *50* pour la contenance de la salle, puis valider.
+8. (On se retrouve sur la page de listing des salles) Cliquer sur le bouton *Modifier* de la ligne correspondant à la salle nouvellement ajoutée.
+9. (On se retrouve sur la page de détail de la salle visualisée). Renommer le nom de la salle en *Salle A*
+10. S'assurer que le message *Ce nom de salle existe déjà, veuillez en choisir un autre.*
+11. S'assurer que le nom de la salle (*Salle D*) peut être de nouveau attribué sans apparition de message d'erreur puis cliquer sur *Enregistrer les modifications*.
+12. (On se retrouve de nouveau dans la page de listing des salles) Aller dans le menu *Gestion centre > Gestion du parc > Ajouter une catégorie.
+13. Ajouter comme nom de de catégorie d'équipement *Espace musculation* puis valider.
+14. (On se retrouve sur la page du listing des catégories d'équipement) Aller dans le menu *Gestion centre > Gestion du centre > Ajouter un équipement*
+15. 
+15. 
+
