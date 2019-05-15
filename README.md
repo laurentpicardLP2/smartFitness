@@ -59,4 +59,16 @@ Test n°2
 21. Cliquer sur l'icône du panier et choisir l'option *Vider le panier
 22. (On se trouve sur la page *home*) : Cliquer en haut à droite sur Vos suivis > Vos commandes
 23. S'assurer qu'il n'y a plus de commandes en cours d'acquisition.
+24. Cliquer sur l'icône de la maison en haut à gauche.
+lll
 
+Test n°3
+--------
+1. Aller dans le module de réservation
+2. Réserver l'équipement Elliptique 1 (se souvenir de la tranche horaire réservé).
+3. Actualiser la page (F5)
+4. On se retrouve sur la page de login
+5. Entrer des identifiants erronés
+6. S'assurer que le message *L'identifiant ou le mot de passe sont incorrects* s'affiche.
+7. Se conecter avec le compte créé lors du test n°1.
+8. S'assurer que la pour la tranche horaire réservé au point 2, le nombre d'Elliptique est de trois et qu'il n
