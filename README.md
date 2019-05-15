@@ -1,16 +1,19 @@
-# smartFitness
-projet chef d'oeuvre
-Mode opératoire pour lancer l'application :
+# Smart Fitness - projet chef d'oeuvre
+# Mode opératoire pour lancer l'application :
 1. Dans mySql Workbench créer un schéma vide intitulé 'db_fitness' 
-2. Cloner le lien git https://github.com/laurentpicardLP2/smartFitness.git
+2. Clôner le lien git https://github.com/laurentpicardLP2/smartFitness.git
 3. Dans Eclipse, faire un import gradle depuis le dossier back du repo cloné
 4. Dans application.properties, renseigner les user et password de la ligne suivante : spring.datasource.url=jdbc:mysql://localhost:3306/db_fitness?useSSL=false&user=fitness&password=Colis062019!.
 5. Modififier dans application.properties la ligne "file.upload-dir" en indiquant le chemin absolue vers le dossier "../assets/images/facilities" (c'est l'endroit où seront stockées les images uploadées).
 6. Lancer les serveurs springboot et node.js.
 
-Test de l'application
-1.
-10. Avec le compte db_user (mot de passe : simplon), on peut ajouter des séances constituées d'activités (chaque activité dure 10').
+# Test de l'application : Rôle Customer
+1. Créer un compte via le module inscription (en haut à droite)
+2. Se connecter avec le compte nouvellement créé.
+3. Aller dans le module de réservation (clic sur l'image réservation ou dans le menu Nos Offres >  Constituer une séance)
+4. Réserver trois tranches horaires : deux fois Elliptique 1 et une fois Tapis_roulant 2.
+5. Valider la séance -> une page avec une liste de produits favoris s'affiche : séléctionner powerade
+6. Choisir la quantité 3
 11. Avec un compte de type 'ROLE_CUSTOMER' (Le compte db_user en est un), on peut souscrire à un abonnement et bénéficier des activités à moitié prix. Pour illustrer ce cas, le compte db_abonne (mot de passe : simplon) visualise les activités à 50% de leur tarif plein.
 12. Chaque compte 'ROLE_CUSTOMER' peut consulter le suivi (en cours, à venir et l'historique) de l'ensemble de leurs abonnements souscrits. (TO DO, le tableau étant responsive, ce modèle sera repris pour la feuille de route d'une séance ainsi que le détail d'une commande).
 13. L'utilisateur a également la possibilité de vider ou valider son panier. Dans ce dernier cas, il peut visualiser les séances validées par le menu Mon choix > Mes suivis > mes séances. En cliquant sur une ligne, il obtient le détail de la feuille de route de sa séance.
