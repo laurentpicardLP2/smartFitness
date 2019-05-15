@@ -89,13 +89,14 @@ Test n°3
 16. Sélectionner sur les deux onglets (ie pour les deux utilsateurs) une tranche horaire où aucun des deux utilisateurs n'a d'équipement réservé.
 17. Sélectionner *Elliptique1* pour le premier utilisateur
 18. Faire de même pour le second utilisateur (db_user). S'assurer que le message *Oups! cet équipement vient d'être réservé* s'affiche.
-19.Sur l'onglet correspondant à *db_user* se déconnecter. Laisser la session ouverte sur le premier onglet : le but étant de s'assurer qu'au bout de 10' se produise une déconnexion automatique.
-20. Sur le premier onglet se déconnecter.
+19.Fermer l'onglet correspondant à *db_user*. Sur le premier onglet se déconnecter.
 
 # Test de l'application : Rôle Manager
 Test n°1
 --------
-Préambule : important, s'assurer que dans le fichier application.properties, la propriété *file.upload-dir* a comme propriété le chemin **absolu** vers le dossiers *assets* et que ce dernier contient la sous-arborescente */images/facilities*
+Préambule : 
+ - important, s'assurer que dans le fichier application.properties, la propriété *file.upload-dir* a comme propriété le chemin **absolu** vers le dossiers *assets* et que ce dernier contient la sous-arborescente */images/facilities*
+ - copier depuis le répertoire *src/main/resources* accessible depuis Eclipse le fichier *musculation1.jpg* dans le dossier *Images*.
 1. Se connecter en tant que *db_manager* / *simplon*
 2. Aller dans le menu *Gestion centre > Gestion des salles > Lister les salles*
 3. S'assurer que la *Salle A* existe.
@@ -110,6 +111,13 @@ Préambule : important, s'assurer que dans le fichier application.properties, la
 12. (On se retrouve de nouveau dans la page de listing des salles) Aller dans le menu *Gestion centre > Gestion du parc > Ajouter une catégorie.
 13. Ajouter comme nom de de catégorie d'équipement *Espace musculation* puis valider.
 14. (On se retrouve sur la page du listing des catégories d'équipement) Aller dans le menu *Gestion centre > Gestion du centre > Ajouter un équipement*
-15. 
-15. 
-
+15. (On se retrouve dans le module pour ajouter un nouvel équipement) Renseigner les champs de la manière suivante :
+  - Catégorie de l'équipement : Espace musculation
+  - Salle de l'équipement : Salle D
+  - Nom de l'équipement : Musculature 1
+  - Prix d'achat de l'équipement : 1500
+  - Tarif de prestation (10') : 0.35
+  - Image à uploader : Sélectionner le fichier *musculation1.jpg* se trouvant dans le dossier *Images* puis Valider.
+17. (On se retrouve sur la page de listing des équipements). Se déconnecter et se reconnecter avec le compte utilisateur créé lors du premier test.
+18. Cliquer sur *Réservation* et s'assurer que l'item *Espace musculation* a été créé et comporte une image. 
+19. 
