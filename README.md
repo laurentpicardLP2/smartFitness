@@ -89,7 +89,7 @@ Test n°3
 16. Sélectionner sur les deux onglets (ie pour les deux utilsateurs) une tranche horaire où aucun des deux utilisateurs n'a d'équipement réservé.
 17. Sélectionner *Elliptique1* pour le premier utilisateur
 18. Faire de même pour le second utilisateur (db_user). S'assurer que le message *Oups! cet équipement vient d'être réservé* s'affiche.
-19.Fermer l'onglet correspondant à *db_user*. Sur le premier onglet se déconnecter.
+19.Fermer l'onglet correspondant à *db_user* et se déconnecter sur le premier onglet.
 
 # Test de l'application : Rôle Manager
 Test n°1
@@ -120,4 +120,7 @@ Préambule :
   - Image à uploader : Sélectionner le fichier *musculation1.jpg* se trouvant dans le dossier *Images* puis Valider.
 17. (On se retrouve sur la page de listing des équipements). Se déconnecter et se reconnecter avec le compte utilisateur créé lors du premier test.
 18. Cliquer sur *Réservation* et s'assurer que l'item *Espace musculation* a été créé et comporte une image. 
-19. 
+
+Test n°2
+--------
+1.
