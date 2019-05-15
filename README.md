@@ -2,14 +2,14 @@
 projet chef d'oeuvre
 Mode opératoire pour lancer l'application :
 1. Dans mySql Workbench créer un schéma vide intitulé 'db_fitness' 
-2. Cloner le lien git
+2. Cloner le lien git https://github.com/laurentpicardLP2/smartFitness.git
 3. Dans Eclipse, faire un import gradle depuis le dossier back du repo cloné
 4. Dans application.properties, renseigner les user et password de la ligne suivante : spring.datasource.url=jdbc:mysql://localhost:3306/db_fitness?useSSL=false&user=fitness&password=Colis062019!.
-5. Afin de pouvoir uploader des images (pour les équipements et les produits proposés), modififier dans application.properties la ligne "file.upload-dir" en indiquant le chemin absolue vers le dossier "../assets/images/facilities".
-6. Lancement du serveur serveur Tomcat : Exécuter l'application fitness. Les tables mySql sont recréées et les jeux de données contenus dans les scripts data.sql et import.sql sont injectés en base.
-7.
-8. Lancement du serveur node : depuis un terminal, saisir l'instruction ng serve depuis le dossier front du repo cloné.
-9. Saisir http://localhost:4200
+5. Modififier dans application.properties la ligne "file.upload-dir" en indiquant le chemin absolue vers le dossier "../assets/images/facilities" (c'est l'endroit où seront stockées les images uploadées).
+6. Lancer les serveurs springboot et node.js.
+
+Test de l'application
+1.
 10. Avec le compte db_user (mot de passe : simplon), on peut ajouter des séances constituées d'activités (chaque activité dure 10').
 11. Avec un compte de type 'ROLE_CUSTOMER' (Le compte db_user en est un), on peut souscrire à un abonnement et bénéficier des activités à moitié prix. Pour illustrer ce cas, le compte db_abonne (mot de passe : simplon) visualise les activités à 50% de leur tarif plein.
 12. Chaque compte 'ROLE_CUSTOMER' peut consulter le suivi (en cours, à venir et l'historique) de l'ensemble de leurs abonnements souscrits. (TO DO, le tableau étant responsive, ce modèle sera repris pour la feuille de route d'une séance ainsi que le détail d'une commande).
