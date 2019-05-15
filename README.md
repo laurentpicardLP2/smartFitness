@@ -6,6 +6,7 @@
 4. Dans application.properties, renseigner les user et password de la ligne suivante : spring.datasource.url=jdbc:mysql://localhost:3306/db_fitness?useSSL=false&user=fitness&password=Colis062019!.
 5. Modififier dans application.properties la ligne "file.upload-dir" en indiquant **le chemin absolue** vers le dossier "../assets/images/facilities". Si besoin, créer les sous-dossiers images/facilities (c'est l'endroit où seront stockées les images uploadées).
 6. Lancer les serveurs springboot et node.js.
+7. Lancer un navigateur chrome et saisir l'adresse [Smart Fitness] http://localhost:4200
 
 # Test de l'application : Rôle Customer
 Test n°1
@@ -59,7 +60,13 @@ Test n°2
 21. Cliquer sur l'icône du panier et choisir l'option *Vider le panier
 22. (On se trouve sur la page *home*) : Cliquer en haut à droite sur Vos suivis > Vos commandes
 23. S'assurer qu'il n'y a plus de commandes en cours d'acquisition.
-24. Cliquer sur l'icône de la maison en haut à gauche.
+24. Aller dans le module de réservation.
+25. Réserver deux équipements.
+26. Essayer de changer de date, s'assurer que le message *Veuillez supprimer les éléments de la séance pour changer la date.* s'affiche.
+27. Supprimer tous les équipements de la liste de réservation (à gauche)
+28. Changer la date.
+29. S'assurer que l'on peut de nouveau ajouter des équipements à sa séance.
+30. Cliquer sur l'icône de la maison en haut à gauche.
 lll
 
 Test n°3
@@ -71,4 +78,16 @@ Test n°3
 5. Entrer des identifiants erronés
 6. S'assurer que le message *L'identifiant ou le mot de passe sont incorrects* s'affiche.
 7. Se conecter avec le compte créé lors du test n°1.
-8. S'assurer que la pour la tranche horaire réservé au point 2, le nombre d'Elliptique est de trois et qu'il n
+8. S'assurer que la pour la tranche horaire réservée au point 2, il n'y pas l'indication *Votre équipment est réservé pour cette tranche horaire*.
+9. Ouvrir un autre onglet chrome et se connecter avec les mêmes identifiants.
+10. S'assurer que le message *Une session est déjà ouverte, veuillez la clôturer ou attendre 10 minutes* s'affiche
+11. Se connecter avec le compte *db_user* / *simplon
+12. Aller dans le module de réservation
+13. Réserver l'équipement Elliptique 1 (se souvenir de la tranche horaire réservé).
+14. Retourner dans l'onglet du premier utilisateur. 
+15. Aller dans le module de réservation, et s'assurer que pour la tranche horaire du point 13, il n'y a plus que deux elliptiques.
+16. Sélectionner sur les deux onglets (ie pour les deux utilsateurs) une tranche horaire où aucun des deux utilisateurs n'a d'équipement réservé.
+17. Sélectionner *Elliptique1* pour le premier utilisateur
+18. Faire de même pour le second utilisateur (db_user). S'assurer que le message *Oups! cet équipement vient d'être réservé* s'affiche.
+19.Sur l'onglet correspondant à *db_user* se déconnecter. Laisser la session ouverte sur le premier onglet : le but étant de s'assurer qu'au bout de 10' d'inactivité il y ait une déconnexion automatique.
+20. Sur le premier onglet se déconnecter.
