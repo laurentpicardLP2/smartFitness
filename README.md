@@ -33,14 +33,15 @@ Test n°1
 15. S'assurer que l'on ne peut pas revenir sur la page de paiement en cliquant sur le bouton *back* du navigateur.
 16. S'assurer qu'un mail a bien été envoyé.
 lll
+
 Test n°2
 --------
 1. (On se trouve sur la page *home*) : Aller dans le module de réservation
 2. S'assurer que les tranches horaires précédemment réservées affichent l'indication *Votre équipment est réservé pour cette tranche horaire*.
 3. Séléctionner une tranche horaire non réservé, et s'assurer que les équipements sont à moitié prix. (le libellé *-50% si vous êtes abonné!* n'apparaît plus dans la description des équipements)
 4. Réserver trois équipements.
-5. Supprimer dans le bloc à gauche (Votre séance du jj/mm/aa) un équipement.
-6. Rajouter un autre équipement, puis valider la séance.
+5. Supprimer dans le bloc à gauche (Votre séance du jj/mm/aa) le second équipement.
+6. Rajouter un autre équipement pour la tranche horaire supprimée, puis valider la séance.
 7. (On se retrouve sur la page des produits favoris). Aller dans le menu Vos suivis > Vos commandes.
 8. Cliquer sur la première ligne (commande en cours d'acquisition)
 9. (On se retrouve sur le détail de la commande ) Cliquer sur [Séance](https://localhost:4200) de la première ligne du tableau.
@@ -51,4 +52,11 @@ Test n°2
 14. (On se trouve sur la page *home*) : Aller dans le module de réservation
 15. Choisir de nouveau deux équipements, puis valider.
 16.  (On se retrouve sur la page des produits favoris). Cliquer sur l'icône du panier en haut droite, puis choisir l'option *Voir le panier*.
-17. 
+17. Supprimer la seconde séance.
+18. Cliquer en haut à droite sur Vos suivis > Vos commandes
+19. (On se retrouve sur la page de la liste des commandes): Cliquer sur la ligne de la commande en cours d'acquisition.
+20. S'assurer que le détail de la commande est à jour.
+21. Cliquer sur l'icône du panier et choisir l'option *Vider le panier
+22. (On se trouve sur la page *home*) : Cliquer en haut à droite sur Vos suivis > Vos commandes
+23. S'assurer qu'il n'y a plus de commandes en cours d'acquisition.
+
