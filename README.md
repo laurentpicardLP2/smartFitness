@@ -81,7 +81,7 @@ Test n°3
 8. S'assurer que la pour la tranche horaire réservée au point 2, il n'y pas l'indication *Votre équipment est réservé pour cette tranche horaire*.
 9. Ouvrir un autre onglet chrome et se connecter avec les mêmes identifiants.
 10. S'assurer que le message *Une session est déjà ouverte, veuillez la clôturer ou attendre 10 minutes* s'affiche
-11. Se connecter avec le compte *db_user* / *simplon
+11. Se connecter avec le compte *db_user* / *simplon*
 12. Aller dans le module de réservation
 13. Réserver l'équipement Elliptique 1 (se souvenir de la tranche horaire réservé).
 14. Retourner dans l'onglet du premier utilisateur. 
@@ -89,5 +89,11 @@ Test n°3
 16. Sélectionner sur les deux onglets (ie pour les deux utilsateurs) une tranche horaire où aucun des deux utilisateurs n'a d'équipement réservé.
 17. Sélectionner *Elliptique1* pour le premier utilisateur
 18. Faire de même pour le second utilisateur (db_user). S'assurer que le message *Oups! cet équipement vient d'être réservé* s'affiche.
-19.Sur l'onglet correspondant à *db_user* se déconnecter. Laisser la session ouverte sur le premier onglet : le but étant de s'assurer qu'au bout de 10' d'inactivité il y ait une déconnexion automatique.
+19.Sur l'onglet correspondant à *db_user* se déconnecter. Laisser la session ouverte sur le premier onglet : le but étant de s'assurer qu'au bout de 10' se produise une déconnexion automatique.
 20. Sur le premier onglet se déconnecter.
+
+# Test de l'application : Rôle Manager
+Test n°1
+--------
+1. Se connecter en tant que *db_manager* / *simplon*
+2. 
