@@ -1,13 +1,13 @@
 # smartFitness
 projet chef d'oeuvre
 Mode opératoire pour lancer l'application :
-1. Dans mySql Workbench créer un schéma vide intitulé 'db_fitness' (pour l'instant data.sql est fonctionnel mais pas schema.sql, par ailleurs le fichier import.sql "drop" et crée bien un schéma, mais il s'exécute en aval du lancement du serveur spring boot))
+1. Dans mySql Workbench créer un schéma vide intitulé 'db_fitness' 
 2. Cloner le lien git
 3. Dans Eclipse, faire un import gradle depuis le dossier back du repo cloné
-4. Dans application.properties, renseigner les user et password avec les valeurs idoines.
-5. Afin de pouvoir uploader des images (pour les équipements et les montres connectées), modififier dans application.properties la ligne "file.upload-dir" en indiquant le chemin absolue vers le dossier "../assets/images/facilities".
-6. Lancement du serveur serveur Tomcat : Exécuter l'application fitness. Les tables mySql sont recréées et le jeu de données contenues dans le script data.sql sont injectées en base.
-7. Un trigger ainsi qu'une fonction stockée ont été implémentés. Afin qu'ils soient opérationnels, il faut faire un copier-collé du contenu du ficher triggerFITNESS.txt se trouvant dans back/src/main/resources dans une console query de workbench suivi de son exécution. (Le trigger permet de contrôler qu'au moment de l'insert de la réservation d'un équipement, celui-ci n'a pas été pris entre temps par un autre utilisateur. Ce cas de figure se produit lorsqu'entre le moment où un utilisateur visualise l'ensemble des équipements disponibles lors du choix d'une tranche horaire et le moment où il sélectionne un équipement, celui-ci a été réservé dans ce laps de temps par un autre utilisateur). 
+4. Dans application.properties, renseigner les user et password de la ligne suivante : spring.datasource.url=jdbc:mysql://localhost:3306/db_fitness?useSSL=false&user=fitness&password=Colis062019!.
+5. Afin de pouvoir uploader des images (pour les équipements et les produits proposés), modififier dans application.properties la ligne "file.upload-dir" en indiquant le chemin absolue vers le dossier "../assets/images/facilities".
+6. Lancement du serveur serveur Tomcat : Exécuter l'application fitness. Les tables mySql sont recréées et les jeux de données contenus dans les scripts data.sql et import.sql sont injectés en base.
+7.
 8. Lancement du serveur node : depuis un terminal, saisir l'instruction ng serve depuis le dossier front du repo cloné.
 9. Saisir http://localhost:4200
 10. Avec le compte db_user (mot de passe : simplon), on peut ajouter des séances constituées d'activités (chaque activité dure 10').
