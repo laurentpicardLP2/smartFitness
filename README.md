@@ -187,4 +187,4 @@ Puis cliquer sur *Enregistrer*
 11. Sur l'autre onglet, ouvrir de nouveau une session avec le compte *db_collaborateur* / *Azerty12!*
 12. S'assurer que *db_collaborateur* visualise le menu correspondant au *ROLE_ADMIN*, c'est-à-dire Gestion Centre, Gestion offres, Gestion staff et Pilotage.
 13. Se déconnecter
-14. Activer l'onglet correspondant à la session *db_admin* (on se trouve dans la page du listing des collaborateurs) Cliquer sur le bouton *Supprimer* correspondant à *db_collaborateur*. Confirmer que vous supprimer le compte du collaborateur.
+14. Activer l'onglet correspondant à la session *db_admin* (on se trouve dans la page du listing des collaborateurs) Cliquer sur le bouton *Supprimer* correspondant à *db_collaborateur*. Confirmer la suppression du compte correspondant à *db_collaborateur*.
