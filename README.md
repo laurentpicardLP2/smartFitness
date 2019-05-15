@@ -92,7 +92,7 @@ Test n°3
 19.Fermer l'onglet correspondant à *db_user* et se déconnecter sur le premier onglet (Il ne doit plus rester qu'un onglet ouvert).
 
 # Test de l'application : Rôle Manager
-Test n°1
+Test n°4
 --------
 Préambule : 
  - Important, s'assurer que dans le fichier application.properties, la propriété *file.upload-dir* a comme propriété le chemin **absolu** vers le dossiers *assets* et que ce dernier contient la sous-arborescente */images/facilities*
@@ -121,6 +121,31 @@ Préambule :
 17. (On se retrouve sur la page de listing des équipements). Se déconnecter et se reconnecter avec le compte utilisateur créé lors du premier test.
 18. Cliquer sur *Réservation* et s'assurer que l'item *Espace musculation* a été créé et comporte une image. 
 
-Test n°2
+Test n°5
 --------
-1. Se connecter en tant que *db_maneger*
+1. Se connecter en tant que *db_manager* / *simplon*
+2. Aller dans le menu *Pilotage > Graphique réservation* et constater l'absence de données.
+3. Aller dans le menu *Pilotage > Graphique rentabilité* et constater que la valorisation de chaque équipement est négative.
+4. Dans Eclipse aller dans le main (Fitness) de l'application, décommenter le bloc comme il est indiqué puis enregistrer. 
+5. Attendre que dans la console s'affiche la ligne *Hibernate: {call proc_insert_end()}*
+6. Dans le navigateur, aller dans le menu *Pilotage > Graphique réservation* et vérifier la présence de l'histogramme de l'évolution du taux de réservation.
+7. Aller dans le menu *Pilotage > Graphique rentabilité* et s'assurer que la valorisation de Elliptique 1 est positive.
+8. Aller dans le menu *Gestion centre > Gestion du parc > lister les équipements*
+9. Cliquer sur le boutalideron *Maintenance* de la ligne correspondant à *Elliptique 1*
+10. (On se trouve dans la page de détail de l'équipement *Elliptique1*). S'assurer que la valorisation de l'équipement est dans le vert avec un excédent de 1650€.
+11. Saisir les informations suivantes :
+  - Coût de l'intervention : 100
+  - Type de l'intervention : Révision
+  Puis valider.
+12. (On se retrouve sur la page du listing des équipements) Cliquer de nouveau sur le bouton *Maintenance* d'Elliptique 1.
+13. S'assurer que la valorisation est de 1550€ et qu'il y a eu intégration d'un tableau *Historique des opérations de maintenance*.
+13. Saisir les informations suivantes :
+  - Coût de l'intervention : 1600
+  - Type de l'intervention : Dépannage
+  Puis valider.
+12. (On se retrouve sur la page du listing des équipements) Cliquer de nouveau sur le bouton *Maintenance* d'Elliptique 1.
+13. S'assurer que la valorisation est passée dans le rouge et est déficitaire de 50€.
+
+Test n°6
+--------
+
