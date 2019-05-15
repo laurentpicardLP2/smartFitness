@@ -4,12 +4,13 @@
 2. Clôner le lien git https://github.com/laurentpicardLP2/smartFitness.git
 3. Dans Eclipse, faire un import gradle depuis le dossier back du repo cloné
 4. Dans application.properties, renseigner les user et password de la ligne suivante : spring.datasource.url=jdbc:mysql://localhost:3306/db_fitness?useSSL=false&user=fitness&password=Colis062019!.
-5. Modififier dans application.properties la ligne "file.upload-dir" en indiquant le chemin absolue vers le dossier "../assets/images/facilities" (c'est l'endroit où seront stockées les images uploadées).
+5. Modififier dans application.properties la ligne "file.upload-dir" en indiquant **le chemin absolue** vers le dossier "../assets/images/facilities". Si besoin, créer les sous-dossiers images/facilities (c'est l'endroit où seront stockées les images uploadées).
 6. Lancer les serveurs springboot et node.js.
 
 # Test de l'application : Rôle Customer
 Test n°1
 --------
+
 1. Créer un compte via le module inscription en haut à droite (indiquer une adresse mail permettant de lire les messages)
 2. Se connecter avec le compte nouvellement créé.
 3. Aller dans le module de réservation (clic sur l'image réservation ou aller dans le menu Nos offres >  Constituer une séance)
@@ -31,7 +32,23 @@ Test n°1
 14. Attendre que la page d'accusé réception s'affiche.
 15. S'assurer que l'on ne peut pas revenir sur la page de paiement en cliquant sur le bouton *back* du navigateur.
 16. S'assurer qu'un mail a bien été envoyé.
+lll
 Test n°2
 --------
-lll
-17. Il est possible, pour tout utilisateur lambda de se créer un compte utilsateur 'smartFitness'.
+1. (On se trouve sur la page *home*) : Aller dans le module de réservation
+2. S'assurer que les tranches horaires précédemment réservées affichent l'indication *Votre équipment est réservé pour cette tranche horaire*.
+3. Séléctionner une tranche horaire non réservé, et s'assurer que les équipements sont à moitié prix. (le libellé *-50% si vous êtes abonné!* n'apparaît plus dans la description des équipements)
+4. Réserver trois équipements.
+5. Supprimer dans le bloc à gauche (Votre séance du jj/mm/aa) un équipement.
+6. Rajouter un autre équipement, puis valider la séance.
+7. (On se retrouve sur la page des produits favoris). Aller dans le menu Vos suivis > Vos commandes.
+8. Cliquer sur la première ligne (commande en cours d'acquisition)
+9. (On se retrouve sur le détail de la commande ) Cliquer sur [Séance](https://localhost:4200) de la première ligne du tableau.
+10. On visualise alors la feuille de route de la séance. S'assurer que les éléments sont affichés dans l'ordre chronologique.
+11. Aller dans le menu Nos offres > Notre catalogue
+12. Séléctionner *Ovotamine* en cliquant sur le bouton *consulter* correspondant.
+13. Cliquer sur le bouton *Ajouter au panier*
+14. (On se trouve sur la page *home*) : Aller dans le module de réservation
+15. Choisir de nouveau deux équipements, puis valider.
+16.  (On se retrouve sur la page des produits favoris). Cliquer sur l'icône du panier en haut droite, puis choisir l'option *Voir le panier*.
+17. 
