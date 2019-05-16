@@ -33,7 +33,6 @@ Test n°1
 14. Attendre que la page d'accusé réception s'affiche.
 15. S'assurer que l'on ne peut pas revenir sur la page de paiement en cliquant sur le bouton *back* du navigateur.
 16. S'assurer qu'un mail a bien été envoyé.
-lll
 
 Test n°2
 --------
@@ -43,7 +42,7 @@ Test n°2
 4. Réserver trois équipements.
 5. Supprimer dans le bloc à gauche (Votre séance du jj/mm/aa) le second équipement.
 6. Rajouter un autre équipement pour la tranche horaire supprimée, puis valider la séance.
-7. (On se retrouve sur la page des produits favoris). Aller dans le menu Vos suivis > Vos commandes.
+7. (On se retrouve sur la page des produits favoris). Aller dans le menu *Vos suivis > Vos commandes*.
 8. Cliquer sur la première ligne (commande en cours d'acquisition)
 9. (On se retrouve sur le détail de la commande ) Cliquer sur [Séance](https://localhost:4200) de la première ligne du tableau.
 10. On visualise alors la feuille de route de la séance. S'assurer que les éléments sont affichés dans l'ordre chronologique.
@@ -57,7 +56,7 @@ Test n°2
 18. Cliquer en haut à droite sur *Vos suivis > Vos commandes*
 19. (On se retrouve sur la page de la liste des commandes): Cliquer sur la ligne de la commande en cours d'acquisition.
 20. S'assurer que le détail de la commande est à jour.
-21. Cliquer sur l'icône du panier et choisir l'option *Vider le panier
+21. Cliquer sur l'icône du panier et choisir l'option *Vider le panier*
 22. (On se trouve sur la page *home*) : Cliquer en haut à droite sur *Vos suivis > Vos commandes*
 23. S'assurer qu'il n'y a plus de commandes en cours d'acquisition.
 24. Aller dans le module de réservation.
@@ -67,17 +66,17 @@ Test n°2
 28. Changer la date.
 29. S'assurer que l'on peut de nouveau ajouter des équipements à sa séance.
 30. Cliquer sur l'icône de la maison en haut à gauche.
-lll
+31. Se déconnecter.
 
 Test n°3
 --------
-1. Aller dans le module de réservation
-2. Réserver l'équipement Elliptique 1 (se souvenir de la tranche horaire réservé).
-3. Actualiser la page (F5)
-4. On se retrouve sur la page de login
-5. Entrer des identifiants erronés
-6. S'assurer que le message *L'identifiant ou le mot de passe sont incorrects* s'affiche.
-7. Se conecter avec le compte créé lors du test n°1.
+1. Ouvrir un nouvel onglet et aller à l'adresse [https://localhost:4200](https://localhost:4200).
+2. Essayer de se connecter avec des identifiants erronés.
+3. S'assurer que le message *L'identifiant ou le mot de passe sont incorrects* s'affiche.
+4. Se connecter avec le compte créé lors du test n°1.
+5. Réserver l'équipement Elliptique 1 (se souvenir de la tranche horaire réservé) et valider la séance.
+6. Quitter l'onglet.
+7. Aller sur le premier onglet et se connecter avec le compte créé lors du test n°1. 
 8. S'assurer que la pour la tranche horaire réservée au point 2, il n'y pas l'indication *Votre équipment est réservé pour cette tranche horaire*.
 9. Ouvrir un autre onglet chrome et se connecter avec les mêmes identifiants.
 10. S'assurer que le message *Une session est déjà ouverte, veuillez la clôturer ou attendre 10 minutes* s'affiche
