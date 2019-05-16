@@ -3,7 +3,7 @@
         <form [formGroup]="userRegistrationForm" class="customer-form">
             <p>
             <mat-form-field class="customer-full-width">
-                <input matInput maxlength="60" required placeholder="Prénom et nom" type="text" formControlName="fullname" [(ngModel)]="fullname">
+                <input matInput maxlength="60" required placeholder="Votre prénom" type="text" formControlName="fullname" [(ngModel)]="fullname">
                 <mat-error>
                     {{errors.fullname}}
                 </mat-error>
@@ -20,7 +20,7 @@
             </mat-form-field>
             </p>
             <mat-form-field class="customer-full-width">    
-                <input matInput required placeholder="Confirmer l'adresse email" type="email" formControlName="confirmEmail" [errorStateMatcher]="confirmValidParentMatcher">
+                <input matInput required placeholder="Confirmer votre adresse email" type="email" formControlName="confirmEmail" [errorStateMatcher]="confirmValidParentMatcher">
                 <mat-error>
                     {{errors.confirmEmail}}
                 </mat-error>

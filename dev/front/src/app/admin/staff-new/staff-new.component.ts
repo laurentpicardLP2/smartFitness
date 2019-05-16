@@ -74,8 +74,9 @@ export class StaffNewComponent implements OnInit {
             confirmPassword: ['', Validators.required]
         }, { validator: CustomValidators.childrenEqual}),
         tel: ['', [
-            Validators.required
-        ]]
+          Validators.required,
+          Validators.pattern('(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}')
+      ]]
       });
   }
 
