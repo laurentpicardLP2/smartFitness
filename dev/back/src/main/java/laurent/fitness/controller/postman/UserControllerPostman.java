@@ -79,41 +79,7 @@ public class UserControllerPostman {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
 	}
-	
-	
-	//via Postman - version livrokaz
-//	@PostMapping("/adduser")
-//	public ResponseEntity<?> addUsers(@Valid String fullName, @Valid String username, @Valid String email, @Valid String password,
-//		@Valid String domesticAddress, @Valid String domesticCp, @Valid String domesticCity, @Valid String domesticCountry,
-//		@Valid String deliveryAddress, @Valid String deliveryCp, @Valid String deliveryCity, @Valid String deliveryCountry,
-//		@Valid String telephone, @Valid String typeRole) {
-//		Users users;
-//		Authorities authorities;
-//		
-//		Long userId;
-//
-//		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
-//		
-//		userId =  (LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())/1000;
-//		users = new Users(userId, true, fullName, username, email, "{bcrypt}" + bcrypt.encode(password), 
-//				domesticAddress, domesticCp, domesticCity, domesticCountry, 
-//				deliveryAddress, deliveryCp, deliveryCity, deliveryCountry,
-//				telephone, new Date());
-//		
-//		authorities = new Authorities(typeRole);
-//		authorities.setUsers(users);
-//		authoritiesRepo.save(authorities);
-//		try {
-//			//authoritiesRepo.save(authorities);
-//			return ResponseEntity.status(HttpStatus.OK).body(null);
-//			
-//		} catch(Exception e) {
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
-//		}	
-//				
-//	}
-
-	
+		
 	
 	//Add a new staff member by Postman
 	@PostMapping("/addstaff/{role}")
@@ -125,11 +91,14 @@ public class UserControllerPostman {
 			@Valid String tel,
 			@Valid String dayWorking,
 			@Valid String hourWorking,
-			@PathVariable String role) {			
+			@PathVariable String role) {
+		
+		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+		
 			try {
 			this.authorityService.saveAuthority(new Authority(username, role));
 			staffService.saveStaff(new Staff(this.userService.findByUsernameIdMax(),
-					username, fullname, password, email, tel, new Date(), (byte)1));
+					username, fullname, "{bcrypt}" + bcrypt.encode(password), email, tel, new Date(), (byte)1));
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 			
 		} catch(Exception e) {

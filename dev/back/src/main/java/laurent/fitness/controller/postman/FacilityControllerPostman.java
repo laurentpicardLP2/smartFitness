@@ -41,21 +41,20 @@ public class FacilityControllerPostman {
 	
 	// Update a category of facility
 	@PutMapping("/updatefacility")
-	public ResponseEntity<?> updateFacility(@Valid String facilityName, @Valid String roomName){
+	public ResponseEntity<?> updateFacility(@Valid String nameFacility, @Valid String nameRoom){
 		try {
-			this.facilityService.updateFacility(facilityName, roomName);
-			return ResponseEntity.status(HttpStatus.OK).body(null);
+			return ResponseEntity.status(HttpStatus.OK).body(this.facilityService.updateFacility(nameFacility, nameRoom));
 		} catch(Exception e) {
-			System.out.println(e);
+			System.out.println(e); 
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}
 	
 	//Delete facility
 	@DeleteMapping("/deletefacility")
-	public ResponseEntity<?> deleteFacility(@Valid String facilityName) {
+	public ResponseEntity<?> deleteFacility(@Valid String nameFacility) {
 		try {
-			this.facilityService.deleteFacility(this.facilityService.findByFacilityName(facilityName));
+			this.facilityService.deleteFacility(this.facilityService.findByFacilityName(nameFacility));
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 		
 		} catch(Exception e) {

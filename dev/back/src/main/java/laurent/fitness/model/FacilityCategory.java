@@ -44,7 +44,6 @@ public class FacilityCategory implements Serializable {
 	@JsonManagedReference
 	private List<TimestampFacility> timestampFacilities;
 
-
 	public FacilityCategory() {
 	}
 	
