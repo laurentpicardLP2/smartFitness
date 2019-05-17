@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
@@ -114,11 +116,6 @@ public class ManagerController {
 	// Retourne un tableau donnant les dépenses et revenues d'un revenue;
 	@GetMapping("/getbalancesheet/{idFacility}")
 	public List<Float> getBalanceSheet(@PathVariable Integer idFacility) {
-//		System.out.println("getbalancesheet entry : " + idFacility);
-//		List<Float> balanceSheet = this.facilityService.getExpenditureRevenueForAFacility(idFacility);
-//		for (float result : balanceSheet) {
-//			System.out.println("recettes et depenses : " + result);
-//		}
 		List<Float> balanceSheet = new ArrayList<Float>();
 		balanceSheet.add(this.facilityService.getRevenueForAFacility(idFacility));
 		
@@ -127,10 +124,8 @@ public class ManagerController {
 	    storedProcedure.registerStoredProcedureParameter(2, Float.class , ParameterMode.OUT);
 	    storedProcedure.setParameter(1, idFacility);
 	    storedProcedure.execute();
-	    System.out.println("storedProcedure.getOutputParameterValue(2) : " + storedProcedure.getOutputParameterValue(2));
 	    Object expenditure =  storedProcedure.getOutputParameterValue(2);
 	    balanceSheet.add(Float.valueOf(expenditure.toString()));
-	    //balanceSheet.add((float)storedProcedure.getOutputParameterValue(2));
 
 		return balanceSheet;
 	}
@@ -142,7 +137,8 @@ public class ManagerController {
 			this.facilityService.deleteMaintenanceOperationFromFacility(idFacility, idMaintenanceOperation);
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}
@@ -161,10 +157,10 @@ public class ManagerController {
 			@PathVariable Float priceFacility,
 			@PathVariable Date dateOfPurchase) {
 		try {
-			System.out.println("dateOfPurchase : " + dateOfPurchase);
 			return ResponseEntity.status(HttpStatus.OK).body(this.facilityService.addFacility(idFacilityCategory, idRoom, nameFacility, descriptionFacility, imageFacility, priceSeance, priceFacility, dateOfPurchase));
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
 	}
@@ -180,9 +176,7 @@ public class ManagerController {
 	    }
 	    
 	    this.fileStorageService.storeFile(multipartFile);
-	    System.out.println("multipartFile : " + multipartFile.getOriginalFilename());
 	    
-	    //multipartFile.transferTo(new File("/home/laurent/smartFitness/dev/front/src/assets/images/facilities/" + multipartFile.getOriginalFilename()));
 	    return new ResponseEntity<>(new FileInformation(multipartFile.getOriginalFilename(), multipartFile.getSize()), HttpStatus.CREATED);
 	  }
     		 	
@@ -195,7 +189,8 @@ public class ManagerController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.facilityService.updateFacility(idFacility, nameFacilityCategory, nameRoom, nameFacility, priceSeance, descriptionFacility, imageFacility, priceFacility));
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}
@@ -206,7 +201,8 @@ public class ManagerController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.facilityCategoryService.updateFacilityCategory(idFacilityCategory, nameFacilityCategory));
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}
@@ -226,7 +222,8 @@ public class ManagerController {
 		
 		} catch(Exception e) {
 			
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
 	}
@@ -239,7 +236,8 @@ public class ManagerController {
 			this.facilityCategoryService.deleteFacilityCategory(this.facilityCategoryService.findByFacilityCategoryName(facilityCategoryName));
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}
@@ -268,7 +266,8 @@ public class ManagerController {
 		
 		} catch(Exception e) {
 			
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
 	}
@@ -279,7 +278,8 @@ public class ManagerController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.roomService.updateRoom(idRoom, nameRoom, capacityRoom));
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}	
@@ -298,7 +298,8 @@ public class ManagerController {
 		return ResponseEntity.status(HttpStatus.OK).body(this.subscriptionCategoryService.saveSubscriptionCategory(subscriptionCategory));
 		
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
 	}
@@ -311,7 +312,8 @@ public class ManagerController {
 		
 		} catch(Exception e) {
 			
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
 	}
@@ -324,7 +326,8 @@ public class ManagerController {
 			this.subscriptionCategoryService.deleteSubscriptionCategory(this.subscriptionCategoryService.findByIdSubscriptionCategory(idSubscriptionCategory));
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}
@@ -333,7 +336,6 @@ public class ManagerController {
 	@GetMapping("/getwatchcategories")
 	public List<WatchCategory> getWatchCategories() {
 		return this.watchCategoryService.getAllWatchCategories();
-		//return this.subscriptionCategoryService.getAllSubscriptionCategories();		
 	}
 	
 	@PostMapping("/addwatchcategory/{nameWatch}/{priceWatch}/{descriptionWatch}/{imageWatch}")
@@ -343,7 +345,8 @@ public class ManagerController {
 		return ResponseEntity.status(HttpStatus.OK).body(this.watchCategoryService.saveWatchCategory(watchCategory));
 		
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
 	}
@@ -355,7 +358,8 @@ public class ManagerController {
 		
 		} catch(Exception e) {
 			
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
 	}

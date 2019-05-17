@@ -32,7 +32,9 @@ public class CommandControllerPostman {
 	public ResponseEntity<?> addCommand(@Valid String username) {
 		try {
 			Customer customer = this.customerService.findByUsername(username);
-			return ResponseEntity.status(HttpStatus.OK).body(this.commandService.saveCommand(new Command(customer, new Date())));
+			Command command = this.commandService.saveCommand(new Command(customer, new Date()));
+			command.setStatusCommand(3);
+			return ResponseEntity.status(HttpStatus.OK).body(this.commandService.saveCommand(command));
 		
 		} catch(Exception e) {
 			

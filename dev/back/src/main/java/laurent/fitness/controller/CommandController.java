@@ -2,6 +2,8 @@ package laurent.fitness.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
@@ -52,6 +54,8 @@ public class CommandController {
 	//Initialise une commande lorsqu'un utilisateur se connecte
 	@PostMapping("/addcommand/{username}")
 	public ResponseEntity<?> addCommand(@PathVariable String username) {
+		Logger logger = Logger.getLogger("Try-Catch Erreur");
+
 		try {
 			Customer customer = this.customerService.findByUsername(username);
 			
@@ -59,28 +63,22 @@ public class CommandController {
 		
 		} catch(Exception e) {
 			
-			System.out.println(e);
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
 	}
-	
-	//Retourne la commande dont l'identifiant est idCommand
-//	@GetMapping("/getcommand/{idCommand}")
-//	public Command getCommand(@PathVariable Integer idCommand) {
-//		return this.commandService.findByIdCommand(idCommand);		
-//	}
-	
+		
 	// Delete a command
 	@DeleteMapping("/delcommand/{idCommand}")
 	public ResponseEntity<?> delCommand(@PathVariable int idCommand){
 		try {
-			System.out.println("delcommand/{idCommand}  : " + idCommand);
 			if(this.commandService.findByIdCommand(idCommand) != null) {
 				this.commandService.deleteCommand(this.commandService.findByIdCommand(idCommand));
 			}
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}
@@ -93,7 +91,8 @@ public class CommandController {
 			this.commandService.deleteCommandsZeroByUsername(username);
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}
@@ -120,7 +119,8 @@ public class CommandController {
 			Customer customer = this.customerService.findByUsername(username);
 			return ResponseEntity.status(HttpStatus.OK).body(this.commandService.saveCommand(new Command(customer, new Date())));
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}
@@ -142,7 +142,8 @@ public class CommandController {
 			return ResponseEntity.status(HttpStatus.OK).body(command); 
 					
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}
@@ -156,7 +157,8 @@ public class CommandController {
 			return ResponseEntity.status(HttpStatus.OK).body(command); 
 					
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}
@@ -180,7 +182,8 @@ public class CommandController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.commandService.setUpdateStatusAndPriceToCommand(idCommand, totalPrice));
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}

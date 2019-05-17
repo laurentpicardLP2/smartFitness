@@ -1,5 +1,8 @@
 package laurent.fitness.controller;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +46,8 @@ public class SimpleEmailController {
             this.commandService.saveCommand(command);
             return ResponseEntity.status(HttpStatus.OK).body(null);
         }catch(Exception ex) {
-        	System.out.println(ex);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, ex.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
@@ -68,7 +72,8 @@ public class SimpleEmailController {
             sendEmailSignup(this.userService.getFullnameByUsername(username), this.userService.getEmailByUsername(username));
             return ResponseEntity.status(HttpStatus.OK).body(null);
         }catch(Exception ex) {
-        	System.out.println(ex);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, ex.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }

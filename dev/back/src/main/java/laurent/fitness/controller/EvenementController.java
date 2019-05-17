@@ -1,6 +1,8 @@
 package laurent.fitness.controller;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,7 +64,6 @@ public class EvenementController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(
 					this.evenementService.saveEvenement(evenement));
-					//this.timestampFacilityService.saveNewTimestampFacility(idItem, dateOfTimestamp, nameFacility, nameFacilityCategory));
 			} catch(Exception e) {
 				
 				System.out.println(e);
@@ -84,8 +85,9 @@ public class EvenementController {
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 			} catch(Exception e) {
 				
-				System.out.println(e);
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new String("Pb suppression evenement"));	
+				Logger logger = Logger.getLogger("Try-Catch Erreur");
+				logger.log(Level.SEVERE, e.toString());
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 			}	
 	}
 	

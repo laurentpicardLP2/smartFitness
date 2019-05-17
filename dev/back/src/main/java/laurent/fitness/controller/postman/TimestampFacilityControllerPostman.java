@@ -1,15 +1,12 @@
 package laurent.fitness.controller.postman;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +24,7 @@ public class TimestampFacilityControllerPostman {
 	
 	//Add a new timestampFacility
 	
+	@SuppressWarnings("deprecation")
 	@PostMapping("/addtimestampfacility")
 	public ResponseEntity<?> addTimestampFacility(
 				@Valid int idItem,
@@ -51,16 +49,11 @@ public class TimestampFacilityControllerPostman {
 	}
 	
 	//Check the quantity of available facilities for a timestamp and its category
-	@GetMapping("/availablefacilities/{facilityName}/{refTimestamp}")
-	public ResponseEntity<?> getQuantityAvailableFacilities(@PathVariable String facilityName, @PathVariable String refTimestamp) {
+	@GetMapping("/availablefacilities")
+	public ResponseEntity<?> getQuantityAvailableFacilities(@Valid String nameFacilityCategory, @Valid String refTimestamp) {
 		try {
-			//int nbAvailableFacilities = this.timestampFacilityService.findByFacilityCategoryCount(facilityName, refTimestamp);
-			System.out.println("refTimestamp : " + refTimestamp);
-			//System.out.println("nbAvailableFacilities : " + nbAvailableFacilities);
-		return ResponseEntity.status(HttpStatus.OK).body(null);
-		
+			return ResponseEntity.status(HttpStatus.OK).body(this.timestampFacilityService.findByFacilityCategoryCount(nameFacilityCategory, refTimestamp));	
 		} catch(Exception e) {
-			
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			

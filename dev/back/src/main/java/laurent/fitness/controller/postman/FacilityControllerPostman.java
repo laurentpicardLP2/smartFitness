@@ -29,8 +29,7 @@ public class FacilityControllerPostman {
 			@Valid String nameRoom, 
 			@Valid String nameFacilityCategory) {
 		try {
-			this.facilityService.saveNewFacility(nameFacility, nameRoom, nameFacilityCategory);
-		return ResponseEntity.status(HttpStatus.OK).body(null);
+		return ResponseEntity.status(HttpStatus.OK).body(this.facilityService.saveNewFacility(nameFacility, nameRoom, nameFacilityCategory));
 		
 		} catch(Exception e) {
 			

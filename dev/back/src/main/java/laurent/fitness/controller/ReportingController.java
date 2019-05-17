@@ -49,7 +49,6 @@ public class ReportingController {
 			data = data + facility.getNameFacility() + ":" + getBalanceSheet(facility.getIdFacility()) + ";";
 		}
 		result.add(data);
-		System.out.println("data : " + data);
 		return result;
 	}
 	

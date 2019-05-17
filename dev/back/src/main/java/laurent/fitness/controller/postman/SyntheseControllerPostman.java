@@ -9,16 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import laurent.fitness.model.Command;
+import laurent.fitness.services.CommandService;
 
 @RestController
 @RequestMapping("/postman/synthesectrl")
 public class SyntheseControllerPostman {
-//	private CommandService commandService;
-//	private CustomerService customerService;
+	private CommandService commandService;
 	
-	public SyntheseControllerPostman(/*CommandService commandService, CustomerService customerService*/) {
-		//this.commandService = commandService;
-		//this.customerService = customerService;
+	public SyntheseControllerPostman(CommandService commandService) {
+		this.commandService = commandService;;
 	}
 
 	
@@ -27,10 +26,8 @@ public class SyntheseControllerPostman {
 		public List<Command> GetCommands(@Valid String username){
 		
 			try {
-				//return this.commandService.findCommandByUsername(username);
-				return null;
+				return this.commandService.findCommandsByUsername(username);
 			} catch(Exception e) {
-				System.out.println(e);
 				return null;
 			}
 		}

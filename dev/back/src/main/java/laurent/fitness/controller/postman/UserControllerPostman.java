@@ -66,12 +66,11 @@ public class UserControllerPostman {
 			
 			try {
 				this.authorityService.saveAuthority(new Authority(username, "ROLE_CUSTOMER"));
-				this.customerService.saveCustomer(new Customer(this.userService.findByUsernameIdMax(),
+			return ResponseEntity.status(HttpStatus.OK).body(this.customerService.saveCustomer(new Customer(this.userService.findByUsernameIdMax(),
 					username, fullname, "{bcrypt}" + bcrypt.encode(password), email, tel, new Date(), (byte)1, 
 					new SimpleDateFormat("dd/MM/yyyy").parse(dateOfBirthday),
 					domesticAddress, domesticCp, domesticCity, domesticCountry,
-					deliveryAddress, deliveryCp, deliveryCity, deliveryCountry));
-			return ResponseEntity.status(HttpStatus.OK).body(null);
+					deliveryAddress, deliveryCp, deliveryCity, deliveryCountry)));
 			
 		} catch(Exception e) {
 			
@@ -97,9 +96,8 @@ public class UserControllerPostman {
 		
 			try {
 			this.authorityService.saveAuthority(new Authority(username, role));
-			staffService.saveStaff(new Staff(this.userService.findByUsernameIdMax(),
-					username, fullname, "{bcrypt}" + bcrypt.encode(password), email, tel, new Date(), (byte)1));
-			return ResponseEntity.status(HttpStatus.OK).body(null);
+			return ResponseEntity.status(HttpStatus.OK).body(staffService.saveStaff(new Staff(this.userService.findByUsernameIdMax(),
+					username, fullname, "{bcrypt}" + bcrypt.encode(password), email, tel, new Date(), (byte)1)));
 			
 		} catch(Exception e) {
 			

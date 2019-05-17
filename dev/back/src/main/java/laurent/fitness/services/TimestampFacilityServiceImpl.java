@@ -40,12 +40,9 @@ public class TimestampFacilityServiceImpl implements TimestampFacilityService {
 
 	@Override
 	public TimestampFacility saveNewTimestampFacility(int idItem, Date dateOfTimestamp, String facilityName, String facilityCategoryName) {
-		System.out.println("TimestampFacility saveNewTimestampFacility : " );
 		Seance seance = this.seanceRepo.findByIdItem(idItem);
 		Facility facility = this.facilityRepo.findByFacilityName(facilityName);
-		System.out.println("facility : " + facility.getNameFacility());
 		FacilityCategory facilityCategory = this.facilityCategoryRepo.findByFacilityCategoryName(facilityCategoryName);
-		System.out.println("facilityCategory " + facilityCategory.getNameFacilityCategory());
 		TimestampFacility timestampFacility = new TimestampFacility(seance, facility, facilityCategory, dateOfTimestamp);
 		return this.timestampFacilityRepo.save(timestampFacility);
 	}

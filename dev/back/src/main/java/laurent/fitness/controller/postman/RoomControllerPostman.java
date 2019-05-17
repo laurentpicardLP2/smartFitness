@@ -24,9 +24,7 @@ public class RoomControllerPostman {
 	@PostMapping("/addroom")
 	public ResponseEntity<?> addRoom(@Valid String nameRoom, @Valid String capacityRoom) {
 		try {
-			this.roomService.saveRoom(new Room(nameRoom, Integer.parseInt(capacityRoom)));
-		return ResponseEntity.status(HttpStatus.OK).body(null);
-		
+			return ResponseEntity.status(HttpStatus.OK).body(this.roomService.saveRoom(new Room(nameRoom, Integer.parseInt(capacityRoom))));	
 		} catch(Exception e) {
 			
 			System.out.println(e);
@@ -40,8 +38,7 @@ public class RoomControllerPostman {
 		try {
 			Room roomToUpdate = this.roomService.findByRoomName(nameRoom);
 			roomToUpdate.setCapacityRoom(Integer.parseInt(capacityRoom));
-			this.roomService.saveRoom(roomToUpdate);
-			return ResponseEntity.status(HttpStatus.OK).body(null);
+			return ResponseEntity.status(HttpStatus.OK).body(this.roomService.saveRoom(roomToUpdate));
 		} catch(Exception e) {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	

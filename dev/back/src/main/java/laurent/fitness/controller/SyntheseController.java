@@ -1,6 +1,8 @@
 package laurent.fitness.controller;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +59,8 @@ public class SyntheseController {
 		try {
 			return this.seanceService.findSeancesByUsername(username);
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return null;
 		}
 	}	
@@ -68,7 +71,8 @@ public class SyntheseController {
 		try {
 			return this.timestampFacilityAdaptaterService.getTimestampFacilitiesForASeance(idItem);
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return null;
 		}
 	}
@@ -80,7 +84,8 @@ public class SyntheseController {
 			this.itemService.deleteItem(idItem);
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 		} catch(Exception e) {
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
 	}

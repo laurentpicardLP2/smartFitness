@@ -38,6 +38,7 @@ public class FacilityCategoryControllerPostman {
 	}
 	
 	//Return the list if categories facilities available for a timestamp
+	@SuppressWarnings("deprecation")
 	@GetMapping("/getfacilitiesavailable")
 	public ResponseEntity<?> getFacilityCategories(@Valid String dateOfTimestamp) {
 		System.out.println("dateOfTimestamp : " + dateOfTimestamp);
@@ -62,39 +63,31 @@ public class FacilityCategoryControllerPostman {
 	//Return the list of category facilities
 	@GetMapping("/getfacilitycategories")
 	public ResponseEntity<?> getFacilityCategories() {
-		List<FacilityCategory> listeFacilityCategories = null;
 		
 		try {
-			listeFacilityCategories = this.facilityCategoryService.getAllFacilityCategories();			
+			return ResponseEntity.status(HttpStatus.OK).body(this.facilityCategoryService.getAllFacilityCategories());
 
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
-		return ResponseEntity.status(HttpStatus.OK).body(listeFacilityCategories);
 	}
 	
 	//Return the list of available facilities for a category and a timestamp
 	@GetMapping("/getavailablefacilites")
 	public ResponseEntity<?> getFacilitiesAvailable() {
-		List<FacilityCategory> listeFacilityCategories = null;
-
 		try {
-			listeFacilityCategories = this.facilityCategoryService.getAllFacilityCategories();			
+			return ResponseEntity.status(HttpStatus.OK).body(this.facilityCategoryService.getAllFacilityCategories());
 
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
-		return ResponseEntity.status(HttpStatus.OK).body(listeFacilityCategories);
 	}
 	
 	//Add a new category of facility
 	@PostMapping("/addfacilitycategory")
 	public ResponseEntity<?> addFacilityCategory(@Valid String nameFacilityCategory) {
-		try {
-			FacilityCategory facilityCategory = new FacilityCategory(nameFacilityCategory);
-			this.facilityCategoryService.saveFacilityCategory(facilityCategory);
-			
-		return ResponseEntity.status(HttpStatus.OK).body(null);
+		try {		
+		return ResponseEntity.status(HttpStatus.OK).body(this.facilityCategoryService.saveFacilityCategory(new FacilityCategory(nameFacilityCategory, 2)));
 		
 		} catch(Exception e) {
 			

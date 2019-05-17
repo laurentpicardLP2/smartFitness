@@ -48,7 +48,6 @@ public class Fitness implements CommandLineRunner {
 	@Override
 	public void run(String... args)
 			throws Exception,  MalformedURLException, IOException, ClassNotFoundException, SQLException {
-		
 	
 		
 /* ============= Décommenter les lignes ci-dessous	============ */	

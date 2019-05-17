@@ -1,6 +1,8 @@
 package laurent.fitness.controller;
 
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +37,8 @@ public class TimestampFacilityController {
 				this.timestampFacilityService.saveNewTimestampFacility(idItem, dateOfTimestamp, nameFacility, nameFacilityCategory));
 		} catch(Exception e) {
 			
-			System.out.println(e);
+			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new String("Timestamp already taken"));	
 		}			
 	}
