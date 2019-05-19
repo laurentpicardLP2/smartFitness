@@ -89,7 +89,7 @@ export class StaffDetailComponent implements OnInit {
                 Validators.required,
                 Validators.pattern(regExps.password)
             ]],
-            confirmPassword: ['jjjjjjjjjjjj', Validators.required]
+            confirmPassword: ['', Validators.required]
         }, { validator: CustomValidators.childrenEqual}),
         tel: ['', [
             Validators.required
