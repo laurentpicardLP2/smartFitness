@@ -38,7 +38,6 @@ export class SubscriptionCustomerPropositionComponent implements OnInit {
         this.MyDataSource.data = res;
         this.MyDataSource.sort = this.sort;
         this.MyDataSource.paginator = this.paginator;
-        console.log(this.MyDataSource.data);
       },
         error => {
         console.log('There was an error !' + error);
@@ -54,7 +53,6 @@ export class SubscriptionCustomerPropositionComponent implements OnInit {
       }
   
       onShow(idSubscriptionCategory: number) {
-        //this.router.navigate(['subscription-category-detail/' + username]);
       }
   
       

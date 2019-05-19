@@ -44,6 +44,7 @@ import { HomeComponent } from './user/home/home.component';
 import { AuthGuardCustomerService } from './services/auth-guard-customer.service';
 import { AuthGuardManagerService } from './services/auth-guard-manager.service';
 import { AuthGuardAdminService } from './services/auth-guard-admin.service';
+import { AuthGuardIsauthService } from './services/auth-guard-isauth.service';
 import { RoomNewComponent } from './manager/room-new/room-new.component';
 import { FacilityCategoryNewComponent } from './manager/facility-category-new/facility-category-new.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
@@ -93,6 +94,7 @@ import { FavoriteProductComponent } from './booking/favorite-product/favorite-pr
 import { ProductListingComponent } from './booking/product-listing/product-listing.component';
 import { ProductDetailComponent } from './booking/product-detail/product-detail.component';
 import { ProductCustomerHistoricComponent } from './synthese/product-customer-historic/product-customer-historic.component';
+import { TestUnitComponent } from './test-unit/test-unit.component';
 
 @NgModule({
   declarations: [
@@ -158,6 +160,7 @@ import { ProductCustomerHistoricComponent } from './synthese/product-customer-hi
     ProductListingComponent,
     ProductDetailComponent,
     ProductCustomerHistoricComponent,
+    TestUnitComponent,
 
   ],
   imports: [
@@ -196,7 +199,8 @@ import { ProductCustomerHistoricComponent } from './synthese/product-customer-hi
     TokenStorageService,
     AuthGuardCustomerService,
     AuthGuardManagerService,
-    AuthGuardAdminService
+    AuthGuardAdminService,
+    AuthGuardIsauthService
   ],
   bootstrap: [AppComponent]
 })

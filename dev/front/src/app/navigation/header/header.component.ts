@@ -33,8 +33,7 @@ export class HeaderComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(){
-    console.log("this.authority  ngOnInit : ", this.authority );
-    this.loginService.isUserLoggedSubject.subscribe(res => {
+      this.loginService.isUserLoggedSubject.subscribe(res => {
       this.isAuth = res;
     });
 
@@ -108,22 +107,6 @@ export class HeaderComponent implements OnInit {
   public onReportingRentability(){
     this.reportingService.publishDataSetRentability();
   }
-
-  // menu2Leave(trigger1, trigger2, button) {
-  //   setTimeout(() => {
-  //     if (this.isMatMenu2Open) {
-  //       trigger1.closeMenu();
-  //       this.isMatMenuOpen = false;
-  //       this.isMatMenu2Open = false;
-  //       this.enteredButton = false;
-  //       this.ren.removeClass(button['_elementRef'].nativeElement, 'cdk-focused');
-  //       this.ren.removeClass(button['_elementRef'].nativeElement, 'cdk-program-focused');
-  //     } else {
-  //       this.isMatMenu2Open = false;
-  //       trigger2.closeMenu();
-  //     }
-  //   }, 100)
-  //}
 
 }
 

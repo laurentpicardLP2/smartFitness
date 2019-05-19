@@ -40,7 +40,6 @@ displayedColumns: string[] = ['Name', 'Price', 'Update'];
       this.MyDataSource.data = res;
       this.MyDataSource.sort = this.sort;
       this.MyDataSource.paginator = this.paginator;
-      console.log(this.MyDataSource.data);
     },
       error => {
       console.log('There was an error !' + error);
@@ -52,7 +51,6 @@ displayedColumns: string[] = ['Name', 'Price', 'Update'];
     }
 
     onShow(idProductRef: number) {
-      //this.router.navigate(['product-ref-detail/' + username]);
     }
 
     onDelete(idProductRef: number, nameProductRef: string){

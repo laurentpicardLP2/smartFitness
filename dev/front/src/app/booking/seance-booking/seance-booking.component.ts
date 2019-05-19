@@ -95,20 +95,6 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
     });
 
     setTimeout(() => this.onChangeDateTimeCheckedCommand(''), 300);
-
-    
-    // this.seanceService.checkAnotherSeanceIsOpen(this.username).subscribe(
-    //   (res) => { 
-    //     if(res == true) {
-    //       alert("Une séance est déjà en cours de réservation, veuillez la finaliser ou l'annuler, merci.");
-    //       this.router.navigate(['']);
-    //     }
-    //   },
-    //   (error) => {
-    //     console.log("error checkAnotherSeanceIsOpen() : ", error);
-    //   }
-    // );
-
     
   }
 
@@ -224,7 +210,8 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         }).subscribe(
           (res) => {
@@ -281,6 +268,7 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
     }
 
     if(isBookedTimestamp == false){
+      
       this.seanceService.getCheckTimestampIsTaken(dateOfTimestamp, this.username).subscribe(
         (res) => {
           isBookedTimestamp = res;
@@ -308,8 +296,6 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     if(this.isAuth  && !this.isValidateSeance){
         this.seanceService.removeSeanceFromCommand(this.command, this.seance);
-      //
-      //this.seanceService.priceSeanceSubject.unsubscribe();
     }
   }
 

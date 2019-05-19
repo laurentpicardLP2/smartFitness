@@ -142,7 +142,6 @@ export class LoginService {
    * @param user 
    */
   public signIn(user: User, bReload: boolean){
-    console.log("(this.isAuth : ", this.isAuth);
       if(this.authority == "ROLE_CUSTOMER"){
         this.utilsService.delCommand();
       }
@@ -150,20 +149,16 @@ export class LoginService {
       data => {
        
         this.token.saveToken(data.token);
-        console.log("data.token", data.token);
 
         this.httpClient.get<boolean>('http://localhost:8080/commandctrl/detectsessionopen/' + user.username, 
         {
           headers: {
               "Content-Type": "application/json",
+              'Access-Control-Allow-Origin':'*',
               "Authorization": this.token.getToken()
           }
       }).subscribe(
         (detectedCommandZero) => {
-          console.log("detectedCommandZero OK : ", detectedCommandZero);
-
-          // A supprimer en prod
-          //this.signInAfterCheckIsOnlySession(user, bReload); 
 
           if(detectedCommandZero == false){this.signInAfterCheckIsOnlySession(user, bReload); }
           else{
@@ -198,7 +193,6 @@ export class LoginService {
   public autoclose(){
     this.timer +=1; 
     let diff = new Date().getTime() - this.lastAction.getTime();
-    //console.log("diff : ", diff);
     if(diff > 600000){
       this.utilsService.delCommand();
       this.signOut();
@@ -227,13 +221,14 @@ export class LoginService {
           setTimeout(() => this.router.navigate(['/product-ref-listing']), 650);
           }          
         }
-        else {            
+        else {       
+              
           this.getUserInfos(user.username).subscribe(
             (res) => {
-              console.log("getUserInfos : ", res);
                 this.setIsUserSubscribedSubject(parseInt(res[0], 10) == 1);
                 this.setFullnameSubject(res[1]);
                 this.router.navigate(['']);
+
             },
             (error) => { }
           );
@@ -242,7 +237,13 @@ export class LoginService {
 
   attemptAuth(ussername: string, password: string): Observable<any> {
     const credentials = {username: ussername, password: password};
-    return this.httpClient.post('http://localhost:8080/userctrl/login', credentials);
+    return this.httpClient.post('http://localhost:8080/userctrl/login', null, {
+      headers: {
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin':'*',
+        "Authorization": 'Basic ' + btoa(ussername + ':' + password)
+    }
+    });
   }
 
   public getAuthority(username: string): Observable<Authority> {
@@ -250,6 +251,7 @@ export class LoginService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   });
@@ -260,6 +262,7 @@ export class LoginService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   });
@@ -270,6 +273,7 @@ export class LoginService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   });
@@ -281,18 +285,33 @@ export class LoginService {
       authority => {
         this.setAuthoritySubject(authority);
         this.setUserSubject(user);
-        console.log("authority.authority : ", authority.authority);
-        console.log("this.isCommandInit : ", this.isCommandInit);
+
         if(authority.authority=="ROLE_CUSTOMER" && this.isCommandInit == false){
           this.isCommandInit = true;
            this.commandService.initCommand(user.username, true); 
            this.commandService.setListCommandItemsSubject(null);
            this.lastAction = new Date();
-          
+            setTimeout(() => this.commandService.commandSubject.subscribe(
+                (res) => {
+                  this.httpClient.get<boolean>('http://localhost:8080/commandctrl/getiscommandok/' + res.idCommand, 
+                  {
+                    headers: {
+                      "Content-Type": "application/json",
+                      "Authorization": this.token.getToken()
+                    }
+                  }).subscribe(
+                    (res) => {
+                      if(res == false) {
+                        this.commandService.initCommand(user.username, true);
+                      }
+                  });
+                }
+           ), 300);
+           
           if(this.timer === 0) {
             setTimeout(() => this.autoclose(), 2000);
           }
-         
+    
         }       
       });
   }
@@ -301,7 +320,6 @@ export class LoginService {
 
   public signOut(){
     this.isCommandInit = false;
-    console.log("signout")
     this.setIsUserLoggedSubject(false);
     this.setAuthoritySubject(new Authority("","ROLE_ANONYMOUS"));
     this.token.signOut();
@@ -314,11 +332,11 @@ export class LoginService {
         {
           headers: {
               "Content-Type": "application/json",
+              'Access-Control-Allow-Origin':'*',
               "Authorization": this.token.getToken()
           }
       }).subscribe(
         (deletedCommandZero) => {
-          console.log("deletedCommandZero OK : ", deletedCommandZero);
         },
         (error) => {
           console.log("deletedCommandZero pb : ", error);

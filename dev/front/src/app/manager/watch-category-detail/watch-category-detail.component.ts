@@ -103,8 +103,6 @@ export class WatchCategoryDetailComponent implements OnInit {
     if(event.target.files && event.target.files.length > 0) {
       this.file = event.target.files[0];
       this.watchCategoryForm.get('imageWatch').setValue(this.file.name);
-      console.log(`file: ${JSON.stringify(this.file.name)}`);
-      console.log(`file: ${JSON.stringify(this.file.size)}`);
       this.fileInformation = null;
     }
   }

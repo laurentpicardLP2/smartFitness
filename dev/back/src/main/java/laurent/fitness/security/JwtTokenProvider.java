@@ -96,8 +96,7 @@ public class JwtTokenProvider {
     
     public List<?> getAuthoritariesFroJWT(String token) {
     	Claims claims =Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-        System.out.println("getUsernameFromJWT" + (String)claims.get("username"));
-        return (List<?>)claims.get("role");
+         return (List<?>)claims.get("role");
     }
     
     

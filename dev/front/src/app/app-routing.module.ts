@@ -21,6 +21,7 @@ import { AuthGuardCustomerService } from './services/auth-guard-customer.service
 import { AuthGuardPaypalService } from './services/auth-guard-paypal.service';
 import { AuthGuardManagerService } from './services/auth-guard-manager.service';
 import { AuthGuardAdminService } from './services/auth-guard-admin.service';
+import { AuthGuardIsauthService } from './services/auth-guard-isauth.service';
 import { RoomListingComponent } from './manager/room-listing/room-listing.component';
 import { RoomDetailComponent } from './manager/room-detail/room-detail.component';
 import { UploadComponent } from './upload/upload.component';
@@ -71,7 +72,7 @@ const routes: Routes = [
   { path: 'staff-new', canActivate: [AuthGuardAdminService], component: StaffNewComponent },
   { path: 'staff-listing', canActivate: [AuthGuardAdminService], component: StaffListingComponent },
   { path: 'staff-detail/:username', canActivate: [AuthGuardAdminService], component: StaffDetailComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', canActivate: [AuthGuardIsauthService],component: LoginComponent },
   { path: 'signup-confirm/:email/:fullname', component: SignupConfirmComponent },
   { path: 'command-listing', canActivate: [AuthGuardCustomerService], component: CommandListingComponent },
   { path: 'command-detail/:idCommand', canActivate: [AuthGuardCustomerService], component: CommandDetailComponent},
@@ -123,17 +124,15 @@ const routes: Routes = [
   { path: 'chart',  component: TimestampFacilityComponent },
   { path: '', component: HomeComponent }, 
   
-  //{ path: 'seance-booking', component: SeanceBookingComponent},
-  //{ path: 'facility-category-booking', component: FacilityCategoryBookingComponent},
-  //{ path: 'facility-booking', component: FacilityBookingComponent, outlet: 'booking-router-outlet' }
 
   { path: 'seance-booking', canActivate: [AuthGuardCustomerService], component: SeanceBookingComponent, children: [
     { path: 'facility-category-booking', canActivate: [AuthGuardCustomerService], component: FacilityCategoryBookingComponent, outlet: 'facility-category-router-outlet' },
-    { path: 'facility-booking', canActivate: [AuthGuardCustomerService], component: FacilityBookingComponent, outlet: 'facility-router-outlet' }] }
+    { path: 'facility-booking', canActivate: [AuthGuardCustomerService], component: FacilityBookingComponent, outlet: 'facility-router-outlet' }] 
+  },
 
-    // { path: 'seance-booking', component: SeanceBookingComponent, children: [
-    //   { path: ':timestamp', component: FacilityCategoryBookingComponent, outlet: 'booking-router-outlet' }, 
-    // ] }
+  { path: '**', redirectTo: ''}
+
+
 ];
 
 @NgModule({

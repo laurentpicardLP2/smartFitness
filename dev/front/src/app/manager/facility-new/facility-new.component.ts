@@ -63,8 +63,6 @@ export class FacilityNewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.loginService.setIsUserLoggedSubject(true);
-    // TO DO reinit setUsername après upload image file
 
     this.managerService.getFacilityCategories().subscribe(res => {
       this.facilityCategories = res;
@@ -152,8 +150,6 @@ export class FacilityNewComponent implements OnInit {
     if(event.target.files && event.target.files.length > 0) {
       this.file = event.target.files[0];
       this.facilityForm.get('imageFacility').setValue(this.file.name);
-      console.log(`file: ${JSON.stringify(this.file.name)}`);
-      console.log(`file: ${JSON.stringify(this.file.size)}`);
       this.fileInformation = null;
     }
   }

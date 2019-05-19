@@ -27,7 +27,6 @@ export class CartCompositionComponent implements OnInit {
   ngOnInit() {
     this.commandService.commandSubject.subscribe(res => {
       this.command = res;
-      console.log("this.command : ", this.command);
       this.isHasItems = this.command.items.length > 0;
       this.totalPrice = 0;
       for(let i=0; i< this.command.items.length; i++){

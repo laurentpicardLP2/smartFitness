@@ -30,6 +30,7 @@ export class AdminService {
       {
         headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
         }
       });
@@ -66,10 +67,11 @@ export class AdminService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
-        (staff) =>{ console.log("création staff OK : ",staff); this.router.navigate(['/staff-listing']);
+        (staff) =>{ 
                     this.utilsService.availableUsernames.push(newStaff.username);
                     this.utilsService.availableUsernames$.next(this.utilsService.availableUsernames);
                   },
@@ -82,10 +84,11 @@ export class AdminService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
-        (staff) =>{ console.log("création staff OK : ",staff); 
+        (staff) =>{ 
                     let index = this.listStaff.findIndex(staff => staff.username === updateStaff.username);
                     this.listStaff[index] = updateStaff;
                     this.listStaff$.next(this.listStaff);                  
@@ -99,10 +102,11 @@ export class AdminService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
-        () =>{ console.log("suppression staff OK : ",username);
+        () =>{ 
                 this.listStaff.slice(this.listStaff.findIndex(staff => staff.username === username), 1);
                 this.listStaff$.next(this.listStaff);
                 this.utilsService.publishUsernames();

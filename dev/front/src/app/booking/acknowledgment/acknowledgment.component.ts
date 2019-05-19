@@ -33,7 +33,6 @@ export class AcknowledgmentComponent implements OnInit {
 
     this.loginService.userSubject.subscribe(
       (res) => {
-        console.log("init command after payment validation Ok : ", res);
         if(this.isCommandInit === false){
           this.isCommandInit = true;
           this.user = res;

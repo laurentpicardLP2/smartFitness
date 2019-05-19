@@ -84,8 +84,6 @@ export class ProductRefNewComponent implements OnInit {
     if(event.target.files && event.target.files.length > 0) {
       this.file = event.target.files[0];
       this.productRefForm.get('imageProductRef').setValue(this.file.name);
-      console.log(`file: ${JSON.stringify(this.file.name)}`);
-      console.log(`file: ${JSON.stringify(this.file.size)}`);
       this.fileInformation = null;
     }
   }
@@ -102,9 +100,6 @@ export class ProductRefNewComponent implements OnInit {
 
       if (this.file !== undefined){
         data.append('data', this.file, this.nameProductRef + "_" + this.file.name);
-        console.log("this.file : ", this.file);
-        console.log("this.fileInput : ", this.fileInput);
-        console.log("data : ", data);
   
         this.imageProductRef = this.nameProductRef + "_" + this.file.name;
         productRef.imageProductRef = this.imageProductRef;

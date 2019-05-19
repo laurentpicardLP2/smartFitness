@@ -34,7 +34,13 @@ export class UtilsService {
    * La fonction getUsernames() est privée car elle n'a besoin d'être appellée que dans le service.
    */
    public getUsernames(): Observable<string[]>{
-    return this.httpClient.get<string[]>('http://localhost:8080/userctrl/usernames');
+    
+    return this.httpClient.get<string[]>('http://localhost:8080/userctrl/usernames',{
+      headers: {
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin':'*'
+    }
+    });
   }
 
   /**
@@ -57,10 +63,8 @@ export class UtilsService {
   }
 
   public delCommand(){
-    //this.loginService.isCommandInit = false;
     this.commandService.commandSubject.subscribe(res => {
       this.command = res;
-      //console.log("this.command : ", this.command);
         if(this.command == undefined || this.command ==null){
           this.commandService.setNbItemsSubject("");
           this.router.navigate(['']);
@@ -72,7 +76,8 @@ export class UtilsService {
             {
             headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
             }
             }).subscribe(
               () => {

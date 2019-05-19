@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import laurent.fitness.model.TimestampFacility;
 import laurent.fitness.services.TimestampFacilityService;
 
 @RestController
@@ -27,7 +28,7 @@ public class TimestampFacilityController {
 	
 	//Add a new timestampFacility
 	@PostMapping("/addtimestampfacility/{idItem}/{dateOfTimestamp}/{nameFacility}/{nameFacilityCategory}")
-	public ResponseEntity<?> addTimestampFacility(
+	public ResponseEntity<TimestampFacility> addTimestampFacility(
 			@PathVariable int idItem,
 			@PathVariable Date dateOfTimestamp, 
 			@PathVariable String nameFacility, 
@@ -39,12 +40,12 @@ public class TimestampFacilityController {
 			
 			Logger logger = Logger.getLogger("Try-Catch Erreur");
 			logger.log(Level.SEVERE, e.toString());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new String("Timestamp already taken"));	
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
 	}
 	
 	@DeleteMapping("/deletetimestampfacility/{idTimestampFacillity}")
-	public ResponseEntity<?> delTimestamp(@PathVariable String idTimestampFacillity){
+	public ResponseEntity<Object> delTimestamp(@PathVariable String idTimestampFacillity){
 		try {
 			this.timestampFacilityService.deleteTimestampFacility(Integer.parseInt(idTimestampFacillity));
 			return ResponseEntity.status(HttpStatus.OK).body(null);

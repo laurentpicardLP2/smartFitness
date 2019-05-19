@@ -20,7 +20,6 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
   styleUrls: ['./facility-category-booking.component.css']
 })
 export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
- // panelOpenState = false;
   dateOfTimestamp: Date;
   listFacilityCategories: BehaviorSubject<FacilityAvailableAdaptater[]>;
   command: Command;
@@ -50,9 +49,6 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.isShowableFacilities = false;
-
-    //this.timestamp = this.route.snapshot.params['timestamp']; // contient la tranche horaire sélectionnée
-    // => remplacé par un BehaviourSubject
     
     this.bookingService.timestampSubject.subscribe(res => {
       this.dateOfTimestamp = res;
@@ -102,7 +98,8 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         }).subscribe(
           (res) => {

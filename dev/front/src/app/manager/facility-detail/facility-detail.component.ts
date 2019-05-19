@@ -150,8 +150,6 @@ export class FacilityDetailComponent implements OnInit {
     if(event.target.files && event.target.files.length > 0) {
       this.file = event.target.files[0];
       this.facilityForm.get('imageFacility').setValue(this.file.name);
-      console.log(`file: ${JSON.stringify(this.file.name)}`);
-      console.log(`file: ${JSON.stringify(this.file.size)}`);
       this.fileInformation = null;
     }
   }

@@ -44,9 +44,8 @@ export class PaypalComponent implements OnInit {
         this.command = res;
         this.totalPrice = this.command.totalPrice;
 
-        setTimeout(() => this.isHidden = false, 4000);
+        setTimeout(() => this.isHidden = false, 1100);
 
-console.log("init paypal")
         this.loginService.usernameSubject.subscribe(
           (res) => {
             this.username = res ;
@@ -125,30 +124,27 @@ console.log("init paypal")
           layout: 'vertical'
         },
         onApprove: (data, actions) => {
-          console.log('onApprove - transaction was approved, but not authorized', data, actions);
           actions.order.get().then((details: any) => {
-            console.log('onApprove - you can get full order details inside onApprove: ', details);
           });
   
         },
         onClientAuthorization: (data) => {
-          console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
           this.showSuccess = true;
           this.commandService.setNbItemsSubject("");
           this.emailService.sendEmailAfterPaypal(this.command.idCommand, this.command.totalPrice, this.username);
           this.router.navigate(['acknoledgment/' + this.email + '/' + this.command.idCommand + '/' + this.command.totalPrice + '/' + this.username + '/' + this.fullname]);
         },
         onCancel: (data, actions) => {
-          console.log('OnCancel', data, actions);
+          this.isHidden = false;
           this.showCancel = true;
   
         },
         onError: err => {
-          console.log('OnError', err);
-          this.showError = true;
+          this.isHidden = false;
+           this.showError = true;
         },
         onClick: () => {
-          console.log('onClick');
+          this.isHidden = true;
           this.resetStatus();
         },
       };
@@ -161,8 +157,7 @@ console.log("init paypal")
     }
   
     private prettify(): void {
-      //hljs.initHighlightingOnLoad();
-    }
+   }
   
    
 }
@@ -173,11 +168,3 @@ export function testFirst(){
   return a+b;
   }
  
-
-//  export function testFirst(state = {} , action){
-//   switch(action.type){
-//     case ACTION.START :
-//       return Object.assign({}, state,{start:true});
-//     default: 
-//     return state;
-  

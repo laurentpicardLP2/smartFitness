@@ -40,12 +40,10 @@ displayedColumns: string[] = ['Name', 'Price', 'Update'];
   RenderDataTable() {
     this.managerService.getFacilitiesAdaptater().subscribe(
       res => {
-        console.log("res getFacilities : ", res);
       this.MyDataSource = new MatTableDataSource();
       this.MyDataSource.data = res;
       this.MyDataSource.sort = this.sort;
       this.MyDataSource.paginator = this.paginator;
-      console.log(this.MyDataSource.data);
     },
       error => {
       console.log('There was an error !' + error);

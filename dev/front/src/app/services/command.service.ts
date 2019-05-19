@@ -63,10 +63,11 @@ export class CommandService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
-        (command) =>{ console.log("init command OK : ", command); 
+        (command) =>{ 
                     this.setCommandSubject(command);
                       this.setTotalPriceCommandSubject(0);
                       if (isRouting) {
@@ -83,11 +84,11 @@ export class CommandService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
         (resetedCommand) =>{ 
-          console.log("reset command OK : ",resetedCommand.idCommand);
           this.setCommandSubject(resetedCommand); 
           this.setNbItemsSubject("");
           this.setTotalPriceCommandSubject(0);
@@ -105,6 +106,7 @@ export class CommandService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
@@ -126,11 +128,12 @@ export class CommandService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
     (updatedCommand) =>{ 
-        console.log("validate command OK : ", updatedCommand);
+        
       },
       (error) => { console.log("validate command pb : ", error); 
                     this.router.navigate(['error-page']);
@@ -145,6 +148,7 @@ export class CommandService {
       {
         headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
         }
       });
@@ -155,11 +159,11 @@ export class CommandService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
         (updatedOneCommand) =>{ 
-          console.log("set 1 to command OK : ",updatedOneCommand);
           this.setCommandSubject(updatedOneCommand);
         },
         (error) => { console.log("reset command pb : ", error); }

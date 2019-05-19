@@ -24,6 +24,7 @@ export class EvenementService {
           {
             headers: {
               "Content-Type": "application/json",
+              'Access-Control-Allow-Origin':'*',
               "Authorization": this.token.getToken()
             }
           });
@@ -34,7 +35,8 @@ export class EvenementService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }
@@ -44,7 +46,8 @@ export class EvenementService {
         {
             headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
             }
         });
     }
@@ -54,6 +57,7 @@ export class EvenementService {
       {
           headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
           }
       });
@@ -74,10 +78,11 @@ export class EvenementService {
     {
         headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
         }
     }).subscribe(
-        (evt) =>{ console.log("init evt OK : ", evt); 
+        (evt) =>{ 
         if(isRouting){
             this.router.navigate(['evenement-listing']);
         }
@@ -92,11 +97,11 @@ export class EvenementService {
           {
           headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
           }
         }).subscribe(
           (updatedEvenement) =>{
-            console.log("update Evenement OK : ", updatedEvenement);
             let index = this.listEvenements.findIndex(evt => evt.idEvt === evenement.idEvt);
             this.listEvenements[index] = updatedEvenement;
             this.listEvenements$.next(this.listEvenements);
@@ -117,10 +122,11 @@ export class EvenementService {
     {
         headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
         }
     }).subscribe(
-        () =>{ console.log("suppression idEvt OK : ",idEvt);
+        () =>{
                 this.listEvenements.slice(this.listEvenements.findIndex(evenement => evenement.idEvt === idEvt), 1);
                 this.listEvenements$.next(this.listEvenements);
             },

@@ -37,7 +37,6 @@ export class SidenavListComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(){
-    console.log("this.authority  ngOnInit : ", this.authority );
     this.loginService.isUserLoggedSubject.subscribe(res => {
       this.isAuth = res;
     });
@@ -70,16 +69,10 @@ export class SidenavListComponent implements OnInit {
   }
 
   public onResetCart(){
-    // this.isAlreadyLeftCartZone=true;
-    // var popup = document.getElementById("cartText");
-    // popup.classList.toggle("show");
     this.commandService.resetCommand(this.command, this.username);
   }
 
   public onSeeCart(){
-    // this.isAlreadyLeftCartZone=true;
-    // var popup = document.getElementById("cartText");
-    // popup.classList.toggle("show");
     this.router.navigate(['cart-composition']);
   }
 

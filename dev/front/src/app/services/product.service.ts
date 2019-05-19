@@ -45,6 +45,7 @@ export class ProductService {
         {
           headers: {
             "Content-Type": "application/json",
+            'Access-Control-Allow-Origin':'*',
             "Authorization": this.token.getToken()
           }
         });
@@ -55,7 +56,8 @@ export class ProductService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }
@@ -65,7 +67,8 @@ export class ProductService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }
@@ -75,7 +78,8 @@ export class ProductService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }
@@ -85,7 +89,8 @@ export class ProductService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }
@@ -95,7 +100,8 @@ export class ProductService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }
@@ -105,7 +111,8 @@ export class ProductService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }
@@ -116,7 +123,8 @@ export class ProductService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }
@@ -231,6 +239,7 @@ export class ProductService {
         {
         headers: {
         "Content-Type": "application/json",
+        'Access-Control-Allow-Origin':'*',
         "Authorization": this.token.getToken()
         }
       }).subscribe(
@@ -249,6 +258,7 @@ export class ProductService {
         {
         headers: {
         "Content-Type": "application/json",
+        'Access-Control-Allow-Origin':'*',
         "Authorization": this.token.getToken()
         }
       }).subscribe(
@@ -269,11 +279,11 @@ export class ProductService {
         {
         headers: {
         "Content-Type": "application/json",
+        'Access-Control-Allow-Origin':'*',
         "Authorization": this.token.getToken()
         }
       }).subscribe(
         (updatedProductCategory) =>{ 
-          console.log("update ProductCategory OK : ", updatedProductCategory);
           let index = this.listProductCategories.findIndex(productCategory => productCategory.idProductCategory === idProductCategory);
           this.listProductCategories[index].nameProductCategory = nameProductCategory;
           this.listProductCategories$.next(this.listProductCategories);
@@ -296,11 +306,11 @@ export class ProductService {
         {
         headers: {
         "Content-Type": "application/json",
+        'Access-Control-Allow-Origin':'*',
         "Authorization": this.token.getToken()
         }
       }).subscribe(
         (updatedProductRef) =>{ 
-          console.log("update ProductRef OK : ", updatedProductRef);
           let index = this.listProductRefs.findIndex(pr => pr.idProductRef === productRef.idProductRef);
           this.listProductRefs[index].nameProductRef = productRef.nameProductRef;
           this.listProductRefs$.next(this.listProductRefs);
@@ -326,10 +336,11 @@ export class ProductService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
-        () =>{ console.log("suppression idProductCategory OK : ",idProductCategory);
+        () =>{
           this.listProductCategories.slice(this.listProductCategories.findIndex(productCategory => productCategory.idProductCategory === idProductCategory), 1);
           this.listNameProductCategories.slice(this.listNameProductCategories.findIndex(name => name === nameProductCategory), 1);
           this.publishNameProductRefs();
@@ -345,10 +356,11 @@ export class ProductService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
-        () =>{ console.log("suppression idProductRef OK : ",idProductRef);
+        () =>{ 
           this.listProductRefs.slice(this.listProductRefs.findIndex(productRef => productRef.idProductRef === idProductRef), 1);
           this.listNameProductRefs.slice(this.listNameProductRefs.findIndex(name => name === nameProductRef), 1);
      },
@@ -362,7 +374,8 @@ export class ProductService {
       {
         headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
         }
       }).subscribe(
         (product) =>{ 
@@ -374,8 +387,7 @@ export class ProductService {
           this.commandService.setNbItemsSubject((parseInt(nbItems, 10) + 1).toString());
 
           totalPriceCommand += product.price * quantityItem;
-          //command.items[command.items.findIndex((item)=> item.idItem == watch.idItem)].price += watch.price;
-          this.commandService.setTotalPriceCommandSubject(totalPriceCommand);
+         this.commandService.setTotalPriceCommandSubject(totalPriceCommand);
           this.commandService.setCommandSubject(command);
           this.commandService.setUpdateStatusAndPriceToCommand(command, totalPriceCommand);
           this.commandService.setListCommandItemsSubject(command.items);

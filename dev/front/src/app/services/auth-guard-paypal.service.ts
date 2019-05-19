@@ -33,6 +33,7 @@ export class AuthGuardPaypalService {
               {
                 headers: {
                   "Content-Type": "application/json",
+                  'Access-Control-Allow-Origin':'*',
                   "Authorization": this.token.getToken()
                 }
               }).subscribe(

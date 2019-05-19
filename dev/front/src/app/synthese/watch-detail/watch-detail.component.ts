@@ -34,7 +34,6 @@ export class WatchDetailComponent implements OnInit {
 
   ngOnInit() {
     this.idWatchCategory = +this.route.snapshot.params.idWatchCategory;
-    console.log("idWatchCategory : ", this.idWatchCategory);
      this.offresService.publishWatchCategories();
 
     setTimeout(()=> this.offresService.findwatchCategory(this.idWatchCategory).subscribe(watchCategory => {

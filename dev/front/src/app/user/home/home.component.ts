@@ -79,8 +79,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.bEvt = true;
         this.showEvenementsLoopAnonymous();
       } else if(this.authority == 'ROLE_CUSTOMER'){
-        // get Evenements from DataBase into this.evenementArray
-        this.arrayTitle = [];
+         this.arrayTitle = [];
         this.stringTitle = "";
         this.evenementArray = [];
         this.evenementservice.getEvenementInSlotTime().subscribe(

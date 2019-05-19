@@ -58,11 +58,9 @@ public class CommandController {
 
 		try {
 			Customer customer = this.customerService.findByUsername(username);
-			
 			return ResponseEntity.status(HttpStatus.OK).body(this.commandService.saveCommand(new Command(customer, new Date())));
 		
 		} catch(Exception e) {
-			
 			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
@@ -108,7 +106,6 @@ public class CommandController {
 	public boolean isAnotherSessionOpen(@PathVariable String username) {
 		return this.commandService.isDetectCommandZeroByUsername(username);
 	}
-	
 	
 	// Reset a command resetcommand
 	@PutMapping("/resetcommand/{idCommand}/{username}")

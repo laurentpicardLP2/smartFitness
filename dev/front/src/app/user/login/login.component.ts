@@ -38,7 +38,7 @@ type="password";
 
   ngOnInit() {
     this.hide = true;
-    this.loginService.usernameSubject.subscribe(res => {
+   this.loginService.usernameSubject.subscribe(res => {
       this.username = res;
     });
     this.loginService.passwordSubject.subscribe(res => {

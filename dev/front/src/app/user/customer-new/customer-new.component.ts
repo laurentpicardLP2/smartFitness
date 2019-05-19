@@ -63,7 +63,6 @@ type="password";
 
   ngOnInit() {
     if(this.utilsService.availableUsernames.length === 0) {
-        //this.router.navigate(['']);
     }
     this.checkedAdrCopy = false;
     this.hide = true;

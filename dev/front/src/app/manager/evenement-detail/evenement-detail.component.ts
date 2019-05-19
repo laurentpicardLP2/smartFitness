@@ -92,14 +92,11 @@ export class EvenementDetailComponent implements OnInit {
         this.endDateTimeEvt = res.endDateTimeEvt;
         this.imageEvt = res.imageEvt;
         this.videoEvt = res.videoEvt;
-        console.log()
         this.youtubeUrl = this.videoEvt;
         if(this.videoEvt != null && this.videoEvt != '') {
           this.iframe_html = this.embedService.embed(this.youtubeUrl);
         }
-        
-        console.log("this.imageEvt : ", this.imageEvt);
-        console.log("this.startDateTimeEvt : ", this.startDateTimeEvt);
+               
         this.strStartDateEvt = this.initDateField(this.startDateTimeEvt);
         this.strStartTimeEvt = this.initTimeField(this.startDateTimeEvt);
         this.strEndDateEvt = this.initDateField(this.endDateTimeEvt);
@@ -152,8 +149,6 @@ export class EvenementDetailComponent implements OnInit {
     if(event.target.files && event.target.files.length > 0) {
       this.file = event.target.files[0];
       this.evenementForm.get('imageEvt').setValue(this.file.name);
-      console.log(`file: ${JSON.stringify(this.file.name)}`);
-      console.log(`file: ${JSON.stringify(this.file.size)}`);
       this.fileInformation = null;
     }
   }
@@ -240,7 +235,6 @@ export class EvenementDetailComponent implements OnInit {
       
     
       let evenement: Evenement = new Evenement(this.titleEvt, this.descriptionEvt, this.startDateTimeEvt, this.endDateTimeEvt, this.imageEvt, this.videoEvt);
-      console.log("this.videoEvt : ", this.videoEvt);
       evenement.idEvt = this.idEvt;
 
       if (this.file !== undefined){

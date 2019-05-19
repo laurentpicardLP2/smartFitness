@@ -42,7 +42,48 @@ export class TimestampFacilityComponent {
   public darkMode = false;
 
 
-  
+  public get code(): string {
+    return `
+<mat-carousel
+  timings="${this.timings}"
+  [autoplay]="${this.autoplay}"
+  interval="${this.interval}"
+  color="${this.color}"
+  maxWidth="${this.maxWidth}"
+  proportion="${this.proportion}"
+  slides="${this.slides}"
+  [loop]="${this.loop}"
+  [hideArrows]="${this.hideArrows}"
+  [hideIndicators]="${this.hideIndicators}"
+  [useKeyboard]="${this.useKeyboard}"
+  [useMouseWheel]="${this.useMouseWheel}"
+  orientation="${this.orientation}"
+>
+  <mat-carousel-slide
+    #matCarouselSlide
+    *ngFor="let slide of slides; let i = index"
+    [image]="slide.image"
+    overlayColor="${this.overlayColor}"
+    [hideOverlay]="${this.hideOverlay}"
+  >${this.showContent ? this.innerCode : ''}</mat-carousel-slide>
+</mat-carousel>
+    `;
+  }
+
+  private innerCode = `
+    <div
+      style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center"
+    >
+      <h1>{{ i }}</h1>
+      <p>disabled: {{ matCarouselSlide.disabled }}</p>
+      <button
+        mat-flat-button
+        (click)="matCarouselSlide.disabled = !matCarouselSlide.disabled"
+      >
+        Click me!
+      </button>
+    </div>
+  `;
 
   constructor(
     private snackBar: MatSnackBar,

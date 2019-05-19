@@ -38,7 +38,6 @@ displayedColumns: string[] = ['Name', 'Update'];
       this.MyDataSource.data = res;
       this.MyDataSource.sort = this.sort;
       this.MyDataSource.paginator = this.paginator;
-      console.log(this.MyDataSource.data);
     },
       error => {
       console.log('There was an error !' + error);
@@ -46,7 +45,6 @@ displayedColumns: string[] = ['Name', 'Update'];
     }
 
     onShow(idFacilityCategory: number) {
-      //this.router.navigate(['facility-category-detail/' + idFacilityCategory]);
     }
 
     onUpdate(idFacilityCategory: number){

@@ -37,7 +37,7 @@ public class SeanceController {
 	
 	//Initialise une seance pour une commande donnée d'un utilisateur connecté
 	@PostMapping("/addseance/{idCommand}/{username}")
-	public ResponseEntity<?> addSeance(@PathVariable int idCommand, @PathVariable String username) {
+	public ResponseEntity<Seance> addSeance(@PathVariable int idCommand, @PathVariable String username) {
 
 		try {
 			Seance newSeance = this.seanceService.addSeance(idCommand, username, 0f);
@@ -46,7 +46,7 @@ public class SeanceController {
 		
 		} catch(Exception e) {
 			
-			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			Logger logger = Logger.getLogger("Try-Catch addseance");
 			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
@@ -54,7 +54,7 @@ public class SeanceController {
 	
 	//Supprime une seance 
 	@DeleteMapping("/deleteseance/{idItem}")
-	public ResponseEntity<?> deleteSeance(@PathVariable int idItem) {
+	public ResponseEntity<Object> deleteSeance(@PathVariable int idItem) {
 		try {
 			this.itemService.deleteItem(idItem);
 			return ResponseEntity.status(HttpStatus.OK).body(null);
@@ -70,7 +70,7 @@ public class SeanceController {
 	//Affecte à une seance la date correspondant au premier timestamp
 	//Met à un le champ status_seance lors de la première étape de validation d'une séance 
 	@PutMapping("/adddateandnbtimestamp/{idItem}")
-	public ResponseEntity<?> addDateAndNbTimestamp(@PathVariable int idItem) {
+	public ResponseEntity<Seance> addDateAndNbTimestamp(@PathVariable int idItem) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.seanceService.updateSeance(idItem));
 		

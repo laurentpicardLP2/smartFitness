@@ -42,6 +42,7 @@ export class SyntheseService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   });
@@ -52,6 +53,7 @@ export class SyntheseService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   });
@@ -62,6 +64,7 @@ export class SyntheseService {
       {
         headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
         }
       });
@@ -72,6 +75,7 @@ export class SyntheseService {
       {
         headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
         }
       });
@@ -82,6 +86,7 @@ export class SyntheseService {
       {
         headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
         }
       });
@@ -96,6 +101,7 @@ export class SyntheseService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   });
@@ -187,6 +193,7 @@ export class SyntheseService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(

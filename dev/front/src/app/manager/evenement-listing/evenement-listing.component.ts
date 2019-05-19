@@ -39,12 +39,10 @@ displayedColumns: string[] = ['Title', 'Start', 'End', 'Update'];
   RenderDataTable() {
     this.evenementService.getEvenements().subscribe(
       res => {
-        console.log("res getEvenements : ", res);
       this.MyDataSource = new MatTableDataSource();
       this.MyDataSource.data = res;
       this.MyDataSource.sort = this.sort;
       this.MyDataSource.paginator = this.paginator;
-      console.log(this.MyDataSource.data);
     },
       error => {
       console.log('There was an error !' + error);

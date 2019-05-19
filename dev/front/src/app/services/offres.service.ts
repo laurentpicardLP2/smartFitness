@@ -49,6 +49,7 @@ export class OffresService {
       {
         headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
         }
       });
@@ -59,6 +60,7 @@ export class OffresService {
       {
         headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
         }
       });
@@ -70,6 +72,7 @@ export class OffresService {
       {
         headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
         }
       });
@@ -80,6 +83,7 @@ export class OffresService {
       {
         headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
         }
       });
@@ -155,11 +159,11 @@ export class OffresService {
         {
         headers: {
         "Content-Type": "application/json",
+        'Access-Control-Allow-Origin':'*',
         "Authorization": this.token.getToken()
         }
       }).subscribe(
         (newSubscriptionCategory) =>{ 
-          console.log("add SubscriptionCategory ok : ", newSubscriptionCategory);
           this.router.navigate(['subscription-category-listing']);
         },
         (error) => { 
@@ -168,17 +172,17 @@ export class OffresService {
         }
     );
   }
-  //addwatchcategory/{nameWatch}/{priceWatch}/{descriptionWatch}/{imageWatch}
+ 
   public addWatchCategory(nameWatch: string, priceWatch: number,  descriptionWatch: string, imageWatch: string, isRouting: boolean){
     this.httpClient.post<WatchCategory>('http://localhost:8080/managerctrl/addwatchcategory/' + nameWatch + '/' + priceWatch + '/' + descriptionWatch + '/' + imageWatch  , null, 
         {
         headers: {
         "Content-Type": "application/json",
+        'Access-Control-Allow-Origin':'*',
         "Authorization": this.token.getToken()
         }
       }).subscribe(
         (newWatchCategory) =>{ 
-          console.log("add WatchCategory ok : ", newWatchCategory);
           if(isRouting){
             this.router.navigate(['watch-category-listing']);
           }
@@ -195,12 +199,12 @@ export class OffresService {
           {
           headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
           }
         }).subscribe(
           (updatedSubscriptionCategory) =>{ 
-            console.log("update SubscriptionCategory OK : ", updatedSubscriptionCategory);
-            let index = this.listSubscriptionCategories.findIndex(subscriptionCategory => subscriptionCategory.idSubscriptionCategory === updatedSubscriptionCategory.idSubscriptionCategory);
+           let index = this.listSubscriptionCategories.findIndex(subscriptionCategory => subscriptionCategory.idSubscriptionCategory === updatedSubscriptionCategory.idSubscriptionCategory);
             this.listSubscriptionCategories[index].nameSubscription = updatedSubscriptionCategory.nameSubscription;
             this.listSubscriptionCategories$.next(this.listSubscriptionCategories);
             this.listNameSubscriptions = [];
@@ -222,6 +226,7 @@ export class OffresService {
           {
           headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
           }
         }).subscribe(
@@ -251,10 +256,11 @@ export class OffresService {
       {
         headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
         }
     }).subscribe(
-          () =>{ console.log("suppression subscriptionCategory OK : ",idSubscriptionCategory);
+          () =>{
               },
           (error) => console.log("suppression subscriptionCategory pb : ", error) 
       );
@@ -265,10 +271,11 @@ export class OffresService {
       {
         headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
         }
     }).subscribe(
-          () =>{ console.log("suppression watchCategory OK : ",idWatchCategory);
+          () =>{
               },
           (error) => console.log("suppression watchCategory pb : ", error) 
       );
@@ -280,11 +287,11 @@ export class OffresService {
         {
           headers: {
               "Content-Type": "application/json",
+              'Access-Control-Allow-Origin':'*',
               "Authorization": this.token.getToken()
           }
         }).subscribe(
           (subscription) =>{ 
-            console.log("subscription : ", subscription);
             command.items.push(subscription); 
             this.commandService.setCommandSubject(command); 
             if(nbItems==null || nbItems==undefined || nbItems=="") {
@@ -292,7 +299,6 @@ export class OffresService {
             }
             this.commandService.setNbItemsSubject((parseInt(nbItems, 10) + 1).toString());
             totalPriceCommand += subscription.price;
-            //command.items[command.items.findIndex((item)=> item.idItem == subscription.idItem)].price += subscription.price;
             this.commandService.setTotalPriceCommandSubject(totalPriceCommand);
             this.commandService.setCommandSubject(command);
             this.commandService.setUpdateStatusAndPriceToCommand(command, totalPriceCommand);
@@ -301,7 +307,6 @@ export class OffresService {
           },
           (error) => { 
             console.log("add subscription pb : ", error);
-            //this.router.navigate(['error-page']);
           }
       );
     }
@@ -310,6 +315,7 @@ export class OffresService {
         {
           headers: {
               "Content-Type": "application/json",
+              'Access-Control-Allow-Origin':'*',
               "Authorization": this.token.getToken()
           }
         }).subscribe(
@@ -321,7 +327,6 @@ export class OffresService {
             }
             this.commandService.setNbItemsSubject((parseInt(nbItems, 10) + 1).toString());
             totalPriceCommand += watch.price;
-            //command.items[command.items.findIndex((item)=> item.idItem == watch.idItem)].price += watch.price;
             this.commandService.setTotalPriceCommandSubject(totalPriceCommand);
             this.commandService.setCommandSubject(command);
             this.commandService.setUpdateStatusAndPriceToCommand(command, totalPriceCommand);

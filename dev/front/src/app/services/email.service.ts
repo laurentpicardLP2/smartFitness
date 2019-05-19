@@ -20,10 +20,11 @@ export class EmailService {
     {
       headers: {
         "Content-Type": "application/json",
+        'Access-Control-Allow-Origin':'*',
         "Authorization": this.token.getToken()
       }
     }).subscribe(
-      (res) => {console.log("send email ok");
+      (res) => {
        },
       (error) => {console.log("send email pb", error);}
     );

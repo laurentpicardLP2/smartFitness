@@ -22,28 +22,6 @@ export class ManagerService {
         private router: Router,
         private token: TokenStorageService) { }
 
-    // facilityCategorySubject permet d'afficher le facilityCategory associé à un facility lorsq'un manager accède à la page de détails d'un facility
-    // public facilityCategorySubject: BehaviorSubject<FacilityCategory> = new BehaviorSubject(null);
-
-    // public setFacilityCategorySubject(value: FacilityCategory){
-    //   if(value){
-    //     this.facilityCategorySubject.next(value);
-    //   } else {
-    //     this.facilityCategorySubject.next(null);
-    //   }
-    // }
-
-    // roomSubject permet d'afficher la room associée à un facility lorsq'un manager accède à la page de détails d'un facility
-    // public roomSubject: BehaviorSubject<Room> = new BehaviorSubject(null);
-
-    // public setRoomSubject(value: Room){
-    //   if(value){
-    //     this.roomSubject.next(value);
-    //   } else {
-    //     this.roomSubject.next(null);
-    //   }
-    // }
-
   public isDataLoadedSubject: BehaviorSubject<boolean> = new BehaviorSubject(null);
 
   public setIsDataLoadedSubject(value: boolean){
@@ -80,6 +58,7 @@ export class ManagerService {
         {
           headers: {
             "Content-Type": "application/json",
+            'Access-Control-Allow-Origin':'*',
             "Authorization": this.token.getToken()
           }
         });
@@ -90,6 +69,7 @@ export class ManagerService {
         {
           headers: {
             "Content-Type": "application/json",
+            'Access-Control-Allow-Origin':'*',
             "Authorization": this.token.getToken()
           }
         });
@@ -100,6 +80,7 @@ export class ManagerService {
         {
           headers: {
             "Content-Type": "application/json",
+            'Access-Control-Allow-Origin':'*',
             "Authorization": this.token.getToken()
           }
         });
@@ -110,7 +91,8 @@ export class ManagerService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }
@@ -120,7 +102,8 @@ export class ManagerService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }
@@ -130,7 +113,8 @@ export class ManagerService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }
@@ -141,7 +125,8 @@ export class ManagerService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }
@@ -151,7 +136,8 @@ export class ManagerService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }
@@ -162,7 +148,8 @@ export class ManagerService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }
@@ -285,6 +272,7 @@ export class ManagerService {
           {
           headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
           }
         }).subscribe(
@@ -318,11 +306,11 @@ export class ManagerService {
           {
           headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
           }
         }).subscribe(
           (addedRoom) =>{ 
-            console.log("add Room OK : ", addedRoom);
             this.router.navigate(['room-listing']);
           },
           (error) => { 
@@ -337,6 +325,7 @@ export class ManagerService {
           {
           headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
           }
         }).subscribe(
@@ -355,11 +344,11 @@ export class ManagerService {
           {
           headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
           }
         }).subscribe(
           (updatedRoom) =>{ 
-            console.log("update Room OK : ", updatedRoom);
             let index = this.listRooms.findIndex(room => room.idRoom === idRoom);
             this.listRooms[index].nameRoom = nameRoom;
             this.listRooms$.next(this.listRooms);
@@ -382,11 +371,11 @@ export class ManagerService {
           {
           headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
           }
         }).subscribe(
           (updatedFacilityCategory) =>{ 
-            console.log("update FacilityCategory OK : ", updatedFacilityCategory);
             let index = this.listFacilityCategories.findIndex(facilityCategory => facilityCategory.idFacilityCategory === idFacilityCategory);
             this.listFacilityCategories[index].nameFacilityCategory = nameFacilityCategory;
             this.listFacilityCategories$.next(this.listFacilityCategories);
@@ -409,11 +398,11 @@ export class ManagerService {
           {
           headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
           }
         }).subscribe(
           (updatedFacility) =>{
-            console.log("update Facility OK : ", updatedFacility);
             let index = this.listFacilities.findIndex(facility => facility.idFacility === idFacility);
             this.listFacilities[index].nameFacility = nameFacility;
             this.listFacilities$.next(this.listFacilities);
@@ -439,10 +428,11 @@ export class ManagerService {
       {
         headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
         }
     }).subscribe(
-          (facility) =>{ console.log("init facility OK : ", facility); this.router.navigate(['facility-listing']);},
+          (facility) =>{ this.router.navigate(['facility-listing']);},
           (error) => { console.log("init facility pb : ", error);  this.router.navigate(['error-page']);}
       );
       
@@ -454,10 +444,11 @@ export class ManagerService {
       {
         headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
         }
     }).subscribe(
-          () =>{ console.log("suppression idMaintenanceOperation OK : ",idMaintenanceOperation);
+          () =>{
               },
           (error) => console.log("suppression idMaintenanceOperation pb : ", error) 
       );
@@ -468,7 +459,8 @@ export class ManagerService {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": this.token.getToken()
+            'Access-Control-Allow-Origin':'*',
+             "Authorization": this.token.getToken()
           }
         });
     }

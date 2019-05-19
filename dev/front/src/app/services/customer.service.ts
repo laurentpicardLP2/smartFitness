@@ -52,7 +52,7 @@ export class CustomerService {
 
   public createCustomer(newCustomer: Customer){
     this.httpClient.post<Customer>('http://localhost:8080/userctrl/newcustomer', newCustomer).subscribe(
-        (customer) =>{ console.log("création user OK : ",customer);
+        (customer) =>{
                     this.utilsService.availableUsernames.push(newCustomer.username);
                     this.utilsService.availableUsernames$.next(this.utilsService.availableUsernames);
                     this.httpClient.post('http://localhost:8080/emailctrl/signupconfirm/' + customer.username, null).subscribe(

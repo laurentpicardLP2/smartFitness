@@ -47,8 +47,6 @@ export class WatchCategoryNewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.loginService.setIsUserLoggedSubject(true);
-    // TO DO reinit setUsername après upload image file
 
     this.loginService.usernameSubject.subscribe(res => {
       this.username = res;

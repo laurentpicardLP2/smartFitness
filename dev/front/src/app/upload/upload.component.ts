@@ -20,10 +20,8 @@ export class UploadComponent implements OnInit {
   }
 
   addImage(){
-    console.log("data : ", this.data);
     this.httpClient.post(
       'http://localhost:8080/managerctrl/upload', this.data).subscribe(() => {
-        //this.addFacility(idFacilityCategory, idRoom, nameFacility, descriptionFacility, imageFacility, priceFacility);
       },
         (error) => {console.log("pb upload fichier ", error);}
       );

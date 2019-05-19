@@ -70,7 +70,6 @@ export class SeanceService {
 
   public setSeanceSubject(value: Seance){
     if(value){
-      console.log("setSeanceSubject value", value);
       this.seanceSubject.next(value);
     } else {
       this.seanceSubject.next(null);
@@ -78,15 +77,11 @@ export class SeanceService {
   }
 
   public addSeanceToCommand(command: Command, username: string){
-    // if(command == undefined){
-    //   this.loginService.signOut();
-    //   this.router.navigate(['/login']);
-    //   return;
-    // }
     this.httpClient.post<Seance>('http://localhost:8080/seancectrl/addseance/' + command.idCommand + '/' + username, null, 
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
@@ -104,13 +99,13 @@ export class SeanceService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
         () =>{ 
           command.items.splice(command.items.findIndex((item)=> item.idItem === seance.idItem), 1); 
           this.commandService.setCommandSubject(command); 
-          console.log("reset command : ", command);
         },
         (error) => { console.log("init timestamp pb : ", error); }
     );
@@ -123,6 +118,7 @@ export class SeanceService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
@@ -131,8 +127,6 @@ export class SeanceService {
           timestampFacility.dateOfTimestamp = dateOfTimestamp;
           seance.timestampFacilities.push(timestampFacility);
           this.listTimestampFacilities$.next(seance.timestampFacilities);
-          //console.log("seance (seance) : ", seance.timestampFacilities[0].dateOfTimestamp);
-           //this.commandService.setCommandSubject(command);
           this.setSeanceSubject(seance);    
           this.setIsBookedTimestampSubject(true);
           this.setSeanceSubject(seance);
@@ -157,11 +151,11 @@ export class SeanceService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
         (updatedSeance) =>{ 
-          console.log("updated seance OK : ", updatedSeance);
           this.setSeanceSubject(updatedSeance);
           let index = command.items.findIndex(item => item.idItem === updatedSeance.idItem);
           command.items[index].typeItem = updatedSeance.typeItem;
@@ -176,13 +170,12 @@ export class SeanceService {
     {
       headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
       }
   }).subscribe(
         () =>{ 
-          console.log("reset timestamp OK : ");
           seance.timestampFacilities.splice(seance.timestampFacilities.findIndex((timestampFacility)=> timestampFacility.idTimestampFacility === idTimestampFacility), 1); 
-           //this.commandService.setCommandSubject(command);
           this.setSeanceSubject(seance); 
 
           let isBookedTimestamp = false;
@@ -191,7 +184,6 @@ export class SeanceService {
               isBookedTimestamp = true;
             }
           }
-        console.log("this.isBookedTimestamp : ", isBookedTimestamp);
         this.setIsBookedTimestampSubject(isBookedTimestamp);
            
         },
@@ -205,21 +197,12 @@ export class SeanceService {
       {
         headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
           "Authorization": this.token.getToken()
         }
       });
   }
 
-  // Indique si un customer a déjà ouvert une autre instance de réservation de séance non clôturée
-  // public checkAnotherSeanceIsOpen(username: string): Observable<boolean> {
-  //   return this.httpClient.get<boolean>('http://localhost:8080/seancectrl/getisopenseance/' + username, 
-  //     {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Authorization": this.token.getToken()
-  //       }
-  //     });
-  // }
 }
 
 

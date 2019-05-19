@@ -21,7 +21,6 @@ export class OurActivityComponent implements OnInit {
 
   @ViewChild('map') mapElement: any;
 map: google.maps.Map;
-//this.map = new google.maps.Map(....);
  
   constructor(private titleService: Title) {
   }
