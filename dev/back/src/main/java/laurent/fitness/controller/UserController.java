@@ -114,9 +114,15 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping("/login")
-	public ResponseEntity<?> authenticateUser(){
-		Authentication authentication = authenticationFacade.getAuthentication();
-       return ResponseEntity.ok(jwtTokenProvider.generateToken(authentication,  this.userService.findByUsername(authentication.getName()), this.userService));
+	public ResponseEntity<?> authenticateUser(@RequestBody User user, BindingResult result){
+		//Gestion de la validité des requêtes REST
+		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationService(result);
+        if(errorMap != null)
+            return  errorMap;
+        
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
+        return ResponseEntity.ok(jwtTokenProvider.generateToken(authentication, user, this.userService));
 	}
 	
 	@GetMapping("/authority/{username}")

@@ -44,7 +44,7 @@ export class PaypalComponent implements OnInit {
         this.command = res;
         this.totalPrice = this.command.totalPrice;
 
-        setTimeout(() => this.isHidden = false, 1100);
+        setTimeout(() => this.isHidden = false, 2000);
 
         this.loginService.usernameSubject.subscribe(
           (res) => {

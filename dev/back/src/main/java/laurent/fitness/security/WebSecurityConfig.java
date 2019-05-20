@@ -6,12 +6,13 @@ import javax.sql.DataSource;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
+import org.apache.coyote.http11.AbstractHttp11Protocol;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -74,8 +75,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .headers().frameOptions().sameOrigin()
                 .and()
-                .httpBasic()
-                .and()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/postman/**").permitAll()
@@ -120,6 +119,36 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
        
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
    }
+    
+    
+//    @Bean
+//    public TomcatServletWebServerFactory containerFactory() {
+//        return new TomcatServletWebServerFactory() {
+//            protected void customizeConnector(Connector connector) {
+//                int maxSize = 50000000;
+//                super.customizeConnector(connector);
+//                connector.setMaxPostSize(maxSize);
+//                connector.setMaxSavePostSize(maxSize);
+//                if (connector.getProtocolHandler() instanceof AbstractHttp11Protocol) {
+//
+//                    ((AbstractHttp11Protocol <?>) connector.getProtocolHandler()).setMaxSwallowSize(maxSize);
+//                    logger.info("Set MaxSwallowSize "+ maxSize);
+//                }
+//            }
+//        };
+//
+//    }
+//     
+//    private Connector redirectConnector() {
+//      Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+//      connector.setScheme("http");
+//      connector.setPort(8080);
+//      connector.setSecure(false);
+//      connector.setRedirectPort(8443);
+//       
+//      return connector;
+//    }
+
     
     
   
