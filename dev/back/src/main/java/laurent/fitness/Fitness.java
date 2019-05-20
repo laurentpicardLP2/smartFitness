@@ -7,23 +7,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 
-import javax.persistence.EntityManager;
-
-import org.apache.catalina.connector.Connector;
-import org.apache.tomcat.util.descriptor.web.SecurityCollection;
-import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import laurent.fitness.services.AuthorityService;
-import laurent.fitness.services.StaffService;
-import laurent.fitness.services.UserService;
 
 
 
