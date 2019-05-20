@@ -237,14 +237,14 @@ export class LoginService {
 
   attemptAuth(ussername: string, password: string): Observable<any> {
     const credentials = {username: ussername, password: password};
-    return this.httpClient.post('http://localhost:8080/userctrl/login', credentials, {
+    return this.httpClient.post('http://localhost:8080/userctrl/login', null, {
       headers: {
         "Content-Type": "application/json",
         'Access-Control-Allow-Origin':'*',
+        "Authorization": "Basic " + btoa(ussername + ":" + password)
       }
     });
   }
-
 
   public getAuthority(username: string): Observable<Authority> {
     return this.httpClient.get<Authority>('http://localhost:8080/userctrl/authority/' + username, 
