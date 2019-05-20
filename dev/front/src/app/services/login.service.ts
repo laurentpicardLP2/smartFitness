@@ -306,7 +306,7 @@ export class LoginService {
                       }
                   });
                 }
-           ), 300);
+           ), 400);
            
           if(this.timer === 0) {
             setTimeout(() => this.autoclose(), 2000);
