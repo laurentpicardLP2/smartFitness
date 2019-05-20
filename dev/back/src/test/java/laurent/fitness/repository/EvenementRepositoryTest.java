@@ -13,7 +13,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import laurent.fitness.model.Evenement;
-import laurent.fitness.model.FacilityCategory;
 
 
 

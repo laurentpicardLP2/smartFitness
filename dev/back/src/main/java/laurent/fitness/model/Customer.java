@@ -64,6 +64,10 @@ public class Customer extends User implements Serializable {
 	public Customer() {
 	}
 	
+	public Customer(String username) {
+		this.username = username;
+	}
+	
 	public Customer(int idUser,
 					String username, 
 					String fullname, 

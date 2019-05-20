@@ -116,11 +116,7 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<?> authenticateUser(){
 		Authentication authentication = authenticationFacade.getAuthentication();
-		        
-//               Authentication authentication = authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
-//        
-        return ResponseEntity.ok(jwtTokenProvider.generateToken(authentication,  this.userService.findByUsername(authentication.getName()), this.userService));
+       return ResponseEntity.ok(jwtTokenProvider.generateToken(authentication,  this.userService.findByUsername(authentication.getName()), this.userService));
 	}
 	
 	@GetMapping("/authority/{username}")

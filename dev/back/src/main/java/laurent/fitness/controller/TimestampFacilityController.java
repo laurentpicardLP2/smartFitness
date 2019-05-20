@@ -44,6 +44,23 @@ public class TimestampFacilityController {
 		}			
 	}
 	
+	//Add a new timestampFacility
+		@PostMapping("/addtimestampfacility/{idItem}/{nameFacility}/{nameFacilityCategory}")
+		public ResponseEntity<TimestampFacility> addTimestampFacilityTest(
+				@PathVariable int idItem,
+				@PathVariable String nameFacility, 
+				@PathVariable String nameFacilityCategory) {
+			try {
+			return ResponseEntity.status(HttpStatus.OK).body(
+					null);
+			} catch(Exception e) {
+				
+				Logger logger = Logger.getLogger("Try-Catch Erreur");
+				logger.log(Level.SEVERE, e.toString());
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
+			}			
+		}
+	
 	@DeleteMapping("/deletetimestampfacility/{idTimestampFacillity}")
 	public ResponseEntity<Object> delTimestamp(@PathVariable String idTimestampFacillity){
 		try {

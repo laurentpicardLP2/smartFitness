@@ -30,17 +30,17 @@ import laurent.fitness.services.UserService;
 @SpringBootApplication
 public class Fitness implements CommandLineRunner {
 	
-	@Autowired
-	private EntityManager entityManager;
-	
-	@Autowired
-	private AuthorityService authorityService;
-	
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private StaffService staffService;
+//	@Autowired
+//	private EntityManager entityManager;
+//	
+//	@Autowired
+//	private AuthorityService authorityService;
+//	
+//	@Autowired
+//	private UserService userService;
+//	
+//	@Autowired
+//	private StaffService staffService;
 	
    public boolean someLibraryMethod() {
         return true;

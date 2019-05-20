@@ -1,5 +1,6 @@
 package laurent.fitness.controller.postman;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -18,6 +19,8 @@ import laurent.fitness.services.TimestampFacilityService;
 public class TimestampFacilityControllerPostman {
 	private TimestampFacilityService timestampFacilityService;
 	
+	Calendar calendar = Calendar.getInstance();
+	
 	public TimestampFacilityControllerPostman(TimestampFacilityService timestampFacilityService) {
 		this.timestampFacilityService = timestampFacilityService;
 	}
@@ -32,14 +35,16 @@ public class TimestampFacilityControllerPostman {
 				@Valid String nameFacility, 
 				@Valid String nameFacilityCategory) {
 		try {
+				
 			String[] splitTimeFromDate = dateOfTimestamp.split("T");
 			int year = Integer.parseInt(splitTimeFromDate[0].split("-")[0]);
-			int month = Integer.parseInt(splitTimeFromDate[0].split("-")[1]);
+			int month = Integer.parseInt(splitTimeFromDate[0].split("-")[1])-1;
 			int day = Integer.parseInt(splitTimeFromDate[0].split("-")[2]);
 			int hour = Integer.parseInt(splitTimeFromDate[1].split(":")[0]);
 			int minute = Integer.parseInt(splitTimeFromDate[1].split(":")[1]);
+			calendar.set(year, month, day, hour, minute, 0);
 			return ResponseEntity.status(HttpStatus.OK).body(
-					this.timestampFacilityService.saveNewTimestampFacility(idItem, new Date(year, month, day, hour, minute, 0), nameFacility, nameFacilityCategory));
+					this.timestampFacilityService.saveNewTimestampFacility(idItem, calendar.getTime(), nameFacility, nameFacilityCategory));
 			
 		} catch(Exception e) {
 			
