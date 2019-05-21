@@ -42,7 +42,7 @@ public class CommandControllerPostman {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
 	}
-	
+
 	// Delete a command by Postman
 	@DeleteMapping("/delcommand")
 	public ResponseEntity<?> delCommand(@Valid int idCommand){
@@ -53,7 +53,5 @@ public class CommandControllerPostman {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
-	}
-	
-
+	}	
 }

@@ -247,6 +247,7 @@ export class LoginService {
   }
 
   public getAuthority(username: string): Observable<Authority> {
+    console.log(this.token.getToken());
     return this.httpClient.get<Authority>('http://localhost:8080/userctrl/authority/' + username, 
     {
       headers: {

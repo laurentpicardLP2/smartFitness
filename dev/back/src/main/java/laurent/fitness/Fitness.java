@@ -33,7 +33,6 @@ public class Fitness implements CommandLineRunner {
     }
 
 
-
 	public static void main(String[] args) throws Exception, MalformedURLException, IOException, ClassNotFoundException, SQLException {
 		SpringApplication.run(Fitness.class, args);
 	}

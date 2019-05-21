@@ -35,13 +35,15 @@ public class TimestampFacilityControllerPostman {
 				@Valid String nameFacility, 
 				@Valid String nameFacilityCategory) {
 		try {
-				
+
 			String[] splitTimeFromDate = dateOfTimestamp.split("T");
 			int year = Integer.parseInt(splitTimeFromDate[0].split("-")[0]);
 			int month = Integer.parseInt(splitTimeFromDate[0].split("-")[1])-1;
 			int day = Integer.parseInt(splitTimeFromDate[0].split("-")[2]);
 			int hour = Integer.parseInt(splitTimeFromDate[1].split(":")[0]);
 			int minute = Integer.parseInt(splitTimeFromDate[1].split(":")[1]);
+			int second = Integer.parseInt(splitTimeFromDate[1].split(":")[2]);
+			calendar.set(year, month, day, hour, minute, second);
 			calendar.set(year, month, day, hour, minute, 0);
 			return ResponseEntity.status(HttpStatus.OK).body(
 					this.timestampFacilityService.saveNewTimestampFacility(idItem, calendar.getTime(), nameFacility, nameFacilityCategory));
@@ -52,7 +54,7 @@ public class TimestampFacilityControllerPostman {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}			
 	}
-	
+
 	//Check the quantity of available facilities for a timestamp and its category
 	@GetMapping("/availablefacilities")
 	public ResponseEntity<?> getQuantityAvailableFacilities(@Valid String nameFacilityCategory, @Valid String refTimestamp) {
