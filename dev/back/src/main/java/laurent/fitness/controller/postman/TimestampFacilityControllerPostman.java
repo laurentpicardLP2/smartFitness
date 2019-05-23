@@ -1,7 +1,6 @@
 package laurent.fitness.controller.postman;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -25,9 +24,7 @@ public class TimestampFacilityControllerPostman {
 		this.timestampFacilityService = timestampFacilityService;
 	}
 	
-	//Add a new timestampFacility
 	
-	@SuppressWarnings("deprecation")
 	@PostMapping("/addtimestampfacility")
 	public ResponseEntity<?> addTimestampFacility(
 				@Valid int idItem,

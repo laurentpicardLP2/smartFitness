@@ -3,7 +3,7 @@
         <form [formGroup]="userRegistrationForm" class="customer-form">
             <p>
             <mat-form-field class="customer-full-width">
-                <input matInput maxlength="60" required placeholder="Votre prénom" type="text" formControlName="fullname" [(ngModel)]="fullname">
+                <input matInput maxlength="60" required placeholder="Vos prénom et nom" type="text" formControlName="fullname" [(ngModel)]="fullname">
                 <mat-error>
                     {{errors.fullname}}
                 </mat-error>
