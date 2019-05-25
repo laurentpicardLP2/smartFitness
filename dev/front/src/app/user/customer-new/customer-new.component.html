@@ -1,4 +1,11 @@
+        
+                
+              
+
 <div fxFlex fxLayout fxLayoutAlign="center">
+    <div class="mat-spinner-div" *ngIf="isNotHiddenSpinner">
+            <mat-progress-spinner mode="indeterminate" class="mat-spinner-component"></mat-progress-spinner>
+    </div>
     <div class="pad">
         <form [formGroup]="userRegistrationForm" class="customer-form">
             <p>
@@ -59,7 +66,7 @@
                 </tr></table>
             </div> 
             <p></p>
-            <mat-checkbox formControlName="checkedAdr" (click)="onCopyAdr()" [(ngModel)]="checkedAdrCopy">Adresse de livraison = Adresse postale</mat-checkbox>
+            <mat-checkbox formControlName="checkedAdr" (change)="onCopyAdrSpace()" (click)="onCopyAdr()" [(ngModel)]="checkedAdrCopy">Adresse de livraison = Adresse postale</mat-checkbox>
             <div class="customer-border-solid">
                 <p>
                     <mat-form-field class="customer-full-width">
@@ -110,10 +117,10 @@
             <div>
                 <p>
                 <mat-form-field class="customer-full-width">
-                    <input matInput required type="date" placeholder="Date de naissance" formControlName="dateOfBirthday" [(ngModel)]="dateOfBirthday">
+                    <input matInput type="date"  placeholder="Date de naissance" formControlName="dateOfBirthday" [(ngModel)]="dateOfBirthday">
                     <mat-icon matSuffix>mode_edit</mat-icon>
-                    <mat-error *ngIf="userRegistrationForm.controls['dateOfBirthday'].hasError('required')">
-                        {{errors.dateOfBirth}}
+                    <mat-error *ngIf="userRegistrationForm.controls['dateOfBirthday'].hasError('dateOfBirthday') && userRegistrationForm.value.dateOfBirthday">
+                        {{errors.dateOfBirthday}}
                     </mat-error>
                 </mat-form-field>
                 </p>

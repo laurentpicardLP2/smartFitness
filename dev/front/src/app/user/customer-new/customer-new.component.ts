@@ -49,6 +49,7 @@ type="password";
   deliveryCountry: string;
   tel: string;
   hide: boolean;
+  isNotHiddenSpinner: boolean
   
 
   constructor(
@@ -65,8 +66,8 @@ type="password";
     if(this.utilsService.availableUsernames.length === 0) {
     }
     this.checkedAdrCopy = false;
-    this.hide = true;
-
+    this.isNotHiddenSpinner = false;
+    this.hide= true;
   }
 
   createForm() {
@@ -129,10 +130,11 @@ type="password";
             Validators.pattern('(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}')
         ]],
         dateOfBirthday: ['', [
-            Validators.required
+            CustomValidator.dateOfBirhdayValidator()
         ]]
       });
   }
+
 
   onCopyAdr(){
       if(!this.checkedAdrCopy){
@@ -150,12 +152,31 @@ type="password";
       
   }
 
+  onCopyAdrSpace(){
+    if(this.checkedAdrCopy){
+      this.deliveryAddress = this.domesticAddress;
+      this.deliveryCp = this.domesticCp;
+      this.deliveryCity = this.domesticCity;
+      this.deliveryCountry = this.domesticCountry;
+    }
+    else {
+      this.deliveryAddress="";
+      this.deliveryCp = "";
+      this.deliveryCity = "";
+      this.deliveryCountry = "";
+    }
+    
+}
+
 
   onStrengthChanged(strength: number) {
     // console.log('password strength = ', strength);
   }
 
   onRegister(): void {
+     
+   
+    this.isNotHiddenSpinner = true;
       this.newCustomer = new Customer(
                 this.username,
                 this.fullname,  

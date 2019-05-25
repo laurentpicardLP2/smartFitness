@@ -61,7 +61,7 @@ export const errorMessages: { [key: string]: string } = {
     country: 'Le pays doit être renseigné.',
     tel: 'Le numéro de téléphone doit être renseigné',
     telValid: 'Le numéro de téléphone doit être valide',
-    dateOfBirth: 'La date de naissance doit être renseignée',
+    dateOfBirthday: 'La date de naissance doit être valide',
     capacityRoom: 'La capacité de la salle doit être comprise entre 4 et 100.',
     nbLast: 'La durée de d\'un type d\'abonnement doit être comprise entre 1 et 10',
     emailRequired: 'Veuillez renseigner votre email.',

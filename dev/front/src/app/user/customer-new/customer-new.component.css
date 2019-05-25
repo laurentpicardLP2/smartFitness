@@ -28,3 +28,20 @@
     padding: 5px;
   }
 
+  .mat-spinner{
+    margin:0 auto; 
+    position: fixed;
+    top: 50px;
+    text-align: center;
+}
+  
+.mat-spinner-div {
+  position: fixed;
+  top: 435px;
+  text-align: center;
+}
+
+.mat-spinner-component{
+  margin:0 auto;
+}
+
