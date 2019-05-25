@@ -1,6 +1,7 @@
 package laurent.fitness.controller.postman;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -40,11 +41,14 @@ public class TimestampFacilityControllerPostman {
 			int hour = Integer.parseInt(splitTimeFromDate[1].split(":")[0]);
 			int minute = Integer.parseInt(splitTimeFromDate[1].split(":")[1]);
 			int second = Integer.parseInt(splitTimeFromDate[1].split(":")[2]);
-			calendar.set(year, month, day, hour, minute, second);
-			calendar.set(year, month, day, hour, minute, 0);
+			calendar.set(year, month, day, hour, minute, second); 
+			while(calendar.getTime().getTime()%2 == 1) {
+				calendar.set(year, month, day, hour, minute, second);
+				calendar.setTime(new Date(year-1900, month, day, hour, minute, second));
+			}
 			return ResponseEntity.status(HttpStatus.OK).body(
 					this.timestampFacilityService.saveNewTimestampFacility(idItem, calendar.getTime(), nameFacility, nameFacilityCategory));
-			
+
 		} catch(Exception e) {
 			
 			System.out.println(e);

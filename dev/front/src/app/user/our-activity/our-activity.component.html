@@ -1,61 +1,71 @@
+<div
+  style="position: relative; text-align:center; height: 350px; vertical-align: bottom; background-image: url('assets/images/smartFitness.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.09;">
 
-      <div style="position: relative; text-align:center; height: 350px; vertical-align: bottom; background-image: url('assets/images/smartFitness.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.09;">
-    
-      </div>
-    
-      <div style="position: absolute; width:100%; top: 70px; text-align:center;">
-          <span class="welcome-principal">Bienvenue sur Smart Fitness</span>
-          <br>
-          <span class="welcome-secondaire">L'univers du fitness sur mesure.</span>
-          <br><br>
-          <div class="div-introduction">
-            Smart Fitness vous permet de vous constituer des séances à la carte à des tarifs préférentiels.
-            <br>
-            Afin d'accéder aux services de notre plate-forme, 
-            <div style="font-family: 'Courier New', Courier, monospace; font-size: 15px;">
-                créez-vous un compte
-                <a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" routerLink="/customer-new">
-                  <mat-icon>person_add</mat-icon>
-                  <span class="mat-button-wrapper">Inscription</span>
-                <div class="mat-button-ripple mat-ripple" matripple=""></div>
-                <div class="mat-button-focus-overlay"></div>
-              </a>
-            </div> 
-            <div style="font-family: 'Courier New', Courier, monospace; font-size: 15px;">
-                puis connectez-vous&nbsp;&nbsp;<a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" routerLink="/login">
-                  <mat-icon>person</mat-icon>
-                  <span class="mat-button-wrapper">Connexion</span>
-                  <div class="mat-button-ripple mat-ripple" matripple=""></div>
-                  <div class="mat-button-focus-overlay"></div>
-                </a>
-            </div>
-          Dans votre espace personnel et vous pourrez : 
-          <div style="font-family: 'Courier New', Courier, monospace; font-size: 15px;">
-            <span class="icon"><mat-icon>navigate_next</mat-icon></span>
-            Réserver des équipements(à partir de 0,40€ les 10')
-            </div>
-          <div style="font-family: 'Courier New', Courier, monospace; font-size: 15px;">
-            <span class="icon"><mat-icon>navigate_next</mat-icon></span>
-            Souscrire à des abonnements (équipements à -50%)&nbsp;&nbsp;&nbsp;
-          </div>
-          <div style="font-family: 'Courier New', Courier, monospace; font-size: 15px;">
-            <span class="icon"><mat-icon>navigate_next</mat-icon></span>
-            Accéder à notre boutique en ligne
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-          </div>            
-            
-          <br>
-          Notre centre de fitness se trouve à Issy-les-moulineaux : 
-            <br>
-            <agm-map [latitude]="lat" [longitude]="lng">
-              <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-            </agm-map>
-            <br>Vous pouvez nous écrire à <A HREF="mailto:smart.fitness.lp2@gmail.com">smart.fitness.lp2@gmail.com</A>: 
-            <br><br>
-            <div class="welcome-final">L'équipe Smart Fitness</div>
-       </div>
+</div>
 
-        
-        
-        
+<div style="position: absolute; width:100%; top: 70px; text-align:center;">
+  <span class="welcome-principal">Bienvenue sur Smart Fitness</span>
+  <br>
+  <span class="welcome-secondaire">L'univers du fitness sur mesure.</span>
+  <br><br>
+  <div class="div-introduction">
+    Smart Fitness vous permet de vous constituer des séances à la carte à des tarifs préférentiels.
+    <br>
+    Afin d'accéder aux services de notre plate-forme,
+    <div style="font-family: 'Courier New', Courier, monospace; font-size: 15px;">
+      créez-vous un compte
+      <a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button=""
+        tabindex="0" aria-disabled="false" routerLink="/customer-new">
+        <mat-icon>person_add</mat-icon>
+        <span class="mat-button-wrapper">Inscription</span>
+        <div class="mat-button-ripple mat-ripple" matripple=""></div>
+        <div class="mat-button-focus-overlay"></div>
+      </a>
+    </div>
+    <div style="font-family: 'Courier New', Courier, monospace; font-size: 15px;">
+      puis connectez-vous&nbsp;&nbsp;<a class="docs-navbar-hide-small docs-button mat-button ng-star-inserted"
+        _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" routerLink="/login">
+        <mat-icon>person</mat-icon>
+        <span class="mat-button-wrapper">Connexion</span>
+        <div class="mat-button-ripple mat-ripple" matripple=""></div>
+        <div class="mat-button-focus-overlay"></div>
+      </a>
+    </div>
+    Dans votre espace personnel et vous pourrez :
+    <div class="can-do-personnal">
+      <div class="inside-block">
+        <div style="font-family: 'Courier New', Courier, monospace; font-size: 15px;">
+          <span class="icon">
+            <mat-icon>navigate_next</mat-icon>
+          </span>
+          Réserver des équipements(à partir de 0,40€ les 10')
+        </div>
+        <div style="font-family: 'Courier New', Courier, monospace; font-size: 15px;">
+          <span class="icon">
+            <mat-icon>navigate_next</mat-icon>
+          </span>
+          Souscrire à des abonnements (équipements à -50%)&nbsp;&nbsp;&nbsp;
+        </div>
+        <div style="font-family: 'Courier New', Courier, monospace; font-size: 15px;">
+          <span class="icon">
+            <mat-icon>navigate_next</mat-icon>
+          </span>
+          Accéder à notre boutique en ligne
+        </div>
       </div>
+    </div>
+    <br>
+    Notre centre de fitness se trouve à Issy-les-moulineaux :
+    <br>
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]=10>
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    </agm-map>
+    <br>Vous pouvez nous écrire à <A HREF="mailto:smart.fitness.lp2@gmail.com">smart.fitness.lp2@gmail.com</A>:
+    <br><br>
+    <div class="welcome-final">L'équipe Smart Fitness</div>
+  </div>
+
+
+
+
+</div>

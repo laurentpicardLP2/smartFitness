@@ -18,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import laurent.fitness.model.Command;
 import laurent.fitness.model.Customer;
-import laurent.fitness.model.Item;
 import laurent.fitness.model.Seance;
 
 @RunWith(SpringRunner.class)

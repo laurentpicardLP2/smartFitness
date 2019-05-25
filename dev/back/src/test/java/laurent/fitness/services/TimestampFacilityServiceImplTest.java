@@ -3,19 +3,13 @@ package laurent.fitness.services;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
-import java.util.Date;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import laurent.fitness.model.Command;
-import laurent.fitness.model.Customer;
 import laurent.fitness.model.TimestampFacility;
-import laurent.fitness.repository.CommandRepository;
 import laurent.fitness.repository.FacilityCategoryRepository;
 import laurent.fitness.repository.FacilityRepository;
 import laurent.fitness.repository.SeanceRepository;
@@ -52,7 +46,7 @@ public class TimestampFacilityServiceImplTest {
 
 		
 
-		TimestampFacility savedTimestampFacility = timestampFacilityService.saveTimestampFacility(timestampFacility);
+		timestampFacilityService.saveTimestampFacility(timestampFacility);
 		assertThat(timestampFacility.getClass()).isEqualTo(timestampFacility.getClass());
 	}
 	

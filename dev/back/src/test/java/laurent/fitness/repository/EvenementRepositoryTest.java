@@ -64,7 +64,7 @@ public class EvenementRepositoryTest {
 		Evenement evt = evenementRepo.findByIdEvenement(5);
 		assertThat(evt.getTitleEvt()).isEqualTo(savedEvenement.getTitleEvt());
 	}
-	
+
 	@Test
 	@WithMockUser(roles={"ADMIN"})
 	public void testDeleteEvenement() {
