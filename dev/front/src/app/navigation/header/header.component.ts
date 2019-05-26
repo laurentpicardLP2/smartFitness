@@ -75,7 +75,9 @@ export class HeaderComponent implements OnInit {
   }
 
   public onResetCart(){
+    if(confirm("Confirmez-vous l'opération de vider votre panier ?")){
       this.commandService.resetCommand(this.command, this.username);
+    }
   }
 
   public onSeeCart(){

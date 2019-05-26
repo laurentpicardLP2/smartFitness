@@ -57,7 +57,7 @@ displayedColumns: string[] = ['Fullname', 'Username', 'Update', 'Delete'];
 
     onDelete(username: string){
       
-      if(confirm("Confirme-vous la suppression du compte " + username + "?")){
+      if(confirm("Confirmez-vous la suppression du compte " + username + "?")){
         this.adminService.delete(username);
         setTimeout(() => this.RenderDataTable(), 300);
       }
