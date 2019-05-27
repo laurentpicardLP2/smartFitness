@@ -30,8 +30,6 @@ export class AppComponent implements OnInit, OnDestroy {
      this.loginService.setIsUserLoggedSubject(false);
      this.loginService.authoritySubject.subscribe();
      this.loginService.setAuthoritySubject(new Authority("","ROLE_ANONYMOUS"));
-
-    // window.localStorage.clear();
     
     this.username=window.localStorage.getItem("username");
     this.password=window.localStorage.getItem("password");
@@ -41,20 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.loginService.signIn(new User(this.username, this.password), true);
      }
        
-    //  window.addEventListener('beforeunload', function (e) {
-
-    //       // Cancel the event
-    //       e.preventDefault();
-    //       // Chrome requires returnValue to be set
-    //       e.returnValue = '';
-    //   });
-
-      
-
-    //   window.addEventListener('beforeunload', function() {
-    //     chrome.runtime.sendMessage({ info: "Here is the info you would like to pass to background page"});
-    // });
-
+    
   
    
 
