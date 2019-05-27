@@ -26,6 +26,7 @@ public class TimestampFacilityControllerPostman {
 	}
 	
 	
+	@SuppressWarnings("deprecation")
 	@PostMapping("/addtimestampfacility")
 	public ResponseEntity<?> addTimestampFacility(
 				@Valid int idItem,
