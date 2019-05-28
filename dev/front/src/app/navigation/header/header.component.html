@@ -19,40 +19,40 @@
   
   <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
 
-      <a *ngIf="authority.authority=='ROLE_ANONYMOUS'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" routerLink="/login">
+      <a *ngIf="authority=='ROLE_ANONYMOUS'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" routerLink="/login">
         <mat-icon>person</mat-icon>
         <span class="mat-button-wrapper">Connexion</span>
         <div class="mat-button-ripple mat-ripple" matripple=""></div>
         <div class="mat-button-focus-overlay"></div>
       </a>
-      <a *ngIf="authority.authority=='ROLE_ANONYMOUS'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" routerLink="/customer-new">
+      <a *ngIf="authority=='ROLE_ANONYMOUS'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" routerLink="/customer-new">
           <mat-icon>person_add</mat-icon>
           <span class="mat-button-wrapper">Inscription</span>
         <div class="mat-button-ripple mat-ripple" matripple=""></div>
         <div class="mat-button-focus-overlay"></div>
       </a>
-      <a *ngIf="authority.authority=='ROLE_ANONYMOUS'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" routerLink="/our-activity">
+      <a *ngIf="authority=='ROLE_ANONYMOUS'" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" routerLink="/our-activity">
         <mat-icon>directions_run</mat-icon>
         <span class="mat-button-wrapper">Nous connaître</span>
       <div class="mat-button-ripple mat-ripple" matripple=""></div>
       <div class="mat-button-focus-overlay"></div>
     </a> 
 
-      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="offrescustomer"><mat-icon>edit</mat-icon>Nos offres</button>
+      <button *ngIf="isAuth && authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="offrescustomer"><mat-icon>edit</mat-icon>Nos offres</button>
       <mat-menu  #offrescustomer="matMenu">
         <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/seance-booking')"><mat-icon>fitness_center</mat-icon>Constituer une séance</button>
         <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/subscription-customer-proposition')"><mat-icon>book</mat-icon>Souscrire à un abonnement</button>
         <button mat-menu-item _ngcontent-cl="" tabindex="0" aria-disabled="false" (click)="onAction('/product-listing')"><mat-icon>library_books</mat-icon>Notre catalogue</button>
      </mat-menu>
 
-     <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="reportings"><mat-icon>list</mat-icon>Vos suivis</button>
+     <button *ngIf="isAuth && authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="reportings"><mat-icon>list</mat-icon>Vos suivis</button>
      <mat-menu #reportings="matMenu">
       <button mat-menu-item _ngcontent-cl="" tabindex="2" aria-disabled="false" (click)="onAction('/command-listing')"><mat-icon>business_center</mat-icon>Vos commandes</button>
       <button mat-menu-item _ngcontent-cl="" tabindex="3" aria-disabled="false" (click)="onAction('/seance-listing')"><mat-icon>event_note</mat-icon>Vos séances</button>
       <button mat-menu-item _ngcontent-cl="" tabindex="5" aria-disabled="false" (click)="onAction('/subscription-customer-historic')"><mat-icon>format_list_bulleted</mat-icon>Votre abonnements</button>
     </mat-menu>
  
-      <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="centre"><mat-icon>domain</mat-icon> 
+      <button *ngIf="isAuth && (authority=='ROLE_ADMIN' || authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="centre"><mat-icon>domain</mat-icon> 
         Gestion centre</button>
       <mat-menu  #centre="matMenu">
           <button mat-menu-item [matMenuTriggerFor]="room"><mat-icon>low_priority</mat-icon>Gestion des salles</button>
@@ -73,7 +73,7 @@
       </mat-menu>
 
 
-       <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="offres"><mat-icon>all_inclusive</mat-icon> Gestion offres</button>
+       <button *ngIf="isAuth && (authority=='ROLE_ADMIN' || authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="offres"><mat-icon>all_inclusive</mat-icon> Gestion offres</button>
        <mat-menu  #offres="matMenu">
         <button mat-menu-item _ngcontent-cl="" tabindex="10" aria-disabled="false" (click)="onAction('/subscription-category-new')"><mat-icon>subscriptions</mat-icon>Ajouter un type d'abonnement</button>
         <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/subscription-category-listing')"><mat-icon>list</mat-icon>Listing des types d'abonnement</button>
@@ -89,13 +89,13 @@
         <button mat-menu-item _ngcontent-cl="" tabindex="11" aria-disabled="false" (click)="onAction('/product-ref-listing')"><mat-icon>list</mat-icon>Listing des produits</button>
       </mat-menu>
 
-       <button *ngIf="isAuth && authority.authority=='ROLE_ADMIN'"  mat-button [matMenuTriggerFor]="staff"><mat-icon>supervisor_account</mat-icon> Gestion staff</button>
+       <button *ngIf="isAuth && authority=='ROLE_ADMIN'"  mat-button [matMenuTriggerFor]="staff"><mat-icon>supervisor_account</mat-icon> Gestion staff</button>
        <mat-menu  #staff="matMenu">
            <button mat-menu-item _ngcontent-cl="" tabindex="12" aria-disabled="false" (click)="onAction('/staff-new')"><mat-icon>group_add</mat-icon>Ajout collaborateur</button>
            <button mat-menu-item _ngcontent-cl="" tabindex="13" aria-disabled="false" (click)="onAction('/staff-listing')"><mat-icon>list</mat-icon>Listing des collaborateurs</button>
         </mat-menu>
     
-      <button *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="pilotage"><mat-icon>insert_chart</mat-icon>Pilotage</button>
+      <button *ngIf="isAuth && (authority=='ROLE_ADMIN' || authority=='ROLE_MANAGER')"  mat-button [matMenuTriggerFor]="pilotage"><mat-icon>insert_chart</mat-icon>Pilotage</button>
       <mat-menu  #pilotage="matMenu">
           <button mat-menu-item _ngcontent-cl="" tabindex="14" aria-disabled="false" (click)="onReportingBooking()"><mat-icon>insert_chart</mat-icon>Graphique réservation</button>
           <button mat-menu-item _ngcontent-cl="" tabindex="15" aria-disabled="false" (click)="onReportingRentability()"><mat-icon>insert_chart_outlined</mat-icon>Graphique rentabilité</button>
@@ -105,7 +105,7 @@
         </mat-menu>
 </div>
   
-      <button *ngIf="isAuth && authority.authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="cart">
+      <button *ngIf="isAuth && authority=='ROLE_CUSTOMER'" mat-button [matMenuTriggerFor]="cart">
           <mat-icon matBadge="{{ nbItems }}" matBadgeColor="warn">shopping_cart</mat-icon>
         </button>
        
@@ -119,7 +119,7 @@
         </mat-menu>
       
     <div> 
-    <a *ngIf="isAuth && (authority.authority=='ROLE_ADMIN' || authority.authority=='ROLE_MANAGER' || authority.authority=='ROLE_CUSTOMER')" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onLogout()">
+    <a *ngIf="isAuth && (authority=='ROLE_ADMIN' || authority=='ROLE_MANAGER' || authority=='ROLE_CUSTOMER')" class="docs-navbar-hide-small docs-button mat-button ng-star-inserted" _ngcontent-cl="" mat-button="" tabindex="0" aria-disabled="false" (click)="onLogout()">
       <mat-icon>power_settings_new</mat-icon>
       <div class="mat-button-ripple mat-ripple" matripple=""></div>
       <div class="mat-button-focus-overlay"></div>

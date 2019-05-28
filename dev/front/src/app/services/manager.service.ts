@@ -11,7 +11,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { FacilityAdaptater } from '../models/facility-adaptater.model';
-
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -289,11 +289,10 @@ export class ManagerService {
     }
 
 
-    public addImage(data, username, password, fromForm: string){
+    public addImage(data, fromForm: string){
       this.httpClient.post(
         'http://localhost:8080/managerctrl/upload', data).subscribe(() => {
-          window.localStorage.setItem("username", username);
-          window.localStorage.setItem("password", password);
+          window.localStorage.setItem("token", this.token.getToken());
           window.localStorage.setItem("fromForm", fromForm);
         },
           (error) => {console.log("pb upload fichier ", error);}

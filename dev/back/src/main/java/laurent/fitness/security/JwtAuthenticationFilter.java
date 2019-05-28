@@ -44,27 +44,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 int userId = tokenProvider.getUserIdFromJWT(jwt);
                 
                 User user = customUserDetailsService.loadUserById(userId);
-                               
-                Object typeRole = new Object();
-                
-                List<?> role = tokenProvider.getAuthoritariesFroJWT(jwt);
-                for (int i=0; i< role.size();i++) {
-                	typeRole = role.get(i).toString();
-                }
-                
+                                               
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 		user.getUsername(),
                 		user.getPassword()
                 );
                 
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                
-                typeRole = typeRole.toString().split("=")[1];
-                typeRole = typeRole.toString().substring(0, typeRole.toString().length() - 1);
-                                		
-                SimpleGrantedAuthority authority = new SimpleGrantedAuthority(typeRole.toString());
-                List<SimpleGrantedAuthority> updatedAuthorities = new ArrayList<SimpleGrantedAuthority>();
-                updatedAuthorities.add(authority);
+                                               		
+                List<SimpleGrantedAuthority> updatedAuthorities = new ArrayList<>();
+               updatedAuthorities.add(new SimpleGrantedAuthority(tokenProvider.getAuthorityFroJWT(jwt)));
 
 
                 SecurityContextHolder.getContext().setAuthentication(

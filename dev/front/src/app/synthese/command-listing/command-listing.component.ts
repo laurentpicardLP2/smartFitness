@@ -40,6 +40,7 @@ export class CommandListingComponent implements OnInit {
   }
 
     RenderDataTable() {
+     
     this.syntheseService.getCommandsForAnUser(this.username).subscribe(
       res => {
       this.MyDataSource = new MatTableDataSource();

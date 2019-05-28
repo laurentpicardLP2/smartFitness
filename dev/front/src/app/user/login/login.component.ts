@@ -41,9 +41,7 @@ type="password";
    this.loginService.usernameSubject.subscribe(res => {
       this.username = res;
     });
-    this.loginService.passwordSubject.subscribe(res => {
-      this.password = res;
-    });
+ 
     if(this.loginService.isCommandInit == true){
       this.loginService.isCommandInit = false;
       this.isLogin = true;

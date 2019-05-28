@@ -5,8 +5,8 @@ import static laurent.fitness.security.SecurityConstants.TOKEN_EXPIRATION_TIME;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,11 +23,12 @@ import laurent.fitness.model.AuthToken;
 import laurent.fitness.model.User;
 import laurent.fitness.services.UserService;
 
+
 @Component
 public class JwtTokenProvider {
 	
 	public static final String TOKEN_PREFIX = "Bearer ";
-
+	
     
     /**
      * Génaration du token
@@ -41,13 +42,14 @@ public class JwtTokenProvider {
 	    user = userService.findByUsername(user.getUsername()); // pour récupérer l'id
 	    SecurityContextHolder.getContext().setAuthentication(authentication);
 	    
-    	 //User user = (User)authentication.getPrincipal();
 	    Date now = new Date(System.currentTimeMillis());
 	    Date expireDate = new Date(now.getTime() + TOKEN_EXPIRATION_TIME);
 	    Map<String, Object>claims = new HashMap<>();
 	    claims.put("id", (Long.toString(user.getIdUser())));
 	    claims.put("username", user.getUsername());
-	    claims.put("role",  authentication.getAuthorities());
+	    claims.put("fullname",  user.getFullname());
+	    claims.put("authority",  user.getAuthority().getAuthority());
+
 	    String jwt =  TOKEN_PREFIX + Jwts.builder()
 	            .setSubject(user.getUsername())
 	            .setClaims(claims)
@@ -64,15 +66,16 @@ public class JwtTokenProvider {
             Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
             return true;
         } catch (SignatureException ex){
-            System.out.println("Signature JWT invalide !!!");
+        	Logger.getLogger("Signature JWT invalide !!!");
         } catch (MalformedJwtException ex) {
-            System.out.println("token JWT invalide !!!");
+        	Logger.getLogger("token JWT invalide !!!");
         } catch (ExpiredJwtException ex) {
-            System.out.println("Désolé, le token a expiré !!!");
+        	Logger.getLogger("Désolé, le token a expiré !!!");
         } catch (UnsupportedJwtException ex){
-            System.out.println("Token JWT non supporté !!!");
+        	Logger.getLogger("Token JWT non supporté !!!");
+           
         } catch (IllegalArgumentException ex) {
-            System.out.println("JWT claims string is empty !!!");
+        	Logger.getLogger("JWT claims string is empty !!!");
         }
         return false;
     }
@@ -94,9 +97,9 @@ public class JwtTokenProvider {
         
     }
     
-    public List<?> getAuthoritariesFroJWT(String token) {
+    public String getAuthorityFroJWT(String token) {
     	Claims claims =Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-         return (List<?>)claims.get("role");
+         return (String)claims.get("authority");
     }
     
     

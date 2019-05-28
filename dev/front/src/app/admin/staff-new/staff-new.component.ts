@@ -2,7 +2,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { AdminService } from '../../services/admin.service';
 import { Staff } from '../../models/staff.model';
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators, FormBuilder, AbstractControl} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
 import { HttpClient } from '@angular/common/http';
 import { CustomerService } from 'src/app/services/customer.service';

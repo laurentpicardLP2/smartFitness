@@ -45,8 +45,6 @@ export class FacilityDetailComponent implements OnInit {
 
   @ViewChild('fileInput')
   fileInput: ElementRef;
-  username: string;
-  password: string;
 
   constructor(private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -97,15 +95,6 @@ export class FacilityDetailComponent implements OnInit {
       this.rooms = res;
       this.managerService.publishRooms();
       this.listRooms = this.managerService.listRooms$;
-    });
-
-
-    this.loginService.usernameSubject.subscribe(res => {
-      this.username = res;
-    });
-
-    this.loginService.passwordSubject.subscribe(res => {
-      this.password = res;
     });
 
     this.createForm();
@@ -171,7 +160,7 @@ export class FacilityDetailComponent implements OnInit {
       this.imageFacility = this.nameFacility + "_" + this.file.name;
       this.managerService.updateFacility(this.idFacility, this.nameFacilityCategory, this.nameRoom, this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility, this.priceFacility, false);
       data.append('data', this.file, this.nameFacility + "_" + this.file.name);
-      this.managerService.addImage(data, this.username, this.password, "facilityForm");
+      this.managerService.addImage(data, "facilityForm");
     }
     else {
       this.managerService.updateFacility(this.idFacility, this.nameFacilityCategory, this.nameRoom, this.nameFacility, this.priceSeance, this.descriptionFacility, this.imageFacility, this.priceFacility, true);

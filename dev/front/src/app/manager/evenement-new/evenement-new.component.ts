@@ -59,8 +59,6 @@ export class EvenementNewComponent implements OnInit {
 
   @ViewChild('fileInput')
   fileInput: ElementRef;
-  username: string;
-  password: string;
 
   constructor(private formBuilder: FormBuilder,
               private managerService: ManagerService,
@@ -73,14 +71,6 @@ export class EvenementNewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-     this.loginService.usernameSubject.subscribe(res => {
-      this.username = res;
-    });
-
-    this.loginService.passwordSubject.subscribe(res => {
-      this.password = res;
-    });
-
     
     this.createForm();
   }
@@ -197,7 +187,7 @@ export class EvenementNewComponent implements OnInit {
           evenement.imageEvt = this.imageEvt;
           data.append('data', this.file, this.idEvt + "_" + this.file.name);
           this.evenementService.addEvenement(evenement, false);
-          this.managerService.addImage(data, this.username, this.password, "evenementForm");
+          this.managerService.addImage(data, "evenementForm");
         }
         else {
           this.evenementService.addEvenement(evenement, true);

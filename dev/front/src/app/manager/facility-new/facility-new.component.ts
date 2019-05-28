@@ -14,6 +14,7 @@ import { Room } from 'src/app/models/room.model';
 import { BehaviorSubject } from 'rxjs';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
 import { FacilityValidator } from 'src/app/validators/facility.validator';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-facility-new',
@@ -50,8 +51,6 @@ export class FacilityNewComponent implements OnInit {
 
   @ViewChild('fileInput')
   fileInput: ElementRef;
-  username: string;
-  password: string;
 
   constructor(private httpClient: HttpClient, 
               private formBuilder: FormBuilder,
@@ -80,14 +79,6 @@ export class FacilityNewComponent implements OnInit {
       this.rooms = res;
       this.managerService.publishRooms();
       this.listRooms = this.managerService.listRooms$;
-    });
-
-    this.loginService.usernameSubject.subscribe(res => {
-      this.username = res;
-    });
-
-    this.loginService.passwordSubject.subscribe(res => {
-      this.password = res;
     });
     
     this.createForm();
@@ -170,7 +161,7 @@ export class FacilityNewComponent implements OnInit {
         this.imageFacility = this.nameFacility + "_" + this.file.name;
         this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceSeance, this.priceFacility, transmitDateOfPurchase);
         data.append('data', this.file, this.nameFacility + "_" + this.file.name);
-        this.managerService.addImage(data, this.username, this.password, "facilityForm");
+        this.managerService.addImage(data, "facilityForm");
       }
       else {
         this.managerService.addFacility(this.idFacilityCategory, this.idRoom, this.nameFacility, this.descriptionFacility, this.imageFacility, this.priceSeance, this.priceFacility, transmitDateOfPurchase);

@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   public listCommandItems: Item []=[];
   public username: string;
   public nbItems: string;
-  public authority: Authority;
+  public authority: string;
   public isSubscribed: boolean;
   
 

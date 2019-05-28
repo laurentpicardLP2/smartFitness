@@ -1,11 +1,12 @@
 package laurent.fitness.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 
 /**
@@ -20,7 +21,6 @@ public class Product extends Item implements Serializable {
 //	//bi-directional many-to-one association to ProductRef
 	@ManyToOne
 	@JoinColumn(name="ProductRef_idProductRef")
-	@JsonManagedReference
 	private ProductRef productRef;
 
 	public Product() {

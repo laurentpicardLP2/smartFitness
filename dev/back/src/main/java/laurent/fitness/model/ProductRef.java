@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -35,16 +35,17 @@ public class ProductRef implements Serializable {
 	private String nameProductRef;
 
 	private float priceProductRef;
+	
+	String undefined = "undefined";
 
 	//bi-directional many-to-one association to Product
 	@OneToMany(mappedBy="productRef")
-	@JsonBackReference
+	@JsonIgnore
 	private List<Product> products;
 
 	//bi-directional many-to-one association to ProductCategory
 	@ManyToOne
 	@JoinColumn(name="ProductCategory_idProductCategory")
-	@JsonBackReference
 	private ProductCategory productCategory;
 
 	public ProductRef() {
@@ -53,7 +54,7 @@ public class ProductRef implements Serializable {
 	public ProductRef(String nameProductRef, float priceProductRef, String descriptionProductRef, String imageProductRef) {
 		this.nameProductRef = nameProductRef;
 		this.priceProductRef = priceProductRef;
-		this.descriptionProductRef = (descriptionProductRef.equals("undefined")) ? "" : descriptionProductRef;
+		this.descriptionProductRef = (descriptionProductRef.equals(undefined)) ? "" : descriptionProductRef;
 		this.imageProductRef = (imageProductRef.equals("undefined")) ? "" : imageProductRef;
 	}
 
@@ -61,8 +62,8 @@ public class ProductRef implements Serializable {
 	public ProductRef(String nameProductRef, float priceProductRef, String descriptionProductRef, String imageProductRef, ProductCategory productCategory) {
 		this.nameProductRef = nameProductRef;
 		this.priceProductRef = priceProductRef;
-		this.descriptionProductRef = (descriptionProductRef.equals("undefined")) ? "" : descriptionProductRef;
-		this.imageProductRef = (imageProductRef.equals("undefined")) ? "" : imageProductRef;
+		this.descriptionProductRef = (descriptionProductRef.equals(undefined)) ? "" : descriptionProductRef;
+		this.imageProductRef = (imageProductRef.equals(undefined)) ? "" : imageProductRef;
 		this.productCategory = productCategory;
 	}
 

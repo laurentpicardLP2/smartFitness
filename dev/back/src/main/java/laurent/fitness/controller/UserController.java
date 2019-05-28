@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import laurent.fitness.model.AuthToken;
 import laurent.fitness.model.Authority;
 import laurent.fitness.model.Customer;
 import laurent.fitness.security.IAuthenticationFacade;
@@ -65,7 +66,7 @@ public class UserController {
 	 */
 	
 	@PostMapping("/newcustomer")
-	public ResponseEntity<?> createCustomer(@RequestBody Customer newCustomer) {
+	public ResponseEntity<Customer> createCustomer(@RequestBody Customer newCustomer) {
 
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
 				
@@ -106,13 +107,13 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping("/login")
-	public ResponseEntity<?> authenticateUser(){
+	public ResponseEntity<AuthToken> authenticateUser(){
         Authentication authentication = authenticationFacade.getAuthentication();
         return ResponseEntity.ok(jwtTokenProvider.generateToken(authentication, this.userService.findByUsername(authentication.getName()), this.userService));
 	}
 	
 	@GetMapping("/authority/{username}")
-	public ResponseEntity<?> authorityOfUser (@PathVariable String username){
+	public ResponseEntity<Authority> authorityOfUser (@PathVariable String username){
 		
 		Authority authority = this.userService.getAuthorityForAnUser(username);
 		return ResponseEntity.ok(authority);

@@ -1,21 +1,14 @@
 import { UtilsService } from 'src/app/services/utils.service';
 import { ManagerService } from 'src/app/services/manager.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
-import { FacilityCategory } from 'src/app/models/facility-category.model';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { BehaviorSubject } from 'rxjs';
-import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
-import { FacilityCategoryValidator } from 'src/app/validators/facility-category.validator';
+import { errorMessages} from '../../services/custom-validators.service';
 import { EvenementService } from 'src/app/services/evenement.service';
 import { Evenement } from 'src/app/models/evenement.model';
-import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FileInformation } from '../file-information';
-import { OffresService } from 'src/app/services/offres.service';
-import { Authority } from 'src/app/models/authority.model';
-import { User } from 'src/app/models/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EmbedVideoService } from 'ngx-embed-video';
 
@@ -66,9 +59,6 @@ export class EvenementDetailComponent implements OnInit {
   
   @ViewChild('fileInput')
   fileInput: ElementRef;
-  username: string;
-  password: string;
-  
 
   constructor(private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -76,7 +66,6 @@ export class EvenementDetailComponent implements OnInit {
     private router: Router,
     private managerService: ManagerService,
     private loginService: LoginService,
-    private utilsService: UtilsService,
     private snackBar: MatSnackBar,
     private embedService: EmbedVideoService) {
       
@@ -104,15 +93,6 @@ export class EvenementDetailComponent implements OnInit {
       },
       (error) => {this.router.navigate(['error-page']);}
     );
-
-    this.loginService.usernameSubject.subscribe(res => {
-      this.username = res;
-    });
-
-    this.loginService.passwordSubject.subscribe(res => {
-      this.password = res;
-    });
-
     
     this.createForm();
  
@@ -243,7 +223,7 @@ export class EvenementDetailComponent implements OnInit {
         evenement.imageEvt = this.imageEvt;
         data.append('data', this.file, this.idEvt + "_" + this.file.name);
         this.evenementService.updateEvenement(evenement, false);
-        this.managerService.addImage(data, this.username, this.password, "evenementForm");
+        this.managerService.addImage(data, "evenementForm");
       }
       else {
         this.evenementService.updateEvenement(evenement, true);

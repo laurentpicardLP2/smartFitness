@@ -1,7 +1,6 @@
 import { ManagerService } from 'src/app/services/manager.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { FileInformation } from '../file-information';
 import { ProductService } from 'src/app/services/product.service';
@@ -34,12 +33,9 @@ export class ProductRefNewComponent implements OnInit {
 
   @ViewChild('fileInput')
   fileInput: ElementRef;
-  username: string;
-  password: string;
-
+  
   constructor(private formBuilder: FormBuilder,
               private productService: ProductService,
-              private loginService: LoginService,
               private managerService: ManagerService) {
  
   }
@@ -47,14 +43,6 @@ export class ProductRefNewComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getNameProductCategories().subscribe(res => {
       this.listProductCategories = this.productService.listProductCategories$;
-    });
-
-    this.loginService.usernameSubject.subscribe(res => {
-      this.username = res;
-    });
-
-    this.loginService.passwordSubject.subscribe(res => {
-      this.password = res;
     });
 
     this.productService.publishProductRefs();
@@ -105,7 +93,7 @@ export class ProductRefNewComponent implements OnInit {
         productRef.imageProductRef = this.imageProductRef;
         data.append('data', this.file, this.nameProductRef + "_" + this.file.name);
         this.productService.addProductRef(this.idProductCategory, productRef , false);
-        this.managerService.addImage(data, this.username, this.password, "productRefForm");
+        this.managerService.addImage(data, "productRefForm");
       }
       else {
         this.productService.addProductRef(this.idProductCategory, productRef , true);

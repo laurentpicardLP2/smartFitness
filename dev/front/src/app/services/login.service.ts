@@ -13,6 +13,7 @@ import { CommandService} from './command.service';
 import { TokenStorageService } from './token-storage.service';
 import { Authority } from 'src/app/models/authority.model';
 import { ProductService } from './product.service';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -78,18 +79,6 @@ export class LoginService {
      }
    }
 
-  /**
-   * l'existence de ce subject a pour but de rejouer une authentification automatique d'un upload
-   * d'un fichier image
-   */
-  public passwordSubject: BehaviorSubject<string> = new BehaviorSubject(null);
-  public setPasswordSubject(value: string){
-    if(value){
-      this.passwordSubject.next(value);
-    } else {
-      this.passwordSubject.next(null);
-    }
-  }
 
   /**
    * l'existence de ce subject a pour but de récupérer l'instance active du user
@@ -105,11 +94,11 @@ export class LoginService {
   }
 
 
-  // Subject informant du rôle (authority) de l'utlisateur
-  public authoritySubject: BehaviorSubject<Authority> = new BehaviorSubject(null);
-  public setAuthoritySubject(value: Authority){
+  //Subject informant du rôle (authority) de l'utlisateur
+  public authoritySubject: BehaviorSubject<string> = new BehaviorSubject(null);
+  public setAuthoritySubject(value: string){
     if(value){
-      this.authority = value.authority;
+      this.authority = value;
       this.authoritySubject.next(value);
       
        if(this.authority == "ROLE_ADMIN" || this.authority == "ROLE_MANAGER"){
@@ -181,7 +170,7 @@ export class LoginService {
         duration: 10000
       });
         this.setIsUserLoggedSubject(false);
-        this.setAuthoritySubject(new Authority("","ROLE_ANONYMOUS"));
+        this.setAuthoritySubject("ROLE_ANONYMOUS");
       }
     );
   }
@@ -207,32 +196,17 @@ export class LoginService {
     this.publishAuthority(user);
     this.setIsUserLoggedSubject(true); 
     this.setUsernameSubject(user.username);
-    this.setPasswordSubject(user.password);
-    
-        if(bReload){
-          let fromForm = window.localStorage.getItem("fromForm") ;
-          window.localStorage.clear();
-          if(fromForm == "facilityForm") {
-            setTimeout(() => this.router.navigate(['/facility-listing']), 650);
-          } else if(fromForm == "evenementForm"){
-            setTimeout(() => this.router.navigate(['/evenement-listing']), 650);
-          }
-         else if(fromForm == "productRefForm"){
-          setTimeout(() => this.router.navigate(['/product-ref-listing']), 650);
-          }          
-        }
-        else {       
               
-          this.getUserInfos(user.username).subscribe(
-            (res) => {
-                this.setIsUserSubscribedSubject(parseInt(res[0], 10) == 1);
-                this.setFullnameSubject(res[1]);
-                this.router.navigate(['']);
+      this.getUserInfos(user.username).subscribe(
+        (res) => {
+            this.setIsUserSubscribedSubject(parseInt(res[0], 10) == 1);
+            this.setFullnameSubject(res[1]);
+            this.router.navigate(['']);
 
-            },
-            (error) => { }
-          );
-        }
+        },
+        (error) => { }
+      );
+        
   }
 
   attemptAuth(ussername: string, password: string): Observable<any> {
@@ -282,12 +256,13 @@ export class LoginService {
 
 
   public publishAuthority(user: User) {
-    this.getAuthority(user.username).subscribe(
-      authority => {
+      const decodedToken = jwt_decode(this.token.getToken());
+      const authority = decodedToken.authority;
+
         this.setAuthoritySubject(authority);
         this.setUserSubject(user);
 
-        if(authority.authority=="ROLE_CUSTOMER" && this.isCommandInit == false){
+        if(authority=="ROLE_CUSTOMER" && this.isCommandInit == false){
           this.isCommandInit = true;
            this.commandService.initCommand(user.username, true); 
            this.commandService.setListCommandItemsSubject(null);
@@ -313,8 +288,7 @@ export class LoginService {
             setTimeout(() => this.autoclose(), 2000);
           }
     
-        }       
-      });
+        }
   }
 
 
@@ -322,7 +296,7 @@ export class LoginService {
   public signOut(){
     this.isCommandInit = false;
     this.setIsUserLoggedSubject(false);
-    this.setAuthoritySubject(new Authority("","ROLE_ANONYMOUS"));
+    this.setAuthoritySubject("ROLE_ANONYMOUS");
     this.token.signOut();
     this.router.navigate[('/login')];
   }

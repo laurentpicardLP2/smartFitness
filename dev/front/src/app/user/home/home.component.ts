@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     
 
     this.loginService.authoritySubject.subscribe(res => {
-      this.authority = res.authority;
+      this.authority = res;
       if(this.authority == 'ROLE_ANONYMOUS'){
         this.arrayTitle.push("Connectez-vous pour accéder aux fonctionnalités.");
         this.arrayTitle.push("Découvrez notre activité et comment venir chez nous.");

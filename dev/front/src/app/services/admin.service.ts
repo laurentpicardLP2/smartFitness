@@ -74,6 +74,7 @@ export class AdminService {
         (staff) =>{ 
                     this.utilsService.availableUsernames.push(newStaff.username);
                     this.utilsService.availableUsernames$.next(this.utilsService.availableUsernames);
+                    this.router.navigate(['/staff-listing']);
                   },
         (error) => console.log("création staff pb : ", error) 
     );

@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -31,7 +31,7 @@ public class ProductCategory implements Serializable {
 
 	//bi-directional many-to-one association to ProductRef
 	@OneToMany(mappedBy="productCategory", cascade=CascadeType.REMOVE)
-	@JsonManagedReference
+	@JsonIgnore
 	private List<ProductRef> productRefs;
 
 	public ProductCategory() {

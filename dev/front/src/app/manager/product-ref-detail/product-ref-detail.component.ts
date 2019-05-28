@@ -1,7 +1,6 @@
 import { ManagerService } from 'src/app/services/manager.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { FileInformation } from '../file-information';
 import { ProductService } from 'src/app/services/product.service';
@@ -37,9 +36,7 @@ export class ProductRefDetailComponent implements OnInit {
 
   @ViewChild('fileInput')
   fileInput: ElementRef;
-  username: string;
-  password: string;
-  bChangeImage: boolean = false;
+   bChangeImage: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private formBuilder: FormBuilder,
@@ -64,15 +61,6 @@ export class ProductRefDetailComponent implements OnInit {
       this.productCategoryAssociateToProductRef = res;
       this.productService.publishProductCategoryAssociateToProductRef(this.idProductRef);
       this.nameProductCategory = this.productCategoryAssociateToProductRef.nameProductCategory;
-    });
-
-
-    this.loginService.usernameSubject.subscribe(res => {
-      this.username = res;
-    });
-
-    this.loginService.passwordSubject.subscribe(res => {
-      this.password = res;
     });
 
     this.productService.getNameProductCategories().subscribe(res => {
@@ -130,7 +118,7 @@ export class ProductRefDetailComponent implements OnInit {
       data.append('data', this.file, this.nameProductRef + "_" + this.file.name);
       productRef.imageProductRef = this.imageProductRef;
       this.productService.updateProductRef(productRef, this.nameProductCategory, false);
-      this.managerService.addImage(data, this.username, this.password, "productRefForm");
+      this.managerService.addImage(data, "productRefForm");
     }
     else {
       this.productService.updateProductRef(productRef, this.nameProductCategory, true);

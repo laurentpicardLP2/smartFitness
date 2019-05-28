@@ -33,8 +33,7 @@ export class WatchCategoryNewComponent implements OnInit {
 
   @ViewChild('fileInput')
   fileInput: ElementRef;
-  username: string;
-  password: string;
+  
 
   constructor(private httpClient: HttpClient, 
               private formBuilder: FormBuilder,
@@ -48,13 +47,6 @@ export class WatchCategoryNewComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loginService.usernameSubject.subscribe(res => {
-      this.username = res;
-    });
-
-    this.loginService.passwordSubject.subscribe(res => {
-      this.password = res;
-    });
 
     this.offresService.publishWatchCategories();
     
@@ -115,7 +107,7 @@ export class WatchCategoryNewComponent implements OnInit {
         this.imageWatch = this.nameWatch + "_" + this.file.name;
         data.append('data', this.file, this.nameWatch + "_" + this.file.name);
         this.offresService.addWatchCategory(this.nameWatch, this.priceWatch, this.descriptionWatch, this.imageWatch, false);
-        this.managerService.addImage(data, this.username, this.password, "watchCategoryForm");
+        this.managerService.addImage(data, "watchCategoryForm");
       }
       else {
         this.offresService.addWatchCategory(this.nameWatch, this.priceWatch, this.descriptionWatch, this.imageWatch, true);

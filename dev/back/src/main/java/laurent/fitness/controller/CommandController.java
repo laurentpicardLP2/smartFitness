@@ -53,8 +53,8 @@ public class CommandController {
 	
 	//Initialise une commande lorsqu'un utilisateur se connecte
 	@PostMapping("/addcommand/{username}")
-	public ResponseEntity<?> addCommand(@PathVariable String username) {
-		Logger logger = Logger.getLogger("Try-Catch Erreur");
+	public ResponseEntity<Command> addCommand(@PathVariable String username) {
+		Logger logger = Logger.getLogger("addcommand Try-Catch Erreur");
 
 		try {
 			Customer customer = this.customerService.findByUsername(username);
@@ -75,7 +75,7 @@ public class CommandController {
 			}
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 		} catch(Exception e) {
-			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			Logger logger = Logger.getLogger(" delcommandTry-Catch Erreur");
 			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
@@ -89,7 +89,7 @@ public class CommandController {
 			this.commandService.deleteCommandsZeroByUsername(username);
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 		} catch(Exception e) {
-			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			Logger logger = Logger.getLogger(" cleancommandTry-Catch Erreur");
 			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
@@ -109,14 +109,14 @@ public class CommandController {
 	
 	// Reset a command resetcommand
 	@PutMapping("/resetcommand/{idCommand}/{username}")
-	public ResponseEntity<?> resetCommand(@PathVariable int idCommand, @PathVariable String username){
+	public ResponseEntity<Command> resetCommand(@PathVariable int idCommand, @PathVariable String username){
 	
 		try {
 			this.commandService.deleteCommand(this.commandService.findByIdCommand(idCommand));
 			Customer customer = this.customerService.findByUsername(username);
 			return ResponseEntity.status(HttpStatus.OK).body(this.commandService.saveCommand(new Command(customer, new Date())));
 		} catch(Exception e) {
-			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			Logger logger = Logger.getLogger(" commandService Try-Catch Erreur");
 			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
@@ -124,7 +124,7 @@ public class CommandController {
 	
 	// Validation du panier : maj en base des prix des différents items du panier
 	@PutMapping("/validatecommand")
-	public ResponseEntity<?> validateCommand(@RequestBody Command command){
+	public ResponseEntity<Command> validateCommand(@RequestBody Command command){
 	
 		try {
 						
@@ -147,14 +147,14 @@ public class CommandController {
 	
 	// Met à jour la commande suite à la suppresion d'articles dans le panier
 		@PutMapping("/updatecommand")
-	public ResponseEntity<?> updateCommand(@RequestBody Command command){
+	public ResponseEntity<Command> updateCommand(@RequestBody Command command){
 	
 		try {
 			this.commandService.saveCommand(command);
 			return ResponseEntity.status(HttpStatus.OK).body(command); 
 					
 		} catch(Exception e) {
-			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			Logger logger = Logger.getLogger("validatecommand Try-Catch Erreur");
 			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
@@ -174,12 +174,12 @@ public class CommandController {
 	
 	// Met à 1 le statut de la commande idCommand (correspond au statut 'en cours d'acquisition')
 	@PutMapping("/setupdatestatusandpricetocommand/{idCommand}/{totalPrice}")
-	public ResponseEntity<?> setUpdateStatusAndPriceToCommand(@PathVariable int idCommand, @PathVariable float totalPrice){
+	public ResponseEntity<Command> setUpdateStatusAndPriceToCommand(@PathVariable int idCommand, @PathVariable float totalPrice){
 	
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(this.commandService.setUpdateStatusAndPriceToCommand(idCommand, totalPrice));
 		} catch(Exception e) {
-			Logger logger = Logger.getLogger("Try-Catch Erreur");
+			Logger logger = Logger.getLogger("setupdatestatusandpricetocommand Try-Catch Erreur");
 			logger.log(Level.SEVERE, e.toString());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);	
 		}
