@@ -122,6 +122,9 @@
                     <mat-error *ngIf="userRegistrationForm.controls['dateOfBirthday'].hasError('dateOfBirthday') && userRegistrationForm.value.dateOfBirthday">
                         {{errors.dateOfBirthday}}
                     </mat-error>
+                    <mat-error *ngIf="!(userRegistrationForm.controls['dateOfBirthday'].hasError('dateOfBirthday') && userRegistrationForm.value.dateOfBirthday)">
+                        {{errors.dateOfBirthday}}
+                    </mat-error>
                 </mat-form-field>
                 </p>
             </div>
