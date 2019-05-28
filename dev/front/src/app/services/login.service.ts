@@ -199,7 +199,6 @@ export class LoginService {
               
       this.getUserInfos(user.username).subscribe(
         (res) => {
-            this.setIsUserSubscribedSubject(parseInt(res[0], 10) == 1);
             this.setFullnameSubject(res[1]);
             this.router.navigate(['']);
 
@@ -234,6 +233,17 @@ export class LoginService {
 
   getUserInfos(username: string): Observable<string []>{
     return this.httpClient.get<string []>('http://localhost:8080/userctrl/getuserinfos/' + username, 
+    {
+      headers: {
+          "Content-Type": "application/json",
+          'Access-Control-Allow-Origin':'*',
+          "Authorization": this.token.getToken()
+      }
+  });
+  }
+
+  getUserSubscribed(username: string, selectedDate: string): Observable<boolean>{
+    return this.httpClient.get<boolean>('http://localhost:8080/userctrl/getisusernamesubscribedselecteddate/' + username + '/' + selectedDate, 
     {
       headers: {
           "Content-Type": "application/json",

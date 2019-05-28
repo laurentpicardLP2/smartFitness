@@ -152,5 +152,14 @@ public class UserController {
 		return this.userService.getUserInfos(username);
 	}
 	
+	/**
+	 * Indique si un utilisateur est abonné à la date selectedDate
+	 * 
+	 * @return
+	 */
+	@GetMapping("/getisusernamesubscribedselecteddate/{username}/{selectedDate}")
+	public boolean findIsSubscribedSelectedDate(@PathVariable String username, @PathVariable String selectedDate) {
+		return this.userService.findIsSubscribedSelectedDateByUsername(username, selectedDate);
+	}
 
 }

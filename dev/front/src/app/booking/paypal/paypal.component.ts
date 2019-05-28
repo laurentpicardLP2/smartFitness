@@ -22,6 +22,7 @@ export class PaypalComponent implements OnInit {
   username: string;
   fullname: string;
   email: string;
+  dateCommand: Date;
 
   constructor(private commandService: CommandService,
     private emailService: EmailService,
@@ -43,6 +44,7 @@ export class PaypalComponent implements OnInit {
       this.commandService.commandSubject.subscribe(res => {
         this.command = res;
         this.totalPrice = this.command.totalPrice;
+        this.dateCommand = this.command.dateOfCommand
 
         setTimeout(() => this.isHidden = false, 2000);
 
@@ -132,7 +134,7 @@ export class PaypalComponent implements OnInit {
           this.showSuccess = true;
           this.commandService.setNbItemsSubject("");
           this.emailService.sendEmailAfterPaypal(this.command.idCommand, this.command.totalPrice, this.username);
-          this.router.navigate(['acknoledgment/' + this.email + '/' + this.command.idCommand + '/' + this.command.totalPrice + '/' + this.username + '/' + this.fullname]);
+          this.router.navigate(['acknoledgment/' + this.email + '/' + this.command.idCommand + '/' + this.command.totalPrice + '/' + this.username + '/' + this.fullname + '/' + this.dateCommand]);
         },
         onCancel: (data, actions) => {
           this.isHidden = false;

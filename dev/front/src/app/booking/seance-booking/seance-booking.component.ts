@@ -248,6 +248,15 @@ export class SeanceBookingComponent implements OnInit, OnDestroy {
       setTimeout(() => this.seanceService.setIsShowableFacilitiesSubject(true), 150);
     }
 
+    let dateFieldsSplit = this.strDateOfBooking.split("-");
+    let selectedDate = dateFieldsSplit[0] + "-" + dateFieldsSplit[1] + "-" + dateFieldsSplit[2];
+
+    this.loginService.getUserSubscribed(this.username, selectedDate).subscribe(
+      (res) => {this.loginService.setIsUserSubscribedSubject(res);}
+    );
+
+    
+
     this.bookingService.setTimestampSubject(selectedTimestamp);
     this.router.navigate(['/seance-booking', {outlets: {'facility-category-router-outlet' : ['facility-category-booking']}}]);
     let isBookedTimestamp = false;

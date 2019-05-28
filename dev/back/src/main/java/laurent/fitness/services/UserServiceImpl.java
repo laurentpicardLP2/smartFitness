@@ -80,10 +80,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<String> getUserInfos(String username) {
 		User user = this.userRepo.findByUsername(username);
-		List<String> infos = new ArrayList<String>();
-		infos.add(Integer.toString(this.subscriptionRepo.findIsSubscridebByUsername(username)));
+		List<String> infos = new ArrayList<>();
 		infos.add(user.getFullname());
 		infos.add(user.getEmail());
 		return infos;
 	}
+	
+	@Override
+	public boolean findIsSubscribedSelectedDateByUsername(String username, String selectedDate) {
+		return this.subscriptionRepo.findIsSubscribedSelectedDateByUsername(username, selectedDate) > 0;
+	}
+	
 }

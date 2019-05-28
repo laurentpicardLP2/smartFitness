@@ -26,5 +26,7 @@ public interface UserService {
 	public List<String> getListUsername();
 	
 	public List<String> getUserInfos(String username);
+	
+	public boolean findIsSubscribedSelectedDateByUsername(String username, String selectedDate);
 
 }

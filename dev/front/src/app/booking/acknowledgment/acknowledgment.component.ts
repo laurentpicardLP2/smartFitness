@@ -18,6 +18,8 @@ export class AcknowledgmentComponent implements OnInit {
   username: string;
   fullname: string;
   isCommandInit: boolean = false; // nécessaire dans le cas où il y  a plusieurs onglets de smartFitness ouvert
+  dateCommand: Date;
+  strDateCommand: string;
 
   constructor(private route: ActivatedRoute,
               private commandService: CommandService,
@@ -30,6 +32,10 @@ export class AcknowledgmentComponent implements OnInit {
     this.totalPrice = +this.route.snapshot.params.totalPrice;
     this.username = this.route.snapshot.params.username;
     this.fullname = this.route.snapshot.params.fullname;
+    this.dateCommand = this.route.snapshot.params.dateCommand;
+
+    let strDate = this.dateCommand.toString().split("T")[0];
+    this.strDateCommand = strDate.split("-")[2] + "-" + strDate.split("-")[1] + "-" + strDate.split("-")[0];
 
     this.loginService.userSubject.subscribe(
       (res) => {

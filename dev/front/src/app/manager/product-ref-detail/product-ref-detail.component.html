@@ -45,7 +45,7 @@
         <button mat-raised-button [disabled]="productRefForm.invalid" (click)="onUpdate()">Enregistrer les modifications</button>
         <div>
           <br>
-          <img *ngIf="imageProductRef!='' && imageProductRef!='undefined' &&  !bChangeImage" class="img-watch" src="assets/images/facilities/{{ imageProductRef }}" />
+          <img *ngIf="imageProductRef!='' && imageProductRef!='undefined' &&  !bChangeImage" class="img-product" src="assets/images/facilities/{{ imageProductRef }}" />
         </div>
         <div *ngIf="imageProductRef!='' && imageProductRef!='undefined' && bChangeImage">
             <br>

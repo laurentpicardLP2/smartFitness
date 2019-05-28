@@ -60,7 +60,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public boolean findIsSubscribedByUsername(String username) {
-		return this.subscriptionRepo.findIsSubscridebByUsername(username) > 0;
+		return this.subscriptionRepo.findIsSubscribedByUsername(username) > 0;
 	}
 
 

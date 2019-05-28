@@ -115,7 +115,7 @@ const routes: Routes = [
   { path: 'facility-maintenance/:idFacility', canActivate: [AuthGuardManagerService], component: FacilityMaintenanceComponent},
   { path: 'balance-by-facility', canActivate: [AuthGuardManagerService], component: BalanceByFacilityComponent},
   { path: 'paypal', canActivate: [AuthGuardPaypalService], component: PaypalComponent },
-  { path: 'acknoledgment/:email/:idCommand/:totalPrice/:username/:fullname', canActivate: [AuthGuardPaypalService], component: AcknowledgmentComponent },
+  { path: 'acknoledgment/:email/:idCommand/:totalPrice/:username/:fullname/:dateCommand', canActivate: [AuthGuardPaypalService], component: AcknowledgmentComponent },
   { path: 'favorite-product', canActivate: [AuthGuardCustomerService], component: FavoriteProductComponent},
   { path: 'product-listing', canActivate: [AuthGuardCustomerService], component: ProductListingComponent},
   { path: 'product-detail/:idProductRef', canActivate: [AuthGuardCustomerService], component: ProductDetailComponent},

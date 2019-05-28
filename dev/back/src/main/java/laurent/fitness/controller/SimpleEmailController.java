@@ -1,5 +1,6 @@
 package laurent.fitness.controller;
 
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,14 +38,13 @@ public class SimpleEmailController {
     }
  
     @PostMapping("/payedcommand/{idCommand}/{amountFormatted}/{username}")
-    public ResponseEntity<?> sendEmailAfterPaypal(@PathVariable Integer idCommand, @PathVariable String amountFormatted, @PathVariable String username) {
+    public ResponseEntity<Command> sendEmailAfterPaypal(@PathVariable Integer idCommand, @PathVariable String amountFormatted, @PathVariable String username) {
         try {
             
             sendEmailPaypal(idCommand, amountFormatted, this.userService.getFullnameByUsername(username), this.userService.getEmailByUsername(username));
             Command command = this.commandService.findByIdCommand(idCommand);
             command.setStatusCommand(3);
-            this.commandService.saveCommand(command);
-            return ResponseEntity.status(HttpStatus.OK).body(null);
+            return ResponseEntity.status(HttpStatus.OK).body(this.commandService.saveCommand(command));
         }catch(Exception ex) {
 			Logger logger = Logger.getLogger("Try-Catch Erreur");
 			logger.log(Level.SEVERE, ex.toString());
@@ -52,16 +52,23 @@ public class SimpleEmailController {
         }
     }
  
-    private void sendEmailPaypal(int idCommand, String amountFormatted, String fullname, String email) throws Exception{
+   private void sendEmailPaypal(int idCommand, String amountFormatted, String fullname, String email) throws Exception{
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
-         
-        
+        Calendar calendar = Calendar.getInstance();
+		
+		calendar.setTime(this.commandService.findByIdCommand(idCommand).getDateOfCommand());
         helper.setTo(email);
         
-        helper.setText("Bonjour " + fullname + ",\n\nL'équipe de Smart Fitness vous accuse réception de la commande n°" + idCommand + 
+
+		String strYear =  Integer.toString(calendar.get(Calendar.YEAR));
+		String strMonth = (calendar.get(Calendar.MONTH) +1 <10) ? "0" + (calendar.get(Calendar.MONTH) + 1) : "" + (calendar.get(Calendar.MONTH) + 1);
+		String strDay = (calendar.get(Calendar.DAY_OF_MONTH)<10) ? "0" + calendar.get(Calendar.DAY_OF_MONTH) : "" + calendar.get(Calendar.DAY_OF_MONTH);
+		String strDateCmd = strDay + "-" + strMonth + "-" + strYear;
+        
+        helper.setText("Bonjour " + fullname + ",\n\nL'équipe de Smart Fitness accuse réception de votre commande à la date du " + strDateCmd + 
         		" pour un montant de " + amountFormatted + ".\nNous vous remercions de votre confiance et nous nous félicitons de vous revoir prochainement dans notre centre !\n\nL'équipe Smart Fitness");
-        helper.setSubject("Votre commande n°" + idCommand);
+        helper.setSubject("Votre commande du " + strDateCmd);
          
         sender.send(message);
     }
@@ -85,7 +92,7 @@ public class SimpleEmailController {
         
         helper.setTo(email);
         
-        helper.setText("Bonjour " + fullname + ",\n\nL'équipe de Smart Fitness vous souhaite la bienvenue.\n"
+        helper.setText("Bonjour " + fullname + ",\n\nL'équipe Smart Fitness vous souhaite la bienvenue.\n"
         		+ "Nous vous remercions de votre confiance et nous nous félicitons de vous voir prochainement dans notre centre !\n\nL'équipe Smart Fitness");
         helper.setSubject("Bienvenue chez SmartFitness.");
          
