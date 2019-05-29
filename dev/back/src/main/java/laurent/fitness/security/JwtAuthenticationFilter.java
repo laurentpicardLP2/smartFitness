@@ -35,6 +35,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
 	AuthenticationManager authenticationManager;
 
+    /**
+     * méthode appelée vérifiant que la requête d'un utilisateur est habilitée à accéder à la ressource du contrôleur 
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
 
@@ -44,18 +47,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 int userId = tokenProvider.getUserIdFromJWT(jwt);
                 
                 User user = customUserDetailsService.loadUserById(userId);
-                                               
+                                  
+             // Authentification de l'utilisateur
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 		user.getUsername(),
                 		user.getPassword()
                 );
-                
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                                               		
+                 
+                // Extrait du token le rôle de l'utilisateur
                 List<SimpleGrantedAuthority> updatedAuthorities = new ArrayList<>();
                updatedAuthorities.add(new SimpleGrantedAuthority(tokenProvider.getAuthorityFroJWT(jwt)));
 
-
+               // Sert à paramétrer le contexte de l'authentication de l'utilisateur avec son niveau d'authority(ie, son rôle) 
                 SecurityContextHolder.getContext().setAuthentication(
                         new UsernamePasswordAuthenticationToken(
                                 SecurityContextHolder.getContext().getAuthentication().getPrincipal(),

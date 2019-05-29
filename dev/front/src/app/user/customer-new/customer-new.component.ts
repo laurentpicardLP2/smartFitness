@@ -130,6 +130,7 @@ type="password";
             Validators.pattern('(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}')
         ]],
         dateOfBirthday: ['', [
+            Validators.required,
             CustomValidator.dateOfBirhdayValidator()
         ]]
       });

@@ -117,7 +117,7 @@
             <div>
                 <p>
                 <mat-form-field class="customer-full-width">
-                    <input matInput type="date"  placeholder="Date de naissance" formControlName="dateOfBirthday" [(ngModel)]="dateOfBirthday">
+                    <input matInput type="date" required placeholder="Date de naissance" formControlName="dateOfBirthday" [(ngModel)]="dateOfBirthday">
                     <mat-icon matSuffix>mode_edit</mat-icon>
                     <mat-error *ngIf="userRegistrationForm.controls['dateOfBirthday'].hasError('dateOfBirthday') && userRegistrationForm.value.dateOfBirthday">
                         {{errors.dateOfBirthday}}

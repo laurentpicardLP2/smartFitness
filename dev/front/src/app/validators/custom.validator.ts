@@ -25,7 +25,7 @@ export class CustomValidator {
                 let month = strOfBirth.toString().split("-")[1];
                 let day = strOfBirth.toString().split("-")[2];
                 let dateOfBirth = new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10))
-                isValid = !(dateOfBirth.getTime()> (new Date()).getTime() || ( ((new Date()).getTime() - dateOfBirth.getTime()) > 3787121480763) );
+                isValid = !(dateOfBirth.getTime()> ((new Date()).getTime() -504918000000 )|| ( ((new Date()).getTime() - dateOfBirth.getTime()) > 3787121480763) );
             }
             if (isValid) {
                 return null;

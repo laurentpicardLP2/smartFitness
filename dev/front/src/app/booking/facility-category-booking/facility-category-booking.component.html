@@ -1,4 +1,5 @@
       
+
 <div *ngIf="!isNotAvailableFacilities && !isBookedTimestamp" style="position: relative; text-align:center; height: 350px; vertical-align: bottom; background-image: url('assets/images/smartFitness.jpg'); background-repeat: no-repeat; background-position: center bottom; opacity:0.09;">
     
 </div>
@@ -42,7 +43,7 @@
                             <span *ngIf="!this.isSubscribed" class="no-suscriber-libel"><br> -50% si vous êtes abonné!</span>
                           </td>
                           <td rowspan=2>
-                            <img class="img-facility" src="assets/images/facilities/{{ facility.imageFacility }}" />
+                              <a (click)="onBookingFacility(facility.nameFacility, facilityCategory.nameFacilityCategory, facility.priceSeance)"> <img class="img-facility" src="assets/images/facilities/{{ facility.imageFacility }}" /></a>
                         </td>
                        </tr>
                       <tr>
@@ -60,7 +61,7 @@
                             <span *ngIf="!this.isSubscribed" class="no-suscriber-libel"><br> -50% si vous êtes abonné!</span>
                         </td> 
                          <td rowspan=3>
-                              <img class="img-facility" src="assets/images/facilities/{{ facility.imageFacility }}" />
+                            <a (click)="onBookingFacility(facility.nameFacility, facilityCategory.nameFacilityCategory, facility.priceSeance)"> <img class="img-facility" src="assets/images/facilities/{{ facility.imageFacility }}" /></a>
                           </td>
                        </tr>
                         <tr>
@@ -86,5 +87,16 @@
     </mat-expansion-panel>
   </mat-accordion>
 </div>
+
+
+
+
+
+
+
+
+
+
+
   
   

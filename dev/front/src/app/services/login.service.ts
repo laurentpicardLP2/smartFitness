@@ -219,17 +219,17 @@ export class LoginService {
     });
   }
 
-  public getAuthority(username: string): Observable<Authority> {
+  // public getAuthority(username: string): Observable<Authority> {
     
-    return this.httpClient.get<Authority>('http://localhost:8080/userctrl/authority/' + username, 
-    {
-      headers: {
-          "Content-Type": "application/json",
-          'Access-Control-Allow-Origin':'*',
-          "Authorization": this.token.getToken()
-      }
-  });
-  }
+  //   return this.httpClient.get<Authority>('http://localhost:8080/userctrl/authority/' + username, 
+  //   {
+  //     headers: {
+  //         "Content-Type": "application/json",
+  //         'Access-Control-Allow-Origin':'*',
+  //         "Authorization": this.token.getToken()
+  //     }
+  // });
+  // }
 
   getUserInfos(username: string): Observable<string []>{
     return this.httpClient.get<string []>('http://localhost:8080/userctrl/getuserinfos/' + username, 

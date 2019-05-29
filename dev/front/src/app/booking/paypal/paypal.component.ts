@@ -53,8 +53,8 @@ export class PaypalComponent implements OnInit {
             this.username = res ;
                         this.loginService.getUserInfos(this.username).subscribe(
               (res) => {
-                this.fullname = res[1];
-                this.email = res[2];
+                this.fullname = res[0];
+                this.email = res[1];
               },
               (error) => { }
             );

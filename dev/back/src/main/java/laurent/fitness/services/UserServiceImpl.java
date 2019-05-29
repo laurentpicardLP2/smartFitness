@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
 		infos.add(user.getEmail());
 		return infos;
 	}
-	
+
 	@Override
 	public boolean findIsSubscribedSelectedDateByUsername(String username, String selectedDate) {
 		return this.subscriptionRepo.findIsSubscribedSelectedDateByUsername(username, selectedDate) > 0;

@@ -66,16 +66,16 @@ public class JwtTokenProvider {
             Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
             return true;
         } catch (SignatureException ex){
-        	Logger.getLogger("Signature JWT invalide !!!");
+        	Logger.getLogger("Signature JWT invalide");
         } catch (MalformedJwtException ex) {
-        	Logger.getLogger("token JWT invalide !!!");
+        	Logger.getLogger("token JWT invalide");
         } catch (ExpiredJwtException ex) {
-        	Logger.getLogger("Désolé, le token a expiré !!!");
+        	Logger.getLogger("Désolé, le token a expiré");
         } catch (UnsupportedJwtException ex){
-        	Logger.getLogger("Token JWT non supporté !!!");
+        	Logger.getLogger("Token JWT non supporté");
            
         } catch (IllegalArgumentException ex) {
-        	Logger.getLogger("JWT claims string is empty !!!");
+        	Logger.getLogger("JWT claims string is empty");
         }
         return false;
     }
