@@ -38,6 +38,7 @@ public class JwtTokenProvider {
      * @return
      */
     public AuthToken generateToken(Authentication authentication, User user, UserService userService) {
+    	long validityInMilliseconds = 3600;
     	
 	    user = userService.findByUsername(user.getUsername()); // pour récupérer l'id
 	    SecurityContextHolder.getContext().setAuthentication(authentication);

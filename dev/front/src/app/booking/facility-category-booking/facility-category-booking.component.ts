@@ -111,7 +111,7 @@ export class FacilityCategoryBookingComponent implements OnInit, OnDestroy {
               this.onBookingFacilityCheckedCommand(nameFacility, nameFacilityCategory, priceSeance);
             }
         },
-          (error) => {this.loginService.signOut();}
+          (error) => {this.loginService.signOut(); this.router.navigate(['/login']);}
         ); 
   }
 
