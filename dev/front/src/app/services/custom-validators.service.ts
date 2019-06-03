@@ -53,7 +53,7 @@ export const errorMessages: { [key: string]: string } = {
     username: 'Votre identifiant doit avoir entre 1 et 40 caractères.',
     email: 'Email doit être un email valide (username@domain).',
     confirmEmail: 'Les adresses emails doivent correspondre.',
-    password: 'Le mot de passe doit comporter entre 1 et 128 caractères, et contenir au moins un chiffre et un caractère spécial.',
+    password: 'Le mot de passe doit comporter entre 7 et 128 caractères, et contenir au moins un chiffre et un caractère spécial.',
     confirmPassword: 'Les mots de passe doivent correspondre.',
     cp: '5 caractères pour le code postal.',
     adresse: 'L\'adresse doit être renseignée.',

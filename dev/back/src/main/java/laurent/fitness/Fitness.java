@@ -7,9 +7,17 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.StoredProcedureQuery;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import laurent.fitness.services.AuthorityService;
+import laurent.fitness.services.StaffService;
+import laurent.fitness.services.UserService;
 
 
 
