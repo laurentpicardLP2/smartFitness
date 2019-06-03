@@ -199,7 +199,7 @@ export class LoginService {
               
       this.getUserInfos(user.username).subscribe(
         (res) => {
-            this.setFullnameSubject(res[1]);
+            this.setFullnameSubject(res[0].split(" ")[0]);
             this.router.navigate(['']);
 
         },
