@@ -38,7 +38,7 @@ public class EvenementControllerTest {
 	
 	@Autowired
 	MockMvc mockMvc;
-		
+	
 	@Autowired
 	private ObjectMapper objectMapper;
 
@@ -52,7 +52,7 @@ public class EvenementControllerTest {
 
 	@MockBean
 	EvenementService evenementService;
-	
+
 	@Test
 	@WithMockUser(roles={"ADMIN"})
 	public void getEvenements() throws Exception {

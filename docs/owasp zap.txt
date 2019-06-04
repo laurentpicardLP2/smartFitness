@@ -1,1 +1,1 @@
-etc/zaproxy/zap.sh -port 8090
+opt/zaproxy/zap.sh -port 8090

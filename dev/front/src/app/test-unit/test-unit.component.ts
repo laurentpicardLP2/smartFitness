@@ -15,6 +15,6 @@ export class TestUnitComponent implements OnInit {
 }
 
 
- export function testFirst(){
+ export function testUnit(){
     return 15;
 }

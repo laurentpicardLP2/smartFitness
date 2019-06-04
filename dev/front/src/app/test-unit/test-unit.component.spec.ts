@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestUnitComponent } from './test-unit.component';
 
-import { testFirst } from './test-unit.component'
+import { testUnit } from './test-unit.component'
 
 describe('TestUnitComponent', () => {
   let component: TestUnitComponent;
@@ -27,8 +27,8 @@ describe('TestUnitComponent', () => {
     console.log('should create');
    });
 
-   it('execute testFirst', () => {
-    const result = testFirst(); 
+   it('execute testUnit', () => {
+    const result = testUnit(); 
     expect(result).toEqual(15);
   });
  

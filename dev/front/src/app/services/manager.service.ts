@@ -291,7 +291,13 @@ export class ManagerService {
 
     public addImage(data, fromForm: string){
       this.httpClient.post(
-        'http://localhost:8080/managerctrl/upload', data).subscribe(() => {
+        'http://localhost:8080/managerctrl/upload', data, 
+        {
+        headers: {
+        
+        "Authorization": this.token.getToken()
+        }
+      }).subscribe(() => {
           window.localStorage.setItem("token", this.token.getToken());
           window.localStorage.setItem("fromForm", fromForm);
         },

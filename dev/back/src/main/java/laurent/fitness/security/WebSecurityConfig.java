@@ -66,8 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .headers().frameOptions().sameOrigin()
-                .and()
+                
                 .httpBasic()
                 .and()
                 .authorizeRequests()
@@ -101,7 +100,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/managerctrl/updatefacility/**").hasAnyRole("ADMIN", "MANAGER") 
                 .antMatchers("/managerctrl/addfacility/**").hasAnyRole("ADMIN", "MANAGER")
                 .antMatchers("/managerctrl/getsubscriptioncategories").hasAnyRole("ADMIN", "MANAGER", "CUSTOMER")
-                .antMatchers("/managerctrl/upload").permitAll()
+                .antMatchers("/managerctrl/upload").hasAnyRole("ADMIN", "MANAGER")
                 .antMatchers("/productcategoryctrl/**").hasAnyRole("ADMIN", "MANAGER")
                 .antMatchers("/productrefctrl/**").hasAnyRole("ADMIN", "MANAGER")
                 .antMatchers("/productctrl/**").hasAnyRole("ADMIN", "MANAGER", "CUSTOMER")
@@ -111,7 +110,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(SIGN_UP_URLS).permitAll()
                 .anyRequest().authenticated();
 
-       
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
    }
 
