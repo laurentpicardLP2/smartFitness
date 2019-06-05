@@ -23,7 +23,7 @@ import laurent.fitness.services.UserService;
 
 @SpringBootApplication
 public class Fitness implements CommandLineRunner {
-	
+//	
 //	@Autowired
 //	private EntityManager entityManager;
 //	
@@ -35,11 +35,11 @@ public class Fitness implements CommandLineRunner {
 //	
 //	@Autowired
 //	private StaffService staffService;
+//	
 	
    public boolean someLibraryMethod() {
         return true;
     }
-
 
 	public static void main(String[] args) throws Exception, MalformedURLException, IOException, ClassNotFoundException, SQLException {
 		SpringApplication.run(Fitness.class, args);
@@ -49,7 +49,7 @@ public class Fitness implements CommandLineRunner {
 	public void run(String... args)
 			throws Exception,  MalformedURLException, IOException, ClassNotFoundException, SQLException {
 	
-		
+	
 /* ============= Décommenter les lignes ci-dessous	============ */	
 //		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_insert_data");
 //	    storedProcedure.execute();

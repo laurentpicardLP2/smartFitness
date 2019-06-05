@@ -56,7 +56,7 @@ DECLARE char_annee VARCHAR (6);
 
 SET i = `index`;
 SET i_jour = 1;
-SET i_mois = 7;
+SET i_mois = 5;
 SET i_annee = 2017;
 SET i_timestamp = `index_timestamp`;
 SET char_annee = CONCAT("", i_annee,"-");
@@ -149,7 +149,7 @@ DECLARE char_annee VARCHAR (6);
 
 SET i = 5;
 SET i_jour = 1;
-SET i_mois = 7;
+SET i_mois = 5;
 SET i_annee = 2017;
 SET i_timestamp = 0;
 SET char_annee = CONCAT("", i_annee,"-");
@@ -218,7 +218,7 @@ END WHILE;
 
 SET i = 705;
 SET i_jour = 1;
-SET i_mois = 7;
+SET i_mois = 5;
 SET i_annee = 2017;
 SET i_timestamp = 4200;
 SET char_annee = CONCAT("", i_annee,"-");
@@ -287,7 +287,7 @@ END WHILE;
 
 SET i = 1405;
 SET i_jour = 1;
-SET i_mois = 7;
+SET i_mois = 5;
 SET i_annee = 2018;
 SET i_timestamp = 8400;
 SET char_annee = CONCAT("", i_annee,"-");
