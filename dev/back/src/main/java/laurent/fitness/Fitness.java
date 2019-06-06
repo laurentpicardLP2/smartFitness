@@ -35,8 +35,8 @@ public class Fitness implements CommandLineRunner {
 //	
 //	@Autowired
 //	private StaffService staffService;
-//	
 	
+
    public boolean someLibraryMethod() {
         return true;
     }
@@ -48,8 +48,8 @@ public class Fitness implements CommandLineRunner {
 	@Override
 	public void run(String... args)
 			throws Exception,  MalformedURLException, IOException, ClassNotFoundException, SQLException {
-	
-	
+
+
 /* ============= Décommenter les lignes ci-dessous	============ */	
 //		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_insert_data");
 //	    storedProcedure.execute();

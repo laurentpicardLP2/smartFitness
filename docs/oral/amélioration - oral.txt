@@ -1,0 +1,33 @@
+debout
+décrire ct j'ai utilisé les outils ++ fonctionnement des outils --
+liste des sécurités
+2 fonctionnalités demo : reservation + dashboard
+- tuto
+
+pres : organisation projet : tâche avec trello + git hub => outils de dev (Linux) + evt methodologie agile
+cheminement modèle de données + développement  
+
+décrire la parcours client et manager
+
+evt w : communication, échanges pr les specs fonctionnelsles
+
+suggestion de fonctionnalités en V2
+
+splitter l'écran 
+
+conclusion : les difficultés rencontrées
+
+angular est utilisé en entreprise
+
+adresse de livraison => adresse de facturation
+
+bandeau annonces : uniquement le montrer
+
+repositionner le wire fdederame en pahse de conception
+
+modifier l'introduction la recherche anglophone
+
+
+deux mêmes pots de passe => deux chaines différentes
+
+parler avec ac le jury
