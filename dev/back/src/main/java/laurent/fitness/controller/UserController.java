@@ -61,8 +61,8 @@ public class UserController {
 	
 	/**
 	 * Appel de la fonction lorqu'un nouvel utilisteur a remplit le formulaire d'inscription
-	 * @param newCustomer
-	 * @return
+	 * @param newCustomer: Fiche du nouvel utilisateur procédant à l'inscription
+	 * @return: retourne un objet Customer correspondant à la fiche d'un nouvel utilisateur
 	 */
 	
 	@PostMapping("/newcustomer")
@@ -101,10 +101,8 @@ public class UserController {
 	
 	
 	/**
-	 * Fonction exécutée à la connexion d'un utilisateur. Retourne un token valable pour une session stateless
-	 * @param user
-	 * @param result
-	 * @return
+	 * Fonction exécutée à la connexion d'un utilisateur. 
+	 * @return: Retourne un token valable pour une session stateless
 	 */
 	@PostMapping("/login")
 	public ResponseEntity<AuthToken> authenticateUser(){
@@ -120,9 +118,9 @@ public class UserController {
 	}
 	
 	/**
-	 * retourne la liste des username (username). getAuthentication()
+	 * 
 	 * Permet lors du signup d'un nouvel utilisateur de contrôler l'unicité du champ username
-	 * @return
+	 * @return: retourne la liste des username (username). getAuthentication()
 	 */
 	
 	@GetMapping("/usernames")
@@ -133,9 +131,9 @@ public class UserController {
 	
 	
 	/**
-	 * retourne la liste des customer (username + authority). 
+	 *  
 	 * Permet de connaître le rôle du user
-	 * @return
+	 * @return: retourne la liste des customer (username + authority).
 	 */
 	@GetMapping("/authorities")
 	public List<Authority> getAllAuthorities() {
@@ -144,8 +142,8 @@ public class UserController {
 	
 	/**
 	 * retourne l'infos du fullname et du statut abonné ou non de l'utilisateur. 
-	 * 
-	 * @return
+	 * @param username : identifiant de l'utilisateur
+	 * @return retourne les nom et mail de l'utilisateur
 	 */
 	@GetMapping("/getuserinfos/{username}")
 	public List<String> getUserInfos(@PathVariable String username) {
@@ -153,9 +151,10 @@ public class UserController {
 	}
 	
 	/**
-	 * Indique si un utilisateur est abonné à la date selectedDate
-	 * 
-	 * @return
+	 * Fonction indiquant si l'utilisateur est abonné 
+	 * @param username : identifiant de l'utilisateur
+	 * @param selectedDate : date déterminant si l'
+	 * @return: retourne un boolean indiquant si l'utilisateur est abonné ou non à la date selectedDate
 	 */
 	@GetMapping("/getisusernamesubscribedselecteddate/{username}/{selectedDate}")
 	public boolean findIsSubscribedSelectedDate(@PathVariable String username, @PathVariable String selectedDate) {

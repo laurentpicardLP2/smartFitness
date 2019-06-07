@@ -81,7 +81,6 @@ public class ProductCategoryController {
 	
 	/**
 	 * Supprime une categorie de produit
-	 * @param idWatchCategory
 	 * @return
 	 */
 	@DeleteMapping("/deleteproductcategory/{idProductCategory}")

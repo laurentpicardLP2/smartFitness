@@ -11,11 +11,9 @@ décrire la parcours client et manager
 
 evt w : communication, échanges pr les specs fonctionnelsles
 
-suggestion de fonctionnalités en V2
+conclusion ==> les difficultés rencontrées suggestion de fonctionnalités en V2
 
 splitter l'écran 
-
-conclusion : les difficultés rencontrées
 
 angular est utilisé en entreprise
 
@@ -25,7 +23,7 @@ bandeau annonces : uniquement le montrer
 
 repositionner le wire fdederame en pahse de conception
 
-modifier l'introduction la recherche anglophone
+modifier l'introduction recherche anglophone
 
 
 deux mêmes pots de passe => deux chaines différentes
