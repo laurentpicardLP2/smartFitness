@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Authority } from 'src/app/models/authority.model';
 import { LoginService } from 'src/app/services/login.service';
 import { CommandService } from 'src/app/services/command.service';
 import { Command } from 'src/app/models/command.model';
