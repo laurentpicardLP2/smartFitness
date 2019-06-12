@@ -1,0 +1,8 @@
+raconter une histoire autour du choix du thème de mon projet
+numeroter les slides
+slide 6 , attn illisible => zoom sur 4 tables jointes
+trop sécu (rq : token stocké dans un cookie n'est pas secure du pt de vue CSRF => use localstorage 
+node .js => déploiement, serveur web tomcat embarquant les rsrc du front)
+
+Pr la démo et gagner du temps: privilégier plus des fonctionnalités propres au site que l'inscription (fonctionnalité trop souvent présentée aux jurys)
+Mentionner l'utilisation de validators
