@@ -1,4 +1,3 @@
-import { CustomerService } from './customer.service';
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, ValidatorFn } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';

@@ -2,15 +2,12 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { CustomerService } from '../../services/customer.service';
 import { Customer } from '../../models/customer.model';
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators, FormBuilder, AbstractControl} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { CustomValidators, ConfirmValidParentMatcher, regExps,  errorMessages} from '../../services/custom-validators.service';
-import { HttpClient } from '@angular/common/http';
 import { CustomValidator } from 'src/app/validators/custom.validator';
 import { Router } from '@angular/router';
-import { runInThisContext } from 'vm';
 import {MatPasswordStrengthComponent} from '@angular-material-extensions/password-strength';
 import {ChangeDetectionStrategy, ViewChild, ViewEncapsulation} from '@angular/core';
-import {Title} from '@angular/platform-browser';
 
 
 @Component({
