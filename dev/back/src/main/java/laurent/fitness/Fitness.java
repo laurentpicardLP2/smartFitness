@@ -51,12 +51,12 @@ public class Fitness implements CommandLineRunner {
 
 
 /* ============= Décommenter les lignes ci-dessous	============ */	
-		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_insert_data");
-	    storedProcedure.execute();
-	    
-	    //storedProcedureEnd permet de savoir quand est-ce que l'import est fini
-	    StoredProcedureQuery storedProcedureEnd = entityManager.createStoredProcedureQuery("proc_insert_end");
-	    storedProcedureEnd.execute();
+//		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_insert_data");
+//	    storedProcedure.execute();
+//	    
+//	    //storedProcedureEnd permet de savoir quand est-ce que l'import est fini
+//	    StoredProcedureQuery storedProcedureEnd = entityManager.createStoredProcedureQuery("proc_insert_end");
+//	    storedProcedureEnd.execute();
 				
 
 	}
